@@ -21,7 +21,7 @@ input[type="number"] {
     display: block;
 }
 .faq-item.active {
-    border-color: #4F6DF5;
+    border-color: #f97316;
 }
 
 /* Checkout modal */
@@ -67,9 +67,9 @@ input[type="number"] {
     left: 50%;
     transform: translateX(-50%);
     background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    border: 1px solid #fed7aa;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(249,115,22,0.08);
     min-width: 220px;
     padding-top: 8px;
     padding-bottom: 6px;
@@ -87,8 +87,8 @@ input[type="number"] {
     transition: background 0.15s, color 0.15s;
 }
 .dropdown-menu a:hover {
-    background: #f1f5f9;
-    color: #0f172a;
+    background: #fff7ed;
+    color: #ea580c;
 }
 
 /* Mobile sub-menu */
@@ -132,9 +132,9 @@ input[type="number"] {
     border: 1px solid rgba(255,255,255,0.3);
 }
 
-/* Gradient text */
+/* Gradient text — Peach Silk palette */
 .gradient-text {
-    background: linear-gradient(135deg, #4F6DF5 0%, #7C3AED 50%, #EC4899 100%);
+    background: linear-gradient(135deg, #f97316 0%, #e11d48 50%, #f43f5e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -146,29 +146,22 @@ input[type="number"] {
 }
 .hover-lift:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(79,109,245,0.12);
+    box-shadow: 0 20px 40px rgba(249,115,22,0.1);
 }
 
-/* Animated gradient background for hero */
+/* Hero gradient — Peach Silk warm off-white */
 .hero-gradient {
-    background: linear-gradient(135deg, #f8faff 0%, #eef2ff 30%, #e8e0ff 60%, #fce7f3 100%);
-    background-size: 200% 200%;
-    animation: gradientShift 8s ease infinite;
-}
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    background: #faf8f5;
 }
 
-/* Pulse glow for CTA buttons */
+/* Pulse glow for CTA buttons — orange */
 .glow-pulse {
-    box-shadow: 0 0 0 0 rgba(79,109,245,0.4);
+    box-shadow: 0 0 0 0 rgba(249,115,22,0.4);
     animation: glowPulse 2.5s ease-in-out infinite;
 }
 @keyframes glowPulse {
-    0%, 100% { box-shadow: 0 4px 15px rgba(79,109,245,0.3); }
-    50% { box-shadow: 0 4px 30px rgba(79,109,245,0.5); }
+    0%, 100% { box-shadow: 0 4px 15px rgba(249,115,22,0.25); }
+    50% { box-shadow: 0 4px 30px rgba(249,115,22,0.45); }
 }
 
 /* Decorative blobs */
@@ -204,5 +197,5 @@ input[type="number"] {
 }
 
 ::selection {
-    background: rgba(79, 109, 245, 0.15);
+    background: rgba(249, 115, 22, 0.15);
 }
