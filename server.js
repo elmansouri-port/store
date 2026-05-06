@@ -366,6 +366,7 @@ app.get('/reset-password', (req, res) => sendPage(req, res, path.join(__dirname,
 app.get('/bg-proposals', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'bg-proposals.html')));
 app.get('/bg-proposals-2', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'bg-proposals-2.html')));
 app.get('/bg-proposals-3', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'bg-proposals-3.html')));
+app.get('/new-proposals', (req, res) => res.sendFile(path.join(__dirname, 'pages', 'new-proposals.html')));app.get('/10-proposals', (req, res) => res.sendFile(path.join(__dirname, 'pages', '10-proposals.html')));app.get('/redesign-proposals', (req, res) => res.sendFile(path.join(__dirname, 'pages', 'redesign-proposals.html')));app.get('/lavender-proposal', (req, res) => res.sendFile(path.join(__dirname, 'pages', 'lavender-proposal.html')));
 app.get('/about', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'about.html')));
 app.get('/legal', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'legal.html')));
 app.get('/privacy', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'privacy.html')));
