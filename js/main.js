@@ -1,4 +1,4 @@
-// Rainbow Portal — Main JS
+﻿// Rainbow Portal â€” Main JS
 
 var stripeInstance = null;
 var cardNumberElement = null;
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initStripe();
 });
 
-// Listen for language changes → reload content
+// Listen for language changes â†’ reload content
 window.addEventListener('langchange', function () {
     loadContent();
 });
@@ -550,9 +550,12 @@ function renderMarketplace(marketplace) {
 }
 
 function renderFaq(faq) {
+    var oldHeading = document.getElementById('faq-heading');
+    if (!oldHeading) return;
     if (!faq) return;
-    document.getElementById('faq-heading').textContent = faq.heading;
+    oldHeading.textContent = faq.heading;
     var list = document.getElementById('faq-list');
+    if (!list) return;
     list.innerHTML = '';
     faq.items.forEach(function (f) {
         var item = document.createElement('div');
@@ -733,4 +736,175 @@ document.querySelectorAll('a[href^="#"]').forEach(function (a) {
         var target = document.querySelector(this.getAttribute('href'));
         if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
     });
+});
+
+// ===== Zendesk FAQ (Laurenn-style: fetch from Zendesk API) =====
+
+// Strip HTML tags, collapse whitespace, trim
+function stripHtml(str) {
+    if (!str) return '';
+    return str.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+// Fetch FAQ articles from Zendesk Help Center
+function fetchZendeskFaq() {
+    var loadingEl = document.getElementById('faq-loading');
+    // Guard: only run on pages that have the Zendesk FAQ section
+    if (!loadingEl) return;
+
+    var errorEl = document.getElementById('faq-error');
+    var containerEl = document.getElementById('faq-items-container');
+
+    var SECTION_ID = '33369381353746';
+    var LOCALE = 'fr';
+    var BASE_URL = 'https://rainbow-market.zendesk.com';
+    var url = BASE_URL + '/api/v2/help_center/sections/' + SECTION_ID + '/articles.json?locale=' + LOCALE + '&per_page=20&page=1&sort_by=position&sort_order=asc';
+
+    // State: Loading -> hide error, hide items
+    loadingEl.classList.remove('hidden');
+    if (errorEl) errorEl.classList.add('hidden');
+    if (containerEl) containerEl.classList.add('hidden');
+
+    fetch(url, {
+        headers: { 'Accept': 'application/json' }
+    })
+    .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+    })
+    .then(function (data) {
+        var articles = data.articles || [];
+        // Filter: only non-draft articles (matches Laurenn: !a.draft)
+        var published = articles.filter(function (a) { return !a.draft; });
+
+        // If no articles -> error state (matches Laurenn)
+        if (published.length === 0) {
+            throw new Error('No published articles');
+        }
+
+        // Map to FAQItem (matches Laurenn mapping exactly)
+        var faqItems = published.map(function (article) {
+            var question = article.title || '';
+            var rawAnswer = article.body || article.snippet || '';
+            var answer = stripHtml(rawAnswer).slice(0, 500);
+            return {
+                id: article.id,
+                question: question,
+                answer: answer
+            };
+        });
+
+        // Render into DOM
+        renderZendeskFaq(faqItems);
+
+        // State: Data -> hide loading, hide error, show items
+        loadingEl.classList.add('hidden');
+        if (errorEl) errorEl.classList.add('hidden');
+        if (containerEl) containerEl.classList.remove('hidden');
+    })
+    .catch(function (err) {
+        console.error('Zendesk FAQ error:', err);
+        // State: Error -> hide loading, hide items
+        loadingEl.classList.add('hidden');
+        if (errorEl) errorEl.classList.remove('hidden');
+        if (containerEl) containerEl.classList.add('hidden');
+    });
+}
+
+// Render FAQ card DOM elements (matches Laurenn JSX structure 1:1)
+function renderZendeskFaq(items) {
+    var container = document.getElementById('faq-items-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    items.forEach(function (item) {
+        // div.faq-card
+        var card = document.createElement('div');
+        card.className = 'faq-card';
+
+        // button.faq-card-button (aria-expanded, onClick toggle)
+        var button = document.createElement('button');
+        button.className = 'faq-card-button';
+        button.setAttribute('aria-expanded', 'false');
+
+        // span.faq-card-question (textContent = question)
+        var questionSpan = document.createElement('span');
+        questionSpan.className = 'faq-card-question';
+        questionSpan.textContent = item.question;
+
+        // svg.faq-card-chevron (ChevronDown inline SVG)
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('class', 'faq-card-chevron');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('stroke', 'currentColor');
+        svg.setAttribute('stroke-width', '2');
+        var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('stroke-linejoin', 'round');
+        path.setAttribute('d', 'M19 9l-7 7-7-7');
+        svg.appendChild(path);
+
+        button.appendChild(questionSpan);
+        button.appendChild(svg);
+
+        // div.faq-card-answer-wrapper (max-height transition)
+        var wrapper = document.createElement('div');
+        wrapper.className = 'faq-card-answer-wrapper';
+
+        // div.faq-card-answer-inner
+        var inner = document.createElement('div');
+        inner.className = 'faq-card-answer-inner';
+
+        // div.faq-card-answer-border
+        var border = document.createElement('div');
+        border.className = 'faq-card-answer-border';
+
+        // p.faq-card-answer (textContent = answer)
+        var answerP = document.createElement('p');
+        answerP.className = 'faq-card-answer';
+        answerP.textContent = item.answer;
+
+        border.appendChild(answerP);
+        inner.appendChild(border);
+        wrapper.appendChild(inner);
+
+        card.appendChild(button);
+        card.appendChild(wrapper);
+
+        container.appendChild(card);
+    });
+
+    // Attach toggle listeners after rendering
+    initFaqCardListeners();
+}
+
+// FAQ toggle behavior (close all others, open current)
+function initFaqCardListeners() {
+    var buttons = document.querySelectorAll('.faq-card-button');
+    buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var card = btn.closest('.faq-card');
+            var wasOpen = card.classList.contains('open');
+
+            // First close ALL faq-cards (removes .open, resets aria-expanded)
+            var allCards = document.querySelectorAll('.faq-card');
+            allCards.forEach(function (c) {
+                c.classList.remove('open');
+                var b = c.querySelector('.faq-card-button');
+                if (b) b.setAttribute('aria-expanded', 'false');
+            });
+
+            // If it was not open, open this one (add .open, set aria-expanded)
+            if (!wasOpen) {
+                card.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+}
+
+// Initialize Zendesk FAQ on DOM load
+document.addEventListener('DOMContentLoaded', function () {
+    fetchZendeskFaq();
 });
