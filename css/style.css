@@ -38,43 +38,14 @@ input[type="number"] {
 .nav-dropdown > a {
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 4px;
+    font-size: 1rem;
 }
 .nav-dropdown > a .chevron {
     transition: transform 0.2s;
 }
 .nav-dropdown:hover > a .chevron {
     transform: rotate(180deg);
-}
-.nav-dropdown .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #fff;
-    border: 1px solid #e9e5ff;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.08), 0 1px 3px rgba(0,0,0,0.04);
-    min-width: 220px;
-    padding: 6px;
-    z-index: 100;
-}
-.nav-dropdown:hover .dropdown-menu {
-    display: block;
-}
-.dropdown-menu a {
-    display: block;
-    padding: 8px 14px;
-    font-size: 0.8125rem;
-    color: #4b5563;
-    white-space: nowrap;
-    border-radius: 8px;
-    transition: background 0.15s, color 0.15s;
-}
-.dropdown-menu a:hover {
-    background: #f5f3ff;
-    color: #7c3aed;
 }
 
 /* Mobile sub-menu */
@@ -656,6 +627,7 @@ input[type="number"] {
     padding-bottom: 1rem;
     cursor: pointer;
 }
+
 .platform-tab-track {
     position: absolute;
     left: 0;

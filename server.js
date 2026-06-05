@@ -175,9 +175,9 @@ app.use(helmet({
             scriptSrcAttr: ["'unsafe-inline'"],
             styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
             fontSrc: ["'self'", "https://fonts.gstatic.com"],
-            imgSrc: ["'self'", "data:", "blob:"],
+            imgSrc: ["'self'", "data:", "blob:", "https://flagcdn.com", "https://images.unsplash.com"],
             frameSrc: ["'self'", "https://js.stripe.com", "https://www.youtube.com"],
-            connectSrc: ["'self'", "https://api.stripe.com"]
+            connectSrc: ["'self'", "https://api.stripe.com", "https://rainbow-market.zendesk.com"]
         }
     },
     crossOriginEmbedderPolicy: false
@@ -312,7 +312,7 @@ function sendPage(req, res, filePath) {
     }
     const cacheKey = filePath + ':' + lang;
     if (translatedPageCache[cacheKey]) {
-        return res.type('html').send(translatedPageCache[cacheKey]);
+        return res.set('Content-Type', 'text/html; charset=utf-8').send(translatedPageCache[cacheKey]);
     }
     try {
         const html = fs.readFileSync(filePath, 'utf8');
@@ -323,7 +323,7 @@ function sendPage(req, res, filePath) {
             delete translatedPageCache[cacheKeys[0]];
         }
         translatedPageCache[cacheKey] = translated;
-        res.type('html').send(translated);
+        res.set('Content-Type', 'text/html; charset=utf-8').send(translated);
     } catch (e) {
         res.sendFile(filePath);
     }
@@ -355,6 +355,8 @@ app.get('/reviews', (req, res) => sendPage(req, res, path.join(__dirname, 'pages
 app.get('/support', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'support.html')));
 app.get('/tutorials', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'tutorials.html')));
 app.get('/products', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'products.html')));
+app.get('/products/collaboration', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'collaboration.html')));
+app.get('/products/webinar', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'webinar.html')));
 app.get('/product/:slug', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'product.html')));
 app.get('/offers', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'offers.html')));
 app.get('/products/rainbow-collaboration', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'product-collaboration.html')));

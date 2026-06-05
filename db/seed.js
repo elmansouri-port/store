@@ -81,7 +81,7 @@ function seed() {
                 features: [
                     'Tout Business +',
                     'Conférence jusqu\'à 1000 participants',
-                    'Webinaires & événements',
+                    'Webinaires & évévénements',
                     'Téléphonie cloud (SIP/PSTN)',
                     'Stockage illimité',
                     'API & SDK développeur',
