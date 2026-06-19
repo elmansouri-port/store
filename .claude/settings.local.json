@@ -61,7 +61,8 @@
       "Bash(for f in index.html pages/tutorials.html pages/support.html pages/reviews.html pages/products.html pages/product.html pages/offers.html pages/blog-article.html pages/blog.html pages/privacy.html pages/legal.html pages/about.html pages/client-login.html pages/admin.html pages/solutions.html pages/industries.html)",
       "Bash(do sed -i '/href=\"\"\\\\/solutions\"\"/d;/href=\"\"\\\\/industries\"\"/d' \"$f\")",
       "Bash(git ls-remote *)",
-      "Bash(git config *)"
+      "Bash(git config *)",
+      "Bash(git remote *)"
     ]
   }
 }
