@@ -36,6 +36,7 @@ const ROUTES = {
   'verify-email': 'pages/verify-email.html',
   'reset-password': 'pages/reset-password.html',
   'admin': 'pages/admin.html',
+  'partenaires': 'pages/partenaires.html',
 };
 
 const ASSET_DIRS = ['css', 'js', 'images', 'img', 'i18n'];

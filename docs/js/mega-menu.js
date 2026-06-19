@@ -71,11 +71,17 @@
               '<span class="mega-menu-showcase-tag">Nouveau</span>',
             '</div>',
           '</a>',
+          '<p class="mega-menu-section-title">Integrations</p>',
+          '<a href="/store/integrations" class="mega-menu-side-cta">',
+            '<span class="mega-menu-side-cta-icon">' + svgIcon('calendar') + '</span>',
+            '<span><p class="mega-menu-side-cta-text">Connect your tools</p><p class="mega-menu-side-cta-desc">Google, Outlook, Teams &amp; more</p></span>',
+          '</a>',
         '</div>',
       '</div>',
       '<div class="mega-menu-footer">',
         '<p class="mega-menu-footer-text">Need help choosing? We&#39;re here to guide you.</p>',
         '<div class="mega-menu-footer-actions">',
+          '<a href="/store/demo" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('question-mark-circle') + 'Book a demo</a>',
           '<a href="/store/contact" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Contact us</a>',
         '</div>',
       '</div>',
@@ -83,8 +89,11 @@
   ].join('');
 
   var ressourcesItems = [
+    makeItem('/store/blog', 'newspaper', 'Blog', 'Latest news, tips, and product updates from the Rainbow team.'),
+    makeItem('/store/tutorials', 'academic-cap', 'Tutorials', 'Step-by-step guides and video walkthroughs to get the most out of Rainbow.'),
     makeItem('/store/docs', 'book-open', 'Documentation', 'Comprehensive API docs, integration guides, and reference materials.'),
     makeItem('/store/community', 'users', 'Community', 'Join the Rainbow community to share ideas and get help from peers.'),
+    makeItem('/store/support', 'lifebuoy', 'Support', 'Get technical support, report issues, and find solutions in our knowledge base.'),
     makeItem('/store/changelog', 'sparkles', "What&#39;s New", 'Stay up to date with the latest features, releases, and improvements.')
   ].join('');
 
@@ -94,12 +103,30 @@
         '<div class="mega-menu-main">',
           '<p class="mega-menu-section-title">Learn &amp; Discover</p>',
           '<div class="mega-menu-grid">' + ressourcesItems + '</div>',
+          '<a href="/store/ressources" class="mega-menu-see-all">Browse all resources <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
+        '</div>',
+        '<div class="mega-menu-side">',
+          '<p class="mega-menu-section-title">Popular Guide</p>',
+          '<a href="/store/tutorials" class="mega-menu-showcase">',
+            '<div class="mega-menu-showcase-img">' + svgIcon('light-bulb') + '</div>',
+            '<div class="mega-menu-showcase-body">',
+              '<p class="mega-menu-showcase-title">Getting Started with Rainbow</p>',
+              '<p class="mega-menu-showcase-desc">Everything you need to know to set up and start using Rainbow in 10 minutes.</p>',
+              '<span class="mega-menu-showcase-tag">Popular</span>',
+            '</div>',
+          '</a>',
+          '<p class="mega-menu-section-title">Need Help?</p>',
+          '<a href="/store/support" class="mega-menu-side-cta">',
+            '<span class="mega-menu-side-cta-icon">' + svgIcon('lifebuoy') + '</span>',
+            '<span><p class="mega-menu-side-cta-text">Visit Support Center</p><p class="mega-menu-side-cta-desc">We&#39;re here 24/7 to help you</p></span>',
+          '</a>',
         '</div>',
       '</div>',
       '<div class="mega-menu-footer">',
         '<p class="mega-menu-footer-text">Stay informed with the latest from Rainbow.</p>',
         '<div class="mega-menu-footer-actions">',
-          '<a href="/store/contact" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Contact us</a>',
+          '<a href="/store/blog" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('newspaper') + 'Visit our blog</a>',
+          '<a href="/store/support" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Get support</a>',
         '</div>',
       '</div>',
     '</div>'
@@ -129,14 +156,18 @@
         '</a>',
       '</div>',
       '<div class="mega-menu-mobile-footer">',
+        '<a href="/store/demo" class="mega-menu-btn mega-menu-btn-secondary" style="justify-content:center;">Book a demo</a>',
         '<a href="/store/contact" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Contact us</a>',
       '</div>',
     '</div>'
   ].join('');
 
   var ressourcesMobileItems = [
+    makeMobileItem('/store/blog', 'newspaper', 'Blog', 'Latest news and updates.'),
+    makeMobileItem('/store/tutorials', 'academic-cap', 'Tutorials', 'Step-by-step guides.'),
     makeMobileItem('/store/docs', 'book-open', 'Documentation', 'API docs and references.'),
     makeMobileItem('/store/community', 'users', 'Community', 'Share ideas with peers.'),
+    makeMobileItem('/store/support', 'lifebuoy', 'Support', 'Get help from our team.'),
     makeMobileItem('/store/changelog', 'sparkles', "What's New", 'Latest features and releases.')
   ].join('');
 
@@ -145,9 +176,18 @@
       '<div class="mega-menu-mobile-section">',
         '<p class="mega-menu-mobile-section-title">Learn &amp; Discover</p>',
         ressourcesMobileItems,
+        '<a href="/store/ressources" class="mega-menu-mobile-see-all">Browse all resources <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
+      '</div>',
+      '<div class="mega-menu-mobile-section">',
+        '<p class="mega-menu-mobile-section-title">Popular Guide</p>',
+        '<a href="/store/tutorials" class="mega-menu-mobile-item">',
+          '<span class="mega-menu-mobile-item-icon">' + svgIcon('light-bulb') + '</span>',
+          '<span class="mega-menu-mobile-item-text"><p class="mega-menu-mobile-item-title">Getting Started with Rainbow</p><p class="mega-menu-mobile-item-desc">Set up and start using Rainbow in 10 minutes.</p></span>',
+        '</a>',
       '</div>',
       '<div class="mega-menu-mobile-footer">',
-        '<a href="/store/contact" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Contact us</a>',
+        '<a href="/store/blog" class="mega-menu-btn mega-menu-btn-secondary" style="justify-content:center;">Visit our blog</a>',
+        '<a href="/store/support" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Get support</a>',
       '</div>',
     '</div>'
   ].join('');
@@ -189,6 +229,49 @@
       '</div>',
       '<div class="mega-menu-mobile-footer">',
         '<a href="/store/contact" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Nous contacter</a>',
+      '</div>',
+    '</div>'
+  ].join('');
+
+  var partenairesItems = [
+    makeItem('/store/partenaires', 'users', 'Devenir un partenaire', 'Rejoignez le réseau Rainbow et développez votre activité avec nos solutions UCaaS souveraines.'),
+    makeItem('/store/partners/portal', 'sparkles', 'Programme de fidélité', 'Accédez aux avantages exclusifs, certifications et récompenses de notre programme.'),
+    makeItem('/store/partners/docs', 'book-open', 'Ressources partenaires', 'Guides, supports marketing, formations et outils dédiés à nos partenaires.')
+  ].join('');
+
+  var partenairesHTML = [
+    '<div class="mega-menu mega-menu-tarifs" role="menu">',
+      '<div class="mega-menu-inner">',
+        '<div class="mega-menu-main">',
+          '<p class="mega-menu-section-title">Programme partenaires</p>',
+          '<div class="mega-menu-grid">' + partenairesItems + '</div>',
+          '<a href="/store/partenaires" class="mega-menu-see-all">Découvrir le programme <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
+        '</div>',
+      '</div>',
+      '<div class="mega-menu-footer">',
+        '<p class="mega-menu-footer-text">Rejoignez plus de 3 000 partenaires Rainbow à travers le monde.</p>',
+        '<div class="mega-menu-footer-actions">',
+          '<a href="/store/partenaires" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('users') + 'Devenir partenaire</a>',
+        '</div>',
+      '</div>',
+    '</div>'
+  ].join('');
+
+  var partenaireMobileItems = [
+    makeMobileItem('/store/partenaires', 'users', 'Devenir un partenaire', 'Rejoignez le réseau Rainbow.'),
+    makeMobileItem('/store/partners/portal', 'sparkles', 'Programme de fidélité', 'Avantages exclusifs.'),
+    makeMobileItem('/store/partners/docs', 'book-open', 'Ressources partenaires', 'Guides et certifications.')
+  ].join('');
+
+  var partenaireMobileHTML = [
+    '<div class="mega-menu-mobile-content">',
+      '<div class="mega-menu-mobile-section">',
+        '<p class="mega-menu-mobile-section-title">Programme partenaires</p>',
+        partenaireMobileItems,
+        '<a href="/store/partenaires" class="mega-menu-mobile-see-all">Découvrir le programme <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
+      '</div>',
+      '<div class="mega-menu-mobile-footer">',
+        '<a href="/store/partenaires" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Devenir partenaire</a>',
       '</div>',
     '</div>'
   ].join('');
@@ -290,7 +373,8 @@
       var isProducts = dd.querySelector('[data-i18n="nav.product"]') !== null;
       var isRessources = trigger.textContent.trim().toLowerCase() === 'ressources';
       var isTarifs = trigger.textContent.trim().toLowerCase() === 'tarifs';
-      if (!isProducts && !isRessources && !isTarifs) continue;
+      var isPartenaires = trigger.textContent.trim().toLowerCase() === 'partenaires';
+      if (!isProducts && !isRessources && !isTarifs && !isPartenaires) continue;
 
       var megaHTML, mobileHTML;
       if (isProducts) {
@@ -299,6 +383,9 @@
       } else if (isRessources) {
         megaHTML = ressourcesHTML;
         mobileHTML = ressourcesMobileHTML;
+      } else if (isPartenaires) {
+        megaHTML = partenairesHTML;
+        mobileHTML = partenaireMobileHTML;
       } else {
         megaHTML = tarifsHTML;
         mobileHTML = tarifsMobileHTML;
@@ -315,13 +402,16 @@
       var isProd = link.getAttribute('href') && link.getAttribute('href').indexOf('/products/') !== -1;
       var isRes = link.getAttribute('href') && link.getAttribute('href').indexOf('/blog') !== -1;
       var isTarifsMobile = link.getAttribute('href') && link.getAttribute('href').indexOf('/tarifs/') !== -1;
-      if (!isProd && !isRes && !isTarifsMobile) continue;
+      var isPartenaireMobile = link.getAttribute('href') && link.getAttribute('href').indexOf('/partenaires') !== -1;
+      if (!isProd && !isRes && !isTarifsMobile && !isPartenaireMobile) continue;
 
       var mobileContent;
       if (isProd) {
         mobileContent = productsMobileHTML;
       } else if (isRes) {
         mobileContent = ressourcesMobileHTML;
+      } else if (isPartenaireMobile) {
+        mobileContent = partenaireMobileHTML;
       } else {
         mobileContent = tarifsMobileHTML;
       }
