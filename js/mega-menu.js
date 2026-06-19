@@ -71,17 +71,11 @@
               '<span class="mega-menu-showcase-tag">Nouveau</span>',
             '</div>',
           '</a>',
-          '<p class="mega-menu-section-title">Integrations</p>',
-          '<a href="/integrations" class="mega-menu-side-cta">',
-            '<span class="mega-menu-side-cta-icon">' + svgIcon('calendar') + '</span>',
-            '<span><p class="mega-menu-side-cta-text">Connect your tools</p><p class="mega-menu-side-cta-desc">Google, Outlook, Teams &amp; more</p></span>',
-          '</a>',
         '</div>',
       '</div>',
       '<div class="mega-menu-footer">',
         '<p class="mega-menu-footer-text">Need help choosing? We&#39;re here to guide you.</p>',
         '<div class="mega-menu-footer-actions">',
-          '<a href="/demo" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('question-mark-circle') + 'Book a demo</a>',
           '<a href="/contact" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Contact us</a>',
         '</div>',
       '</div>',
@@ -89,11 +83,8 @@
   ].join('');
 
   var ressourcesItems = [
-    makeItem('/blog', 'newspaper', 'Blog', 'Latest news, tips, and product updates from the Rainbow team.'),
-    makeItem('/tutorials', 'academic-cap', 'Tutorials', 'Step-by-step guides and video walkthroughs to get the most out of Rainbow.'),
     makeItem('/docs', 'book-open', 'Documentation', 'Comprehensive API docs, integration guides, and reference materials.'),
     makeItem('/community', 'users', 'Community', 'Join the Rainbow community to share ideas and get help from peers.'),
-    makeItem('/support', 'lifebuoy', 'Support', 'Get technical support, report issues, and find solutions in our knowledge base.'),
     makeItem('/changelog', 'sparkles', "What&#39;s New", 'Stay up to date with the latest features, releases, and improvements.')
   ].join('');
 
@@ -103,30 +94,12 @@
         '<div class="mega-menu-main">',
           '<p class="mega-menu-section-title">Learn &amp; Discover</p>',
           '<div class="mega-menu-grid">' + ressourcesItems + '</div>',
-          '<a href="/ressources" class="mega-menu-see-all">Browse all resources <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
-        '</div>',
-        '<div class="mega-menu-side">',
-          '<p class="mega-menu-section-title">Popular Guide</p>',
-          '<a href="/tutorials" class="mega-menu-showcase">',
-            '<div class="mega-menu-showcase-img">' + svgIcon('light-bulb') + '</div>',
-            '<div class="mega-menu-showcase-body">',
-              '<p class="mega-menu-showcase-title">Getting Started with Rainbow</p>',
-              '<p class="mega-menu-showcase-desc">Everything you need to know to set up and start using Rainbow in 10 minutes.</p>',
-              '<span class="mega-menu-showcase-tag">Popular</span>',
-            '</div>',
-          '</a>',
-          '<p class="mega-menu-section-title">Need Help?</p>',
-          '<a href="/support" class="mega-menu-side-cta">',
-            '<span class="mega-menu-side-cta-icon">' + svgIcon('lifebuoy') + '</span>',
-            '<span><p class="mega-menu-side-cta-text">Visit Support Center</p><p class="mega-menu-side-cta-desc">We&#39;re here 24/7 to help you</p></span>',
-          '</a>',
         '</div>',
       '</div>',
       '<div class="mega-menu-footer">',
         '<p class="mega-menu-footer-text">Stay informed with the latest from Rainbow.</p>',
         '<div class="mega-menu-footer-actions">',
-          '<a href="/blog" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('newspaper') + 'Visit our blog</a>',
-          '<a href="/support" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Get support</a>',
+          '<a href="/contact" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Contact us</a>',
         '</div>',
       '</div>',
     '</div>'
@@ -156,18 +129,14 @@
         '</a>',
       '</div>',
       '<div class="mega-menu-mobile-footer">',
-        '<a href="/demo" class="mega-menu-btn mega-menu-btn-secondary" style="justify-content:center;">Book a demo</a>',
         '<a href="/contact" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Contact us</a>',
       '</div>',
     '</div>'
   ].join('');
 
   var ressourcesMobileItems = [
-    makeMobileItem('/blog', 'newspaper', 'Blog', 'Latest news and updates.'),
-    makeMobileItem('/tutorials', 'academic-cap', 'Tutorials', 'Step-by-step guides.'),
     makeMobileItem('/docs', 'book-open', 'Documentation', 'API docs and references.'),
     makeMobileItem('/community', 'users', 'Community', 'Share ideas with peers.'),
-    makeMobileItem('/support', 'lifebuoy', 'Support', 'Get help from our team.'),
     makeMobileItem('/changelog', 'sparkles', "What's New", 'Latest features and releases.')
   ].join('');
 
@@ -176,18 +145,50 @@
       '<div class="mega-menu-mobile-section">',
         '<p class="mega-menu-mobile-section-title">Learn &amp; Discover</p>',
         ressourcesMobileItems,
-        '<a href="/ressources" class="mega-menu-mobile-see-all">Browse all resources <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
-      '</div>',
-      '<div class="mega-menu-mobile-section">',
-        '<p class="mega-menu-mobile-section-title">Popular Guide</p>',
-        '<a href="/tutorials" class="mega-menu-mobile-item">',
-          '<span class="mega-menu-mobile-item-icon">' + svgIcon('light-bulb') + '</span>',
-          '<span class="mega-menu-mobile-item-text"><p class="mega-menu-mobile-item-title">Getting Started with Rainbow</p><p class="mega-menu-mobile-item-desc">Set up and start using Rainbow in 10 minutes.</p></span>',
-        '</a>',
       '</div>',
       '<div class="mega-menu-mobile-footer">',
-        '<a href="/blog" class="mega-menu-btn mega-menu-btn-secondary" style="justify-content:center;">Visit our blog</a>',
-        '<a href="/support" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Get support</a>',
+        '<a href="/contact" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Contact us</a>',
+      '</div>',
+    '</div>'
+  ].join('');
+
+  var tarifsItems = [
+    makeItem('/products/webinar/pricing', 'video-camera', 'Rainbow Webinar', 'Plans et tarifs pour nos solutions de webinaires interactifs.'),
+    makeItem('/products/collaboration/pricing', 'chat', 'Rainbow Collaboration', 'Tarifs adaptés à vos besoins de collaboration d\'équipe.')
+  ].join('');
+
+  var tarifsHTML = [
+    '<div class="mega-menu mega-menu-tarifs" role="menu">',
+      '<div class="mega-menu-inner">',
+        '<div class="mega-menu-main">',
+          '<p class="mega-menu-section-title">Nos tarifs</p>',
+          '<div class="mega-menu-grid">' + tarifsItems + '</div>',
+          '<a href="/tarifs" class="mega-menu-see-all">Voir tous les plans <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
+        '</div>',
+      '</div>',
+      '<div class="mega-menu-footer">',
+        '<p class="mega-menu-footer-text">Des tarifs simples et transparents pour votre équipe.</p>',
+        '<div class="mega-menu-footer-actions">',
+          '<a href="/contact" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Nous contacter</a>',
+        '</div>',
+      '</div>',
+    '</div>'
+  ].join('');
+
+  var tarifsMobileItems = [
+    makeMobileItem('/products/webinar/pricing', 'video-camera', 'Rainbow Webinar', 'Plans webinaires.'),
+    makeMobileItem('/products/collaboration/pricing', 'chat', 'Rainbow Collaboration', 'Plans collaboration.')
+  ].join('');
+
+  var tarifsMobileHTML = [
+    '<div class="mega-menu-mobile-content">',
+      '<div class="mega-menu-mobile-section">',
+        '<p class="mega-menu-mobile-section-title">Nos tarifs</p>',
+        tarifsMobileItems,
+        '<a href="/tarifs" class="mega-menu-mobile-see-all">Voir tous les plans <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
+      '</div>',
+      '<div class="mega-menu-mobile-footer">',
+        '<a href="/contact" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Nous contacter</a>',
       '</div>',
     '</div>'
   ].join('');
@@ -288,10 +289,20 @@
 
       var isProducts = dd.querySelector('[data-i18n="nav.product"]') !== null;
       var isRessources = trigger.textContent.trim().toLowerCase() === 'ressources';
-      if (!isProducts && !isRessources) continue;
+      var isTarifs = trigger.textContent.trim().toLowerCase() === 'tarifs';
+      if (!isProducts && !isRessources && !isTarifs) continue;
 
-      var megaHTML = isProducts ? productsHTML : ressourcesHTML;
-      var mobileHTML = isProducts ? productsMobileHTML : ressourcesMobileHTML;
+      var megaHTML, mobileHTML;
+      if (isProducts) {
+        megaHTML = productsHTML;
+        mobileHTML = productsMobileHTML;
+      } else if (isRessources) {
+        megaHTML = ressourcesHTML;
+        mobileHTML = ressourcesMobileHTML;
+      } else {
+        megaHTML = tarifsHTML;
+        mobileHTML = tarifsMobileHTML;
+      }
 
       setupDropdown(dd, trigger, megaHTML, mobileHTML);
     }
@@ -303,9 +314,17 @@
       if (!link) continue;
       var isProd = link.getAttribute('href') && link.getAttribute('href').indexOf('/products/') !== -1;
       var isRes = link.getAttribute('href') && link.getAttribute('href').indexOf('/blog') !== -1;
-      if (!isProd && !isRes) continue;
+      var isTarifsMobile = link.getAttribute('href') && link.getAttribute('href').indexOf('/tarifs/') !== -1;
+      if (!isProd && !isRes && !isTarifsMobile) continue;
 
-      var mobileContent = isProd ? productsMobileHTML : ressourcesMobileHTML;
+      var mobileContent;
+      if (isProd) {
+        mobileContent = productsMobileHTML;
+      } else if (isRes) {
+        mobileContent = ressourcesMobileHTML;
+      } else {
+        mobileContent = tarifsMobileHTML;
+      }
 
       sm.style.display = 'none';
       var wrapper = document.createElement('div');

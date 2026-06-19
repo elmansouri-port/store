@@ -15,6 +15,9 @@
   transition: opacity 0.15s ease;
   margin-top: 0;
 }
+.mega-menu-tarifs .mega-menu-inner {
+  grid-template-columns: 1fr;
+}
 .nav-dropdown:hover .mega-menu,
 .nav-dropdown.mega-open .mega-menu {
   display: block;

@@ -1,13 +1,19 @@
 // ========== LAURENN-MAIN ANIMATIONS PORTED TO VANILLA JS ==========
 
-document.addEventListener('DOMContentLoaded', function() {
+function initAllAnimations() {
     initScrollMorphingArch();
     initAnimatedCounters();
     initCTAMouseGlow();
     initSlidingPillTabs();
     initUnifiedPlatformTabs();
     initExpandOnHoverCards();
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllAnimations);
+} else {
+    initAllAnimations();
+}
 
 // ========== SCROLL-MORPHING ARCH ANIMATION ==========
 // Morphs from convex (corners at y=120, controls at y=0) 
@@ -55,7 +61,9 @@ function initAnimatedCounters() {
     var countersStarted = new WeakMap();
 
     function animateCounter(el) {
-        var target = parseInt(el.getAttribute('data-counter'), 10);
+        var targetStr = el.getAttribute('data-counter');
+        var isFloat = targetStr.indexOf('.') > -1 || targetStr.indexOf(',') > -1;
+        var target = parseFloat(targetStr.replace(',', '.'));
         var duration = parseInt(el.getAttribute('data-duration') || '2000', 10);
         var startTime = null;
 
@@ -64,12 +72,24 @@ function initAnimatedCounters() {
             var progress = Math.min((timestamp - startTime) / duration, 1);
             
             var easeOut = 1 - Math.pow(1 - progress, 3);
-            var current = Math.round(easeOut * target);
+            var current = easeOut * target;
             
-            el.textContent = current.toLocaleString();
+            if (isFloat) {
+                // Format with 1 decimal place and replace dot with comma for French locale
+                el.textContent = current.toFixed(1).replace('.', ',');
+            } else {
+                el.textContent = Math.round(current).toLocaleString();
+            }
             
             if (progress < 1) {
                 requestAnimationFrame(update);
+            } else {
+                // Ensure final value is exact
+                if (isFloat) {
+                    el.textContent = target.toFixed(1).replace('.', ',');
+                } else {
+                    el.textContent = Math.round(target).toLocaleString();
+                }
             }
         }
 
@@ -233,6 +253,15 @@ function initUnifiedPlatformTabs() {
         });
     });
 
+    // Mobile dot navigation
+    var dots = document.querySelectorAll('.platform-dot');
+    dots.forEach(function(dot, index) {
+        dot.addEventListener('click', function() {
+            stopAutoPlay();
+            switchToTab(index);
+        });
+    });
+
     function switchToTab(index) {
         activeIndex = index;
         
@@ -256,9 +285,13 @@ function initUnifiedPlatformTabs() {
                     title.classList.add('text-xl', 'md:text-2xl');
                 }
                 if (content) {
-                    content.style.maxHeight = '500px';
                     content.style.opacity = '1';
-                    content.style.paddingTop = '0.75rem';
+                    // Use the real content height so the expand of this tab and the
+                    // collapse of the previous one animate in true lockstep (no bump).
+                    // Note: padding-top is NOT animated here — if it were, reading
+                    // scrollHeight in the same frame would come back short and clip
+                    // the bottom ("En savoir plus"). The description's pt-3 gives the gap.
+                    content.style.maxHeight = content.scrollHeight + 'px';
                 }
             } else {
                 item.classList.remove('active');
@@ -274,7 +307,6 @@ function initUnifiedPlatformTabs() {
                 if (content) {
                     content.style.maxHeight = '0';
                     content.style.opacity = '0';
-                    content.style.paddingTop = '0';
                 }
             }
         });
@@ -294,6 +326,44 @@ function initUnifiedPlatformTabs() {
                 }
             });
         }
+
+        // Mobile images (natural flow, display-based switching)
+        var mobileWrapper = document.getElementById('platform-mobile-image-wrapper');
+        if (mobileWrapper) {
+            var mobileImgs = mobileWrapper.querySelectorAll('.platform-mobile-image');
+            mobileImgs.forEach(function(img, i) {
+                if (i === index) {
+                    img.classList.remove('hidden');
+                    img.classList.add('block');
+                } else {
+                    img.classList.remove('block');
+                    img.classList.add('hidden');
+                }
+            });
+        }
+
+        // Mobile text panels
+        var mobileTexts = document.querySelectorAll('.platform-mobile-text');
+        mobileTexts.forEach(function(el) {
+            var idx = parseInt(el.getAttribute('data-platform-index'), 10);
+            if (idx === index) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        });
+
+        // Mobile dots
+        var dots = document.querySelectorAll('.platform-dot');
+        var dotColors = ['#5e2d91', '#0085CA', '#ea5800'];
+        dots.forEach(function(dot) {
+            var idx = parseInt(dot.getAttribute('data-platform-index'), 10);
+            if (idx === index) {
+                dot.style.backgroundColor = dotColors[idx] || '#5e2d91';
+            } else {
+                dot.style.backgroundColor = '#d1d5db';
+            }
+        });
 
         var quoteContainer = document.getElementById('platform-quote');
         if (quoteContainer) {
@@ -330,61 +400,25 @@ function initUnifiedPlatformTabs() {
         }
     }
 
+    // Re-measure the open tab's height once fonts/layout settle (and on resize),
+    // otherwise the height locked at init can be too small and clip the
+    // "En savoir plus" link once the real font renders.
+    function refreshActiveHeight() {
+        var active = document.querySelector('.platform-tab-item.active .platform-tab-content');
+        if (active) active.style.maxHeight = active.scrollHeight + 'px';
+    }
+
+    window.addEventListener('resize', refreshActiveHeight);
+    window.addEventListener('load', refreshActiveHeight);
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(refreshActiveHeight);
+    }
+
     switchToTab(0);
     startAutoPlay();
-
-    // Preload images and set wrapper height to the tallest image's aspect ratio
-    var wrapper = document.getElementById('platform-image-wrapper');
-    if (wrapper) {
-        var srcs = [
-            '/images/echanger.jpg',
-            '/images/dicuter.jpg',
-            '/images/organiser.jpg'
-        ];
-        var maxRatio = 0;
-        var preloaded = 0;
-
-        srcs.forEach(function(src) {
-            var img = new Image();
-            img.onload = function() {
-                var ratio = img.naturalHeight / img.naturalWidth;
-                if (ratio > maxRatio) maxRatio = ratio;
-                preloaded++;
-                if (preloaded === srcs.length) {
-                    var w = wrapper.offsetWidth;
-                    if (w > 0 && maxRatio > 0) {
-                        wrapper.style.height = Math.round(w * maxRatio) + 'px';
-                    }
-                }
-            };
-            img.src = src;
-        });
-    }
 }
 
-// ========== HELPER: SECTION WAVE DIVIDER GENERATOR ==========
-// Can be called dynamically if needed
 
-function createSectionDivider(fromColor, toColor) {
-    var container = document.createElement('div');
-    container.className = 'section-divider-wave';
-    container.style.backgroundColor = fromColor;
-    
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('viewBox', '0 0 1440 120');
-    svg.setAttribute('preserveAspectRatio', 'none');
-    svg.style.width = '100%';
-    svg.style.height = 'clamp(80px, 10vw, 140px)';
-    
-    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d', 'M0,120 C480,0 960,0 1440,120 L1440,120 L0,120 Z');
-    path.setAttribute('fill', toColor);
-    
-    svg.appendChild(path);
-    container.appendChild(svg);
-    
-    return container;
-}
 
 // ========== EXPAND ON HOVER CARDS (Testimonials Section) ==========
 

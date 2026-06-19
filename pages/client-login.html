@@ -13,7 +13,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#7c3aed', 600: '#6d28d9', 700: '#5b21b6' }, navy: { 900: '#1e1b4b', 800: '#312e81', 700: '#3730a3' }, rainbow: { 50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#7c3aed', 600: '#6d28d9', 700: '#5b21b6', 800: '#4c1d95', 900: '#1e1b4b' }
+                        brand: { 50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#7c3aed', 600: '#6d28d9', 700: '#5b21b6' }, navy: { 900: '#1e1b4b', 800: '#312e81', 700: '#3730a3' }
                     },
                     borderRadius: { btn: '10px' }, fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -24,605 +24,202 @@
     </script>
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .tab-active {
-            color: #7c3aed;
-            border-bottom: 2px solid #7c3aed;
-        }
-        .tab-inactive {
-            color: #9CA3AF;
-            border-bottom: 2px solid transparent;
-        }
-        .tab-inactive:hover {
-            color: #6B7280;
-        }
-        .fade-in {
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .input-focus:focus {
-            border-color: #7c3aed;
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
-        }
-        .lang-switcher { position: relative; }
-        .lang-switcher button { display: flex; align-items: center; gap: 4px; font-size: 0.8125rem; color: #64748b; cursor: pointer; background: none; border: none; padding: 4px 8px; border-radius: 6px; transition: color 0.2s; }
-        .lang-switcher button:hover { color: #0f172a; }
-        .lang-switcher .lang-dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border: 1px solid #e9e5ff; border-radius: 10px; box-shadow: 0 8px 24px rgba(124,58,237,0.08); min-width: 140px; z-index: 200; padding: 4px 0; margin-top: 4px; }
-        .lang-switcher.open .lang-dropdown { display: block; }
-        .lang-dropdown button { display: block; width: 100%; text-align: left; padding: 8px 14px; font-size: 0.8125rem; color: #374151; border: none; background: none; cursor: pointer; }
-        .lang-dropdown button:hover { background: #f5f3ff; }
-        .lang-dropdown button.active { color: #7c3aed; font-weight: 600; }
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .glass-input { border: 1px solid #e5e7eb; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
+        .glass-input:focus-within { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,0.12); }
+        .fade-in-up { animation: fadeIn 0.5s ease-out forwards; opacity: 0; transform: translateY(12px); }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+        .delay-8 { animation-delay: 0.8s; }
+        .delay-9 { animation-delay: 0.9s; }
     </style>
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body class="bg-gray-50 min-h-screen">
-    <!-- ===== NAV ===== -->
-    <nav id="navbar" class="fixed top-0 w-full z-50 glass-nav">
-        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-            <a href="/" class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#4f46e5] flex items-center justify-center"><span class="text-white font-bold text-sm">R</span></div>
-                <span class="text-lg font-bold text-gray-900">Rainbow</span>
-            </a>
-            <div class="hidden md:flex items-center gap-6">
-                <a href="/" class="text-sm text-gray-500 hover:text-gray-900 transition-colors" data-i18n="nav.home">Home</a>
-                <div class="nav-dropdown">
-                    <a href="#" class="text-sm text-gray-500 hover:text-gray-900 transition-colors" data-i18n="nav.product">Products
-                        <svg class="chevron w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-                    </a>
-
-                </div>
-                <div class="nav-dropdown">
-                    <a href="#" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Tarifs</a>
-                    <div class="dropdown-menu">
-                        <a href="/tarifs/rainbow-webinar">Tarif Rainbow Webinar</a>
-                        <a href="/tarifs/rainbow-collaboration">Tarif Rainbow Collaboration</a>
-                    </div>
-                </div>
-                <a href="#partners" class="text-sm text-gray-500 hover:text-gray-900 transition-colors" data-i18n="nav.partners">Partners</a>
-                <div class="nav-dropdown">
-                    <a href="#" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Ressources</a>
-
-                </div>
-                <div class="lang-switcher" id="lang-switcher">
-                    <button onclick="document.getElementById('lang-switcher').classList.toggle('open')">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/></svg>
-                        <span id="lang-current">EN</span>
-                    </button>
-                    <div class="lang-dropdown" id="lang-dropdown"></div>
-                </div>
-                <a href="/login" class="px-5 py-2 rounded-btn bg-navy-900 text-white text-sm font-medium hover:bg-navy-800 transition-colors" data-i18n="nav.signin">Sign in</a>
-            </div>
-            <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Menu">
-                <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-            </button>
-        </div>
-        <div id="mobile-menu" class="md:hidden hidden border-t border-indigo-50 bg-white px-6 py-4 space-y-3">
-            <a href="/" class="block text-sm text-gray-600 py-2" data-i18n="nav.home">Home</a>
-            <a href="#" class="block text-sm text-gray-600 py-2" data-i18n="nav.product">Products</a>
-            <div class="mobile-submenu space-y-1">
-                <a href="/products/rainbow-webinar" class="block py-1">Rainbow Webinar</a>
-                <a href="/products/rainbow-collaboration" class="block py-1">Rainbow Collaboration</a>
-            </div>
-            <a href="#" class="block text-sm text-gray-600 py-2">Tarifs</a>
-            <div class="mobile-submenu space-y-1">
-                <a href="/tarifs/rainbow-webinar" class="block py-1">Tarif Rainbow Webinar</a>
-                <a href="/tarifs/rainbow-collaboration" class="block py-1">Tarif Rainbow Collaboration</a>
-            </div>
-            <a href="#partners" class="block text-sm text-gray-600 py-2" data-i18n="nav.partners">Partners</a>
-            <a href="#" class="block text-sm text-gray-600 py-2">Ressources</a>
-            <div class="mobile-submenu space-y-1">
-                <a href="/blog" class="block py-1" data-i18n="nav.blog">Blog</a>
-                <a href="/reviews" class="block py-1" data-i18n="nav.reviews">Reviews</a>
-                <a href="/support" class="block py-1" data-i18n="nav.support">Support</a>
-                <a href="/tutorials" class="block py-1" data-i18n="nav.tutorials">Tutorials</a>
-            </div>
-            <div id="mobile-lang-switcher" class="flex flex-wrap gap-2 py-2"></div>
-            <a href="/login" class="block w-full text-center text-sm font-medium text-white bg-[#1e1b4b] rounded-[10px] py-2.5" data-i18n="nav.signin">Sign in</a>
-        </div>
-    </nav>
-
-    <div class="flex items-center justify-center p-4 min-h-screen pt-20">
-    <div class="w-full max-w-md">
-        <!-- Card -->
-        <div class="bg-white rounded-2xl shadow-lg shadow-gray-200/60 border border-gray-100 overflow-hidden">
-            <!-- Tabs -->
-            <div class="flex border-b border-gray-100">
-                <button id="tab-login" onclick="switchTab('login')" class="flex-1 py-4 text-sm font-semibold text-center transition-colors tab-active" data-i18n="login.tabSignIn">
-                    Sign In
-                </button>
-                <button id="tab-register" onclick="switchTab('register')" class="flex-1 py-4 text-sm font-semibold text-center transition-colors tab-inactive" data-i18n="login.tabRegister">
-                    Register
-                </button>
+<body class="bg-white min-h-screen flex items-center justify-center p-6">
+    <div class="w-full max-w-lg">
+        <div class="flex flex-col gap-6">
+            <!-- Logo -->
+            <div class="text-center fade-in-up delay-1">
+                <a href="/" class="inline-flex items-center gap-2.5">
+                    <img src="/images/rainbow-logo.png" alt="Rainbow" class="h-16 w-auto" />
+                </a>
             </div>
 
-            <div class="p-6 sm:p-8">
-                <!-- Error / Success Messages -->
-                <div id="message-box" class="hidden mb-4 p-3 rounded-lg text-sm font-medium"></div>
+            <h1 class="fade-in-up delay-1 text-center text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+                Welcome back
+            </h1>
+            <p class="fade-in-up delay-2 text-center text-lg text-gray-500">Sign in to your account to continue</p>
 
-                <!-- Login Form -->
-                <form id="form-login" class="space-y-5 fade-in" onsubmit="handleLogin(event)">
-                    <div>
-                        <label for="login-email" class="block text-sm font-medium text-gray-700 mb-1.5" data-i18n="login.emailLabel">Email address</label>
-                        <input type="email" id="login-email" required placeholder="you@company.com" data-i18n-placeholder="login.emailPlaceholder"
-                            class="input-focus w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 outline-none transition-all">
-                    </div>
-                    <div>
-                        <label for="login-password" class="block text-sm font-medium text-gray-700 mb-1.5" data-i18n="login.passwordLabel">Password</label>
-                        <div class="relative">
-                            <input type="password" id="login-password" required placeholder="Your password" data-i18n-placeholder="login.passwordPlaceholder"
-                                class="input-focus w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 outline-none transition-all pr-10">
-                            <button type="button" onclick="togglePassword('login-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                                <svg class="w-5 h-5 eye-off" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"/></svg>
-                                <svg class="w-5 h-5 eye-on hidden" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            </button>
+            <!-- Message box -->
+            <div id="message-box" class="fade-in-up hidden p-4 rounded-btn text-sm font-medium leading-relaxed" role="alert"></div>
+
+            <!-- ===== LOGIN FORM ===== -->
+            <div id="form-login">
+                <form onsubmit="handleLogin(event)" class="space-y-5">
+                    <div class="fade-in-up delay-3">
+                        <label class="text-base font-medium text-gray-500">Email Address</label>
+                        <div class="glass-input rounded-btn p-0.5 mt-1">
+                            <input id="login-email" name="email" type="email" required placeholder="you@company.com" class="w-full bg-transparent text-base px-4 py-4 rounded-btn focus:outline-none text-gray-900 placeholder-gray-400" />
                         </div>
                     </div>
-                    <div class="flex items-center justify-between">
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" id="remember-me" class="w-4 h-4 rounded border-gray-300 text-rainbow-500 focus:ring-rainbow-500">
-                            <span class="text-sm text-gray-600" data-i18n="login.rememberMe">Remember me</span>
+                    <div class="fade-in-up delay-4">
+                        <label class="text-base font-medium text-gray-500">Password</label>
+                        <div class="glass-input rounded-btn p-0.5 mt-1">
+                            <div class="relative">
+                                <input id="login-password" name="password" type="password" required placeholder="Enter your password" class="w-full bg-transparent text-base px-4 py-4 pr-12 rounded-btn focus:outline-none text-gray-900 placeholder-gray-400" />
+                                <button type="button" onclick="togglePassword('login-password', this)" class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors">
+                                    <svg class="eye-on w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                    <svg class="eye-off w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fade-in-up delay-5 flex items-center justify-between text-base">
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input id="remember-me" name="rememberMe" type="checkbox" class="rounded border-gray-300 text-brand-500 focus:ring-brand-500" />
+                            <span class="text-gray-600">Keep me signed in</span>
                         </label>
-                        <button type="button" onclick="showForgotPassword()" class="text-sm text-rainbow-500 hover:text-rainbow-600 font-medium" data-i18n="login.forgotPassword">
-                            Forgot password?
-                        </button>
+                        <button type="button" onclick="showForgotPassword()" class="hover:underline text-brand-500 transition-colors">Reset password</button>
                     </div>
-                    <button type="submit" id="btn-login"
-                        class="w-full py-2.5 px-4 bg-rainbow-500 hover:bg-rainbow-600 text-white font-semibold rounded-lg text-sm transition-colors disabled:opacity-60 disabled:cursor-not-allowed" data-i18n="login.signInBtn">
-                        Sign In
-                    </button>
+                    <button id="btn-login" type="submit" class="fade-in-up delay-6 w-full rounded-btn py-4 font-semibold text-white bg-brand-500 hover:bg-brand-600 transition-colors text-base shadow-md">Sign In</button>
                 </form>
 
-                <!-- Register Form -->
-                <form id="form-register" class="space-y-5 fade-in hidden" onsubmit="handleRegister(event)">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label for="reg-firstName" class="block text-sm font-medium text-gray-700 mb-1.5" data-i18n="login.firstNameLabel">First name</label>
-                            <input type="text" id="reg-firstName" required placeholder="John" data-i18n-placeholder="login.firstNamePlaceholder"
-                                class="input-focus w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 outline-none transition-all">
-                        </div>
-                        <div>
-                            <label for="reg-lastName" class="block text-sm font-medium text-gray-700 mb-1.5" data-i18n="login.lastNameLabel">Last name</label>
-                            <input type="text" id="reg-lastName" required placeholder="Smith" data-i18n-placeholder="login.lastNamePlaceholder"
-                                class="input-focus w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 outline-none transition-all">
-                        </div>
-                    </div>
-                    <div>
-                        <label for="reg-email" class="block text-sm font-medium text-gray-700 mb-1.5" data-i18n="login.emailLabel">Email address</label>
-                        <input type="email" id="reg-email" required placeholder="you@company.com" data-i18n-placeholder="login.emailPlaceholder"
-                            class="input-focus w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 outline-none transition-all">
-                    </div>
-                    <div>
-                        <label for="reg-password" class="block text-sm font-medium text-gray-700 mb-1.5" data-i18n="login.passwordLabel">Password</label>
-                        <div class="relative">
-                            <input type="password" id="reg-password" required placeholder="Min. 12 characters" data-i18n-placeholder="login.passwordMinChars"
-                                minlength="12"
-                                class="input-focus w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 outline-none transition-all pr-10">
-                            <button type="button" onclick="togglePassword('reg-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                                <svg class="w-5 h-5 eye-off" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"/></svg>
-                                <svg class="w-5 h-5 eye-on hidden" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            </button>
-                        </div>
-                        <div id="pw-checklist" class="hidden mt-2 space-y-1">
-                            <p id="pw-len" class="text-xs flex items-center gap-1.5"><span class="pw-icon">&#9675;</span> 12+ characters</p>
-                            <p id="pw-lower" class="text-xs flex items-center gap-1.5"><span class="pw-icon">&#9675;</span> 1 lowercase letter</p>
-                            <p id="pw-upper" class="text-xs flex items-center gap-1.5"><span class="pw-icon">&#9675;</span> 1 uppercase letter</p>
-                            <p id="pw-num" class="text-xs flex items-center gap-1.5"><span class="pw-icon">&#9675;</span> 1 number</p>
-                            <p id="pw-special" class="text-xs flex items-center gap-1.5"><span class="pw-icon">&#9675;</span> 1 special character</p>
-                        </div>
-                    </div>
-                    <button type="submit" id="btn-register"
-                        class="w-full py-2.5 px-4 bg-rainbow-500 hover:bg-rainbow-600 text-white font-semibold rounded-lg text-sm transition-colors disabled:opacity-60 disabled:cursor-not-allowed" data-i18n="login.createAccountBtn">
-                        Create my account
-                    </button>
-                </form>
+                <p class="fade-in-up delay-7 text-center text-base text-gray-500 mt-6">
+                    New to our platform? <a href="/register" class="text-brand-500 hover:underline transition-colors font-semibold">Create Account</a>
+                </p>
+            </div>
 
-                <!-- Verify Code Form (shown after plan registration) -->
-                <form id="form-verify-code" class="space-y-5 fade-in hidden" onsubmit="handleVerifyCode(event)">
-                    <div class="text-center mb-2">
-                        <div class="w-12 h-12 bg-rainbow-50 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <svg class="w-6 h-6 text-rainbow-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900">Check your email</h3>
-                        <p class="text-sm text-gray-500 mt-1">Enter the 6-digit code sent to <strong id="verify-email-display"></strong></p>
-                    </div>
+            <!-- ===== FORGOT PASSWORD ===== -->
+            <div id="form-forgot" class="hidden">
+                <form onsubmit="handleForgotPassword(event)" class="space-y-5">
+                    <p class="text-base text-gray-500">Enter your email and we'll send you a link to reset your password.</p>
                     <div>
-                        <input type="text" id="verify-code" required placeholder="Enter 6-digit code" maxlength="6"
-                            class="input-focus w-full px-4 py-3 border border-gray-300 rounded-lg text-center text-lg font-semibold tracking-widest text-gray-900 placeholder-gray-400 outline-none transition-all">
-                    </div>
-                    <button type="submit" id="btn-verify-code"
-                        class="w-full py-2.5 px-4 bg-rainbow-500 hover:bg-rainbow-600 text-white font-semibold rounded-lg text-sm transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
-                        Verify
-                    </button>
-                    <button type="button" onclick="switchTab('login')" class="w-full py-2.5 px-4 text-gray-600 hover:text-gray-800 font-medium text-sm transition-colors">
-                        Back to sign in
-                    </button>
-                </form>
-
-                <!-- Forgot Password Form -->
-                <form id="form-forgot" class="space-y-5 fade-in hidden" onsubmit="handleForgotPassword(event)">
-                    <div class="text-center mb-2">
-                        <div class="w-12 h-12 bg-rainbow-50 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <svg class="w-6 h-6 text-rainbow-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+                        <label class="text-base font-medium text-gray-500">Email Address</label>
+                        <div class="glass-input rounded-btn p-0.5 mt-1">
+                            <input id="forgot-email" name="email" type="email" required placeholder="you@company.com" class="w-full bg-transparent text-base px-4 py-4 rounded-btn focus:outline-none text-gray-900 placeholder-gray-400" />
                         </div>
-                        <h3 class="text-lg font-semibold text-gray-900" data-i18n="login.forgotTitle">Forgot your password?</h3>
-                        <p class="text-sm text-gray-500 mt-1" data-i18n="login.forgotDescription">Enter your email address and we'll send you a reset link.</p>
                     </div>
-                    <div>
-                        <label for="forgot-email" class="block text-sm font-medium text-gray-700 mb-1.5" data-i18n="login.emailLabel">Email address</label>
-                        <input type="email" id="forgot-email" required placeholder="you@company.com" data-i18n-placeholder="login.emailPlaceholder"
-                            class="input-focus w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 outline-none transition-all">
-                    </div>
-                    <button type="submit" id="btn-forgot"
-                        class="w-full py-2.5 px-4 bg-rainbow-500 hover:bg-rainbow-600 text-white font-semibold rounded-lg text-sm transition-colors disabled:opacity-60 disabled:cursor-not-allowed" data-i18n="login.sendResetLink">
-                        Send reset link
-                    </button>
-                    <button type="button" onclick="hideForgotPassword()" class="w-full py-2.5 px-4 text-gray-600 hover:text-gray-800 font-medium text-sm transition-colors" data-i18n="login.backToSignIn">
-                        Back to sign in
-                    </button>
+                    <button id="btn-forgot" type="submit" class="w-full rounded-btn py-4 font-semibold text-white bg-brand-500 hover:bg-brand-600 transition-colors text-base shadow-md">Send reset link</button>
+                    <button type="button" onclick="hideForgotPassword()" class="w-full text-center text-base text-brand-500 hover:underline transition-colors font-medium">Back to sign in</button>
                 </form>
             </div>
-        </div>
 
-        <!-- Footer -->
-        <p class="text-center text-xs text-gray-400 mt-6" data-i18n-html="footer.copyright">
-            &copy; 2026 Rainbow by Alcatel-Lucent Enterprise. All rights reserved.
-        </p>
-    </div>
+            <p class="text-center text-sm text-gray-400 mt-4">&copy; 2026 Rainbow by Alcatel-Lucent Enterprise. All rights reserved.</p>
+        </div>
     </div>
 
     <script src="/js/i18n.js"></script>
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-        // Close lang-switcher on outside click
-        document.addEventListener('click', function(e) {
-            var sw = document.getElementById('lang-switcher');
-            if (sw && !sw.contains(e.target)) sw.classList.remove('open');
-        });
-    </script>
-    <script>
-        function t(k,f){return typeof i18n!=='undefined'?i18n.t(k,f):f;}
-        // =============================================
-        // Configuration
-        // =============================================
-        const API_BASE = window.location.origin;
-        const urlParams = new URLSearchParams(window.location.search);
-        const selectedPlan = urlParams.get('plan');
-        const selectedLicenses = urlParams.get('licenses');
-        const inviteToken = urlParams.get('invite');
-        const inviteEmail = urlParams.get('email');
+    function hideMessage() {
+        var mb = document.getElementById('message-box');
+        mb.classList.add('hidden');
+        mb.textContent = '';
+        mb.className = 'hidden p-4 rounded-btn text-sm font-medium leading-relaxed';
+    }
 
-        function getPortalRedirect() {
-            let url = '/portal';
-            if (selectedPlan) {
-                url += '?plan=' + encodeURIComponent(selectedPlan);
-                if (selectedLicenses) url += '&licenses=' + encodeURIComponent(selectedLicenses);
-            }
-            return url;
+    function showMessage(text, type) {
+        var mb = document.getElementById('message-box');
+        mb.textContent = text;
+        mb.className = 'block p-4 rounded-btn text-sm font-medium leading-relaxed fade-in ' + (type === 'error' ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700');
+    }
+
+    // ===== PASSWORD TOGGLE =====
+    function togglePassword(inputId, btn) {
+        var input = document.getElementById(inputId);
+        if (input.type === 'password') {
+            input.type = 'text';
+            btn.querySelector('.eye-on').classList.add('hidden');
+            btn.querySelector('.eye-off').classList.remove('hidden');
+        } else {
+            input.type = 'password';
+            btn.querySelector('.eye-on').classList.remove('hidden');
+            btn.querySelector('.eye-off').classList.add('hidden');
         }
+    }
 
-        // Handle license invite â€” pre-fill email & show banner
-        function handleInviteParams() {
-            if (!inviteToken) return;
-            if (inviteEmail) {
-                const regEmail = document.getElementById('reg-email');
-                if (regEmail) regEmail.value = decodeURIComponent(inviteEmail);
-            }
-            switchTab('register');
-            showMessage("You've been invited to join a Rainbow team! Register to activate your license.", 'info');
-        }
+    // ===== FORGOT PASSWORD =====
+    function showForgotPassword() {
+        hideMessage();
+        document.getElementById('form-login').classList.add('hidden');
+        document.getElementById('form-forgot').classList.remove('hidden');
+    }
 
-        // =============================================
-        // Tab switching
-        // =============================================
-        function switchTab(tab) {
-            const loginTab = document.getElementById('tab-login');
-            const registerTab = document.getElementById('tab-register');
-            const loginForm = document.getElementById('form-login');
-            const registerForm = document.getElementById('form-register');
-            const forgotForm = document.getElementById('form-forgot');
+    function hideForgotPassword() {
+        hideMessage();
+        document.getElementById('form-forgot').classList.add('hidden');
+        document.getElementById('form-login').classList.remove('hidden');
+    }
 
-            hideMessage();
-            forgotForm.classList.add('hidden');
-            document.getElementById('form-verify-code').classList.add('hidden');
+    // ===== API HELPERS =====
+    var API_BASE = window.location.origin;
 
-            if (tab === 'login') {
-                loginTab.className = loginTab.className.replace('tab-inactive', 'tab-active');
-                registerTab.className = registerTab.className.replace('tab-active', 'tab-inactive');
-                loginForm.classList.remove('hidden');
-                registerForm.classList.add('hidden');
-            } else {
-                registerTab.className = registerTab.className.replace('tab-inactive', 'tab-active');
-                loginTab.className = loginTab.className.replace('tab-active', 'tab-inactive');
-                registerForm.classList.remove('hidden');
-                loginForm.classList.add('hidden');
-            }
-        }
-
-        // =============================================
-        // Password visibility toggle
-        // =============================================
-        function togglePassword(inputId, btn) {
-            const input = document.getElementById(inputId);
-            const eyeOff = btn.querySelector('.eye-off');
-            const eyeOn = btn.querySelector('.eye-on');
-            if (input.type === 'password') {
-                input.type = 'text';
-                eyeOff.classList.add('hidden');
-                eyeOn.classList.remove('hidden');
-            } else {
-                input.type = 'password';
-                eyeOff.classList.remove('hidden');
-                eyeOn.classList.add('hidden');
-            }
-        }
-
-        // =============================================
-        // Live password checklist
-        // =============================================
-        (function() {
-            const pwInput = document.getElementById('reg-password');
-            if (!pwInput) return;
-            const checklist = document.getElementById('pw-checklist');
-            const rules = [
-                { id: 'pw-len',     test: pw => pw.length >= 12 },
-                { id: 'pw-lower',   test: pw => /[a-z]/.test(pw) },
-                { id: 'pw-upper',   test: pw => /[A-Z]/.test(pw) },
-                { id: 'pw-num',     test: pw => /[0-9]/.test(pw) },
-                { id: 'pw-special', test: pw => /[^a-zA-Z0-9]/.test(pw) }
-            ];
-            pwInput.addEventListener('focus', () => checklist.classList.remove('hidden'));
-            pwInput.addEventListener('input', () => {
-                const pw = pwInput.value;
-                checklist.classList.remove('hidden');
-                rules.forEach(r => {
-                    const el = document.getElementById(r.id);
-                    const pass = r.test(pw);
-                    el.querySelector('.pw-icon').innerHTML = pass ? '&#10003;' : '&#9675;';
-                    el.className = 'text-xs flex items-center gap-1.5 ' + (pass ? 'text-green-600' : 'text-gray-400');
-                });
+    function apiRequest(method, path, body) {
+        return fetch(API_BASE + path, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: body ? JSON.stringify(body) : undefined
+        }).then(function(r) {
+            return r.json().then(function(data) {
+                if (!r.ok) throw new Error(data.error || data.message || 'Request failed');
+                return data;
             });
-        })();
+        });
+    }
 
-        // =============================================
-        // Message display
-        // =============================================
-        function showMessage(text, type) {
-            const box = document.getElementById('message-box');
-            box.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'bg-green-50', 'text-green-700', 'bg-blue-50', 'text-blue-700');
-            if (type === 'error') {
-                box.classList.add('bg-red-50', 'text-red-700');
-            } else if (type === 'success') {
-                box.classList.add('bg-green-50', 'text-green-700');
-            } else {
-                box.classList.add('bg-blue-50', 'text-blue-700');
-            }
-            box.textContent = (typeof text === 'string') ? text : String(text);
+    // ===== LOGIN =====
+    function handleLogin(e) {
+        e.preventDefault();
+        hideMessage();
+        var btn = document.getElementById('btn-login');
+        btn.disabled = true;
+        btn.textContent = 'Signing in...';
+        var email = document.getElementById('login-email').value.trim();
+        var password = document.getElementById('login-password').value;
+        apiRequest('POST', '/api/client/login', { email: email, password: password }).then(function(data) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('client', JSON.stringify(data.user));
+            setTimeout(function() {
+                var redirect = '/portal';
+                window.location.href = redirect;
+            }, 500);
+        }).catch(function(err) {
+            showMessage(err.message, 'error');
+            btn.disabled = false;
+            btn.textContent = 'Sign In';
+        });
+    }
+
+    // ===== FORGOT PASSWORD =====
+    function handleForgotPassword(e) {
+        e.preventDefault();
+        hideMessage();
+        var btn = document.getElementById('btn-forgot');
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        var email = document.getElementById('forgot-email').value.trim();
+        apiRequest('POST', '/api/client/forgot-password', { email: email }).then(function() {
+            showMessage('If an account exists with that email, you will receive a password reset link shortly.', 'success');
+        }).catch(function() {
+            showMessage('If an account exists with that email, you will receive a password reset link shortly.', 'success');
+        }).finally(function() {
+            btn.disabled = false;
+            btn.textContent = 'Send reset link';
+        });
+    }
+
+    // ===== URL PARAMS =====
+    (function() {
+        if (localStorage.getItem('token')) {
+            window.location.href = '/portal';
+            return;
         }
-
-        function hideMessage() {
-            document.getElementById('message-box').classList.add('hidden');
-        }
-
-        // =============================================
-        // Forgot password
-        // =============================================
-        function showForgotPassword() {
-            hideMessage();
-            document.getElementById('form-login').classList.add('hidden');
-            document.getElementById('form-register').classList.add('hidden');
-            document.getElementById('form-forgot').classList.remove('hidden');
-        }
-
-        function hideForgotPassword() {
-            hideMessage();
-            document.getElementById('form-forgot').classList.add('hidden');
-            document.getElementById('form-login').classList.remove('hidden');
-        }
-
-        // =============================================
-        // API helper
-        // =============================================
-        async function apiRequest(url, method, body) {
-            const opts = {
-                method,
-                headers: { 'Content-Type': 'application/json' },
-            };
-            if (body) opts.body = JSON.stringify(body);
-
-            const res = await fetch(API_BASE + url, opts);
-            const data = await res.json().catch(() => ({}));
-            if (!res.ok) {
-                const errMsg = typeof data.error === 'string' ? data.error
-                    : typeof data.message === 'string' ? data.message
-                    : data.errorDetails || data.errorMsg || 'An error occurred';
-                throw new Error(errMsg);
-            }
-            return data;
-        }
-
-        // =============================================
-        // Login handler
-        // =============================================
-        async function handleLogin(e) {
-            e.preventDefault();
-            hideMessage();
-            const btn = document.getElementById('btn-login');
-            btn.disabled = true;
-            btn.textContent = t('login.signingIn','Signing in...');
-
-            try {
-                const email = document.getElementById('login-email').value.trim();
-                const password = document.getElementById('login-password').value;
-
-                const data = await apiRequest('/api/client/login', 'POST', { email, password });
-
-                localStorage.setItem('token', data.token);
-                if (data.client) {
-                    localStorage.setItem('client', JSON.stringify(data.client));
-                }
-
-                // Accept license invite if present
-                if (inviteToken) {
-                    try {
-                        await fetch(API_BASE + '/api/client/accept-invite', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + data.token },
-                            body: JSON.stringify({ inviteId: inviteToken })
-                        });
-                    } catch (e) { console.warn('Invite accept failed:', e.message); }
-                }
-
-                showMessage(t('login.loginSuccess','Login successful! Redirecting...'), 'success');
-                setTimeout(() => {
-                    window.location.href = getPortalRedirect();
-                }, 500);
-            } catch (err) {
-                showMessage(err.message, 'error');
-                btn.disabled = false;
-                btn.textContent = t('login.signInBtn','Sign In');
-            }
-        }
-
-        // =============================================
-        // Register handler
-        // =============================================
-        async function handleRegister(e) {
-            e.preventDefault();
-            hideMessage();
-
-            const firstName = document.getElementById('reg-firstName').value.trim();
-            const lastName = document.getElementById('reg-lastName').value.trim();
-            const email = document.getElementById('reg-email').value.trim();
-            const password = document.getElementById('reg-password').value;
-
-            if (password.length < 12) {
-                showMessage(t('login.passwordMin12','Password must be at least 12 characters.'), 'error');
-                return;
-            }
-            if (!/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/[0-9]/.test(password) || !/[^a-zA-Z0-9]/.test(password)) {
-                showMessage(t('login.passwordPolicy','Password must contain at least 1 lowercase, 1 uppercase, 1 number and 1 special character.'), 'error');
-                return;
-            }
-
-            const btn = document.getElementById('btn-register');
-            btn.disabled = true;
-            btn.textContent = t('login.creatingAccount','Creating account...');
-
-            try {
-                const result = await apiRequest('/api/client/register', 'POST', {
-                    firstName, lastName, email, password
-                });
-
-                // If Rainbow account already exists, skip verification â€” go straight to sign-in
-                if (result.alreadyVerified) {
-                    document.getElementById('form-register').classList.add('hidden');
-                    document.getElementById('form-login').classList.remove('hidden');
-                    document.getElementById('login-email').value = email;
-                    // Switch tab visual state
-                    document.getElementById('tab-login').className = document.getElementById('tab-login').className.replace('tab-inactive', 'tab-active');
-                    document.getElementById('tab-register').className = document.getElementById('tab-register').className.replace('tab-active', 'tab-inactive');
-                    showMessage('Your Rainbow account was found. You can sign in with your password.', 'success');
-                    btn.disabled = false;
-                    btn.textContent = t('login.createAccountBtn','Create my account');
-                    return;
-                }
-
-                // Store credentials for verify-code step
-                window._regEmail = email;
-                window._regPassword = password;
-
-                // Show the verify code form
-                document.getElementById('form-register').classList.add('hidden');
-                document.getElementById('verify-email-display').textContent = email;
-                document.getElementById('form-verify-code').classList.remove('hidden');
-                showMessage('Account created! Check your email for a verification code.', 'success');
-            } catch (err) {
-                showMessage(err.message, 'error');
-                btn.disabled = false;
-                btn.textContent = t('login.createAccountBtn','Create my account');
-            }
-        }
-
-        // =============================================
-        // Verify code handler
-        // =============================================
-        async function handleVerifyCode(e) {
-            e.preventDefault();
-            hideMessage();
-            const code = document.getElementById('verify-code').value.trim();
-            if (!code) {
-                showMessage('Please enter the verification code.', 'error');
-                return;
-            }
-
-            const btn = document.getElementById('btn-verify-code');
-            btn.disabled = true;
-            btn.textContent = 'Verifying...';
-
-            try {
-                await apiRequest('/api/client/verify-code', 'POST', {
-                    email: window._regEmail,
-                    code: code,
-                    password: window._regPassword
-                });
-
-                showMessage('Email verified! You can now sign in.', 'success');
-                document.getElementById('form-verify-code').classList.add('hidden');
-                document.getElementById('form-login').classList.remove('hidden');
-                // Pre-fill login email
-                document.getElementById('login-email').value = window._regEmail;
-                window._regEmail = null;
-                window._regPassword = null;
-            } catch (err) {
-                showMessage(err.message, 'error');
-                btn.disabled = false;
-                btn.textContent = 'Verify';
-            }
-        }
-
-        // =============================================
-        // Forgot password handler
-        // =============================================
-        async function handleForgotPassword(e) {
-            e.preventDefault();
-            hideMessage();
-            const btn = document.getElementById('btn-forgot');
-            btn.disabled = true;
-            btn.textContent = t('login.sendingReset','Sending...');
-
-            try {
-                const email = document.getElementById('forgot-email').value.trim();
-                await apiRequest('/api/client/forgot-password', 'POST', { email });
-                showMessage(t('login.resetSent','If an account exists with this email, a reset link has been sent.'), 'success');
-            } catch (err) {
-                // For security, always show the same message
-                showMessage(t('login.resetSent','If an account exists with this email, a reset link has been sent.'), 'success');
-            } finally {
-                btn.disabled = false;
-                btn.textContent = t('login.sendResetLink','Send reset link');
-            }
-        }
-
-        // =============================================
-        // On load: if already logged in, redirect
-        // =============================================
-        (function() {
-            const token = localStorage.getItem('token');
-            if (token) {
-                window.location.href = getPortalRedirect();
-            }
-        })();
-        // Auto-switch to register tab if coming from plan selection
-        if (selectedPlan) {
-            switchTab('register');
-        }
-        // Handle invite params
-        handleInviteParams();
+    })();
     </script>
 </body>
 </html>

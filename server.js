@@ -308,7 +308,7 @@ function translateHTML(html, lang) {
 function sendPage(req, res, filePath) {
     const lang = req.cookies && req.cookies.lang;
     if (!lang || lang === 'en' || SUPPORTED_LANGS.indexOf(lang) === -1) {
-        return res.sendFile(filePath);
+        return res.status(200).set('Content-Type', 'text/html; charset=utf-8').sendFile(filePath);
     }
     const cacheKey = filePath + ':' + lang;
     if (translatedPageCache[cacheKey]) {
@@ -325,7 +325,7 @@ function sendPage(req, res, filePath) {
         translatedPageCache[cacheKey] = translated;
         res.set('Content-Type', 'text/html; charset=utf-8').send(translated);
     } catch (e) {
-        res.sendFile(filePath);
+        res.status(200).set('Content-Type', 'text/html; charset=utf-8').sendFile(filePath);
     }
 }
 
@@ -348,30 +348,17 @@ app.post('/api/admin/clear-i18n-cache', adminAuth, (req, res) => {
 app.get('/', (req, res) => sendPage(req, res, path.join(__dirname, 'index.html')));
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'pages', 'admin.html')));
 app.get('/login', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'client-login.html')));
+app.get('/register', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'signup.html')));
 app.get('/portal', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'client-portal.html')));
-app.get('/blog', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'blog.html')));
-app.get('/blog/:slug', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'blog-article.html')));
-app.get('/reviews', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'reviews.html')));
-app.get('/support', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'support.html')));
-app.get('/tutorials', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'tutorials.html')));
 app.get('/products', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'products.html')));
 app.get('/products/collaboration', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'collaboration.html')));
 app.get('/products/webinar', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'webinar.html')));
-app.get('/product/:slug', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'product.html')));
-app.get('/offers', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'offers.html')));
-app.get('/products/rainbow-collaboration', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'product-collaboration.html')));
-app.get('/products/rainbow-webinar', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'product-webinar.html')));
-app.get('/tarifs/rainbow-webinar', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'tarif-webinar.html')));
-app.get('/tarifs/rainbow-collaboration', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'tarif-collaboration.html')));
+app.get('/tarifs', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'tarifs.html')));
+app.get('/products/webinar/pricing', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'tarif-webinar.html')));
+app.get('/products/collaboration/pricing', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'tarif-collaboration.html')));
 app.get('/verify-email', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'verify-email.html')));
 app.get('/reset-password', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'reset-password.html')));
-app.get('/bg-proposals', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'bg-proposals.html')));
-app.get('/bg-proposals-2', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'bg-proposals-2.html')));
-app.get('/bg-proposals-3', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'bg-proposals-3.html')));
-app.get('/new-proposals', (req, res) => res.sendFile(path.join(__dirname, 'pages', 'new-proposals.html')));app.get('/10-proposals', (req, res) => res.sendFile(path.join(__dirname, 'pages', '10-proposals.html')));app.get('/redesign-proposals', (req, res) => res.sendFile(path.join(__dirname, 'pages', 'redesign-proposals.html')));app.get('/lavender-proposal', (req, res) => res.sendFile(path.join(__dirname, 'pages', 'lavender-proposal.html')));
-app.get('/about', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'about.html')));
-app.get('/legal', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'legal.html')));
-app.get('/privacy', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'privacy.html')));
+app.get('/contact', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'contact.html')));
 
 // ===================== API ROUTES =====================
 
@@ -576,6 +563,24 @@ app.get('/healthz', (req, res) => {
     } catch (e) {
         res.status(500).json({ status: 'error', message: e.message });
     }
+});
+
+// ===================== 404 HANDLER =====================
+
+app.use((req, res) => {
+    res.status(404).set('Content-Type', 'text/html; charset=utf-8').send(`
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>404 - Page non trouvée</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',system-ui,sans-serif}</style>
+</head><body class="flex items-center justify-center min-h-screen bg-[#f5f3ff]">
+<div class="text-center px-6">
+<h1 class="text-8xl font-extrabold text-navy-900">404</h1>
+<p class="mt-4 text-xl text-gray-600">Page non trouvée</p>
+<a href="/" class="mt-8 inline-block px-6 py-3 rounded-xl bg-navy-900 text-white font-semibold text-sm hover:bg-black transition-colors shadow-lg">Retour à l'accueil</a>
+</div></body></html>`);
 });
 
 // ===================== ERROR HANDLER =====================

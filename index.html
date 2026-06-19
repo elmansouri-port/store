@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -81,7 +81,12 @@
                     </a>
 
                 </div>
-                <a href="/tarifs" class="text-sm text-gray-500 hover:text-navy-900 transition-colors font-medium">Tarifs</a>
+                <div class="nav-dropdown">
+                    <a href="#" class="text-sm text-gray-500 hover:text-navy-900 transition-colors font-medium">
+                        Tarifs
+                        <svg class="chevron w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </a>
+                </div>
                 <div class="nav-dropdown">
                     <a href="#" class="text-sm text-gray-500 hover:text-navy-900 transition-colors font-medium">Ressources
                         <svg class="chevron w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -98,7 +103,7 @@
                     <div class="lang-dropdown" id="lang-dropdown"></div>
                 </div>
                 <a href="/login" class="px-5 py-2.5 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-sm font-semibold transition-colors" data-i18n="nav.signin">Se connecter</a>
-                <a href="#products" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all">Explorez nos produits</a>
+                <a href="#products" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all">Essai gratuit</a>
             </div>
             <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Menu">
                 <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -110,13 +115,10 @@
                 <a href="/products/webinar" class="block py-1">Rainbow Webinar</a>
                 <a href="/products/collaboration" class="block py-1">Rainbow Collaboration</a>
             </div>
-            <a href="/tarifs" class="block text-sm text-gray-600 py-2">Tarifs</a>
-            <a href="#" class="block text-sm text-gray-600 py-2">Ressources</a>
+            <a href="#" class="block text-sm text-gray-600 py-2">Tarifs</a>
             <div class="mobile-submenu space-y-1">
-                <a href="/blog" class="block py-1" data-i18n="nav.blog">Blog</a>
-                <a href="/reviews" class="block py-1" data-i18n="nav.reviews">Reviews</a>
-                <a href="/support" class="block py-1" data-i18n="nav.support">Support</a>
-                <a href="/tutorials" class="block py-1" data-i18n="nav.tutorials">Tutorials</a>
+                <a href="/products/webinar/pricing" class="block py-1">Rainbow Webinar</a>
+                <a href="/products/collaboration/pricing" class="block py-1">Rainbow Collaboration</a>
             </div>
             <div id="mobile-lang-switcher" class="flex flex-wrap gap-2 py-2"></div>
             <div class="flex flex-col gap-3 pt-2">
@@ -160,11 +162,7 @@
             <!-- CTAs -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
                 <a href="#products" class="px-8 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold shadow-2xl shadow-purple-900/20 transition-all active:scale-95">
-                    Explorez nos produits
-                </a>
-                <a href="/support" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-gray-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">
-                    <svg class="w-5 h-5 mr-3 fill-current text-gray-900 group-hover:text-brand-500 transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    Demander une d&eacute;monstration
+                    Essai gratuit
                 </a>
             </div>
             
@@ -266,7 +264,36 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <!-- Mobile: Image carousel with dots -->
+            <div class="lg:hidden">
+                <div id="platform-mobile-image-wrapper" class="relative w-full rounded-xl overflow-hidden bg-gray-900 shadow-xl ring-1 ring-black/5 mb-6" style="aspect-ratio: 800 / 650;">
+                    <img src="/images/echanger.jpg" alt="" class="platform-mobile-image block absolute inset-0 w-full h-full object-cover" data-platform-index="0" />
+                    <img src="/images/dicuter.jpg" alt="" class="platform-mobile-image hidden absolute inset-0 w-full h-full object-cover" data-platform-index="1" />
+                    <img src="/images/organiser.jpg" alt="" class="platform-mobile-image hidden absolute inset-0 w-full h-full object-cover" data-platform-index="2" />
+                </div>
+                <div class="text-center">
+                    <div class="platform-mobile-text" data-platform-index="0">
+                        <h3 class="text-xl font-bold" style="color: #5e2d91;">&Eacute;changer avec vos &eacute;quipes</h3>
+                        <p class="text-gray-600 text-lg mt-2 leading-relaxed">Travailler ensemble en temps r&eacute;el gr&acirc;ce aux espaces partag&eacute;s, cha&icirc;nes d'information, chat, et fichiers centralis&eacute;s.</p>
+                    </div>
+                    <div class="platform-mobile-text hidden" data-platform-index="1">
+                        <h3 class="text-xl font-bold" style="color: #0085CA;">Discuter en temps r&eacute;el</h3>
+                        <p class="text-gray-600 text-lg mt-2 leading-relaxed">Voix, visio, messages instantan&eacute;s : tout est r&eacute;uni pour fluidifier les &eacute;changes.</p>
+                    </div>
+                    <div class="platform-mobile-text hidden" data-platform-index="2">
+                        <h3 class="text-xl font-bold" style="color: #ea5800;">Organiser des r&eacute;unions et &eacute;v&eacute;nements</h3>
+                        <p class="text-gray-600 text-lg mt-2 leading-relaxed">Organisez facilement webinaires, conf&eacute;rences et d&eacute;monstrations pour engager vos audiences.</p>
+                    </div>
+                </div>
+                <div class="flex justify-center gap-3 mt-6">
+                    <button class="w-2.5 h-2.5 rounded-full bg-[#5e2d91] platform-dot transition-all duration-300" data-platform-index="0"></button>
+                    <button class="w-2.5 h-2.5 rounded-full bg-gray-300 platform-dot transition-all duration-300" data-platform-index="1"></button>
+                    <button class="w-2.5 h-2.5 rounded-full bg-gray-300 platform-dot transition-all duration-300" data-platform-index="2"></button>
+                </div>
+            </div>
+
+            <!-- Desktop layout -->
+            <div class="hidden lg:grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
                 <!-- Left: Tabs with progress -->
                 <div class="order-2 lg:order-1 lg:col-span-5 flex flex-col justify-center">
                     <div class="space-y-3 mb-8">
@@ -358,11 +385,11 @@
                 </div>
 
                 <!-- Right: Image Display with blur transitions -->
-                <div class="order-1 lg:order-2 lg:col-span-7 lg:min-h-[450px]">
-                    <div id="platform-image-wrapper" class="relative rounded-xl overflow-hidden bg-gray-900 shadow-xl ring-1 ring-black/5" style="min-height: 300px;">
-                        <img src="/images/echanger.jpg" alt="Collaborer" class="platform-image absolute inset-0 w-full h-full object-contain transition-all duration-500 ease-in-out" style="opacity: 1; filter: blur(0); z-index: 10;" />
-                        <img src="/images/dicuter.jpg" alt="Communiquer" class="platform-image absolute inset-0 w-full h-full object-contain transition-all duration-500 ease-in-out" style="opacity: 0; filter: blur(4px); z-index: 0;" />
-                        <img src="/images/organiser.jpg" alt="Evenements" class="platform-image absolute inset-0 w-full h-full object-contain transition-all duration-500 ease-in-out" style="opacity: 0; filter: blur(4px); z-index: 0;" />
+                <div class="order-1 lg:order-2 lg:col-span-7 flex items-center">
+                    <div id="platform-image-wrapper" class="relative w-full rounded-xl overflow-hidden bg-gray-900 shadow-xl ring-1 ring-black/5" style="aspect-ratio: 800 / 650;">
+                        <img src="/images/echanger.jpg" alt="" class="platform-image absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out" style="opacity: 1; filter: blur(0); z-index: 10;" />
+                        <img src="/images/dicuter.jpg" alt="" class="platform-image absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out" style="opacity: 0; filter: blur(4px); z-index: 0;" />
+                        <img src="/images/organiser.jpg" alt="" class="platform-image absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out" style="opacity: 0; filter: blur(4px); z-index: 0;" />
                     </div>
                 </div>
             </div>
@@ -382,7 +409,7 @@
             </div>
 
             <!-- Sliding Pill Tab Container -->
-            <div class="flex justify-center mb-4">
+            <div class="hidden md:flex md:justify-center md:mb-4">
                 <div class="pill-tab-container relative inline-flex">
                     <div class="pill-slider"></div>
                     
@@ -429,21 +456,22 @@
                         
                         <!-- Panel 0: Marketeurs -->
                         <div class="tab-panel-content" data-panel-id="audience" data-panel-index="0" style="opacity: 1; visibility: visible; position: relative;">
+                            <img src="/images/Marketeurs_commerciaux.jpg" alt="Marketeurs" class="lg:hidden w-full h-48 object-cover rounded-xl mb-4" />
                             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold mb-4" style="background-color: rgba(234, 88, 0, 0.1); color: #ea5800;">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                                 </svg>
                                 Marketeurs &amp; commerciaux
                             </div>
-                            <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 text-gray-900 leading-tight">
+                            <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-4 text-gray-900 leading-tight">
                                 Acc&eacute;l&eacute;rez vos &eacute;changes et gagnez en r&eacute;activit&eacute;
                             </h3>
-                            <p class="text-base md:text-lg text-gray-600 mb-6 leading-relaxed">
-                                Acc&eacute;l&eacute;rez vos &eacute;changes et gagnez en r&eacute;activit&eacute;. Rainbow vous permet de coordonner vos campagnes et vos actions de vente en un clin d'&oelig;il.
+                            <p class="hidden lg:block text-lg text-gray-600 leading-relaxed mb-6">
+                                Centralisez vos campagnes, partagez vos supports et collaborez en temps r&eacute;el avec vos prospects pour conclure vos ventes plus rapidement.
                             </p>
                             <!-- CTA Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <a href="/offers" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">
+                                <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">
                                     Testez-le gratuitement
                                 </a>
                                 <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
@@ -454,21 +482,22 @@
 
                         <!-- Panel 1: Public -->
                         <div class="tab-panel-content" data-panel-id="audience" data-panel-index="1" style="opacity: 0; visibility: hidden; position: absolute; top: 0; left: 0; width: 100%; pointer-events: none;">
+                            <img src="/images/ONG_secteur-public.png" alt="Public" class="lg:hidden w-full h-48 object-cover rounded-xl mb-4" />
                             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold mb-4" style="background-color: rgba(0, 133, 202, 0.1); color: #0085CA;">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                 </svg>
                                 ONG &amp; secteur public
                             </div>
-                            <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 text-gray-900 leading-tight">
+                            <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-4 text-gray-900 leading-tight">
                                 Une collaboration souveraine et s&eacute;curis&eacute;e
                             </h3>
-                            <p class="text-base md:text-lg text-gray-600 mb-6 leading-relaxed">
-                                Collaborez en toute s&eacute;curit&eacute; avec vos partenaires. Rainbow garantit la souverainet&eacute; et la confidentialit&eacute; totale de vos &eacute;changes.
+                            <p class="hidden lg:block text-lg text-gray-600 leading-relaxed mb-6">
+                                &Eacute;changez en toute confiance gr&acirc;ce &agrave; une plateforme souveraine, h&eacute;berg&eacute;e en Europe et conforme aux exigences de s&eacute;curit&eacute; les plus strictes.
                             </p>
                             <!-- CTA Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <a href="/offers" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">
+                                <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">
                                     Testez-le gratuitement
                                 </a>
                                 <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
@@ -479,21 +508,22 @@
 
                         <!-- Panel 2: Education -->
                         <div class="tab-panel-content" data-panel-id="audience" data-panel-index="2" style="opacity: 0; visibility: hidden; position: absolute; top: 0; left: 0; width: 100%; pointer-events: none;">
+                            <img src="/images/Enseignants_formateurs.jpg" alt="Education" class="lg:hidden w-full h-48 object-cover rounded-xl mb-4" />
                             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold mb-4" style="background-color: rgba(94, 45, 145, 0.1); color: #5e2d91;">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 59.905 0 006.75 15.75v-1.5" />
                                 </svg>
                                 Enseignants &amp; formateurs
                             </div>
-                            <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 text-gray-900 leading-tight">
+                            <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-4 text-gray-900 leading-tight">
                                 Transmettez votre savoir sans fronti&egrave;res
                             </h3>
-                            <p class="text-base md:text-lg text-gray-600 mb-6 leading-relaxed">
-                                Invitez vos &eacute;l&egrave;ves dans une salle de classe virtuelle. Vous y trouverez tous les outils pour enseigner efficacement et &eacute;valuer les acquis en temps r&eacute;el.
+                            <p class="hidden lg:block text-lg text-gray-600 leading-relaxed mb-6">
+                                Animez vos cours et formations &agrave; distance avec des outils de visio, de partage et d'interaction pens&eacute;s pour l'apprentissage.
                             </p>
                             <!-- CTA Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <a href="/offers" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">
+                                <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">
                                     Testez-le gratuitement
                                 </a>
                                 <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
@@ -504,21 +534,22 @@
 
                         <!-- Panel 3: Managers -->
                         <div class="tab-panel-content" data-panel-id="audience" data-panel-index="3" style="opacity: 0; visibility: hidden; position: absolute; top: 0; left: 0; width: 100%; pointer-events: none;">
+                            <img src="/images/Managers_consultants.jpg" alt="Managers" class="lg:hidden w-full h-48 object-cover rounded-xl mb-4" />
                             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold mb-4" style="background-color: rgba(22, 169, 110, 0.1); color: #16a96e;">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                                 </svg>
                                 Managers &amp; consultants
                             </div>
-                            <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 text-gray-900 leading-tight">
+                            <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-4 text-gray-900 leading-tight">
                                 Optimisez la coordination de vos &eacute;quipes
                             </h3>
-                            <p class="text-base md:text-lg text-gray-600 mb-6 leading-relaxed">
-                                Optimisez la prise de d&eacute;cision et la coordination d'&eacute;quipes gr&acirc;ce &agrave; une communication fluide et s&eacute;curis&eacute;e.
+                            <p class="hidden lg:block text-lg text-gray-600 leading-relaxed mb-6">
+                                Pilotez vos projets, alignez vos &eacute;quipes et fluidifiez la prise de d&eacute;cision depuis un espace de travail unifi&eacute; et accessible partout.
                             </p>
                             <!-- CTA Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <a href="/offers" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">
+                                <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">
                                     Testez-le gratuitement
                                 </a>
                                 <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
@@ -530,7 +561,7 @@
                  </div>
 
                  <!-- Right: Images -->
-                <div class="order-1 lg:order-2 relative aspect-[4/3]">
+                <div class="hidden lg:block order-1 lg:order-2 relative aspect-[4/3]">
                     <div class="rounded-3xl overflow-hidden bg-white border border-gray-200 shadow-xl w-full h-full">
                         <div class="tab-panel-images w-full h-full relative">
                             <img src="/images/Marketeurs_commerciaux.jpg" alt="Marketeurs" data-img-index="0" class="tab-img absolute inset-0 w-full h-full object-cover transition-all duration-500" />
@@ -780,13 +811,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="text-center mt-16">
-                <a href="/security" class="text-brand-500 font-bold hover:text-pink-600 transition-all group inline-flex items-center">
-                    En savoir plus sur notre engagement s&eacute;curit&eacute;
-                    <span class="ml-2 transition-transform group-hover:translate-x-1">&rarr;</span>
-                </a>
-            </div>
         </div>
     </section>
 
@@ -810,58 +834,53 @@
                 
                 <!-- Rainbow Webinar -->
                 <div class="product-range-card group">
-                    <div class="product-range-card-image">
+                    <div class="product-range-card-image" style="position: relative;">
                         <img src="/images/webinar_live.png" alt="Rainbow Webinar" />
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to top, #43379e, transparent); pointer-events: none;"></div>
                     </div>
                     <div class="product-range-card-content">
-                        <div class="product-range-card-tags">
-                            <span class="product-range-tag" style="color: #ea5800; border-color: rgba(234, 88, 0, 0.2);">Live</span>
-                            <span class="product-range-tag" style="color: #ea5800; border-color: rgba(234, 88, 0, 0.2);">Polls</span>
-                            <span class="product-range-tag" style="color: #ea5800; border-color: rgba(234, 88, 0, 0.2);">Q&A</span>
-                            <span class="product-range-tag" style="color: #ea5800; border-color: rgba(234, 88, 0, 0.2);">Analytics</span>
-                        </div>
                         <h3 class="product-range-card-title">
-                            Rainbow <span style="color: #ea5800;">Webinar</span>
+                            Rainbow <span style="color: #43379e;">Webinar</span>
                         </h3>
                         <p class="product-range-card-subtitle">
                             La solution souveraine pour vos &eacute;v&eacute;nements digitaux
                         </p>
                         <ul class="product-range-card-features">
                             <li>
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #ea5800;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #43379e;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                 </svg>
                                 <span>Jusqu'&agrave; 1 000 participants en simultan&eacute;</span>
                             </li>
                             <li>
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #ea5800;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #43379e;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                 </svg>
                                 <span>Outils d'interactivit&eacute; avanc&eacute;s (Sondages, Q&A)</span>
                             </li>
                             <li>
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #ea5800;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #43379e;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                 </svg>
                                 <span>Analytiques d&eacute;taill&eacute;s et rapports d'engagement</span>
                             </li>
                             <li>
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #ea5800;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #43379e;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                 </svg>
                                 <span>Enregistrement HD et replay s&eacute;curis&eacute;</span>
                             </li>
                             <li>
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #ea5800;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #43379e;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                 </svg>
                                 <span>H&eacute;bergement souverain et conformit&eacute; RGPD</span>
                             </li>
                         </ul>
-                        <a href="/webinar" class="product-range-cta-primary" style="background-color: #ea5800;">
+                        <a href="/products/webinar" class="product-range-cta-primary" style="background-color: #43379e;">
                             D&eacute;couvrir Webinar
                         </a>
-                        <a href="/webinar" class="product-range-cta-secondary" style="color: #ea5800;">
+                        <a href="/products/webinar" class="product-range-cta-secondary" style="color: #43379e;">
                             Voir les fonctionnalit&eacute;s &rarr;
                         </a>
                     </div>
@@ -869,58 +888,53 @@
 
                 <!-- Rainbow Collaboration -->
                 <div class="product-range-card group">
-                    <div class="product-range-card-image">
+                    <div class="product-range-card-image" style="position: relative;">
                         <img src="/images/rainbow_chat.png" alt="Rainbow Collaboration" />
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to top, #6e264a, transparent); pointer-events: none;"></div>
                     </div>
                     <div class="product-range-card-content">
-                        <div class="product-range-card-tags">
-                            <span class="product-range-tag" style="color: #16a96e; border-color: rgba(22, 169, 110, 0.2);">Chat</span>
-                            <span class="product-range-tag" style="color: #16a96e; border-color: rgba(22, 169, 110, 0.2);">Video</span>
-                            <span class="product-range-tag" style="color: #16a96e; border-color: rgba(22, 169, 110, 0.2);">Files</span>
-                            <span class="product-range-tag" style="color: #16a96e; border-color: rgba(22, 169, 110, 0.2);">Presence</span>
-                        </div>
                         <h3 class="product-range-card-title">
-                            Rainbow <span style="color: #16a96e;">Collaboration</span>
+                            Rainbow <span style="color: #6e264a;">Collaboration</span>
                         </h3>
                         <p class="product-range-card-subtitle">
                             Communications unifi&eacute;es pour les entreprises modernes
                         </p>
                         <ul class="product-range-card-features">
                             <li>
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #16a96e;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #6e264a;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                 </svg>
                                 <span>Messagerie d'&eacute;quipe et canaux de discussion</span>
                             </li>
                             <li>
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #16a96e;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #6e264a;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                 </svg>
                                 <span>Appels audio et vid&eacute;o HD illimit&eacute;s</span>
                             </li>
                             <li>
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #16a96e;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #6e264a;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                 </svg>
                                 <span>Partage et stockage de fichiers s&eacute;curis&eacute;</span>
                             </li>
                             <li>
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #16a96e;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #6e264a;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                 </svg>
                                 <span>Int&eacute;grations avec vos outils m&eacute;tiers (CRM, etc.)</span>
                             </li>
                             <li>
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #16a96e;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #6e264a;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                 </svg>
                                 <span>Pr&eacute;sence en temps r&eacute;el et annuaire entreprise</span>
                             </li>
                         </ul>
-                        <a href="/collaboration" class="product-range-cta-primary" style="background-color: #16a96e;">
+                        <a href="/products/collaboration" class="product-range-cta-primary" style="background-color: #6e264a;">
                             D&eacute;couvrir Collaboration
                         </a>
-                        <a href="/collaboration" class="product-range-cta-secondary" style="color: #16a96e;">
+                        <a href="/products/collaboration" class="product-range-cta-secondary" style="color: #6e264a;">
                             Voir les fonctionnalit&eacute;s &rarr;
                         </a>
                     </div>
@@ -941,19 +955,19 @@
             <!-- Large Stats Horizontal -->
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 animate-on-scroll">
                 <div class="text-center">
-                    <div class="text-4xl md:text-6xl font-semibold text-white tracking-tighter mb-2">700 M</div>
+                    <div class="text-4xl md:text-6xl font-semibold text-white tracking-tighter mb-2"><span class="counter-number" data-counter="700" data-duration="2000">0</span> M</div>
                     <div class="text-sm md:text-base text-purple-100 font-medium leading-tight opacity-90">de messages envoy&eacute;s chaque jour</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-4xl md:text-6xl font-semibold text-white tracking-tighter mb-2">4 M</div>
+                    <div class="text-4xl md:text-6xl font-semibold text-white tracking-tighter mb-2"><span class="counter-number" data-counter="4" data-duration="2000">0</span> M</div>
                     <div class="text-sm md:text-base text-purple-100 font-medium leading-tight opacity-90">d'utilisateurs collaborent directement avec des &eacute;quipes externes chaque semaine</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-4xl md:text-6xl font-semibold text-white tracking-tighter mb-2">3 M</div>
+                    <div class="text-4xl md:text-6xl font-semibold text-white tracking-tighter mb-2"><span class="counter-number" data-counter="3" data-duration="2000">0</span> M</div>
                     <div class="text-sm md:text-base text-purple-100 font-medium leading-tight opacity-90">de flux de travail quotidiens</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-4xl md:text-6xl font-semibold text-white tracking-tighter mb-2">1,7 M</div>
+                    <div class="text-4xl md:text-6xl font-semibold text-white tracking-tighter mb-2"><span class="counter-number" data-counter="1.7" data-duration="2000">0</span> M</div>
                     <div class="text-sm md:text-base text-purple-100 font-medium leading-tight opacity-90">d'applications utilis&eacute;es chaque semaine</div>
                 </div>
             </div>
@@ -1155,8 +1169,7 @@
           <h2 class="sp-cta-h2">Prêt à transformer votre<br />communication d'équipe&nbsp;?</h2>
           <p class="sp-cta-sub">Rejoignez plus de 10&nbsp;000+ organisations qui utilisent Rainbow pour se connecter, collaborer et grandir. Sans carte bancaire.</p>
           <div class="sp-cta-actions">
-            <a href="/offers" class="btn-cta-primary">Commencer l'essai gratuit &rarr;</a>
-            <a href="/support" class="btn-cta-secondary">Voir une démo</a>
+            <a href="/tarifs" class="btn-cta-primary">Commencer l'essai gratuit &rarr;</a>
           </div>
           <div class="sp-cta-note">Essai gratuit de 14 jours &middot; Sans carte bancaire &middot; Accès complet des fonctionnalités</div>
         </div>
@@ -1166,58 +1179,97 @@
 </section>
 
     <!-- ===== BLOC 10: Footer (p11.png bottom) ===== -->
-    <footer class="footer-premium text-gray-400 pt-8 pb-4 px-6">
-        <div class="max-w-5xl mx-auto">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-premium text-gray-400 pt-20 pb-10 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <!-- Top Section -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-12 mb-16">
+                <!-- Brand Column -->
                 <div class="col-span-2 md:col-span-1">
-                    <div class="flex items-center gap-2 mb-2.5">
-                        <div class="w-6 h-6 rounded-md bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center"><span class="text-white font-bold text-[10px]">R</span></div>
-                        <div><span class="text-white text-[11px] font-bold block leading-tight">Alcatel-Lucent</span><span class="text-gray-500 text-[9px]">Enterprise</span></div>
+                    <div class="flex items-center mb-6">
+                        <img src="/images/ale_white.png" alt="Alcatel-Lucent Enterprise" class="h-10 w-auto opacity-90 hover:opacity-100 transition-opacity">
                     </div>
-                    <div class="space-y-1 text-[10px]">
-                        <p class="flex items-center gap-1.5"><svg class="w-2.5 h-2.5 text-gray-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>+33 (0)1 00 00 00 00</p>
-                        <p class="flex items-center gap-1.5"><svg class="w-2.5 h-2.5 text-gray-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>contact@rainbow-webinar.fr</p>
-                        <p class="flex items-start gap-1.5 text-[9px] text-gray-500"><svg class="w-2.5 h-2.5 text-gray-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>ALE International<br>32 avenue Kl&eacute;ber<br>92700 Colombes, France</p>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6 max-w-[240px]">The unified communications platform trusted by 10,000+ enterprise teams in 180+ countries.</p>
+                    <!-- Rainbow colored dots -->
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-indigo-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-pink-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-orange-500"></span>
                     </div>
                 </div>
+
+                <!-- Solutions Column -->
                 <div>
-                    <h4 class="text-white font-semibold text-[11px] mb-2">Produit</h4>
-                    <ul class="space-y-1 text-[10px]">
-                        <li><a href="/products/rainbow-webinar" class="hover:text-white transition-colors">Rainbow Webinar</a></li>
-                        <li><a href="/products/rainbow-collaboration" class="hover:text-white transition-colors">Fonctionnalit&eacute;s</a></li>
-                        <li><a href="/tarifs/rainbow-webinar" class="hover:text-white transition-colors">Tarifs</a></li>
-                        <li><a href="/offers" class="hover:text-white transition-colors">Espace Webinaires</a></li>
-                        <li><a href="/about" class="hover:text-white transition-colors">API</a></li>
+                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Solutions</h4>
+                    <ul class="space-y-3.5 text-sm">
+                        <li><a href="/products/webinar" class="hover:text-white transition-colors">Rainbow Webinar</a></li>
+                        <li><a href="/products/collaboration" class="hover:text-white transition-colors">Rainbow Classroom</a></li>
+                        <li><a href="/products/collaboration" class="hover:text-white transition-colors">Rainbow Hub</a></li>
+                        <li><a href="/products" class="hover:text-white transition-colors">Rainbow Business</a></li>
+                        <li><a href="/products" class="hover:text-white transition-colors">Rainbow CPaaS</a></li>
                     </ul>
                 </div>
+
+                <!-- Developers Column -->
                 <div>
-                    <h4 class="text-white font-semibold text-[11px] mb-2">Ressources</h4>
-                    <ul class="space-y-1 text-[10px]">
-                        <li><a href="/support" class="hover:text-white transition-colors">Documentation</a></li>
-                        <li><a href="/support" class="hover:text-white transition-colors">Centre d'aide</a></li>
-                        <li><a href="/tutorials" class="hover:text-white transition-colors">Guides</a></li>
-                        <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="/reviews" class="hover:text-white transition-colors">&Eacute;tudes de cas</a></li>
+                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Developers</h4>
+                    <ul class="space-y-3.5 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">API Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">SDKs &amp; Libraries</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">WebRTC Guide</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Changelog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Status</a></li>
                     </ul>
                 </div>
+
+                <!-- Resources Column -->
                 <div>
-                    <h4 class="text-white font-semibold text-[11px] mb-2">Entreprise</h4>
-                    <ul class="space-y-1 text-[10px]">
-                        <li><a href="/about" class="hover:text-white transition-colors">&Agrave; propos</a></li>
-                        <li><a href="/about" class="hover:text-white transition-colors">Carri&egrave;res</a></li>
-                        <li><a href="/blog" class="hover:text-white transition-colors">Presse</a></li>
-                        <li><a href="/support" class="hover:text-white transition-colors">Contact</a></li>
-                        <li><a href="/support" class="hover:text-white transition-colors">Support</a></li>
-                        <li><a href="/admin" class="hover:text-white transition-colors flex items-center gap-1"><svg class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/></svg>Administration</a></li>
+                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Resources</h4>
+                    <ul class="space-y-3.5 text-sm">
+                        <li><a href="/products/webinar" class="hover:text-white transition-colors">Webinars</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Community</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Column -->
+                <div>
+                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Company</h4>
+                    <ul class="space-y-3.5 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Press Room</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Partners</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-indigo-900/40 pt-3 flex flex-col md:flex-row items-center justify-between gap-2">
-                <span class="text-[9px] text-gray-500">&copy; 2026 ALE International. ALE USA Inc. Tous droits r&eacute;serv&eacute;s.</span>
-                <div class="flex gap-3 text-[10px]">
-                    <a href="/about" class="hover:text-white transition-colors">&Agrave; propos</a>
-                    <a href="/privacy" class="hover:text-white transition-colors">Confidentialit&eacute;</a>
-                    <a href="/legal" class="hover:text-white transition-colors">Mentions l&eacute;gales</a>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-700/50 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                <span class="text-sm text-gray-500">&copy; 2026 Alcatel-Lucent Enterprise. Rainbow&trade; is a registered trademark.</span>
+                <div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+                    <div class="flex items-center gap-6 text-sm">
+                        <a href="#" class="hover:text-white transition-colors">Cookies</a>
+                        <a href="#" class="hover:text-white transition-colors">GDPR</a>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <!-- X (Twitter) -->
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-700/50 hover:bg-gray-600/60 flex items-center justify-center transition-colors" aria-label="X">
+                            <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <!-- LinkedIn -->
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-700/50 hover:bg-gray-600/60 flex items-center justify-center transition-colors" aria-label="LinkedIn">
+                            <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <!-- YouTube -->
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-700/50 hover:bg-gray-600/60 flex items-center justify-center transition-colors" aria-label="YouTube">
+                            <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                        <!-- Instagram -->
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-700/50 hover:bg-gray-600/60 flex items-center justify-center transition-colors" aria-label="Instagram">
+                            <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 1 0 0-12.324zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405a1.441 1.441 0 1 1-2.882 0 1.441 1.441 0 0 1 2.882 0z"/></svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -48,6 +48,7 @@ input[type="number"] {
     transform: rotate(180deg);
 }
 
+
 /* Mobile sub-menu */
 .mobile-submenu {
     padding-left: 1rem;
@@ -943,7 +944,7 @@ input[type="number"] {
 }
 
 .product-range-card-image {
-    aspect-ratio: 16/10;
+    aspect-ratio: 16/9;
     overflow: hidden;
     background: #f9fafb;
 }
@@ -1280,6 +1281,92 @@ input[type="number"] {
 .expand-cards-footer a svg {
     width: 20px;
     height: 20px;
+}
+
+/* Mobile: vertical stacking instead of horizontal */
+@media (max-width: 767px) {
+    .expand-cards-row {
+        flex-direction: column;
+        height: auto;
+        gap: 8px;
+    }
+
+    .expand-card {
+        flex: none;
+        height: 80px;
+        transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .expand-card.expanded {
+        height: 360px;
+        flex: none;
+    }
+
+    .expand-card-content {
+        padding: 20px;
+    }
+
+    .expand-card-vertical-text {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 16px;
+    }
+
+    .expand-card-title {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+
+    .expand-card-description {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .expand-card-arrow-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .expand-card-arrow-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Mobile: show all tab panels when pill tabs are hidden */
+@media (max-width: 767px) {
+    .usecase-panel {
+        display: block !important;
+        margin-bottom: 2.5rem;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .usecase-panel:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .tab-panel-content {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateX(0) !important;
+        z-index: 1 !important;
+        margin-bottom: 2.5rem;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .tab-panel-content:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .tab-panel-wrapper {
+        min-height: auto !important;
+    }
 }
 
 /* --- FAQ Section (Laurenn style) --- */
