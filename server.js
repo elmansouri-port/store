@@ -359,6 +359,7 @@ app.get('/products/collaboration/pricing', (req, res) => sendPage(req, res, path
 app.get('/verify-email', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'verify-email.html')));
 app.get('/reset-password', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'reset-password.html')));
 app.get('/contact', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'contact.html')));
+app.get('/partenaires', (req, res) => sendPage(req, res, path.join(__dirname, 'pages', 'partenaires.html')));
 
 // ===================== API ROUTES =====================
 

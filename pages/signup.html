@@ -13,11 +13,11 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#7c3aed', 600: '#6d28d9', 700: '#5b21b6' }, navy: { 900: '#1e1b4b', 800: '#312e81', 700: '#3730a3' }
+                        brand: { 50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#7c3aed', 600: '#6d28d9', 700: '#5b21b6' },
+                        navy: { 900: '#1e1b4b', 800: '#312e81', 700: '#3730a3' }
                     },
-                    borderRadius: { btn: '10px' }, fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
+                    borderRadius: { btn: '10px' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
                 }
             }
         }
@@ -28,24 +28,74 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         .glass-input { border: 1px solid #e5e7eb; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
         .glass-input:focus-within { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,0.12); }
-        .fade-in-up { animation: fadeIn 0.5s ease-out forwards; opacity: 0; transform: translateY(12px); }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-        .delay-5 { animation-delay: 0.5s; }
-        .delay-6 { animation-delay: 0.6s; }
+        .fade-in-up { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.05s; }
+        .delay-2 { animation-delay: 0.1s; }
+        .delay-3 { animation-delay: 0.15s; }
+        .delay-4 { animation-delay: 0.2s; }
+        .delay-5 { animation-delay: 0.25s; }
+        .delay-6 { animation-delay: 0.3s; }
         .step-indicator { display: flex; align-items: center; justify-content: center; gap: 8px; }
-        select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
         .step-dot { width: 10px; height: 10px; border-radius: 50%; background: #d1d5db; transition: all 0.3s; }
         .step-dot.active { background: #7c3aed; width: 28px; border-radius: 5px; }
         .step-dot.done { background: #7c3aed; }
+        select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+
+        /* Solution cards */
+        .solution-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+            background: #fff;
+            position: relative;
+            user-select: none;
+        }
+        .solution-card:hover {
+            border-color: #c4b5fd;
+            background: #faf9ff;
+        }
+        .solution-card.selected {
+            border-color: #7c3aed;
+            background: #f5f3ff;
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.10);
+        }
+        .solution-card .card-check {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-left: auto;
+            transition: all 0.18s;
+        }
+        .solution-card.selected .card-check {
+            background: #7c3aed;
+            border-color: #7c3aed;
+        }
+        .solution-card .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
     </style>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="bg-white min-h-screen flex items-center justify-center p-6">
     <div class="w-full max-w-lg">
         <div class="flex flex-col gap-6">
+
             <!-- Logo -->
             <div class="text-center fade-in-up delay-1">
                 <a href="/" class="inline-flex items-center gap-2.5">
@@ -56,20 +106,94 @@
             <h1 class="fade-in-up delay-1 text-center text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
                 Create your account
             </h1>
-            <p class="fade-in-up delay-2 text-center text-lg text-gray-500">Join Rainbow and start collaborating</p>
+            <p id="page-subtitle" class="fade-in-up delay-2 text-center text-lg text-gray-500">Choose your solution to get started</p>
 
-            <!-- Step Indicator -->
+            <!-- Step Indicator (3 steps) -->
             <div class="step-indicator fade-in-up delay-3">
                 <div class="step-dot active" id="step-dot-1"></div>
                 <div class="step-dot" id="step-dot-2"></div>
+                <div class="step-dot" id="step-dot-3"></div>
             </div>
 
             <!-- Message box -->
-            <div id="message-box" class="fade-in-up hidden p-4 rounded-btn text-sm font-medium leading-relaxed" role="alert"></div>
+            <div id="message-box" class="hidden p-4 rounded-btn text-sm font-medium leading-relaxed" role="alert"></div>
 
-            <!-- ===== STEP 1: Email & Password ===== -->
+            <!-- ===== STEP 1: Solution Selection ===== -->
             <div id="form-step-1">
-                <form onsubmit="handleStep1(event)" class="space-y-5">
+                <div class="space-y-3 fade-in-up delay-3">
+
+                    <!-- Webinar -->
+                    <div class="solution-card" id="card-webinar" onclick="selectSolution('webinar')">
+                        <div class="card-icon bg-purple-50">
+                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-semibold text-gray-900 text-sm">Rainbow Webinar</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Webinaires professionnels jusqu'à 1 000 participants</p>
+                        </div>
+                        <div class="card-check">
+                            <svg class="hidden w-3 h-3 text-white" id="check-webinar" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Collaboration -->
+                    <div class="solution-card" id="card-collaboration" onclick="selectSolution('collaboration')">
+                        <div class="card-icon bg-indigo-50">
+                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#4f46e5" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-semibold text-gray-900 text-sm">Rainbow Collaboration</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Messagerie, visioconférence et partage de fichiers</p>
+                        </div>
+                        <div class="card-check">
+                            <svg class="hidden w-3 h-3 text-white" id="check-collaboration" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Both -->
+                    <div class="solution-card" id="card-both" onclick="selectSolution('both')">
+                        <div class="card-icon bg-pink-50">
+                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#db2777" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-semibold text-gray-900 text-sm">Webinar + Collaboration
+                                <span class="ml-2 text-[10px] font-bold uppercase tracking-wide text-pink-600 bg-pink-50 border border-pink-200 px-1.5 py-0.5 rounded-full">Complet</span>
+                            </p>
+                            <p class="text-xs text-gray-500 mt-0.5">Toutes les solutions Rainbow en un seul compte</p>
+                        </div>
+                        <div class="card-check">
+                            <svg class="hidden w-3 h-3 text-white" id="check-both" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btn-step1-continue" onclick="handleStep1Continue()" disabled
+                    class="mt-6 w-full rounded-btn py-4 font-semibold text-white bg-brand-500 hover:bg-brand-600 transition-colors text-base shadow-md disabled:opacity-40 disabled:cursor-not-allowed">
+                    Continuer
+                </button>
+
+                <p class="text-center text-base text-gray-500 mt-6">
+                    Already have an account? <a href="/login" class="text-brand-500 hover:underline transition-colors font-semibold">Sign in</a>
+                </p>
+            </div>
+
+            <!-- ===== STEP 2: Email & Password ===== -->
+            <div id="form-step-2" class="hidden">
+
+                <!-- Selected solution reminder -->
+                <div id="solution-reminder" class="mb-5 flex items-center gap-2 px-4 py-2.5 rounded-[10px] bg-brand-50 border border-brand-100 text-sm font-medium text-brand-700">
+                    <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span id="solution-reminder-text"></span>
+                    <button onclick="goToStep1()" class="ml-auto text-xs text-brand-500 hover:underline font-normal">Modifier</button>
+                </div>
+
+                <form onsubmit="handleStep2(event)" class="space-y-5">
                     <div class="fade-in-up delay-3">
                         <label class="text-base font-medium text-gray-500">Email Address</label>
                         <div class="glass-input rounded-btn p-0.5 mt-1">
@@ -95,17 +219,14 @@
                             <p id="pw-special" class="text-gray-400"><span class="pw-icon">&#9675;</span> 1 special character</p>
                         </div>
                     </div>
-                    <button type="submit" class="fade-in-up delay-6 w-full rounded-btn py-4 font-semibold text-white bg-brand-500 hover:bg-brand-600 transition-colors text-base shadow-md">Continue</button>
+                    <button type="submit" class="fade-in-up delay-6 w-full rounded-btn py-4 font-semibold text-white bg-brand-500 hover:bg-brand-600 transition-colors text-base shadow-md">Continuer</button>
+                    <button type="button" onclick="goToStep1()" class="w-full text-center text-base text-brand-500 hover:underline transition-colors font-medium">Retour</button>
                 </form>
-
-                <p class="fade-in-up delay-7 text-center text-base text-gray-500 mt-6">
-                    Already have an account? <a href="/login" class="text-brand-500 hover:underline transition-colors font-semibold">Sign in</a>
-                </p>
             </div>
 
-            <!-- ===== STEP 2: Personal Info ===== -->
-            <div id="form-step-2" class="hidden">
-                <form onsubmit="handleStep2(event)" class="space-y-4">
+            <!-- ===== STEP 3: Personal Info ===== -->
+            <div id="form-step-3" class="hidden">
+                <form onsubmit="handleStep3(event)" class="space-y-4">
                     <div class="grid grid-cols-2 gap-3 fade-in-up delay-3">
                         <div>
                             <label class="text-sm font-medium text-gray-500">First name <span class="text-red-400">*</span></label>
@@ -181,9 +302,11 @@
                     <input type="hidden" id="reg-leadSource" name="lead_source" />
                     <input type="hidden" id="reg-utmParams" name="utm_params" />
                     <input type="hidden" id="reg-hotjarId" name="hotjar_id" />
+                    <input type="hidden" id="reg-product" name="product" />
+                    <input type="hidden" id="reg-plan" name="plan" />
 
                     <button id="btn-register" type="submit" class="fade-in-up delay-6 w-full rounded-btn py-4 font-semibold text-white bg-brand-500 hover:bg-brand-600 transition-colors text-base shadow-md">Create my account</button>
-                    <button type="button" onclick="goToStep1()" class="w-full text-center text-base text-brand-500 hover:underline transition-colors font-medium">Back</button>
+                    <button type="button" onclick="goToStep2()" class="w-full text-center text-base text-brand-500 hover:underline transition-colors font-medium">Retour</button>
                 </form>
             </div>
 
@@ -193,23 +316,29 @@
 
     <script src="/js/i18n.js"></script>
     <script>
-    var regData = {};
+    var regData = { product: null, plan: null };
 
+    var SOLUTION_LABELS = {
+        webinar: 'Rainbow Webinar',
+        collaboration: 'Rainbow Collaboration',
+        both: 'Rainbow Webinar + Collaboration'
+    };
+
+    // ===== MESSAGES =====
     function hideMessage() {
         var mb = document.getElementById('message-box');
-        mb.classList.add('hidden');
-        mb.textContent = '';
         mb.className = 'hidden p-4 rounded-btn text-sm font-medium leading-relaxed';
+        mb.textContent = '';
     }
-
     function showMessage(text, type) {
         var mb = document.getElementById('message-box');
         mb.textContent = text;
         mb.className = 'block p-4 rounded-btn text-sm font-medium leading-relaxed fade-in ' + (type === 'error' ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700');
     }
 
+    // ===== STEP DOTS (3 steps) =====
     function updateStepDots(activeStep) {
-        for (var i = 1; i <= 2; i++) {
+        for (var i = 1; i <= 3; i++) {
             var dot = document.getElementById('step-dot-' + i);
             dot.classList.remove('active', 'done');
             if (i < activeStep) dot.classList.add('done');
@@ -217,17 +346,58 @@
         }
     }
 
+    // ===== SOLUTION SELECTION =====
+    function selectSolution(value) {
+        ['webinar', 'collaboration', 'both'].forEach(function(v) {
+            var card = document.getElementById('card-' + v);
+            var check = document.getElementById('check-' + v);
+            if (v === value) {
+                card.classList.add('selected');
+                check.classList.remove('hidden');
+            } else {
+                card.classList.remove('selected');
+                check.classList.add('hidden');
+            }
+        });
+        regData.product = value;
+        document.getElementById('btn-step1-continue').disabled = false;
+    }
+
+    function handleStep1Continue() {
+        if (!regData.product) {
+            showMessage('Veuillez choisir une solution pour continuer.', 'error');
+            return;
+        }
+        hideMessage();
+        goToStep2();
+    }
+
+    // ===== NAVIGATION =====
     function goToStep1() {
         hideMessage();
         document.getElementById('form-step-2').classList.add('hidden');
+        document.getElementById('form-step-3').classList.add('hidden');
         document.getElementById('form-step-1').classList.remove('hidden');
+        document.getElementById('page-subtitle').textContent = 'Choose your solution to get started';
         updateStepDots(1);
     }
 
     function goToStep2() {
+        hideMessage();
         document.getElementById('form-step-1').classList.add('hidden');
+        document.getElementById('form-step-3').classList.add('hidden');
         document.getElementById('form-step-2').classList.remove('hidden');
+        document.getElementById('page-subtitle').textContent = 'Your credentials';
+        var label = SOLUTION_LABELS[regData.product] || regData.product;
+        document.getElementById('solution-reminder-text').textContent = label;
         updateStepDots(2);
+    }
+
+    function goToStep3() {
+        document.getElementById('form-step-2').classList.add('hidden');
+        document.getElementById('form-step-3').classList.remove('hidden');
+        document.getElementById('page-subtitle').textContent = 'Tell us about you';
+        updateStepDots(3);
     }
 
     // ===== PASSWORD TOGGLE =====
@@ -264,18 +434,17 @@
             if (ok) {
                 el.classList.remove('text-gray-400');
                 el.classList.add('text-green-600');
-                el.querySelector('.pw-icon').textContent = '\u2713';
+                el.querySelector('.pw-icon').textContent = '✓';
             } else {
                 el.classList.remove('text-green-600');
                 el.classList.add('text-gray-400');
-                el.querySelector('.pw-icon').textContent = '\u25E6';
+                el.querySelector('.pw-icon').textContent = '◦';
             }
         }
     })();
 
     // ===== API HELPERS =====
     var API_BASE = window.location.origin;
-
     function apiRequest(method, path, body) {
         return fetch(API_BASE + path, {
             method: method,
@@ -289,8 +458,8 @@
         });
     }
 
-    // ===== STEP 1: Validate email & password, go to step 2 =====
-    function handleStep1(e) {
+    // ===== STEP 2: Validate email & password =====
+    function handleStep2(e) {
         e.preventDefault();
         hideMessage();
         var email = document.getElementById('reg-email').value.trim();
@@ -307,11 +476,11 @@
         }
         regData.email = email;
         regData.password = password;
-        goToStep2();
+        goToStep3();
     }
 
-    // ===== STEP 2: Submit registration =====
-    function handleStep2(e) {
+    // ===== STEP 3: Submit registration =====
+    function handleStep3(e) {
         e.preventDefault();
         hideMessage();
         var firstName = document.getElementById('reg-firstName').value.trim();
@@ -332,6 +501,10 @@
             return;
         }
 
+        // Sync hidden fields
+        document.getElementById('reg-product').value = regData.product || '';
+        document.getElementById('reg-plan').value = regData.plan || '';
+
         var btn = document.getElementById('btn-register');
         btn.disabled = true;
         btn.textContent = 'Creating account...';
@@ -347,6 +520,8 @@
             country: country,
             consent: consent,
             acceptTerms: acceptTerms,
+            product: regData.product,
+            plan: regData.plan,
             referrer_page: document.getElementById('reg-referrer').value,
             lead_source: document.getElementById('reg-leadSource').value,
             utm_params: document.getElementById('reg-utmParams').value,
@@ -356,14 +531,10 @@
             btn.textContent = 'Create my account';
             if (result.alreadyVerified) {
                 showMessage('Your Rainbow account was found. Please sign in.', 'success');
-                setTimeout(function() {
-                    window.location.href = '/login';
-                }, 1500);
+                setTimeout(function() { window.location.href = '/login'; }, 1500);
             } else {
-                showMessage('Account created! Check your email for the verification code.', 'success');
-                setTimeout(function() {
-                    window.location.href = '/login';
-                }, 2000);
+                showMessage('Account created! Check your email to verify your account.', 'success');
+                setTimeout(function() { window.location.href = '/verify-email'; }, 2000);
             }
         }).catch(function(err) {
             showMessage(err.message, 'error');
@@ -393,11 +564,23 @@
         }
     })();
 
-    // ===== URL PARAMS =====
+    // ===== INIT: URL PARAMS =====
     (function() {
         if (localStorage.getItem('token')) {
             window.location.href = '/portal';
             return;
+        }
+
+        var params = new URLSearchParams(location.search);
+        var plan = params.get('plan');
+        var product = params.get('product');
+
+        // Store plan from URL (e.g. ?plan=pro)
+        if (plan) regData.plan = plan;
+
+        // Pre-select product card if coming from pricing page
+        if (product === 'webinar' || product === 'collaboration' || product === 'both') {
+            selectSolution(product);
         }
     })();
     </script>

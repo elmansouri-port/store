@@ -70,8 +70,7 @@
     <nav id="navbar" class="fixed top-0 w-full z-50 glass-nav">
         <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
             <a href="/" class="flex items-center gap-2.5 shrink-0">
-                <img src="/images/rainbow-logo.png" alt="Rainbow" class="h-8 w-auto" />
-                <span class="text-lg font-bold text-navy-900 tracking-tight">Rainbow</span>
+                <img src="/images/Rainbow-logo-banner.png" alt="Rainbow" class="h-8 w-auto" />
             </a>
             <div class="hidden md:flex items-center justify-center flex-1 gap-8">
                 <div class="nav-dropdown">
@@ -93,6 +92,7 @@
                     </a>
 
                 </div>
+                <a href="/partenaires" class="text-sm text-gray-500 hover:text-navy-900 transition-colors font-medium" style="font-size:1rem">Partenaires</a>
             </div>
             <div class="hidden md:flex items-center gap-4 shrink-0">
                 <div class="lang-switcher" id="lang-switcher">
@@ -102,8 +102,8 @@
                     </button>
                     <div class="lang-dropdown" id="lang-dropdown"></div>
                 </div>
-                <a href="/login" class="px-5 py-2.5 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-sm font-semibold transition-colors" data-i18n="nav.signin">Se connecter</a>
-                <a href="#products" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all">Essai gratuit</a>
+                <a href="/login" class="px-5 py-2.5 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-sm font-semibold transition-all active:scale-95 inline-flex items-center justify-center" data-i18n="nav.signin">Se connecter</a>
+                <a href="/tarifs" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all">Essai gratuit</a>
             </div>
             <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Menu">
                 <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -120,10 +120,18 @@
                 <a href="/products/webinar/pricing" class="block py-1">Rainbow Webinar</a>
                 <a href="/products/collaboration/pricing" class="block py-1">Rainbow Collaboration</a>
             </div>
+            <a href="#" class="block text-sm text-gray-600 py-2">Ressources</a>
+            <div class="mobile-submenu space-y-1">
+                <a href="/blog" class="block py-1" data-i18n="nav.blog">Blog</a>
+                <a href="/reviews" class="block py-1" data-i18n="nav.reviews">Reviews</a>
+                <a href="/support" class="block py-1" data-i18n="nav.support">Support</a>
+                <a href="/tutorials" class="block py-1" data-i18n="nav.tutorials">Tutorials</a>
+            </div>
+            <a href="/partenaires" class="block text-sm text-gray-600 py-2">Partenaires</a>
             <div id="mobile-lang-switcher" class="flex flex-wrap gap-2 py-2"></div>
             <div class="flex flex-col gap-3 pt-2">
-                <a href="/login" class="block w-full text-center text-sm font-semibold text-gray-900 border-2 border-gray-200 rounded-btn py-2.5 hover:bg-gray-50 transition-colors">Se connecter</a>
-                <a href="#products" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all">Explorez nos produits</a>
+                <a href="/login" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">Se connecter</a>
+                <a href="/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all">Explorez nos produits</a>
             </div>
         </div>
     </nav>
@@ -140,9 +148,8 @@
         <div class="max-w-6xl mx-auto text-center px-6 z-10 relative animate-on-scroll">
             <!-- Hero Badge with gradient text -->
             <p class="text-sm md:text-base font-bold uppercase tracking-[0.15em] mb-4 hero-badge-gradient inline-flex items-center">
-                Souveraine. Moderne. Europ&eacute;enne.
-                <img src="https://flagcdn.com/w40/eu.png" alt="UE" class="inline-block w-6 h-auto ml-2 align-middle" style="transform: translateY(-1px);" />
-            </p>
+                Souveraine. Moderne. Europ&eacute;enne
+                </p>
 
             <!-- Hero Title with CSS word shuffler -->
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.04em] leading-[1.2] mb-6 text-gray-900">
@@ -161,8 +168,12 @@
             </p>
             <!-- CTAs -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                <a href="#products" class="px-8 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold shadow-2xl shadow-purple-900/20 transition-all active:scale-95">
+                <a href="/tarifs" class="px-8 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold shadow-2xl shadow-purple-900/20 transition-all active:scale-95">
                     Essai gratuit
+                </a>
+                <a href="/support" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-3 fill-current text-purple-900 group-hover:text-brand-500 transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    Regarder  une d&eacute;mo
                 </a>
             </div>
             
@@ -196,7 +207,7 @@
             <p class="text-sm text-gray-400 font-bold uppercase tracking-widest text-center mb-6">
                 Ils nous font confiance
             </p>
-            <div class="marquee-container relative flex overflow-x-hidden opacity-60">
+            <div class="marquee-container relative flex overflow-x-hidden">
                 <div class="flex animate-marquee whitespace-nowrap gap-10 md:gap-16 items-center py-4">
                     <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
                         <img src="/images/bestford.png" alt="Bestford" class="h-full w-auto object-contain max-w-[140px]" />
@@ -310,8 +321,8 @@
                                     Travailler ensemble en temps r&eacute;el gr&acirc;ce aux espaces partag&eacute;s, cha&icirc;nes d'information, chat, et fichiers centralis&eacute;s.
                                 </p>
                                 <div class="flex items-center text-sm font-bold" style="color: #5e2d91;">
-                                    <span class="hover:underline cursor-pointer">En savoir plus</span>
-                                    <span class="ml-1 opacity-70">&rarr;</span>
+                                    <a href="/products/collaboration"><span class="hover:underline cursor-pointer"> En savoir plus </span>
+                                    <span class="ml-1 opacity-70">&rarr;</span></a>
                                 </div>
                             </div>
                         </div>
@@ -328,8 +339,8 @@
                                     Voix, visio, messages instantan&eacute;s : tout est r&eacute;uni pour fluidifier les &eacute;changes.
                                 </p>
                                 <div class="flex items-center text-sm font-bold" style="color: #0085CA;">
-                                    <span class="hover:underline cursor-pointer">En savoir plus</span>
-                                    <span class="ml-1 opacity-70">&rarr;</span>
+                                    <a href="/products/collaboration"><span class="hover:underline cursor-pointer">En savoir plus</span>
+                                    <span class="ml-1 opacity-70">&rarr;</span></a>
                                 </div>
                             </div>
                         </div>
@@ -346,8 +357,8 @@
                                     Organisez facilement webinaires, conf&eacute;rences et d&eacute;monstrations pour engager vos audiences.
                                 </p>
                                 <div class="flex items-center text-sm font-bold" style="color: #ea5800;">
-                                    <span class="hover:underline cursor-pointer">En savoir plus</span>
-                                    <span class="ml-1 opacity-70">&rarr;</span>
+                                    <a href="/products/collaboration"><span class="hover:underline cursor-pointer">En savoir plus</span>
+                                    <span class="ml-1 opacity-70">&rarr;</span></a>
                                 </div>
                             </div>
                         </div>
@@ -472,10 +483,10 @@
                             <!-- CTA Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">
-                                    Testez-le gratuitement
+                                    Essai gratuit
                                 </a>
                                 <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
-                                    D&eacute;couvrir l'usage
+                                    En savoir plus
                                 </a>
                             </div>
                         </div>
@@ -498,10 +509,10 @@
                             <!-- CTA Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">
-                                    Testez-le gratuitement
+                                    Essai gratuit
                                 </a>
                                 <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
-                                    D&eacute;couvrir l'usage
+                                    En savoir plus
                                 </a>
                             </div>
                         </div>
@@ -524,10 +535,10 @@
                             <!-- CTA Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">
-                                    Testez-le gratuitement
+                                    Essai gratuit
                                 </a>
                                 <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
-                                    D&eacute;couvrir l'usage
+                                    En savoir plus
                                 </a>
                             </div>
                         </div>
@@ -550,10 +561,10 @@
                             <!-- CTA Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">
-                                    Testez-le gratuitement
+                                    Essai gratuit
                                 </a>
                                 <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
-                                    D&eacute;couvrir l'usage
+                                    En savoir plus
                                 </a>
                             </div>
                          </div>
@@ -592,7 +603,6 @@
                     </div>
                     <p class="text-base md:text-lg font-medium text-white/90 max-w-[280px] mx-auto leading-relaxed">
                         des utilisateurs indiquent que Rainbow les aide &agrave; rester mieux connect&eacute;s
-                        <sup class="text-xs ml-0.5 opacity-60 font-bold">4</sup>
                     </p>
                 </div>
 
@@ -603,7 +613,6 @@
                     </div>
                     <p class="text-base md:text-lg font-medium text-white/90 max-w-[280px] mx-auto leading-relaxed">
                         le nombre moyen d'applications utilis&eacute;es par les &eacute;quipes dans Rainbow
-                        <sup class="text-xs ml-0.5 opacity-60 font-bold">3</sup>
                     </p>
                 </div>
 
@@ -614,7 +623,6 @@
                     </div>
                     <p class="text-base md:text-lg font-medium text-white/90 max-w-[280px] mx-auto leading-relaxed">
                         des utilisateurs d&eacute;clarent que Rainbow les aide &agrave; collaborer plus efficacement
-                        <sup class="text-xs ml-0.5 opacity-60 font-bold">4</sup>
                     </p>
                 </div>
             </div>
@@ -630,7 +638,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
             <div class="text-center mb-16">
-                <h2 class="text-2xl md:text-4xl lg:text-5xl font-semibold mb-6 text-gray-900 tracking-tight">Vos donn&eacute;es, prot&eacute;g&eacute;es &amp; h&eacute;berg&eacute;es en France.</h2>
+                <h2 class="text-2xl md:text-4xl lg:text-5xl font-semibold mb-6 text-gray-900 tracking-tight">Vos donn&eacute;es, prot&eacute;g&eacute;es &amp; h&eacute;berg&eacute;es en France</h2>
                 
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                      Rainbow est une solution française, hébergée dans des centres de données situés en Europe, respectant les normes les plus strictes en matière de sécurité, de souveraineté et de confidentialité.
@@ -811,6 +819,13 @@
                     </div>
                 </div>
             </div>
+
+            <div class="text-center mt-16">
+                <a href="/security" class="text-brand-500 font-bold hover:text-pink-600 transition-all group inline-flex items-center">
+                    En savoir plus sur notre engagement s&eacute;curit&eacute;
+                    <span class="ml-2 transition-transform group-hover:translate-x-1">&rarr;</span>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -988,7 +1003,7 @@
 
                 <h2 id="testimonials-heading" class="text-2xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-center text-gray-900">
                     Ils ont transform&eacute; leur quotidien avec <br/>
-                    <span>Rainbow</span>
+                    <span class="text-brand-500">Rainbow</span>
                 </h2>
                 <p class="text-center mt-6 text-gray-600 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
                     D&eacute;couvrez comment nos clients utilisent la puissance de Rainbow pour leurs &eacute;v&eacute;nements les plus critiques.
@@ -1119,7 +1134,7 @@
     </section>
 
     <!-- ===== FAQ SECTION (Laurenn style - Zendesk API) ===== -->
-    <section id="faq" class="py-20 lg:py-28 faq-section" style="background-color: #f3f3ff;">
+    <section id="faq" class="py-20 lg:py-28 faq-section" style="background-color: #c5deff47;">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
             <div class="text-center mb-16">
@@ -1170,6 +1185,7 @@
           <p class="sp-cta-sub">Rejoignez plus de 10&nbsp;000+ organisations qui utilisent Rainbow pour se connecter, collaborer et grandir. Sans carte bancaire.</p>
           <div class="sp-cta-actions">
             <a href="/tarifs" class="btn-cta-primary">Commencer l'essai gratuit &rarr;</a>
+            <a href="/support" class="btn-cta-secondary">Voir une démo</a>
           </div>
           <div class="sp-cta-note">Essai gratuit de 14 jours &middot; Sans carte bancaire &middot; Accès complet des fonctionnalités</div>
         </div>
@@ -1228,6 +1244,9 @@
                 <div>
                     <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Resources</h4>
                     <ul class="space-y-3.5 text-sm">
+                        <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/reviews" class="hover:text-white transition-colors">Case Studies</a></li>
+                        <li><a href="/support" class="hover:text-white transition-colors">Help Center</a></li>
                         <li><a href="/products/webinar" class="hover:text-white transition-colors">Webinars</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">Community</a></li>
                     </ul>
@@ -1237,9 +1256,11 @@
                 <div>
                     <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Company</h4>
                     <ul class="space-y-3.5 text-sm">
+                        <li><a href="/about" class="hover:text-white transition-colors">About ALE</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">Press Room</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">Partners</a></li>
+                        <li><a href="/support" class="hover:text-white transition-colors">Contact Us</a></li>
                     </ul>
                 </div>
             </div>
@@ -1249,6 +1270,8 @@
                 <span class="text-sm text-gray-500">&copy; 2026 Alcatel-Lucent Enterprise. Rainbow&trade; is a registered trademark.</span>
                 <div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
                     <div class="flex items-center gap-6 text-sm">
+                        <a href="/privacy" class="hover:text-white transition-colors">Privacy</a>
+                        <a href="/legal" class="hover:text-white transition-colors">Terms</a>
                         <a href="#" class="hover:text-white transition-colors">Cookies</a>
                         <a href="#" class="hover:text-white transition-colors">GDPR</a>
                     </div>

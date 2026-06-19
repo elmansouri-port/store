@@ -13,7 +13,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#7c3aed', 600: '#6d28d9', 700: '#5b21b6' },
+                        brand: { 50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#5e2d91', 600: '#4a2373', 700: '#3c1c5e' },
                         navy: { 900: '#1e1b4b', 800: '#312e81', 700: '#3730a3' }
                     },
                     fontFamily: { sans: ["Inter", "system-ui", "sans-serif"] }, borderRadius: { btn: "10px" }
@@ -181,11 +181,12 @@
                     plateforme SaaS unifiée pour collaborer en équipe et animer des webinaires.
                 </p>
                 <div class="mt-8 flex flex-col sm:flex-row gap-4 items-center">
-                    <a href="/login"
-                        class="px-6 py-3 rounded-xl bg-navy-900 hover:bg-black text-white font-medium text-sm transition-colors w-full sm:w-auto text-center shadow-lg">Commencer</a>
-                    <a href="#features"
-                        class="px-6 py-3 rounded-xl bg-white border border-gray-200 text-gray-800 font-medium text-sm hover:bg-gray-50 transition-colors w-full sm:w-auto text-center inline-flex justify-center items-center shadow-sm">
-                        Rainbow lève 12M$ <span class="ml-2">&rarr;</span>
+                    <a href="/tarifs"
+                        class="px-8 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold shadow-2xl shadow-purple-900/20 transition-all active:scale-95">Essai gratuit</a>
+                    <a href="/support"
+                        class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-3 fill-current text-purple-900 group-hover:text-brand-500 transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        Voir une démo
                     </a>
                 </div>
             </div>
@@ -398,9 +399,9 @@
 
                     <div class="w-full">
                         <!-- Bento Grid: 4 parts - 2 rows, 1 big image per row -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 border-y border-dashed border-gray-200">
+                        <div class="grid grid-cols-1 md:grid-cols-5 border-y border-dashed border-gray-200">
                             <!-- Row 1 Big: Sondages -->
-                            <div class="md:col-span-2 p-8 md:p-12 border-b border-dashed border-gray-200 md:border-r flex flex-col">
+                            <div class="md:col-span-3 p-8 md:p-12 border-b border-dashed border-gray-200 md:border-r flex flex-col">
                                 <p class="text-gray-500 text-[15px] leading-relaxed max-w-2xl mb-10">
                                     <strong class="text-navy-900 font-semibold">Sondages en direct.</strong> Créez des sondages interactifs et recueillez l'avis de votre audience en temps réel pendant vos webinaires.
                                 </p>
@@ -409,7 +410,7 @@
                                 </div>
                             </div>
                             <!-- Row 1 Small: Métriques (image centered, text at top) -->
-                            <div class="p-8 md:p-12 border-b border-dashed border-gray-200 flex flex-col">
+                            <div class="md:col-span-2 p-8 md:p-12 border-b border-dashed border-gray-200 flex flex-col">
                                 <p class="text-gray-500 text-[15px] leading-relaxed max-w-md mb-10">
                                     <strong class="text-navy-900 font-semibold">Métriques avancées.</strong> Suivez les taux de participation et les résultats détaillés de vos sondages.
                                 </p>
@@ -420,7 +421,7 @@
                                 </div>
                             </div>
                             <!-- Row 2 Small: Inscription / Notification -->
-                            <div class="md:col-span-1 p-8 md:p-12 border-b md:border-b-0 md:border-r border-dashed border-gray-200 flex flex-col">
+                            <div class="md:col-span-2 p-8 md:p-12 border-b md:border-b-0 md:border-r border-dashed border-gray-200 flex flex-col">
                                 <p class="text-gray-500 text-[15px] leading-relaxed max-w-md mb-10">
                                     <strong class="text-navy-900 font-semibold">Vos sondages sont disponibles.</strong> Les participants peuvent répondre aux sondages directement depuis leur interface, avec des résultats visibles en temps réel.
                                 </p>
@@ -431,7 +432,7 @@
                                 </div>
                             </div>
                             <!-- Row 2 Big: Salle d'attente -->
-                            <div class="md:col-span-2 p-8 md:p-12 flex flex-col">
+                            <div class="md:col-span-3 p-8 md:p-12 flex flex-col">
                                 <p class="text-gray-500 text-[15px] leading-relaxed max-w-2xl mb-10">
                                     <strong class="text-navy-900 font-semibold">Salle d'attente.</strong> Gérez vos flux de participants en temps réel avec une file d'attente personnalisable.
                                 </p>
@@ -485,7 +486,7 @@
                     </div>
 
                     <!-- Tab Content -->
-                    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <div class="grid lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16 items-center">
                         <!-- Left: Text -->
                         <div>
                             <!-- Panel 0: Event -->
@@ -1058,7 +1059,7 @@
             </section>
 
             <!-- FAQ SECTION -->
-            <section class="py-24 bg-white z-10 relative border-t border-gray-100">
+            <section class="py-24 z-10 relative border-t border-gray-100" style="background-color: #c5deff47;">
                 <div class="max-w-5xl mx-auto px-6">
                     <div class="mb-12">
                         <h2 class="text-4xl md:text-5xl font-medium text-navy-900 tracking-tight font-serif">
