@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Rainbow by ALE - Sales Portal",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build:pages": "node tools/build-pages.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
