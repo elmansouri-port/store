@@ -110,4 +110,17 @@ for (const [route, srcRel] of Object.entries(ROUTES)) {
 // 4. Pages housekeeping
 fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
 
+// Friendly 404 for unknown paths under the Pages base: bounce to the home page.
+fs.writeFileSync(path.join(OUT, '404.html'),
+  '<!doctype html><html lang="fr"><head><meta charset="utf-8">' +
+  '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+  '<title>Page introuvable — Rainbow</title>' +
+  `<meta http-equiv="refresh" content="3;url=${BASE}/">` +
+  '<style>body{font-family:Inter,system-ui,sans-serif;background:#f9f8fe;color:#1f2937;' +
+  'display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;text-align:center}' +
+  'a{color:#5e2d91;font-weight:600}</style></head><body><div>' +
+  '<h1 style="font-size:2rem;margin:0 0 .5rem">Page introuvable</h1>' +
+  `<p>Redirection vers l'accueil… <a href="${BASE}/">Cliquez ici</a> si rien ne se passe.</p>` +
+  '</div></body></html>\n');
+
 console.log(`Built ${pageCount} pages into docs/ with base "${BASE}/". Assets: ${ASSET_DIRS.join(', ')}.`);
