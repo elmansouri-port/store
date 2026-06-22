@@ -13,7 +13,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#7c3aed', 600: '#6d28d9', 700: '#5b21b6' },
+                        brand: { 50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#5e2d91', 600: '#4a2373', 700: '#3c1c5e' },
                         navy: { 900: '#1e1b4b', 800: '#312e81', 700: '#3730a3' }
                     },
                     fontFamily: { sans: ["Inter", "system-ui", "sans-serif"] }, borderRadius: { btn: "10px" }
@@ -181,11 +181,12 @@
                     plateforme SaaS unifiée pour collaborer en équipe et animer des webinaires.
                 </p>
                 <div class="mt-8 flex flex-col sm:flex-row gap-4 items-center">
-                    <a href="/login"
-                        class="px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm transition-colors w-full sm:w-auto text-center shadow-lg">Commencer</a>
-                    <a href="#features"
-                        class="px-6 py-3 rounded-xl bg-white border border-gray-200 text-gray-800 font-medium text-sm hover:bg-gray-50 transition-colors w-full sm:w-auto text-center inline-flex justify-center items-center shadow-sm">
-                        Rainbow lève 12M$ <span class="ml-2">&rarr;</span>
+                    <a href="/tarifs"
+                        class="px-8 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold shadow-2xl shadow-purple-900/20 transition-all active:scale-95">Essai gratuit</a>
+                    <a href="/contact"
+                        class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-3 fill-current text-purple-900 group-hover:text-brand-500 transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        Voir une démo
                     </a>
                 </div>
             </div>
@@ -880,7 +881,7 @@
             </section>
 
             <!-- FAQ SECTION -->
-            <section class="py-24 bg-white z-10 relative border-t border-gray-100">
+            <section class="py-24 z-10 relative border-t border-gray-100" style="background-color: #c5deff47;">
                 <div class="max-w-5xl mx-auto px-6">
                     <div class="mb-12">
                         <h2 class="text-4xl md:text-5xl font-medium text-navy-900 tracking-tight font-serif">
@@ -893,14 +894,14 @@
                         <div class="lg:col-span-2 flex flex-col gap-3">
                             <!-- FAQ 1 -->
                             <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors active"
-                                onclick="this.classList.toggle('active')">
+                                onclick="faqAccordion(this)">
                                 <div class="flex justify-between items-start gap-4">
                                     <h4 class="font-semibold text-navy-900">Qu'est-ce que Rainbow et à qui
                                         s'adresse-t-il ?</h4>
                                     <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M12 4v16m8-8H4" />
+                                            d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </div>
                                 <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
@@ -912,14 +913,14 @@
 
                             <!-- FAQ 2 -->
                             <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="this.classList.toggle('active')">
+                                onclick="faqAccordion(this)">
                                 <div class="flex justify-between items-start gap-4">
                                     <h4 class="font-semibold text-navy-900">Puis-je utiliser Rainbow sans connaissances
                                         techniques ?</h4>
                                     <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M12 4v16m8-8H4" />
+                                            d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </div>
                                 <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
@@ -931,14 +932,14 @@
 
                             <!-- FAQ 3 -->
                             <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="this.classList.toggle('active')">
+                                onclick="faqAccordion(this)">
                                 <div class="flex justify-between items-start gap-4">
                                     <h4 class="font-semibold text-navy-900">Rainbow s'intègre-t-il avec d'autres outils
                                         comme Slack ou Figma ?</h4>
                                     <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M12 4v16m8-8H4" />
+                                            d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </div>
                                 <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
@@ -949,14 +950,14 @@
 
                             <!-- FAQ 4 -->
                             <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="this.classList.toggle('active')">
+                                onclick="faqAccordion(this)">
                                 <div class="flex justify-between items-start gap-4">
                                     <h4 class="font-semibold text-navy-900">Comment fonctionne l'automatisation des
                                         tâches dans Rainbow ?</h4>
                                     <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M12 4v16m8-8H4" />
+                                            d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </div>
                                 <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
@@ -968,13 +969,13 @@
 
                             <!-- FAQ 5 -->
                             <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="this.classList.toggle('active')">
+                                onclick="faqAccordion(this)">
                                 <div class="flex justify-between items-start gap-4">
                                     <h4 class="font-semibold text-navy-900">Rainbow est-il sécurisé et conforme ?</h4>
                                     <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M12 4v16m8-8H4" />
+                                            d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </div>
                                 <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
@@ -1212,6 +1213,13 @@
                 labelMonthly.classList.replace('text-gray-500', 'text-navy-900');
                 labelMonthly.classList.replace('font-medium', 'font-bold');
             }
+        }
+    </script>
+    <script>
+        function faqAccordion(el) {
+            var wasActive = el.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('active'); });
+            if (!wasActive) el.classList.add('active');
         }
     </script>
 </body>
