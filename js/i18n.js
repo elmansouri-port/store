@@ -5,7 +5,7 @@
     var cache = {};
     var currentLang = 'en';
     var currentTranslations = {};
-    var SUPPORTED = ['en', 'fr', 'es', 'it', 'de'];
+    var SUPPORTED = ['en', 'fr', 'de'];
     var DEFAULT_LANG = 'en';
 
     // Detect language: localStorage > browser > default
@@ -61,7 +61,7 @@
 
     // Build language switcher dropdowns (desktop + mobile)
     function initLangSwitcher() {
-        var langs = { en: 'English', fr: 'Fran\u00e7ais', es: 'Espa\u00f1ol', it: 'Italiano', de: 'Deutsch' };
+        var langs = { en: 'English', fr: 'Fran\u00e7ais', de: 'Deutsch' };
 
         var dropdown = document.getElementById('lang-dropdown');
         if (dropdown) {
