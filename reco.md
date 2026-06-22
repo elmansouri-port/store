@@ -460,3 +460,144 @@ Hard rules:
 - Third-party scripts (Matomo, Hotjar) loaded after interactive — never blocking
 
 ---
+
+## 13. Astro CMS-Driven SSR — Implementation Notes
+
+You are working on a CMS-driven SSR Astro codebase. Apply the following changes:
+
+---
+
+### 13.1 Navbar ordering
+
+The navbar items are stored in the CMS with a user-defined order (via drag-and-drop). Currently the frontend does not respect this order. Fix the data fetch so navbar items are sorted by their saved `order` or `position` field before being passed to the Astro component. The drag-and-drop handler in the CMS must also persist the new order to the database on save.
+
+---
+
+### 13.2 Megamenu layout with optional zones
+
+Each navbar item can have a megamenu. The megamenu has three zones:
+- `main` — left side, always required
+- `features` — right side, optional
+- `footer` — bottom, optional
+
+Rules:
+- If `features` is empty/null, do not render its container. The `main` zone must expand to fill the full width.
+- If `footer` is empty/null, do not render its container. No residual spacing, border, or margin should remain.
+- Use flexbox so zones fill available space based on what is present.
+- Corners and edges must remain visually clean in all four combinations: main only / main + features / main + footer / main + features + footer.
+
+---
+
+### 13.3 Global code snippet injector
+
+Add three fields in the CMS global settings:
+- `global_head_snippet`
+- `global_body_snippet`
+- `global_footer_snippet`
+
+Each is a textarea accepting arbitrary HTML. In the Astro layout file (e.g. `BaseLayout.astro` or equivalent), fetch these fields from the CMS and inject them using `<Fragment set:html={...} />`:
+
+```astro
+---
+const { global_head_snippet, global_body_snippet, global_footer_snippet } = await fetchGlobalSettings();
+---
+<html>
+  <head>
+    <Fragment set:html={global_head_snippet} />
+  </head>
+  <body>
+    <Fragment set:html={global_body_snippet} />
+    <slot />
+    <Fragment set:html={global_footer_snippet} />
+  </body>
+</html>
+```
+
+`set:html` is the correct Astro way to inject raw HTML — do not use `innerHTML`, do not escape the content. The fields must accept any valid HTML including `<script>`, `<link>`, `<meta>`, `<noscript>` tags.
+
+---
+
+### 13.4 Per-page code snippet injector
+
+Add three fields on each individual page entry in the CMS:
+- `page_head_snippet`
+- `page_body_snippet`
+- `page_footer_snippet`
+
+Fetch them in each page's `.astro` file and pass them to the layout. Inject them using `<Fragment set:html={...} />` in the same zones as global snippets, after the global ones:
+
+```astro
+---
+// page file
+const { page_head_snippet, page_body_snippet, page_footer_snippet } = page;
+---
+<BaseLayout
+  pageHeadSnippet={page_head_snippet}
+  pageBodySnippet={page_body_snippet}
+  pageFooterSnippet={page_footer_snippet}
+>
+  ...
+</BaseLayout>
+```
+
+```astro
+---
+// BaseLayout.astro
+const { global_head_snippet, global_body_snippet, global_footer_snippet } = await fetchGlobalSettings();
+const { pageHeadSnippet, pageBodySnippet, pageFooterSnippet } = Astro.props;
+---
+<head>
+  <Fragment set:html={global_head_snippet} />
+  <Fragment set:html={pageHeadSnippet} />
+</head>
+<body>
+  <Fragment set:html={global_body_snippet} />
+  <Fragment set:html={pageBodySnippet} />
+  <slot />
+  <Fragment set:html={global_footer_snippet} />
+  <Fragment set:html={pageFooterSnippet} />
+</body>
+```
+
+These fields will be used for: canonical tags, page-specific meta tags, and JSON-LD structured data (FAQ, Pricing, BreadcrumbList, etc.). Do not build individual CMS fields per meta tag type — the textarea approach is intentional.
+
+---
+
+### 13.5 OpenGraph per-page fields
+
+Add the following optional fields to each page entry in the CMS:
+- `og_title`
+- `og_description`
+- `og_image` (media upload)
+
+Inject them in the `<head>` of the page as standard OG meta tags:
+
+```astro
+<meta property="og:title" content={og_title} />
+<meta property="og:description" content={og_description} />
+<meta property="og:image" content={og_image?.url} />
+```
+
+Rules:
+- Only render a tag if the field has a value — do not output empty `content=""` attributes.
+- `og_image` must expose the absolute URL of the uploaded asset.
+- If any field is empty, fall back to the global default OG values defined in the CMS global settings (add `default_og_title`, `default_og_description`, `default_og_image` there as well).
+
+---
+
+### 13.6 Video thumbnail (optional field)
+
+Add an optional `thumbnail` image field to every video component/block in the CMS.
+
+Rules:
+- If a thumbnail is provided, display it as a placeholder over the video until the video is fully loaded.
+- If no thumbnail is provided, fall back to the current default behavior.
+- This applies to all video blocks across the CMS (inline videos, hero videos, etc.).
+
+---
+
+### Critical requirement
+
+All snippet fields must be injected as functional HTML using `set:html`. Never render snippet content as text. Validate by checking the SSR HTML output — tags must appear verbatim in the correct position.
+
+---
