@@ -317,27 +317,59 @@ input[type="number"] {
 
 /* --- Lang Switcher --- */
 .lang-switcher { position: relative; }
-.lang-switcher button {
-    display: flex; align-items: center; gap: 4px;
-    font-size: 0.8125rem; color: #64748b; cursor: pointer;
-    background: none; border: none; padding: 4px 8px;
-    border-radius: 6px; transition: color 0.2s;
+.lang-switcher > button {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.8125rem; font-weight: 600; color: #374151;
+    cursor: pointer; background: #fff;
+    border: 1.5px solid #e5e7eb;
+    padding: 6px 12px; border-radius: 20px;
+    transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
 }
-.lang-switcher button:hover { color: #1e1b4b; }
+.lang-switcher > button:hover {
+    border-color: #5e2d91; color: #5e2d91;
+    box-shadow: 0 2px 8px rgba(94,45,145,0.1);
+}
+.lang-switcher.open > button {
+    border-color: #5e2d91; color: #5e2d91;
+    box-shadow: 0 2px 8px rgba(94,45,145,0.12);
+}
+.lang-switcher > button .lang-chevron {
+    width: 12px; height: 12px;
+    transition: transform 0.2s; opacity: 0.5;
+}
+.lang-switcher.open > button .lang-chevron { transform: rotate(180deg); opacity: 1; }
 .lang-switcher .lang-dropdown {
-    display: none; position: absolute; top: 100%; right: 0;
-    background: #fff; border: 1px solid #e9e5ff;
-    border-radius: 10px; box-shadow: 0 8px 24px rgba(124,58,237,0.08);
-    min-width: 140px; z-index: 200; padding: 4px; margin-top: 4px;
+    display: none; position: absolute; top: calc(100% + 8px); right: 0;
+    background: #fff; border: 1px solid #ede9f9;
+    border-radius: 14px;
+    box-shadow: 0 12px 32px rgba(94,45,145,0.12), 0 2px 8px rgba(0,0,0,0.05);
+    min-width: 160px; z-index: 200; padding: 6px;
 }
-.lang-switcher.open .lang-dropdown { display: block; }
-.lang-dropdown button {
-    display: block; width: 100%; text-align: left;
-    padding: 8px 14px; font-size: 0.8125rem; color: #374151;
-    border: none; background: none; cursor: pointer; border-radius: 6px;
+.lang-switcher.open .lang-dropdown { display: block; animation: langDropIn 0.15s ease; }
+@keyframes langDropIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
-.lang-dropdown button:hover { background: #f5f3ff; }
-.lang-dropdown button.active { color: #7c3aed; font-weight: 600; }
+.lang-dropdown .lang-opt {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; text-align: left;
+    padding: 9px 12px; font-size: 0.875rem; color: #374151;
+    border: none; background: none; cursor: pointer;
+    border-radius: 8px; transition: background 0.15s; font-weight: 500;
+}
+.lang-dropdown .lang-opt:hover { background: #f5f0ff; color: #5e2d91; }
+.lang-dropdown .lang-opt.active { background: #f5f0ff; color: #5e2d91; font-weight: 700; }
+.lang-dropdown .lang-flag { font-size: 1.1rem; line-height: 1; }
+.lang-dropdown .lang-check { width: 14px; height: 14px; margin-left: auto; color: #5e2d91; flex-shrink: 0; }
+.mobile-lang-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 6px 14px; border-radius: 20px; font-size: 0.8125rem;
+    font-weight: 600; border: 1.5px solid #e5e7eb; background: #fff;
+    color: #374151; cursor: pointer; transition: all 0.15s;
+}
+.mobile-lang-btn.active { border-color: #5e2d91; color: #5e2d91; background: #f5f0ff; }
+.mobile-lang-btn:hover { border-color: #5e2d91; color: #5e2d91; }
 
 /* --- Solution Filter --- */
 .sol-filter-btn.active { background: #7c3aed; color: #fff; }

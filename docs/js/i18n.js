@@ -61,15 +61,24 @@
 
     // Build language switcher dropdowns (desktop + mobile)
     function initLangSwitcher() {
-        var langs = { en: 'English', fr: 'Fran\u00e7ais', de: 'Deutsch' };
+        var langs = {
+            en: { name: 'English',  flag: '\ud83c\uddec\ud83c\udde7' },
+            fr: { name: 'Fran\u00e7ais', flag: '\ud83c\uddeb\ud83c\uddf7' },
+            de: { name: 'Deutsch',  flag: '\ud83c\udde9\ud83c\uddea' }
+        };
 
         var dropdown = document.getElementById('lang-dropdown');
         if (dropdown) {
             dropdown.innerHTML = '';
             Object.keys(langs).forEach(function (code) {
                 var btn = document.createElement('button');
-                btn.textContent = langs[code];
-                btn.className = code === currentLang ? 'active' : '';
+                btn.className = 'lang-opt' + (code === currentLang ? ' active' : '');
+                btn.innerHTML =
+                    '<span class="lang-flag">' + langs[code].flag + '</span>' +
+                    '<span>' + langs[code].name + '</span>' +
+                    (code === currentLang
+                        ? '<svg class="lang-check" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>'
+                        : '');
                 btn.onclick = function (e) {
                     e.stopPropagation();
                     setLang(code);
@@ -85,10 +94,8 @@
             mobileSwitcher.innerHTML = '';
             Object.keys(langs).forEach(function (code) {
                 var btn = document.createElement('button');
-                btn.textContent = code.toUpperCase();
-                btn.className = code === currentLang
-                    ? 'px-3 py-1.5 rounded-full text-xs font-medium bg-brand-500 text-white'
-                    : 'px-3 py-1.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600';
+                btn.className = 'mobile-lang-btn' + (code === currentLang ? ' active' : '');
+                btn.innerHTML = '<span>' + langs[code].flag + '</span><span>' + code.toUpperCase() + '</span>';
                 btn.onclick = function () { setLang(code); };
                 mobileSwitcher.appendChild(btn);
             });
