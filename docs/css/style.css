@@ -214,26 +214,33 @@ input[type="number"] {
 
 /* --- FAQ Items --- */
 .faq-item {
-    border: 1px solid rgba(124,58,237,0.1);
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(8px);
+    background: #fff;
 }
 .faq-item:hover {
-    border-color: rgba(124,58,237,0.18);
-    box-shadow: 0 4px 16px rgba(124,58,237,0.04);
+    border-color: #d1d5db;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
 }
 .faq-item.active {
-    border-color: #7c3aed;
-    background: rgba(245,243,255,0.5);
-    box-shadow: 0 8px 24px rgba(124,58,237,0.06);
+    border-color: #d1d5db;
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+.faq-item h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.5;
 }
 .faq-item .faq-answer {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1);
+    font-size: 1.125rem;
+    line-height: 1.6;
 }
 .faq-item.active .faq-answer {
     max-height: 300px;
@@ -1448,7 +1455,7 @@ input[type="number"] {
 
 .faq-card-button:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #5e2d91, 0 0 0 4px white;
+    box-shadow: none;
 }
 
 .faq-card-question {
