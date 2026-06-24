@@ -335,7 +335,7 @@ export const sectionRegistry: Record<string, Type<any>> = {
   BlogRichText,
   BlogCallout,
   BlogImageBlock,
-  InteractiveDemoQ42024,   // example custom one-off section
+  InteractiveDémoQ42024,   // example custom one-off section
 };
 ```
 

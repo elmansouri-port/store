@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -102,7 +102,7 @@
             <div class="hidden md:flex items-center justify-center flex-1 gap-8">
                 <div class="nav-dropdown">
                     <a href="#" class="text-sm text-gray-500 hover:text-navy-900 transition-colors font-medium">
-                        <span data-i18n="nav.product">Products</span>
+                        <span data-i18n="nav.product">Produits</span>
                         <svg class="chevron w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                     </a>
 
@@ -131,14 +131,14 @@
                     <div class="lang-dropdown" id="lang-dropdown"></div>
                 </div>
                 <a href="/login" class="px-5 py-2.5 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-sm font-semibold transition-all active:scale-95 inline-flex items-center justify-center" data-i18n="nav.signin">Se connecter</a>
-                <a href="/tarifs" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all">Essai gratuit</a>
+                <a href="/tarifs" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all">Découvrez notre forfait</a>
             </div>
             <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Menu">
                 <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
         </div>
         <div id="mobile-menu" class="md:hidden hidden border-t border-indigo-50 bg-white px-6 py-4 space-y-3">
-            <a href="#" class="block text-sm text-gray-600 py-2" data-i18n="nav.product">Products</a>
+            <a href="#" class="block text-sm text-gray-600 py-2" data-i18n="nav.product">Produits</a>
             <div class="mobile-submenu space-y-1">
                 <a href="/products/webinar" class="block py-1">Rainbow Webinar</a>
                 <a href="/products/collaboration" class="block py-1">Rainbow Collaboration</a>
@@ -151,15 +151,15 @@
             <a href="#" class="block text-sm text-gray-600 py-2">Ressources</a>
             <div class="mobile-submenu space-y-1">
                 <a href="/blog" class="block py-1" data-i18n="nav.blog">Blog</a>
-                <a href="/reviews" class="block py-1" data-i18n="nav.reviews">Reviews</a>
+                <a href="/reviews" class="block py-1" data-i18n="nav.reviews">Avis</a>
                 <a href="/support" class="block py-1" data-i18n="nav.support">Support</a>
-                <a href="/tutorials" class="block py-1" data-i18n="nav.tutorials">Tutorials</a>
+                <a href="/tutorials" class="block py-1" data-i18n="nav.tutorials">Tutoriels</a>
             </div>
             <a href="/partenaires" class="block text-sm text-gray-600 py-2">Partenaires</a>
             <div id="mobile-lang-switcher" class="flex flex-wrap gap-2 py-2"></div>
             <div class="flex flex-col gap-3 pt-2">
                 <a href="/login" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">Se connecter</a>
-                <a href="/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all">Essai gratuit</a>
+                <a href="/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all">Découvrez notre forfait</a>
             </div>
         </div>
     </nav>
@@ -204,168 +204,132 @@
                     </div>
 
                     <!-- Bento-style Pricing Grid -->
-                    <div class="max-w-5xl mx-auto mb-20">
+                    <div class="max-w-5xl mx-auto mb-6">
                         <div class="bg-white shadow-[0_4px_20px_rgb(0,0,0,0.04)]">
                             <div class="grid md:grid-cols-3 border-t border-b border-dashed border-gray-200">
 
-                                <!-- Plan 1: Débutant -->
+                                <!-- Plan 1: Essentiel (Free) -->
                                 <div
                                     class="p-8 md:p-10 border-b md:border-b-0 md:border-r border-dashed border-gray-200 flex flex-col hover:bg-gray-50/50 hover:shadow-[inset_0_0_0_1px_rgba(124,58,237,0.06)] transition-all duration-300 group">
                                     <div class="flex flex-col h-full">
                                         <div class="flex-grow">
-                                            <h3 class="text-lg font-bold text-navy-900 mb-2 tracking-tight">Débutant</h3>
-                                            <p class="text-sm text-gray-500 mb-6 leading-relaxed">Pour les petites équipes qui découvrent la collaboration unifiée. Commencez sans frais.</p>
+                                            <h3 class="text-lg font-bold text-navy-900 mb-5 tracking-tight">Essentiel</h3>
 
                                             <div class="mb-5 flex items-end gap-1">
-                                                <span class="text-4xl md:text-5xl font-extrabold text-navy-900 tracking-tight">0$</span>
-                                                <span class="text-sm text-gray-500 mb-1.5 ml-1">Toujours gratuit</span>
+                                                <span class="text-4xl md:text-5xl font-extrabold text-navy-900 tracking-tight">Gratuit</span>
                                             </div>
 
                                             <div class="w-full border-t border-dashed border-gray-200 my-6"></div>
 
                                             <ul class="space-y-3.5 mb-8 text-[14px] text-gray-600 flex-grow">
-                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg><span>Messagerie illimitée</span></li>
-                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg><span>Appels audio/vidéo 1:1</span></li>
-                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg><span>Partage d'écran (10 Go)</span></li>
-                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg><span>Espaces de travail</span></li>
-                                                <li class="flex items-start gap-3 text-gray-400"><svg class="w-4 h-4 mt-0.5 shrink-0"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                                    </svg><span>Enregistrement cloud</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Chat 1:1 et groupes illimités</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Appels audio &amp; vidéo HD</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Partage de fichiers &amp; écran</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Enregistrement jusqu'à 5h</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Intégration calendrier (O365, Google)</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Sécurité entreprise (TLS, SSO)</span></li>
                                             </ul>
                                         </div>
 
                                         <a href="/login"
-                                            class="block w-full py-3.5 px-4 text-center rounded-[10px] border-2 border-brand-500 text-brand-500 font-bold hover:bg-brand-500 hover:text-white hover:shadow-lg transition-all duration-200 text-sm">Commencer</a>
+                                            class="block w-full py-3.5 px-4 text-center rounded-[10px] border-2 border-brand-500 text-brand-500 font-bold hover:bg-brand-500 hover:text-white hover:shadow-lg transition-all duration-200 text-sm">Commencer gratuitement</a>
                                     </div>
                                 </div>
 
-                                <!-- Plan 2: Professionnel (Center - highlighted) -->
+                                <!-- Plan 2: Enterprise (Center - highlighted) -->
                                 <div
                                     class="p-8 md:p-10 border-b md:border-b-0 md:border-r border-dashed border-gray-200 flex flex-col bg-gradient-to-b from-brand-50/40 to-white relative hover:from-brand-50/60 transition-all duration-300 group shadow-[inset_0_1px_0_0_rgba(124,58,237,0.08)]">
                                     <div class="absolute -top-16 -right-16 w-56 h-56 bg-brand-500/10 rounded-full blur-3xl"></div>
                                     <div class="absolute -bottom-16 -left-16 w-56 h-56 bg-indigo-500/10 rounded-full blur-3xl"></div>
                                     <div class="flex flex-col h-full relative z-10">
                                         <div class="flex-grow">
-                                            
-                                            <h3 class="text-2xl font-bold text-navy-900 mb-2 tracking-tight">Professionnel</h3>
-                                            <p class="text-sm text-gray-500 mb-6 min-h-[40px] leading-relaxed">Pour les entreprises qui nécessitent des outils de collaboration avancés.</p>
+                                            <div class="flex items-start gap-2 mb-5 flex-wrap">
+                                                <h3 class="text-2xl font-bold text-navy-900 tracking-tight">Enterprise</h3>
+                                                <span class="inline-flex items-center bg-brand-500 text-white font-bold px-2.5 py-0.5 rounded-full text-[10px] uppercase tracking-wider shrink-0 mt-1">Le plus populaire</span>
+                                            </div>
 
                                             <div class="mb-5 flex items-end gap-1">
-                                                <span class="text-4xl md:text-5xl font-extrabold text-navy-900 price-monthly tracking-tight">24$</span>
-                                                <span class="text-4xl md:text-5xl font-extrabold text-navy-900 price-yearly hidden tracking-tight">19$</span>
-                                                <span class="text-gray-500 font-medium text-sm mb-1.5 ml-1">/mois</span>
+                                                <span class="text-4xl md:text-5xl font-extrabold text-navy-900 price-monthly tracking-tight">6€</span>
+                                                <span class="text-4xl md:text-5xl font-extrabold text-navy-900 price-yearly hidden tracking-tight">4,80€</span>
+                                                <div class="flex flex-col mb-2 ml-1.5">
+                                                    <span class="text-gray-500 font-medium text-[11px] leading-tight">/ utilisateur</span>
+                                                    <span class="text-gray-500 font-medium text-[11px] leading-tight">/ mois</span>
+                                                </div>
                                             </div>
 
                                             <div class="w-full border-t border-dashed border-gray-200 my-6"></div>
 
                                             <ul class="space-y-3.5 mb-8 text-[14px] text-gray-600">
-                                                <li class="flex items-start gap-3"><svg
-                                                        class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg><span>Visioconférences HD (250 pers.)</span></li>
-                                                <li class="flex items-start gap-3"><svg
-                                                        class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg><span>Enregistrement cloud (100 Go)</span></li>
-                                                <li class="flex items-start gap-3"><svg
-                                                        class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg><span>Tableaux blancs collaboratifs</span></li>
-                                                <li class="flex items-start gap-3"><svg
-                                                        class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg><span>Gestion des rôles</span></li>
-                                                <li class="flex items-start gap-3"><svg
-                                                        class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg><span>Intégrations natives</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Conférences jusqu'à 120 participants</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Transcription vocale IA</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Enregistrement jusqu'à 5h</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Jusqu'à 500 espaces de travail par utilisateur</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Sondages, votes &amp; export CSV</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Prise en main à distance partagée</span></li>
                                             </ul>
                                         </div>
 
                                         <a href="/login"
-                                            class="block w-full py-3.5 px-4 text-center rounded-[10px] bg-brand-500 text-white hover:bg-brand-600 font-bold transition-all shadow-md text-sm hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">Essai
-                                            gratuit de 14 jours</a>
+                                            class="block w-full py-3.5 px-4 text-center rounded-[10px] bg-brand-500 text-white hover:bg-brand-600 font-bold transition-all shadow-md text-sm hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">Acheter</a>
                                     </div>
                                 </div>
 
-                                <!-- Plan 3: Entreprise -->
-                                <div
-                                    class="p-8 md:p-10 flex flex-col hover:bg-gray-50/50 hover:shadow-[inset_0_0_0_1px_rgba(124,58,237,0.06)] transition-all duration-300 group">
+                                <!-- Plan 3: Premium (Bientôt disponible) -->
+                                <div class="p-8 md:p-10 flex flex-col opacity-60">
                                     <div class="flex flex-col h-full">
                                         <div class="flex-grow">
-                                            <h3 class="text-2xl font-bold text-navy-900 mb-2 tracking-tight">Entreprise</h3>
-                                            <p class="text-sm text-gray-500 mb-6 min-h-[40px] leading-relaxed">Des solutions sur mesure pour les grandes organisations avec des exigences élevées.</p>
+                                            <div class="flex items-start gap-2 mb-5 flex-wrap">
+                                                <h3 class="text-2xl font-bold text-navy-900 tracking-tight">Premium</h3>
+                                                <span class="inline-flex items-center bg-gray-200 text-gray-500 font-bold px-2.5 py-0.5 rounded-full text-[10px] uppercase tracking-wider shrink-0 mt-1">Bientôt disponible</span>
+                                            </div>
 
                                             <div class="mb-5 flex items-end gap-1">
-                                                <span class="text-4xl md:text-5xl font-extrabold text-navy-900 price-monthly tracking-tight">49$</span>
-                                                <span class="text-4xl md:text-5xl font-extrabold text-navy-900 price-yearly hidden tracking-tight">39$</span>
-                                                <span class="text-gray-500 font-medium text-sm mb-1.5 ml-1">/mois</span>
+                                                <span class="text-4xl md:text-5xl font-extrabold text-gray-400 price-monthly tracking-tight">12€</span>
+                                                <span class="text-4xl md:text-5xl font-extrabold text-gray-400 price-yearly hidden tracking-tight">9,60€</span>
+                                                <div class="flex flex-col mb-2 ml-1.5">
+                                                    <span class="text-gray-400 font-medium text-[11px] leading-tight">/ utilisateur</span>
+                                                    <span class="text-gray-400 font-medium text-[11px] leading-tight">/ mois</span>
+                                                </div>
                                             </div>
 
                                             <div class="w-full border-t border-dashed border-gray-200 my-6"></div>
 
-                                            <ul class="space-y-3.5 mb-8 text-[14px] text-gray-600">
-                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-navy-900 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg><span class="font-semibold text-navy-900">Tout ce qui est dans Professionnel</span></li>
-                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                        </svg><span>Participants illimités</span></li>
-                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                        </svg><span>Stockage cloud illimité</span></li>
-                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg><span>SSO SAML / OIDC & AD</span></li>
-                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg><span>PBX / Téléphonie IP & API dédiée</span></li>
+                                            <ul class="space-y-3.5 mb-8 text-[14px] text-gray-400">
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-gray-300 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Fonctionnalités IA avancées</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-gray-300 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Disponibilité géographique étendue</span></li>
+                                                <li class="flex items-start gap-3"><svg class="w-4 h-4 text-gray-300 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>SLA premium &amp; support dédié</span></li>
                                             </ul>
                                         </div>
 
-                                        <a href="/contact"
-                                            class="block w-full py-3.5 px-4 text-center rounded-[10px] border border-gray-200 text-navy-900 font-semibold hover:bg-gray-50 hover:border-gray-300 transition-all text-sm">Contacter
-                                            les ventes</a>
+                                        <span class="block w-full py-3.5 px-4 text-center rounded-[10px] border border-gray-200 text-gray-400 font-semibold text-sm cursor-not-allowed select-none">Disponible prochainement</span>
                                     </div>
                                 </div>
 
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Notes -->
+                    <div class="max-w-5xl mx-auto mb-20 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-gray-50/70 border border-gray-100">
+                            <svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            <div>
+                                <p class="text-xs font-bold text-navy-900 mb-0.5">Facturation flexible</p>
+                                <p class="text-xs text-gray-500">Mensuelle ou annuelle · économisez ~20% avec l'abonnement annuel</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-gray-50/70 border border-gray-100">
+                            <svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z"/></svg>
+                            <div>
+                                <p class="text-xs font-bold text-navy-900 mb-0.5">HT TVA</p>
+                                <p class="text-xs text-gray-500">Prix affichés hors taxes · TVA applicable selon votre pays</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-gray-50/70 border border-gray-100">
+                            <svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <div>
+                                <p class="text-xs font-bold text-navy-900 mb-0.5">Europe uniquement</p>
+                                <p class="text-xs text-gray-500">Disponible dans 31 pays européens · Phase 1</p>
                             </div>
                         </div>
                     </div>
@@ -391,11 +355,11 @@
                                 <thead>
                                     <tr class="border-b border-gray-200 bg-gray-50/50">
                                         <th class="p-6 text-sm font-bold text-navy-900 w-[40%]">Fonctionnalité</th>
-                                        <th class="p-6 text-sm font-bold text-navy-900 w-[20%] text-center">Débutant</th>
+                                        <th class="p-6 text-sm font-bold text-navy-900 w-[20%] text-center">Essentiel</th>
                                         <th
                                             class="p-6 text-sm font-bold text-navy-900 w-[20%] text-center bg-brand-50/30">
-                                            Professionnel</th>
-                                        <th class="p-6 text-sm font-bold text-navy-900 w-[20%] text-center">Entreprise</th>
+                                            Enterprise</th>
+                                        <th class="p-6 text-sm font-bold text-navy-900 w-[20%] text-center">Premium</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100 text-sm text-gray-600">
@@ -632,7 +596,7 @@
                 <div class="max-w-5xl mx-auto px-6">
                     <div class="mb-12">
                         <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 tracking-tight">
-                            FAQ :
+                            Questions fr&eacute;quentes
                         </h2>
                     </div>
 
@@ -764,7 +728,7 @@
                                 <div class="sp-cta-actions">
                                     <a href="/tarifs" class="btn-cta-primary">Commencer l'essai gratuit &rarr;</a>
                                 </div>
-                                <div class="sp-cta-note text-gray-500">Essai gratuit de 14 jours &middot; Sans carte
+                                <div class="sp-cta-note text-gray-500">14 jours sans engagement &middot; Sans carte
                                     bancaire &middot; Accès complet des fonctionnalités</div>
                             </div>
                         </div>
@@ -779,32 +743,29 @@
     <footer class="footer-premium text-gray-400 pt-20 pb-10 px-6 relative z-10">
         <div class="max-w-6xl mx-auto">
             <!-- Top Section -->
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-12 mb-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
                 <!-- Brand Column -->
                 <div class="col-span-2 md:col-span-1">
-                    <div class="flex items-center mb-6">
-                        <img src="/images/ale_white.png" alt="Alcatel-Lucent Enterprise" class="h-10 w-auto opacity-90 hover:opacity-100 transition-opacity">
+                    <div class="flex items-center mb-4">
+                        <img src="/images/ale_white.png" alt="Alcatel-Lucent Enterprise" class="h-15 w-auto opacity-90 hover:opacity-100 transition-opacity">
                     </div>
-                    <p class="text-sm text-gray-400 leading-relaxed mb-6 max-w-[240px]">The unified communications platform trusted by 10,000+ enterprise teams in 180+ countries.</p>
-                    <!-- Rainbow colored dots -->
-                    <div class="flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
-                        <span class="w-3 h-3 rounded-full bg-blue-500"></span>
-                        <span class="w-3 h-3 rounded-full bg-indigo-500"></span>
-                        <span class="w-3 h-3 rounded-full bg-pink-500"></span>
-                        <span class="w-3 h-3 rounded-full bg-orange-500"></span>
-                    </div>
+                    <address class="text-sm text-gray-400 leading-relaxed mb-6 not-italic">
+                        ALE International<br>
+                        32 avenue Kl&eacute;ber<br>
+                        92700 Colombes, France
+                    </address>
+                    <!---->
+                    
                 </div>
 
                 <!-- Solutions Column -->
                 <div>
                     <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Solutions</h4>
                     <ul class="space-y-3.5 text-sm">
+                        <li><a href="/products/collaboration" class="hover:text-white transition-colors">Rainbow Collaboration</a></li>
                         <li><a href="/products/webinar" class="hover:text-white transition-colors">Rainbow Webinar</a></li>
-                        <li><a href="/products/collaboration" class="hover:text-white transition-colors">Rainbow Classroom</a></li>
-                        <li><a href="/products/collaboration" class="hover:text-white transition-colors">Rainbow Hub</a></li>
-                        <li><a href="/products" class="hover:text-white transition-colors">Rainbow Business</a></li>
-                        <li><a href="/products" class="hover:text-white transition-colors">Rainbow CPaaS</a></li>
+                        <li><a href="/tarifs" class="hover:text-white transition-colors">Tarifs</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">API</a></li>
                     </ul>
                 </div>
 
@@ -812,20 +773,10 @@
                 <div>
                     <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Developers</h4>
                     <ul class="space-y-3.5 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">API Documentation</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">SDKs &amp; Libraries</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">WebRTC Guide</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Changelog</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Status</a></li>
-                    </ul>
-                </div>
-
-                <!-- Resources Column -->
-                <div>
-                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Resources</h4>
-                    <ul class="space-y-3.5 text-sm">
-                        <li><a href="/products/webinar" class="hover:text-white transition-colors">Webinars</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Community</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Guide technique</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Code samples</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Int&eacute;grations</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Forum dev</a></li>
                     </ul>
                 </div>
 
@@ -833,9 +784,11 @@
                 <div>
                     <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Company</h4>
                     <ul class="space-y-3.5 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Press Room</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Partners</a></li>
+                        <li><a href="/about" class="hover:text-white transition-colors">A propos</a></li>
+                        <li><a href="/partenaires" class="hover:text-white transition-colors">Devenir partenaire</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Carri&egrave;res</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Presse</a></li>
+                        <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
             </div>

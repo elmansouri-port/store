@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rainbow Design System</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: { 50:'#f5f3ff',100:'#ede9fe',200:'#ddd6fe',300:'#c4b5fd',400:'#a78bfa',500:'#5e2d91',600:'#4a2373',700:'#3c1c5e' },
+        navy: { 900:'#1e1b4b',800:'#312e81',700:'#3730a3' },
+        laurenn: { purple:'#5e2d91',purpleLight:'#7c3aad',purpleDark:'#4a2373',orange:'#FF4500',pink:'#CF0072',blue:'#0085CA',green:'#34B233' }
+      },
+      fontFamily: { sans:['Inter','system-ui','sans-serif'], mono:['JetBrains Mono','monospace'] },
+      borderRadius: { btn:'10px' }
+    }
+  }
+}
+</script>
+<style>
+  *{box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#fafaf9;color:#1a1a2e}
+
+  /* Sidebar */
+  .ds-sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;overflow-y:auto;background:#fff;border-right:1px solid #e5e7eb;z-index:50;padding:0 0 40px}
+  .ds-sidebar::-webkit-scrollbar{width:4px}
+  .ds-sidebar::-webkit-scrollbar-track{background:transparent}
+  .ds-sidebar::-webkit-scrollbar-thumb{background:#e5e7eb;border-radius:99px}
+  .ds-content{margin-left:240px;min-height:100vh}
+
+  /* Sidebar nav */
+  .ds-nav-group{padding:24px 16px 0}
+  .ds-nav-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;padding:0 8px;margin-bottom:6px}
+  .ds-nav-link{display:block;padding:6px 8px;font-size:13px;color:#6b7280;border-radius:6px;text-decoration:none;transition:background .15s,color .15s}
+  .ds-nav-link:hover{background:#f5f3ff;color:#5e2d91}
+  .ds-nav-link.active{background:#f5f3ff;color:#5e2d91;font-weight:600}
+
+  /* Content sections */
+  .ds-section{padding:64px 56px;border-bottom:1px solid #f3f4f6;max-width:960px}
+  .ds-section:last-child{border-bottom:none}
+  .ds-section-title{font-size:28px;font-weight:800;color:#170926;letter-spacing:-.03em;margin-bottom:6px}
+  .ds-section-sub{font-size:15px;color:#6b7280;line-height:1.6;margin-bottom:40px;max-width:560px}
+
+  /* Component group */
+  .ds-group-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin-bottom:12px;margin-top:36px}
+  .ds-group-label:first-child{margin-top:0}
+
+  /* Canvas (live preview area) */
+  .ds-canvas{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px;margin-bottom:8px}
+  .ds-canvas-dark{background:linear-gradient(135deg,#0f0b2e 0%,#1e1b4b 100%);border:1px solid rgba(255,255,255,.06)}
+  .ds-canvas-muted{background:#f9fafb}
+
+  /* Code block */
+  .ds-code{font-family:'JetBrains Mono',monospace;font-size:12px;background:#f8f7ff;border:1px solid #ede9fe;border-radius:8px;padding:12px 16px;color:#4a2373;line-height:1.7;overflow-x:auto;margin-bottom:24px;white-space:pre}
+
+  /* Callout boxes */
+  .ds-callout{padding:14px 18px;border-radius:10px;font-size:13px;line-height:1.6;margin-bottom:16px;display:flex;gap:10px}
+  .ds-callout-warn{background:#fffbeb;border:1px solid #fcd34d;color:#92400e}
+  .ds-callout-info{background:#f0f9ff;border:1px solid #bae6fd;color:#0c4a6e}
+  .ds-callout-error{background:#fef2f2;border:1px solid #fecaca;color:#7f1d1d}
+  .ds-callout-ok{background:#f0fdf4;border:1px solid #bbf7d0;color:#14532d}
+
+  /* Color swatch */
+  .swatch{display:flex;flex-direction:column;gap:0;border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,.06);flex:1;min-width:0}
+  .swatch-block{height:72px;width:100%}
+  .swatch-info{background:#fff;padding:10px 12px;border-top:1px solid rgba(0,0,0,.06)}
+  .swatch-name{font-size:11px;font-weight:600;color:#374151}
+  .swatch-hex{font-size:11px;font-family:'JetBrains Mono',monospace;color:#6b7280;margin-top:2px}
+
+  /* Token row */
+  .ds-token-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f3f4f6;font-size:13px}
+  .ds-token-row:last-child{border-bottom:none}
+  .ds-token-name{font-family:'JetBrains Mono',monospace;color:#5e2d91;font-size:12px;flex:0 0 220px}
+  .ds-token-value{color:#374151;flex:0 0 120px}
+  .ds-token-desc{color:#9ca3af;flex:1}
+  .ds-token-preview{flex:0 0 40px;display:flex;align-items:center;justify-content:flex-end}
+
+  /* Type specimen */
+  .ds-type-row{display:flex;align-items:baseline;gap:24px;padding:20px 0;border-bottom:1px solid #f3f4f6}
+  .ds-type-row:last-child{border-bottom:none}
+  .ds-type-meta{flex:0 0 160px;font-size:11px;color:#9ca3af;font-family:'JetBrains Mono',monospace;line-height:1.8}
+
+  /* Do/don't */
+  .ds-do-dont{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+  .ds-do{border:1.5px solid #86efac;border-radius:12px;overflow:hidden}
+  .ds-dont{border:1.5px solid #fca5a5;border-radius:12px;overflow:hidden}
+  .ds-do-header{background:#f0fdf4;padding:8px 16px;font-size:11px;font-weight:700;color:#15803d;letter-spacing:.08em;text-transform:uppercase}
+  .ds-dont-header{background:#fef2f2;padding:8px 16px;font-size:11px;font-weight:700;color:#dc2626;letter-spacing:.08em;text-transform:uppercase}
+  .ds-do-body,.ds-dont-body{padding:20px;background:#fff}
+
+  /* Shadow samples */
+  .shadow-sample{background:#fff;border-radius:12px;padding:20px 24px;font-size:13px}
+
+  /* Radius samples */
+  .radius-sample{background:#ede9fe;height:56px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#5e2d91}
+
+  /* Chip */
+  .ds-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:.04em}
+
+  /* Spacing ruler */
+  .space-ruler{display:flex;align-items:flex-end;gap:12px}
+  .space-block{background:#ede9fe;border-radius:4px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;font-size:10px;color:#7c3aad;font-weight:600;transition:background .2s}
+  .space-block:hover{background:#ddd6fe}
+
+  /* Motion sample */
+  .motion-box{width:48px;height:48px;border-radius:10px;background:#5e2d91;cursor:pointer;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+  .motion-box:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(94,45,145,.25)}
+
+  /* Scrollspy active */
+  .scrollspy-active .ds-nav-link{background:#f5f3ff;color:#5e2d91;font-weight:600}
+</style>
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="ds-sidebar">
+  <div style="padding:20px 16px 0">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+      <div style="width:28px;height:28px;background:linear-gradient(135deg,#5e2d91,#7c3aed);border-radius:7px"></div>
+      <span style="font-size:13px;font-weight:700;color:#170926">Rainbow DS</span>
+    </div>
+    <div style="font-size:11px;color:#9ca3af;padding-left:36px">v1.0 · 2026</div>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-label">Overview</div>
+    <a href="#principles" class="ds-nav-link">Design Principles</a>
+    <a href="#brand" class="ds-nav-link">Brand Identity</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-label">Foundations</div>
+    <a href="#colors" class="ds-nav-link">Colors</a>
+    <a href="#typography" class="ds-nav-link">Typography</a>
+    <a href="#spacing" class="ds-nav-link">Spacing</a>
+    <a href="#radius" class="ds-nav-link">Border Radius</a>
+    <a href="#shadows" class="ds-nav-link">Shadows</a>
+    <a href="#motion" class="ds-nav-link">Motion</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-label">Components</div>
+    <a href="#buttons" class="ds-nav-link">Buttons</a>
+    <a href="#badges" class="ds-nav-link">Badges & Pills</a>
+    <a href="#inputs" class="ds-nav-link">Form Inputs</a>
+    <a href="#cards" class="ds-nav-link">Cards</a>
+    <a href="#navigation" class="ds-nav-link">Navigation</a>
+    <a href="#stepper" class="ds-nav-link">Step Indicator</a>
+    <a href="#tabs" class="ds-nav-link">Pill Tabs</a>
+    <a href="#faq" class="ds-nav-link">FAQ</a>
+    <a href="#solution-cards" class="ds-nav-link">Solution Cards</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-label">Patterns</div>
+    <a href="#hero" class="ds-nav-link">Hero Section</a>
+    <a href="#stats" class="ds-nav-link">Stats Section</a>
+    <a href="#pricing" class="ds-nav-link">Pricing Cards</a>
+    <a href="#cta-banner" class="ds-nav-link">CTA Banner</a>
+    <a href="#marquee" class="ds-nav-link">Trust Marquee</a>
+    <a href="#footer-pattern" class="ds-nav-link">Footer</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-label">Guidance</div>
+    <a href="#issues" class="ds-nav-link" style="color:#dc2626">⚠ Issues to Fix</a>
+    <a href="#dos-donts" class="ds-nav-link">Do / Don't</a>
+  </div>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="ds-content">
+
+  <!-- ─── PRINCIPLES ─── -->
+  <section id="principles" class="ds-section">
+    <div class="ds-chip" style="background:#f5f3ff;color:#5e2d91;border:1px solid #ddd6fe;margin-bottom:16px">Design System · Rainbow by ALE</div>
+    <h1 class="ds-section-title">Design Principles</h1>
+    <p class="ds-section-sub">The four values that govern every decision — from micro-interactions to page layout.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
+      <div style="padding:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-left:3px solid #5e2d91">
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">01 — Clarity over decoration</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6">Every visual element must earn its place. Glassmorphism and gradients create depth, not noise. If removing something makes the page cleaner, remove it.</div>
+      </div>
+      <div style="padding:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-left:3px solid #CF0072">
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">02 — Motion with purpose</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6">Animation guides attention, confirms state, and signals hierarchy. Never animate for entertainment. Spring easing <code style="font-size:11px;background:#f5f3ff;padding:1px 4px;border-radius:4px">cubic-bezier(.16,1,.3,1)</code> is our signature curve.</div>
+      </div>
+      <div style="padding:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-left:3px solid #0085CA">
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">03 — Trust through consistency</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6">Enterprise buyers make decisions on perceived reliability. Consistent spacing, type, and color patterns signal craftsmanship. Inconsistency erodes confidence.</div>
+      </div>
+      <div style="padding:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-left:3px solid #34B233">
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">04 — Accessible by default</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6">Contrast ratios, focus states, and keyboard navigation are non-negotiable. AA compliance is the floor, not the ceiling.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BRAND ─── -->
+  <section id="brand" class="ds-section">
+    <h2 class="ds-section-title">Brand Identity</h2>
+    <p class="ds-section-sub">Rainbow is a B2B SaaS platform by Alcatel-Lucent Enterprise. The brand voice is premium, clear, and human — never cold or corporate.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="ds-group-label">Personality</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span class="ds-chip" style="background:#f5f3ff;color:#5e2d91;border:1px solid #ddd6fe">Premium</span>
+          <span class="ds-chip" style="background:#f5f3ff;color:#5e2d91;border:1px solid #ddd6fe">Trustworthy</span>
+          <span class="ds-chip" style="background:#f5f3ff;color:#5e2d91;border:1px solid #ddd6fe">Modern</span>
+          <span class="ds-chip" style="background:#fdf2f8;color:#CF0072;border:1px solid #f9a8d4">Friendly</span>
+          <span class="ds-chip" style="background:#f0f9ff;color:#0085CA;border:1px solid #bae6fd">Innovative</span>
+        </div>
+      </div>
+      <div>
+        <div class="ds-group-label">Visual Language</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.8">
+          Glassmorphism surfaces · Radial gradient blobs · Spring-eased motion · Purple-to-indigo gradients · Tight letter-spacing on headings
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── COLORS ─── -->
+  <section id="colors" class="ds-section">
+    <h2 class="ds-section-title">Colors</h2>
+    <p class="ds-section-sub">All color values extracted from the live codebase. A critical inconsistency exists between two purple values — see the callout below.</p>
+
+    <div class="ds-callout ds-callout-error">
+      <span>⚠</span>
+      <div><strong>Inconsistency detected:</strong> Two different values are used as "brand primary purple" — <code style="font-family:monospace;font-size:11px">#5e2d91</code> (Tailwind config in index.html, CSS file, btn-cta-primary) and <code style="font-family:monospace;font-size:11px">#7c3aed</code> (Tailwind config in tarifs.html/signup.html, glass borders, glow shadows). <strong>Resolution: adopt #5e2d91 as the single brand.500 token and use #7c3aed only as an interactive/accent variant (brand.vibrant).</strong></div>
+    </div>
+
+    <div class="ds-group-label">Brand Purple Scale</div>
+    <div style="display:flex;gap:8px;margin-bottom:24px">
+      <div class="swatch"><div class="swatch-block" style="background:#f5f3ff"></div><div class="swatch-info"><div class="swatch-name">brand.50</div><div class="swatch-hex">#f5f3ff</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#ede9fe"></div><div class="swatch-info"><div class="swatch-name">brand.100</div><div class="swatch-hex">#ede9fe</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#ddd6fe"></div><div class="swatch-info"><div class="swatch-name">brand.200</div><div class="swatch-hex">#ddd6fe</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#c4b5fd"></div><div class="swatch-info"><div class="swatch-name">brand.300</div><div class="swatch-hex">#c4b5fd</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#a78bfa"></div><div class="swatch-info"><div class="swatch-name">brand.400</div><div class="swatch-hex">#a78bfa</div></div></div>
+      <div class="swatch" style="box-shadow:0 0 0 2px #5e2d91"><div class="swatch-block" style="background:#5e2d91"></div><div class="swatch-info"><div class="swatch-name">brand.500 ★</div><div class="swatch-hex">#5e2d91</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#4a2373"></div><div class="swatch-info"><div class="swatch-name">brand.600</div><div class="swatch-hex">#4a2373</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#3c1c5e"></div><div class="swatch-info"><div class="swatch-name">brand.700</div><div class="swatch-hex">#3c1c5e</div></div></div>
+    </div>
+
+    <div class="ds-group-label">Interactive / Vibrant Variants</div>
+    <div style="display:flex;gap:8px;margin-bottom:24px">
+      <div class="swatch"><div class="swatch-block" style="background:#7c3aed"></div><div class="swatch-info"><div class="swatch-name">brand.vibrant</div><div class="swatch-hex">#7c3aed</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#7c3aad"></div><div class="swatch-info"><div class="swatch-name">brand.purpleLight</div><div class="swatch-hex">#7c3aad</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#6B5CE7"></div><div class="swatch-info"><div class="swatch-name">compliance.accent</div><div class="swatch-hex">#6B5CE7</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#4f46e5"></div><div class="swatch-info"><div class="swatch-name">indigo.600</div><div class="swatch-hex">#4f46e5</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#6366f1"></div><div class="swatch-info"><div class="swatch-name">indigo.400</div><div class="swatch-hex">#6366f1</div></div></div>
+    </div>
+
+    <div class="ds-group-label">Navy / Dark Backgrounds</div>
+    <div style="display:flex;gap:8px;margin-bottom:24px">
+      <div class="swatch"><div class="swatch-block" style="background:#0f0b2e"></div><div class="swatch-info"><div class="swatch-name">dark.deepest</div><div class="swatch-hex">#0f0b2e</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#151936"></div><div class="swatch-info"><div class="swatch-name">dark.stats</div><div class="swatch-hex">#151936</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#170926"></div><div class="swatch-info"><div class="swatch-name">dark.cta-text</div><div class="swatch-hex">#170926</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#1e1b4b"></div><div class="swatch-info"><div class="swatch-name">navy.900</div><div class="swatch-hex">#1e1b4b</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#312e81"></div><div class="swatch-info"><div class="swatch-name">navy.800</div><div class="swatch-hex">#312e81</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#3730a3"></div><div class="swatch-info"><div class="swatch-name">navy.700</div><div class="swatch-hex">#3730a3</div></div></div>
+    </div>
+
+    <div class="ds-group-label">Accent Colors (Laurenn palette)</div>
+    <div style="display:flex;gap:8px;margin-bottom:24px">
+      <div class="swatch"><div class="swatch-block" style="background:#FF4500"></div><div class="swatch-info"><div class="swatch-name">laurenn.orange</div><div class="swatch-hex">#FF4500</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#CF0072"></div><div class="swatch-info"><div class="swatch-name">laurenn.pink</div><div class="swatch-hex">#CF0072</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#0085CA"></div><div class="swatch-info"><div class="swatch-name">laurenn.blue</div><div class="swatch-hex">#0085CA</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#34B233"></div><div class="swatch-info"><div class="swatch-name">laurenn.green</div><div class="swatch-hex">#34B233</div></div></div>
+    </div>
+
+    <div class="ds-group-label">Neutral Grays</div>
+    <div style="display:flex;gap:8px;margin-bottom:24px">
+      <div class="swatch"><div class="swatch-block" style="background:#111827"></div><div class="swatch-info"><div class="swatch-name">gray.900</div><div class="swatch-hex">#111827</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#374151"></div><div class="swatch-info"><div class="swatch-name">gray.700</div><div class="swatch-hex">#374151</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#4b5563"></div><div class="swatch-info"><div class="swatch-name">gray.600</div><div class="swatch-hex">#4b5563</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#6b7280"></div><div class="swatch-info"><div class="swatch-name">gray.500</div><div class="swatch-hex">#6b7280</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#9ca3af"></div><div class="swatch-info"><div class="swatch-name">gray.400</div><div class="swatch-hex">#9ca3af</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#d1d5db"></div><div class="swatch-info"><div class="swatch-name">gray.300</div><div class="swatch-hex">#d1d5db</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#e5e7eb"></div><div class="swatch-info"><div class="swatch-name">gray.200</div><div class="swatch-hex">#e5e7eb</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#f3f4f6"></div><div class="swatch-info"><div class="swatch-name">gray.100</div><div class="swatch-hex">#f3f4f6</div></div></div>
+    </div>
+
+    <div class="ds-group-label">Semantic</div>
+    <div style="display:flex;gap:8px">
+      <div class="swatch"><div class="swatch-block" style="background:#10b981"></div><div class="swatch-info"><div class="swatch-name">success</div><div class="swatch-hex">#10b981</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#ef4444"></div><div class="swatch-info"><div class="swatch-name">error</div><div class="swatch-hex">#ef4444</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#f59e0b"></div><div class="swatch-info"><div class="swatch-name">warning</div><div class="swatch-hex">#f59e0b</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#3b82f6"></div><div class="swatch-info"><div class="swatch-name">info</div><div class="swatch-hex">#3b82f6</div></div></div>
+    </div>
+  </section>
+
+  <!-- ─── TYPOGRAPHY ─── -->
+  <section id="typography" class="ds-section">
+    <h2 class="ds-section-title">Typography</h2>
+    <p class="ds-section-sub">Inter is the sole typeface. Weights 300–800 are loaded. Tight letter-spacing (<code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">-0.03em</code>) on all display and headline sizes.</p>
+
+    <div class="ds-canvas" style="padding:40px">
+      <div class="ds-type-row">
+        <div class="ds-type-meta">Display<br>3.25rem · 800<br>ls: -0.03em · lh: 1.15</div>
+        <div style="font-size:3.25rem;font-weight:800;color:#170926;letter-spacing:-.03em;line-height:1.15">Start for free today</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">H1<br>2.75rem · 800<br>ls: -0.03em · lh: 1.15</div>
+        <div style="font-size:2.75rem;font-weight:800;color:#170926;letter-spacing:-.03em;line-height:1.15">Rainbow Webinar</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">H2<br>2rem · 800<br>ls: -0.03em · lh: 1.2</div>
+        <div style="font-size:2rem;font-weight:800;color:#170926;letter-spacing:-.03em;line-height:1.2">Simple, transparent pricing</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">H3<br>1.5rem · 700<br>ls: -0.02em · lh: 1.3</div>
+        <div style="font-size:1.5rem;font-weight:700;color:#170926;letter-spacing:-.02em;line-height:1.3">Professional Plan</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">H4<br>1.125rem · 700<br>ls: -0.01em · lh: 1.4</div>
+        <div style="font-size:1.125rem;font-weight:700;color:#170926;letter-spacing:-.01em;line-height:1.4">Feature title</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">Body Large<br>1.0625rem · 400<br>lh: 1.65</div>
+        <div style="font-size:1.0625rem;color:#4b5563;line-height:1.65;max-width:480px">Cloud communication platform for enterprises of any size. Secure, scalable, and built for the modern workplace.</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">Body<br>0.9375rem · 400<br>lh: 1.65</div>
+        <div style="font-size:0.9375rem;color:#4b5563;line-height:1.65;max-width:480px">Up to 250 participants per webinar with cloud recording included in every professional plan.</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">Small<br>0.875rem · 400<br>lh: 1.6</div>
+        <div style="font-size:0.875rem;color:#6b7280;line-height:1.6">Secondary copy and supporting text for cards and form helpers.</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">Caption<br>0.8125rem · 500<br>lh: 1.5</div>
+        <div style="font-size:0.8125rem;font-weight:500;color:#9ca3af;line-height:1.5">Nav items · Dropdown labels · Helper text</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">Label / Tag<br>0.6875rem · 700<br>ls: +0.12em · uppercase</div>
+        <div style="font-size:0.6875rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af">Section labels · Category tags</div>
+      </div>
+    </div>
+
+    <div class="ds-group-label">Gradient Text</div>
+    <div class="ds-canvas">
+      <div class="gradient-text" style="font-size:2rem;font-weight:800;letter-spacing:-.03em;margin-bottom:8px">Unified platform</div>
+      <div class="hero-badge-gradient" style="font-size:1.25rem;font-weight:700;letter-spacing:-.02em">Rainbow — by ALE</div>
+    </div>
+    <div class="ds-code">.gradient-text {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-badge-gradient {
+  background: linear-gradient(135deg, #5e2d91, #CF0072);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}</div>
+  </section>
+
+  <!-- ─── SPACING ─── -->
+  <section id="spacing" class="ds-section">
+    <h2 class="ds-section-title">Spacing</h2>
+    <p class="ds-section-sub">Tailwind's 4px base grid. Section vertical rhythm is consistently <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">py-20</code> (80px) to <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">py-28</code> (112px).</p>
+
+    <div class="ds-canvas ds-canvas-muted">
+      <div class="space-ruler" style="align-items:flex-end;gap:10px">
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:4px;background:#ede9fe"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">1<br>4px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:8px;background:#ede9fe"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">2<br>8px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:12px;background:#ddd6fe"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">3<br>12px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:16px;background:#ddd6fe"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">4<br>16px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:24px;background:#c4b5fd"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">6<br>24px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:32px;background:#c4b5fd"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">8<br>32px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:48px;background:#a78bfa"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">12<br>48px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:64px;background:#a78bfa"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">16<br>64px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:80px;background:#7c3aed;opacity:.6"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">20<br>80px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:96px;background:#5e2d91;opacity:.5"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">24<br>96px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:112px;background:#5e2d91;opacity:.7"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">28<br>112px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:128px;background:#5e2d91;opacity:.9"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">32<br>128px</div></div>
+      </div>
+    </div>
+
+    <div class="ds-group-label" style="margin-top:24px">Container widths</div>
+    <div class="ds-token-row"><span class="ds-token-name">max-w-lg</span><span class="ds-token-value">512px</span><span class="ds-token-desc">Auth pages (login, register)</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">max-w-4xl</span><span class="ds-token-value">896px</span><span class="ds-token-desc">Narrow content sections</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">max-w-6xl</span><span class="ds-token-value">1152px</span><span class="ds-token-desc">Primary page container (nav, most sections)</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">max-w-7xl</span><span class="ds-token-value">1280px</span><span class="ds-token-desc">Wide sections (expand cards)</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">px-6</span><span class="ds-token-value">24px</span><span class="ds-token-desc">Default horizontal page padding</span></div>
+  </section>
+
+  <!-- ─── BORDER RADIUS ─── -->
+  <section id="radius" class="ds-section">
+    <h2 class="ds-section-title">Border Radius</h2>
+    <p class="ds-section-sub">Two radius systems coexist — Tailwind utilities and custom pixel values in CSS. These should be unified into a single token set.</p>
+
+    <div class="ds-callout ds-callout-warn">
+      <span>⚠</span>
+      <div>Inconsistency: Tailwind uses <code style="font-family:monospace;font-size:11px">rounded-xl</code> (12px) while custom CSS uses <code style="font-family:monospace;font-size:11px">border-radius: 20px</code> and <code style="font-family:monospace;font-size:11px">24px</code>. Standardize around the scale below.</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:12px">
+      <div><div class="radius-sample" style="border-radius:4px">4px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">rounded<br>sm</div></div>
+      <div><div class="radius-sample" style="border-radius:8px">8px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">rounded-lg<br>card-inner</div></div>
+      <div><div class="radius-sample" style="border-radius:10px">10px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">rounded-btn<br>button</div></div>
+      <div><div class="radius-sample" style="border-radius:12px">12px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">rounded-xl<br>btn-cta</div></div>
+      <div><div class="radius-sample" style="border-radius:16px">16px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">rounded-2xl<br>product-card</div></div>
+      <div><div class="radius-sample" style="border-radius:20px">20px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">stat-card<br>compliance</div></div>
+      <div><div class="radius-sample" style="border-radius:24px">24px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">cta-banner<br>sp-preview</div></div>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:12px;align-items:center">
+      <div style="flex:1;background:#ede9fe;height:48px;border-radius:9999px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#5e2d91">rounded-full · ∞</div>
+      <div style="font-size:11px;color:#9ca3af;flex:0 0 180px">Badges, pills, lang switcher, scrollbar thumbs</div>
+    </div>
+  </section>
+
+  <!-- ─── SHADOWS ─── -->
+  <section id="shadows" class="ds-section">
+    <h2 class="ds-section-title">Shadows</h2>
+    <p class="ds-section-sub">All shadows use the brand purple tint <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">rgba(124,58,237,…)</code> rather than pure black. This keeps the palette cohesive.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+      <div>
+        <div class="shadow-sample" style="box-shadow:0 1px 6px rgba(0,0,0,.05)">shadow-xs</div>
+        <div style="font-size:10px;font-family:monospace;color:#9ca3af;margin-top:8px;padding:0 4px">0 1px 6px rgba(0,0,0,.05)</div>
+        <div style="font-size:11px;color:#6b7280;padding:0 4px">Form inputs (resting)</div>
+      </div>
+      <div>
+        <div class="shadow-sample" style="box-shadow:0 4px 16px rgba(124,58,237,.04)">shadow-sm</div>
+        <div style="font-size:10px;font-family:monospace;color:#9ca3af;margin-top:8px;padding:0 4px">0 4px 16px rgba(124,58,237,.04)</div>
+        <div style="font-size:11px;color:#6b7280;padding:0 4px">FAQ hover, lang dropdown</div>
+      </div>
+      <div>
+        <div class="shadow-sample" style="box-shadow:0 8px 32px rgba(0,0,0,.03),inset 0 1px 0 rgba(255,255,255,.6)">glass-card</div>
+        <div style="font-size:10px;font-family:monospace;color:#9ca3af;margin-top:8px;padding:0 4px">0 8px 32px rgba(0,0,0,.03)<br>+ inset 0 1px 0 rgba(255,255,255,.6)</div>
+        <div style="font-size:11px;color:#6b7280;padding:0 4px">Glass morphism cards</div>
+      </div>
+      <div>
+        <div class="shadow-sample" style="box-shadow:0 20px 40px rgba(124,58,237,.08)">shadow-md</div>
+        <div style="font-size:10px;font-family:monospace;color:#9ca3af;margin-top:8px;padding:0 4px">0 20px 40px rgba(124,58,237,.08)</div>
+        <div style="font-size:11px;color:#6b7280;padding:0 4px">hover-lift raised state</div>
+      </div>
+      <div>
+        <div class="shadow-sample" style="box-shadow:0 32px 64px rgba(124,58,237,.08)">shadow-lg</div>
+        <div style="font-size:10px;font-family:monospace;color:#9ca3af;margin-top:8px;padding:0 4px">0 32px 64px rgba(124,58,237,.08)</div>
+        <div style="font-size:11px;color:#6b7280;padding:0 4px">Product card hover</div>
+      </div>
+      <div>
+        <div class="shadow-sample" style="box-shadow:0 4px 20px rgba(124,58,237,.25)">shadow-glow</div>
+        <div style="font-size:10px;font-family:monospace;color:#9ca3af;margin-top:8px;padding:0 4px">0 4px 20px rgba(124,58,237,.25)</div>
+        <div style="font-size:11px;color:#6b7280;padding:0 4px">Primary CTA button glow</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MOTION ─── -->
+  <section id="motion" class="ds-section">
+    <h2 class="ds-section-title">Motion</h2>
+    <p class="ds-section-sub">One easing curve governs all interactive motion. Durations follow a clear scale. Hover over the box below to see the signature spring.</p>
+
+    <div class="ds-group-label">Signature Easing</div>
+    <div class="ds-canvas" style="display:flex;align-items:center;gap:32px;padding:40px">
+      <div class="motion-box"></div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:#170926;margin-bottom:4px">Spring — cubic-bezier(.16, 1, .3, 1)</div>
+        <div style="font-size:12px;color:#6b7280;line-height:1.7">Used on: hover-lift, product-card, testimonial-card, expand-card, pill-tab slider, faq-item, compliance-card-arrow, lang-dropdown. This single curve unifies all hover and transition motion across the system.</div>
+      </div>
+    </div>
+
+    <div class="ds-group-label">Duration Scale</div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.fast</span><span class="ds-token-value">0.15s</span><span class="ds-token-desc">Button hover shadow/transform (btn-cta-primary)</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.base</span><span class="ds-token-value">0.2s</span><span class="ds-token-desc">Nav chevron rotate, color transitions, lang switcher</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.moderate</span><span class="ds-token-value">0.3s</span><span class="ds-token-desc">glass-nav scroll effect, hover-lift, cert-badge</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.slow</span><span class="ds-token-value">0.4s</span><span class="ds-token-desc">FAQ answer reveal, pill-tab slider, tab panel transition</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.xslow</span><span class="ds-token-value">0.6–0.7s</span><span class="ds-token-desc">Scroll reveal (animate-on-scroll), stagger animations</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.ambient</span><span class="ds-token-value">3–9s</span><span class="ds-token-desc">glowPulse (3s), float (6s), ctaShine (6s), hero_slide (9s)</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.marquee</span><span class="ds-token-value">30s</span><span class="ds-token-desc">Trust logo infinite scroll</span></div>
+
+    <div class="ds-group-label" style="margin-top:24px">Named Keyframes</div>
+    <div class="ds-code">glowPulse   3s  ease-in-out  infinite   /* CTA button ambient glow */
+fadeInUp    0.7s ease-out  once       /* Scroll reveal entry */
+float       6s  ease-in-out infinite   /* Hero image levitation */
+marquee     30s linear      infinite   /* Trust logo strip */
+hero_slide  9s  ease-in-out infinite   /* Word shuffler */
+ctaShine    6s  ease-in-out infinite   /* CTA banner radial highlight */
+progressGrow 6s linear     forwards   /* Platform tab progress bar */
+fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
+
+    <div class="ds-group-label">Scroll Reveal</div>
+    <div class="ds-code">/* Add class, then observe with IntersectionObserver */
+.animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity .7s ease-out, transform .7s ease-out; }
+.animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+/* Staggered grid reveal */
+.animate-stagger > * { opacity: 0; transform: translateY(20px); }
+.animate-stagger.visible > *:nth-child(n) { animation: fadeInUpStagger .6s ease-out forwards; animation-delay: calc(n * .1s); }</div>
+  </section>
+
+  <!-- ─── BUTTONS ─── -->
+  <section id="buttons" class="ds-section">
+    <h2 class="ds-section-title">Buttons</h2>
+    <p class="ds-section-sub">Two systems exist in parallel — CSS classes (<code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.btn-cta-*</code>) and Tailwind inline classes. The CSS class system should be the canonical one.</p>
+
+    <div class="ds-callout ds-callout-warn">
+      <span>⚠</span>
+      <div>Tailwind inline buttons (e.g. <code style="font-family:monospace;font-size:11px">bg-brand-500 hover:bg-brand-600 rounded-btn</code>) and CSS class buttons (<code style="font-family:monospace;font-size:11px">.btn-cta-primary</code>) produce slightly different results. Migrate to <code style="font-family:monospace;font-size:11px">.btn-cta-primary / .btn-cta-secondary</code> everywhere for consistency.</div>
+    </div>
+
+    <div class="ds-group-label">Primary</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+      <a href="#" class="btn-cta-primary">Essai gratuit</a>
+      <a href="#" class="btn-cta-primary glow-pulse">With glow pulse</a>
+      <a href="#" class="btn-cta-primary" style="opacity:.4;cursor:not-allowed">Disabled</a>
+    </div>
+    <div class="ds-code">&lt;a href="/tarifs" class="btn-cta-primary"&gt;Essai gratuit&lt;/a&gt;
+&lt;a href="/tarifs" class="btn-cta-primary glow-pulse"&gt;Essai gratuit&lt;/a&gt; /* hero CTA only */</div>
+
+    <div class="ds-group-label">Secondary</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+      <a href="#" class="btn-cta-secondary">Voir une démo</a>
+      <a href="#" class="btn-cta-secondary" style="display:inline-flex;align-items:center;gap:8px"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Regarder la vidéo</a>
+    </div>
+    <div class="ds-code">&lt;a href="/support" class="btn-cta-secondary"&gt;Voir une démo&lt;/a&gt;</div>
+
+    <div class="ds-group-label">Nav-level buttons (Tailwind)</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+      <a href="#" class="px-5 py-2.5 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-sm font-semibold transition-colors">Se connecter</a>
+      <a href="#" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all" style="background:#5e2d91">Essai gratuit</a>
+    </div>
+    <div class="ds-code">&lt;a class="px-5 py-2.5 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-sm font-semibold"&gt;Se connecter&lt;/a&gt;
+&lt;a class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md"&gt;Essai gratuit&lt;/a&gt;</div>
+
+    <div class="ds-group-label">Pricing card buttons</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+      <a href="#" style="display:inline-block;padding:14px 24px;border-radius:10px;font-weight:700;font-size:14px;border:2px solid #1e1b4b;color:#1e1b4b;text-decoration:none;transition:all .2s" onmouseover="this.style.background='#1e1b4b';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='#1e1b4b'">Commencer</a>
+      <a href="#" style="display:inline-block;padding:14px 24px;border-radius:10px;font-weight:700;font-size:14px;background:#1e1b4b;color:#fff;text-decoration:none">Essai gratuit 14 jours</a>
+      <a href="#" style="display:inline-block;padding:14px 24px;border-radius:10px;font-weight:600;font-size:14px;border:1px solid #e5e7eb;color:#1e1b4b;text-decoration:none">Contacter les ventes</a>
+    </div>
+  </section>
+
+  <!-- ─── BADGES ─── -->
+  <section id="badges" class="ds-section">
+    <h2 class="ds-section-title">Badges & Pills</h2>
+    <p class="ds-section-sub">Used for section labels, category tags, status indicators, and product identifiers.</p>
+
+    <div class="ds-group-label">Section Header Badges</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+      <div class="security-certs-header-badge">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <span>Enterprise Security</span>
+      </div>
+      <div class="testimonials-header-badge">Clients &amp; Success Stories</div>
+    </div>
+    <div class="ds-code">/* Section header badge (security / testimonials) */
+&lt;div class="security-certs-header-badge"&gt;...&lt;/div&gt;
+&lt;div class="testimonials-header-badge"&gt;...&lt;/div&gt;</div>
+
+    <div class="ds-group-label">Inline Pills</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+      <span class="ds-chip" style="background:#f5f3ff;color:#5e2d91;border:1px solid #ddd6fe">Rainbow Webinar</span>
+      <span class="ds-chip" style="background:#fdf2f8;color:#CF0072;border:1px solid #f9a8d4">Complet</span>
+      <span class="ds-chip" style="background:#f0f9ff;color:#0085CA;border:1px solid #bae6fd">Beta</span>
+      <span class="ds-chip" style="background:#f0fdf4;color:#34B233;border:1px solid #bbf7d0">Active</span>
+      <span class="ds-chip" style="background:#fff7ed;color:#FF4500;border:1px solid #fed7aa">Enterprise</span>
+    </div>
+
+    <div class="ds-group-label">Product Range Tags</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <span class="product-range-tag" style="color:#43379e;border-color:#43379e;background:#f0eeff">Webinar</span>
+      <span class="product-range-tag" style="color:#6e264a;border-color:#6e264a;background:#fdf2f8">Collaboration</span>
+      <span class="product-range-tag" style="color:#1e1b4b;border-color:#1e1b4b;background:#f0f0f8">Enterprise</span>
+    </div>
+  </section>
+
+  <!-- ─── FORM INPUTS ─── -->
+  <section id="inputs" class="ds-section">
+    <h2 class="ds-section-title">Form Inputs</h2>
+    <p class="ds-section-sub">Glass-style inputs with a focus ring using the brand purple. Consistent on all auth pages.</p>
+
+    <div class="ds-canvas">
+      <div style="max-width:400px;display:flex;flex-direction:column;gap:20px">
+        <div>
+          <label style="font-size:14px;font-weight:500;color:#6b7280;display:block;margin-bottom:6px">Email Address</label>
+          <div class="glass-input rounded-btn" style="padding:2px">
+            <input type="email" placeholder="you@company.com" style="width:100%;background:transparent;font-size:15px;padding:14px 16px;border-radius:10px;outline:none;color:#111827;font-family:Inter,sans-serif">
+          </div>
+        </div>
+        <div>
+          <label style="font-size:14px;font-weight:500;color:#6b7280;display:block;margin-bottom:6px">Password</label>
+          <div class="glass-input rounded-btn" style="padding:2px">
+            <input type="password" placeholder="Create a strong password" style="width:100%;background:transparent;font-size:15px;padding:14px 16px;border-radius:10px;outline:none;color:#111827;font-family:Inter,sans-serif">
+          </div>
+        </div>
+        <div>
+          <label style="font-size:14px;font-weight:500;color:#6b7280;display:block;margin-bottom:6px">Company Size</label>
+          <div class="glass-input rounded-btn" style="padding:2px">
+            <select style="width:100%;background:transparent;font-size:14px;padding:14px 16px;border-radius:10px;outline:none;color:#111827;font-family:Inter,sans-serif;appearance:none;background-image:url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E);background-repeat:no-repeat;background-position:right 12px center">
+              <option value="">Select size</option>
+              <option>1–10</option>
+              <option>11–50</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">/* Resting */
+.glass-input { border: 1px solid #e5e7eb; background: #fff; border-radius: 10px; }
+/* Focus */
+.glass-input:focus-within { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,.12); }</div>
+  </section>
+
+  <!-- ─── CARDS ─── -->
+  <section id="cards" class="ds-section">
+    <h2 class="ds-section-title">Cards</h2>
+    <p class="ds-section-sub">Five distinct card types, each with specific surface treatments and motion behaviors.</p>
+
+    <div class="ds-group-label">Glass Card — .glass-card</div>
+    <div class="ds-canvas">
+      <div class="glass-card" style="padding:24px;border-radius:12px;max-width:320px">
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">Feature Card</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6">Backdrop blur, white/70, subtle brand border. Used for trust signals, feature highlights, and testimonials.</div>
+      </div>
+    </div>
+    <div class="ds-code">.glass-card {
+  background: rgba(255,255,255,.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(124,58,237,.06);
+  box-shadow: 0 8px 32px rgba(0,0,0,.03), inset 0 1px 0 rgba(255,255,255,.6);
+}</div>
+
+    <div class="ds-group-label">Stat Card — .stat-card (dark surface)</div>
+    <div class="ds-canvas ds-canvas-dark">
+      <div class="stat-card" style="max-width:220px;text-align:center">
+        <div style="font-size:2.5rem;font-weight:800;color:#d5bcf8;letter-spacing:-.03em">10K+</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:8px">Organizations worldwide</div>
+      </div>
+    </div>
+    <div class="ds-code">.stat-card {
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  padding: 32px;
+}</div>
+
+    <div class="ds-group-label">Product Range Card — .product-range-card</div>
+    <div class="ds-canvas" style="padding:24px">
+      <div class="product-range-card" style="max-width:300px">
+        <div class="product-range-card-image" style="background:#f5f3ff;display:flex;align-items:center;justify-content:center;height:120px">
+          <div style="font-size:40px">🎥</div>
+        </div>
+        <div class="product-range-card-content">
+          <div class="product-range-card-tags"><span class="product-range-tag" style="color:#43379e;border-color:#43379e;background:#f0eeff">Webinar</span></div>
+          <div class="product-range-card-title">Rainbow Webinar</div>
+          <div class="product-range-card-subtitle">Professional webinar platform</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-group-label">FAQ Card — .faq-card</div>
+    <div class="ds-canvas">
+      <div style="max-width:560px">
+        <div class="faq-card open" style="border-color:#5e2d91">
+          <button class="faq-card-button">
+            <span class="faq-card-question">Can I host up to 1,000 participants?</span>
+            <svg class="faq-card-chevron" style="transform:rotate(180deg)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-card-answer-wrapper" style="max-height:200px">
+            <div class="faq-card-answer-inner"><div class="faq-card-answer-border"><p class="faq-card-answer">Yes — the Enterprise plan supports up to 1,000 live participants with cloud recording included.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── NAVIGATION ─── -->
+  <section id="navigation" class="ds-section">
+    <h2 class="ds-section-title">Navigation</h2>
+    <p class="ds-section-sub">Frosted glass navbar fixed at top. 64px height. Mega-menu on desktop, accordion on mobile.</p>
+
+    <div class="ds-canvas" style="padding:0;overflow:hidden;border-radius:12px">
+      <nav style="background:rgba(255,255,255,.75);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(124,58,237,.06);height:64px;display:flex;align-items:center;padding:0 24px;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:28px;height:28px;background:linear-gradient(135deg,#5e2d91,#7c3aed);border-radius:7px"></div>
+          <span style="font-size:15px;font-weight:700;color:#1e1b4b">Rainbow</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:28px">
+          <span style="font-size:13px;color:#6b7280;font-weight:500;cursor:pointer">Products ▾</span>
+          <span style="font-size:13px;color:#6b7280;font-weight:500;cursor:pointer">Tarifs ▾</span>
+          <span style="font-size:13px;color:#6b7280;font-weight:500;cursor:pointer">Ressources ▾</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:13px;color:#6b7280;cursor:pointer">EN ▾</span>
+          <a href="#" style="padding:9px 18px;border-radius:10px;border:2px solid #e5e7eb;font-size:13px;font-weight:600;color:#111827;text-decoration:none">Se connecter</a>
+          <a href="#" style="padding:9px 18px;border-radius:10px;background:#5e2d91;font-size:13px;font-weight:600;color:#fff;text-decoration:none">Essai gratuit</a>
+        </div>
+      </nav>
+    </div>
+    <div class="ds-code">.glass-nav {
+  background: rgba(255,255,255,.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(124,58,237,.06);
+  height: 64px;   /* h-16 */
+}
+.glass-nav.scrolled { box-shadow: 0 1px 12px rgba(30,27,75,.06); }</div>
+  </section>
+
+  <!-- ─── STEPPER ─── -->
+  <section id="stepper" class="ds-section">
+    <h2 class="ds-section-title">Step Indicator</h2>
+    <p class="ds-section-sub">Used in multi-step forms (register, onboarding). Active step is a pill, completed steps are filled circles.</p>
+
+    <div class="ds-canvas" style="display:flex;flex-direction:column;gap:24px">
+      <div>
+        <div style="font-size:11px;color:#9ca3af;margin-bottom:12px">Step 1 of 3 — active</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:28px;height:10px;background:#5e2d91;border-radius:5px"></div>
+          <div style="width:10px;height:10px;background:#d1d5db;border-radius:50%"></div>
+          <div style="width:10px;height:10px;background:#d1d5db;border-radius:50%"></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:#9ca3af;margin-bottom:12px">Step 2 of 3 — one done</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:10px;height:10px;background:#5e2d91;border-radius:50%"></div>
+          <div style="width:28px;height:10px;background:#5e2d91;border-radius:5px"></div>
+          <div style="width:10px;height:10px;background:#d1d5db;border-radius:50%"></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:#9ca3af;margin-bottom:12px">Step 3 of 3 — all done</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:10px;height:10px;background:#5e2d91;border-radius:50%"></div>
+          <div style="width:10px;height:10px;background:#5e2d91;border-radius:50%"></div>
+          <div style="width:28px;height:10px;background:#5e2d91;border-radius:5px"></div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">.step-dot { width:10px; height:10px; border-radius:50%; background:#d1d5db; transition:all .3s; }
+.step-dot.active { background:#5e2d91; width:28px; border-radius:5px; }
+.step-dot.done { background:#5e2d91; }</div>
+  </section>
+
+  <!-- ─── TABS ─── -->
+  <section id="tabs" class="ds-section">
+    <h2 class="ds-section-title">Pill Tabs</h2>
+    <p class="ds-section-sub">Sliding pill background. Used for monthly/yearly billing toggle and product use-case tabs.</p>
+
+    <div class="ds-canvas" style="display:flex;gap:24px;align-items:center">
+      <div class="pill-tab-container" style="position:relative">
+        <div class="pill-slider" style="left:6px;width:80px"></div>
+        <button class="pill-tab-btn text-active">Mensuel</button>
+        <button class="pill-tab-btn text-inactive">Annuel <span style="color:#34B233;font-size:11px;font-weight:700">-20%</span></button>
+      </div>
+    </div>
+    <div class="ds-code">.pill-tab-container { background:#fff; border:1px solid rgba(229,231,235,.6); border-radius:12px; padding:6px; }
+.pill-slider { background:#f3f4f6; border-radius:8px; transition:left .4s cubic-bezier(.16,1,.3,1), width .4s cubic-bezier(.16,1,.3,1); }
+.pill-tab-btn.text-active { color:#111827; font-weight:600; }
+.pill-tab-btn.text-inactive { color:#9ca3af; }</div>
+  </section>
+
+  <!-- ─── FAQ ─── -->
+  <section id="faq" class="ds-section">
+    <h2 class="ds-section-title">FAQ</h2>
+    <p class="ds-section-sub">Two implementations exist across the project — <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.faq-card</code> (new, Laurenn style) and <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.faq-item</code> (older). Consolidate to <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.faq-card</code>.</p>
+    <div class="ds-callout ds-callout-warn"><span>⚠</span><div>Two different FAQ component implementations exist. Standardize on <code style="font-family:monospace;font-size:11px">.faq-card</code> system going forward.</div></div>
+
+    <div class="ds-canvas">
+      <div class="faq-items" style="max-width:560px">
+        <div class="faq-card">
+          <button class="faq-card-button">
+            <span class="faq-card-question" style="font-size:15px">What happens after the 14-day trial?</span>
+            <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+        </div>
+        <div class="faq-card open" style="border-color:#5e2d91">
+          <button class="faq-card-button">
+            <span class="faq-card-question" style="font-size:15px">Can I cancel at any time?</span>
+            <svg class="faq-card-chevron" style="transform:rotate(180deg)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-card-answer-wrapper" style="max-height:200px">
+            <div class="faq-card-answer-inner"><div class="faq-card-answer-border"><p class="faq-card-answer" style="font-size:14px">Yes, you can cancel your subscription at any time. No lock-in periods.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SOLUTION CARDS ─── -->
+  <section id="solution-cards" class="ds-section">
+    <h2 class="ds-section-title">Solution Cards</h2>
+    <p class="ds-section-sub">Introduced in the registration flow (Step 1). Three-option selection with animated check, disabled Continue button until selection.</p>
+
+    <div class="ds-canvas" style="max-width:500px">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:2px solid #7c3aed;border-radius:12px;background:#f5f3ff;box-shadow:0 0 0 3px rgba(124,58,237,.10);cursor:pointer">
+          <div style="width:44px;height:44px;border-radius:10px;background:#f5f3ff;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+          </div>
+          <div style="flex:1">
+            <div style="font-weight:600;color:#170926;font-size:14px">Rainbow Webinar</div>
+            <div style="font-size:12px;color:#6b7280;margin-top:2px">Webinaires professionnels jusqu'à 1 000 participants</div>
+          </div>
+          <div style="width:22px;height:22px;border-radius:50%;background:#7c3aed;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:2px solid #e5e7eb;border-radius:12px;background:#fff;cursor:pointer">
+          <div style="width:44px;height:44px;border-radius:10px;background:#eef2ff;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#4f46e5" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div style="flex:1">
+            <div style="font-weight:600;color:#170926;font-size:14px">Rainbow Collaboration</div>
+            <div style="font-size:12px;color:#6b7280;margin-top:2px">Messagerie, visioconférence et partage de fichiers</div>
+          </div>
+          <div style="width:22px;height:22px;border-radius:50%;border:2px solid #d1d5db"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HERO PATTERN ─── -->
+  <section id="hero" class="ds-section">
+    <h2 class="ds-section-title">Hero Section Pattern</h2>
+    <p class="ds-section-sub">Full-bleed gradient background, decorative radial blobs, centered content, word shuffler animation, dual CTA.</p>
+
+    <div class="ds-canvas" style="padding:0;overflow:hidden">
+      <div class="hero-gradient" style="padding:56px 40px;position:relative;text-align:center">
+        <div class="blob blob-1" style="opacity:.5"></div>
+        <div style="position:relative;z-index:10">
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:99px;background:rgba(94,45,145,.08);border:1px solid rgba(94,45,145,.2);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5e2d91;margin-bottom:20px">New — Rainbow Webinar 3.0</div>
+          <h1 style="font-size:2.5rem;font-weight:800;color:#170926;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px">The platform for<br><span class="gradient-text">better webinaires</span></h1>
+          <p style="font-size:15px;color:#6b7280;max-width:420px;margin:0 auto 28px;line-height:1.65">Connect your teams with secure messaging, HD video, and enterprise telephony.</p>
+          <div style="display:flex;gap:12px;justify-content:center">
+            <a href="#" class="btn-cta-primary">Essai gratuit</a>
+            <a href="#" class="btn-cta-secondary">Voir une démo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">/* Background */
+.hero-gradient { background: linear-gradient(180deg, #fafafe 0%, #f5f3ff 40%, #ede9fe 70%, #fafafe 100%); }
+
+/* Anatomy: badge → h1 → sub → dual CTA → scroll indicator */
+/* Word shuffler: .hero-word-loader > .hero-words (CSS animation hero_slide 9s) */
+/* Blobs: .blob-1 (purple), .blob-2 (indigo), .blob-3 (violet) — position:absolute */</div>
+  </section>
+
+  <!-- ─── STATS PATTERN ─── -->
+  <section id="stats" class="ds-section">
+    <h2 class="ds-section-title">Stats Section Pattern</h2>
+    <p class="ds-section-sub">Dark background with subtle dot texture and radial highlights. Three colored stat numbers.</p>
+
+    <div class="ds-canvas" style="padding:0;overflow:hidden;border-radius:12px">
+      <div class="stats-bg" style="padding:48px 40px;position:relative">
+        <div style="position:relative;z-index:10;display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+          <div class="stat-card" style="text-align:center">
+            <div class="stats-number-1" style="font-size:2.5rem;font-weight:800;letter-spacing:-.03em">10K+</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:8px">Organizations</div>
+          </div>
+          <div class="stat-card" style="text-align:center">
+            <div class="stats-number-2" style="font-size:2.5rem;font-weight:800;letter-spacing:-.03em">50M+</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:8px">Users worldwide</div>
+          </div>
+          <div class="stat-card" style="text-align:center">
+            <div class="stats-number-3" style="font-size:2.5rem;font-weight:800;letter-spacing:-.03em">99.9%</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:8px">Uptime SLA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">.stats-bg { background: linear-gradient(135deg, #0f0b2e 0%, #1e1b4b 30%, #312e81 60%, #1e1b4b 100%); }
+.stats-number-1 { color: #d5bcf8; }  /* purple */
+.stats-number-2 { color: #fdb0cc; }  /* pink */
+.stats-number-3 { color: #a6c6f9; }  /* blue */</div>
+  </section>
+
+  <!-- ─── PRICING PATTERN ─── -->
+  <section id="pricing" class="ds-section">
+    <h2 class="ds-section-title">Pricing Cards Pattern</h2>
+    <p class="ds-section-sub">3-column layout on desktop. Center card (Pro) is highlighted with brand-50/40 gradient and inset shadow. Free card uses outline button, Pro uses filled, Enterprise uses subtle outline.</p>
+
+    <div class="ds-canvas">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #e5e7eb;border-radius:16px;overflow:hidden">
+        <!-- Free -->
+        <div style="padding:28px;border-right:1px dashed #e5e7eb;display:flex;flex-direction:column">
+          <div style="font-weight:700;font-size:18px;color:#1e1b4b;margin-bottom:4px">Débutant</div>
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:20px">Pour commencer</div>
+          <div style="font-size:2.5rem;font-weight:800;color:#1e1b4b;letter-spacing:-.03em;margin-bottom:4px">0$</div>
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:24px">/mois</div>
+          <div style="border-top:1px dashed #e5e7eb;margin-bottom:16px;padding-top:16px;flex:1">
+            <div style="font-size:13px;color:#4b5563;margin-bottom:8px;display:flex;gap:8px;align-items:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg>Jusqu'à 50 participants</div>
+            <div style="font-size:13px;color:#4b5563;margin-bottom:8px;display:flex;gap:8px;align-items:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg>Webinaires de 60 min</div>
+          </div>
+          <a href="#" style="display:block;width:100%;padding:13px;text-align:center;border-radius:10px;border:2px solid #1e1b4b;color:#1e1b4b;font-weight:700;font-size:13px;text-decoration:none">Commencer</a>
+        </div>
+        <!-- Pro (highlighted) -->
+        <div style="padding:28px;border-right:1px dashed #e5e7eb;display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(245,243,255,.4),#fff);position:relative;box-shadow:inset 0 1px 0 0 rgba(124,58,237,.08)">
+          <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:#5e2d91;color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:0 0 8px 8px">Populaire</div>
+          <div style="font-weight:700;font-size:18px;color:#1e1b4b;margin-bottom:4px;margin-top:16px">Professionnel</div>
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:20px">Pour les équipes</div>
+          <div style="font-size:2.5rem;font-weight:800;color:#1e1b4b;letter-spacing:-.03em;margin-bottom:4px">24$</div>
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:24px">/mois</div>
+          <div style="border-top:1px dashed #e5e7eb;margin-bottom:16px;padding-top:16px;flex:1">
+            <div style="font-size:13px;color:#4b5563;margin-bottom:8px;display:flex;gap:8px;align-items:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg>Jusqu'à 250 participants</div>
+            <div style="font-size:13px;color:#4b5563;margin-bottom:8px;display:flex;gap:8px;align-items:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg>Enregistrement cloud</div>
+          </div>
+          <a href="#" style="display:block;width:100%;padding:13px;text-align:center;border-radius:10px;background:#1e1b4b;color:#fff;font-weight:700;font-size:13px;text-decoration:none;box-shadow:0 4px 12px rgba(30,27,75,.25)">Essai gratuit 14 jours</a>
+        </div>
+        <!-- Enterprise -->
+        <div style="padding:28px;display:flex;flex-direction:column">
+          <div style="font-weight:700;font-size:18px;color:#1e1b4b;margin-bottom:4px">Entreprise</div>
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:20px">Sur mesure</div>
+          <div style="font-size:2.5rem;font-weight:800;color:#1e1b4b;letter-spacing:-.03em;margin-bottom:4px">49$</div>
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:24px">/mois</div>
+          <div style="border-top:1px dashed #e5e7eb;margin-bottom:16px;padding-top:16px;flex:1">
+            <div style="font-size:13px;color:#4b5563;margin-bottom:8px;display:flex;gap:8px;align-items:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#1e1b4b" stroke-width="2.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg>Jusqu'à 1 000 participants</div>
+            <div style="font-size:13px;color:#4b5563;margin-bottom:8px;display:flex;gap:8px;align-items:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#1e1b4b" stroke-width="2.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg>SSO SAML / OIDC</div>
+          </div>
+          <a href="#" style="display:block;width:100%;padding:13px;text-align:center;border-radius:10px;border:1px solid #e5e7eb;color:#1e1b4b;font-weight:600;font-size:13px;text-decoration:none">Contacter les ventes</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA BANNER ─── -->
+  <section id="cta-banner" class="ds-section">
+    <h2 class="ds-section-title">CTA Banner Pattern</h2>
+    <p class="ds-section-sub">Radial gradient background (top-left purple → bottom-right pink), centered content, dual CTA, "no credit card" footnote.</p>
+
+    <div class="ds-canvas" style="padding:0;overflow:hidden;border-radius:12px">
+      <div class="sp-cta-banner">
+        <div class="sp-cta-content">
+          <p class="sp-cta-h2">Prêt à transformer vos événements ?</p>
+          <p class="sp-cta-sub">Rejoignez 10 000+ organisations qui font confiance à Rainbow pour leurs communications d'entreprise.</p>
+          <div class="sp-cta-actions">
+            <a href="#" class="btn-cta-primary">Commencer gratuitement →</a>
+            <a href="#" class="btn-cta-secondary">Voir une démo</a>
+          </div>
+          <p class="sp-cta-note">Essai gratuit de 14 jours · Sans carte bancaire · Annulation à tout moment</p>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">.sp-cta-banner {
+  border-radius: 24px;
+  background-image:
+    radial-gradient(ellipse 100% 100% at 0% 0%,   rgba(190,150,240,.35) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 100% at 100% 100%, rgba(210,110,200,.32) 0%, transparent 70%);
+  box-shadow: 0 2px 60px rgba(100,60,160,.08);
+}</div>
+  </section>
+
+  <!-- ─── MARQUEE ─── -->
+  <section id="marquee" class="ds-section">
+    <h2 class="ds-section-title">Trust Marquee Pattern</h2>
+    <p class="ds-section-sub">Infinite horizontal scroll of trust logos. Gradient fade mask on left/right edges. 30s duration, linear easing.</p>
+
+    <div class="ds-canvas">
+      <div class="marquee-container" style="padding:16px 0">
+        <div class="animate-marquee" style="display:flex;gap:40px;white-space:nowrap;align-items:center">
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">ALCATEL</span>
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">ENTERPRISE</span>
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">TRUSTED BY</span>
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">10,000+</span>
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">ORGANISATIONS</span>
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">ALCATEL</span>
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">ENTERPRISE</span>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">.marquee-container {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+.animate-marquee { animation: marquee 30s linear infinite; }
+/* Duplicate the logo list inside the element to create seamless loop */</div>
+  </section>
+
+  <!-- ─── FOOTER PATTERN ─── -->
+  <section id="footer-pattern" class="ds-section">
+    <h2 class="ds-section-title">Footer Pattern</h2>
+    <p class="ds-section-sub">5-column grid on desktop. Same deep gradient as stats section. Logo + tagline left, link columns right, legal row at bottom.</p>
+    <div class="ds-canvas ds-canvas-dark" style="border-radius:12px;overflow:hidden">
+      <div class="footer-premium" style="padding:40px 32px;border-radius:12px">
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;margin-bottom:32px">
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><div style="width:28px;height:28px;background:linear-gradient(135deg,#5e2d91,#7c3aed);border-radius:7px"></div><span style="color:#fff;font-weight:700;font-size:15px">Rainbow</span></div>
+            <div style="font-size:13px;color:rgba(255,255,255,.45);line-height:1.7;max-width:240px">Cloud communication & collaboration by Alcatel-Lucent Enterprise.</div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:12px">Produits</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);line-height:2">Rainbow Webinar<br>Rainbow Collaboration<br>Rainbow Hub</div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:12px">Ressources</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);line-height:2">Blog<br>Aide<br>Contact</div>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:12px;color:rgba(255,255,255,.3)">© 2026 Rainbow by ALE. All rights reserved.</div>
+          <div style="display:flex;gap:16px;font-size:12px;color:rgba(255,255,255,.3)"><span>Privacy</span><span>Terms</span><span>Legal</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">.footer-premium { background: linear-gradient(180deg, #0f0b2e 0%, #1e1b4b 100%); }</div>
+  </section>
+
+  <!-- ─── ISSUES ─── -->
+  <section id="issues" class="ds-section">
+    <h2 class="ds-section-title">Issues to Fix</h2>
+    <p class="ds-section-sub">Design debt found during the audit, prioritized by user impact.</p>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="ds-callout ds-callout-error">
+        <span style="font-weight:700;flex-shrink:0">P0</span>
+        <div><strong>Dual brand purple.</strong> <code style="font-family:monospace;font-size:11px">#5e2d91</code> vs <code style="font-family:monospace;font-size:11px">#7c3aed</code> are used interchangeably as brand.500. Standardize in Tailwind config across ALL pages: brand.500 = <code style="font-family:monospace;font-size:11px">#5e2d91</code>, add brand.vibrant = <code style="font-family:monospace;font-size:11px">#7c3aed</code> for glass borders and glow effects.</div>
+      </div>
+      <div class="ds-callout ds-callout-error">
+        <span style="font-weight:700;flex-shrink:0">P0</span>
+        <div><strong>Two FAQ implementations.</strong> <code style="font-family:monospace;font-size:11px">.faq-item</code> (style.css, older) and <code style="font-family:monospace;font-size:11px">.faq-card</code> (style.css, Laurenn style) coexist. Migrate all pages to .faq-card and remove .faq-item.</div>
+      </div>
+      <div class="ds-callout ds-callout-warn">
+        <span style="font-weight:700;flex-shrink:0">P1</span>
+        <div><strong>Two button systems.</strong> <code style="font-family:monospace;font-size:11px">.btn-cta-primary</code> (border-radius 12px, shadow) and Tailwind inline buttons (<code style="font-family:monospace;font-size:11px">rounded-btn</code>, 10px) are both used. Prefer .btn-cta-primary everywhere except in-nav buttons.</div>
+      </div>
+      <div class="ds-callout ds-callout-warn">
+        <span style="font-weight:700;flex-shrink:0">P1</span>
+        <div><strong>Border radius inconsistency.</strong> Tailwind classes (rounded-xl = 12px) mixed with raw CSS (border-radius: 20px, 24px). Create a shared token map or consolidate custom values into Tailwind config.</div>
+      </div>
+      <div class="ds-callout ds-callout-warn">
+        <span style="font-weight:700;flex-shrink:0">P1</span>
+        <div><strong>No CSS custom properties.</strong> All tokens are scattered across inline Tailwind config per-page and raw CSS. Extract into a <code style="font-family:monospace;font-size:11px">:root {}</code> token block in style.css to enable single-source theming.</div>
+      </div>
+      <div class="ds-callout ds-callout-info">
+        <span style="font-weight:700;flex-shrink:0">P2</span>
+        <div><strong>SVG icons are hardcoded inline.</strong> No central icon system. Consider an SVG sprite or a small icon component map to enable consistent sizing and color via stroke.</div>
+      </div>
+      <div class="ds-callout ds-callout-info">
+        <span style="font-weight:700;flex-shrink:0">P2</span>
+        <div><strong>Sparse sm: breakpoints.</strong> Most responsive jumps go mobile → md:/lg:, skipping the 640px range. This creates jarring transitions on tablet. Add sm: steps to key grid layouts.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DO / DON'T ─── -->
+  <section id="dos-donts" class="ds-section">
+    <h2 class="ds-section-title">Do / Don't</h2>
+    <p class="ds-section-sub">Core principles in practice.</p>
+
+    <div class="ds-do-dont">
+      <div class="ds-do">
+        <div class="ds-do-header">✓ Do</div>
+        <div class="ds-do-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Use spring easing for all hover transitions</div>
+          <div style="font-size:12px;color:#6b7280"><code style="font-size:11px">cubic-bezier(.16,1,.3,1)</code> is the brand signature. Use it on every lift, expand, and slide.</div>
+        </div>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-header">✗ Don't</div>
+        <div class="ds-dont-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Mix ease-in-out and linear for UI transitions</div>
+          <div style="font-size:12px;color:#6b7280">Reserve <code style="font-size:11px">linear</code> for ambient animations only (marquee, glow pulse). Never for interactive states.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-do-dont">
+      <div class="ds-do">
+        <div class="ds-do-header">✓ Do</div>
+        <div class="ds-do-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Use <code style="font-size:11px">#5e2d91</code> for all primary brand moments</div>
+          <div style="font-size:12px;color:#6b7280">Logo area, primary CTA, word animation, section badges. This is the ALE brand color.</div>
+        </div>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-header">✗ Don't</div>
+        <div class="ds-dont-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Use <code style="font-size:11px">#7c3aed</code> as the primary brand color</div>
+          <div style="font-size:12px;color:#6b7280">This vibrant purple is for glass borders, glow effects, and interactive accent states — not brand identity.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-do-dont">
+      <div class="ds-do">
+        <div class="ds-do-header">✓ Do</div>
+        <div class="ds-do-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Use letter-spacing: -0.03em on all headings</div>
+          <div style="font-size:12px;color:#6b7280">Tight tracking at large sizes is a design hallmark that makes headings feel premium and intentional.</div>
+        </div>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-header">✗ Don't</div>
+        <div class="ds-dont-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Add decorative elements without purpose</div>
+          <div style="font-size:12px;color:#6b7280">Blobs, gradients, and shine effects exist to create depth. If they don't serve the content, remove them.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-do-dont">
+      <div class="ds-do">
+        <div class="ds-do-header">✓ Do</div>
+        <div class="ds-do-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Tint shadows with brand purple</div>
+          <div style="font-size:12px;color:#6b7280"><code style="font-size:11px">rgba(124,58,237,…)</code> not <code style="font-size:11px">rgba(0,0,0,…)</code> for elevated components. Keeps the palette cohesive.</div>
+        </div>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-header">✗ Don't</div>
+        <div class="ds-dont-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Use pure black shadows on colored surfaces</div>
+          <div style="font-size:12px;color:#6b7280">Black shadows on purple/indigo backgrounds look muddy. Purple-tinted shadows keep cards feeling part of the system.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// Scrollspy
+const links = document.querySelectorAll('.ds-nav-link');
+const sections = document.querySelectorAll('.ds-section');
+function onScroll() {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  links.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+  });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+</script>
+</body>
+</html>

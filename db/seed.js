@@ -201,7 +201,7 @@ function seed() {
             'Rainbow Webinar',
             'webinar',
             'Professional webinar platform for hosting large-scale online events with up to 10,000 participants.',
-            'Rainbow Webinar by Alcatel-Lucent Enterprise is a professional webinar solution for hosting large-scale online events, product demos, training sessions, and town halls with interactive Q&A, polls, and analytics.',
+            'Rainbow Webinar by Alcatel-Lucent Enterprise is a professional webinar solution for hosting large-scale online events, product Démos, training sessions, and town halls with interactive Q&A, polls, and analytics.',
             JSON.stringify([
                 'Up to 10,000 participants',
                 'Interactive Q&A and polls',
