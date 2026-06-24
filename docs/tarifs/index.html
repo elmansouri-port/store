@@ -245,7 +245,7 @@
                                                 <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Enregistrez vos événements</span></li>
                                             </ul>
                                         </div>
-                                        <a href="/store/login" class="block w-full py-3.5 px-4 text-center rounded-[10px] border-2 border-brand-500 text-brand-500 font-bold hover:bg-brand-500 hover:text-white hover:shadow-lg transition-all duration-200 text-sm">Commencer</a>
+                                        <a href="/store/register?plan=webinar120&product=webinar" class="block w-full py-3.5 px-4 text-center rounded-[10px] border-2 border-brand-500 text-brand-500 font-bold hover:bg-brand-500 hover:text-white hover:shadow-lg transition-all duration-200 text-sm">Commencer</a>
                                     </div>
                                 </div>
 
@@ -274,7 +274,7 @@
                                                 <li class="flex items-start gap-3"><svg class="w-4 h-4 text-brand-500 mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span>Enregistrez vos événements</span></li>
                                             </ul>
                                         </div>
-                                        <a href="/store/login" class="block w-full py-3.5 px-4 text-center rounded-[10px] bg-brand-500 text-white hover:bg-brand-600 font-bold transition-all shadow-md text-sm hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">Commencer</a>
+                                        <a href="/store/register?plan=webinar500&product=webinar" class="block w-full py-3.5 px-4 text-center rounded-[10px] bg-brand-500 text-white hover:bg-brand-600 font-bold transition-all shadow-md text-sm hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">Commencer</a>
                                     </div>
                                 </div>
 
@@ -652,7 +652,7 @@
                 <div class="max-w-5xl mx-auto px-6">
                     <div class="mb-12">
                         <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 tracking-tight">
-                            FAQ :
+                            Questions fr&eacute;quentes
                         </h2>
                     </div>
 
@@ -813,14 +813,17 @@
     <footer class="footer-premium text-gray-400 pt-20 pb-10 px-6 relative z-10">
         <div class="max-w-6xl mx-auto">
             <!-- Top Section -->
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-12 mb-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
                 <!-- Brand Column -->
                 <div class="col-span-2 md:col-span-1">
-                    <div class="flex items-center mb-6">
+                    <div class="flex items-center mb-4">
                         <img src="/store/images/ale_white.png" alt="Alcatel-Lucent Enterprise" class="h-15 w-auto opacity-90 hover:opacity-100 transition-opacity">
                     </div>
-                    <p class="text-sm text-gray-400 leading-relaxed mb-6 max-w-[240px]">ALE International​ </br>
-32 avenue Kléber</br>92700 Colombes, France </p>
+                    <address class="text-sm text-gray-400 leading-relaxed mb-6 not-italic">
+                        ALE International<br>
+                        32 avenue Kl&eacute;ber<br>
+                        92700 Colombes, France
+                    </address>
                     <!---->
                     
                 </div>
@@ -829,11 +832,10 @@
                 <div>
                     <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Solutions</h4>
                     <ul class="space-y-3.5 text-sm">
+                        <li><a href="/store/products/collaboration" class="hover:text-white transition-colors">Rainbow Collaboration</a></li>
                         <li><a href="/store/products/webinar" class="hover:text-white transition-colors">Rainbow Webinar</a></li>
-                        <li><a href="/store/products/collaboration" class="hover:text-white transition-colors">Rainbow Classroom</a></li>
-                        <li><a href="/store/products/collaboration" class="hover:text-white transition-colors">Rainbow Hub</a></li>
-                        <li><a href="/store/products" class="hover:text-white transition-colors">Rainbow Business</a></li>
-                        <li><a href="/store/products" class="hover:text-white transition-colors">Rainbow CPaaS</a></li>
+                        <li><a href="/store/tarifs" class="hover:text-white transition-colors">Tarifs</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">API</a></li>
                     </ul>
                 </div>
 
@@ -841,20 +843,10 @@
                 <div>
                     <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Developers</h4>
                     <ul class="space-y-3.5 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">API Documentation</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">SDKs &amp; Libraries</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">WebRTC Guide</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Changelog</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Status</a></li>
-                    </ul>
-                </div>
-
-                <!-- Resources Column -->
-                <div>
-                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Resources</h4>
-                    <ul class="space-y-3.5 text-sm">
-                        <li><a href="/store/products/webinar" class="hover:text-white transition-colors">Webinars</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Community</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Guide technique</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Code samples</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Int&eacute;grations</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Forum dev</a></li>
                     </ul>
                 </div>
 
@@ -862,9 +854,11 @@
                 <div>
                     <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Company</h4>
                     <ul class="space-y-3.5 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Press Room</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Partners</a></li>
+                        <li><a href="/store/about" class="hover:text-white transition-colors">A propos</a></li>
+                        <li><a href="/store/partenaires" class="hover:text-white transition-colors">Devenir partenaire</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Carri&egrave;res</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Presse</a></li>
+                        <li><a href="/store/contact" class="hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
             </div>

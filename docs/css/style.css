@@ -829,15 +829,15 @@ input[type="number"] {
 }
 
 .compliance-card-logo-area {
-    height: 80px;
+    height: 120px;
     margin-bottom: 12px;
     display: flex;
     align-items: flex-start;
 }
 
 .compliance-card-logo-area img {
-    max-height: 60px;
-    max-width: 120px;
+    max-height: 120px;
+    max-width: 220px;
     object-fit: contain;
 }
 
@@ -1032,34 +1032,7 @@ input[type="number"] {
     margin-bottom: 24px;
 }
 
-.product-range-card-features {
-    list-style: none;
-    margin-bottom: 32px;
-    flex-grow: 1;
-}
 
-.product-range-card-features li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-.product-range-card-features li:last-child {
-    margin-bottom: 0;
-}
-
-.product-range-card-features li svg {
-    width: 16px;
-    height: 16px;
-    margin-top: 2px;
-    flex-shrink: 0;
-}
-
-.product-range-card-features li span {
-    color: #4b5563;
-    font-size: 14px;
-}
 
 .product-range-cta-primary {
     width: 100%;
@@ -1470,6 +1443,13 @@ input[type="number"] {
 
 .faq-card:hover {
     border-color: #5e2d91;
+    animation: faqPulse 0.6s ease-in-out;
+}
+
+@keyframes faqPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
 }
 
 .faq-card-button {
