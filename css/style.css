@@ -452,11 +452,16 @@ input[type="number"] {
   position: relative;
   overflow: hidden;
   border-radius: 24px;
-  background-color: #ffffff;
+  background-color: #f9f6ff;
   background-image:
-    radial-gradient(ellipse 100% 100% at 0% 0%,   rgba(190, 150, 240, 0.35) 0%, transparent 70%),
-    radial-gradient(ellipse 100% 100% at 100% 100%, rgba(210, 110, 200, 0.32) 0%, transparent 70%);
-  box-shadow: 0 2px 60px rgba(100, 60, 160, 0.08);
+    radial-gradient(ellipse 85% 75% at 0% 0%,   rgba(130, 70, 210, 0.30) 0%, transparent 58%),
+    radial-gradient(ellipse 75% 85% at 100% 100%, rgba(207, 0, 114, 0.24) 0%, transparent 58%),
+    radial-gradient(ellipse 60% 60% at 50% 50%,  rgba(245, 240, 255, 0.70) 0%, transparent 100%);
+  border: 1px solid rgba(94, 45, 145, 0.13);
+  box-shadow:
+    0 12px 50px rgba(94, 45, 145, 0.14),
+    0 2px  12px rgba(94, 45, 145, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 @media (min-width: 768px) {
@@ -1439,17 +1444,6 @@ input[type="number"] {
     background: white;
     overflow: hidden;
     transition: all 0.2s ease;
-}
-
-.faq-card:hover {
-    border-color: #5e2d91;
-    animation: faqPulse 0.6s ease-in-out;
-}
-
-@keyframes faqPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); }
 }
 
 .faq-card-button {
