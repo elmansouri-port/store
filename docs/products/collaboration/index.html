@@ -250,8 +250,19 @@
                                 <p class="text-gray-500 text-[15px] leading-relaxed max-w-md mb-10">
                                     <strong class="text-navy-900 font-semibold">Chat avec collaborateur.</strong> Échangez instantanément avec vos collègues via des messages directs ou des canaux d'équipe dédiés.
                                 </p>
-                                <div class="aspect-[16/9] rounded-xl flex items-center justify-center">
-                                    <img src="/store/images/integrations.png" alt="">
+                                <div class="rounded-xl overflow-hidden" style="aspect-ratio:768/576">
+                                    <video
+                                        src="/store/images/collaboration-page/chat.mp4"
+                                        width="768"
+                                        height="576"
+                                        muted
+                                        loop
+                                        playsinline
+                                        preload="metadata"
+                                        class="w-full h-full object-cover"
+                                        onmouseenter="this.play()"
+                                        onmouseleave="this.pause(); this.currentTime=0;"
+                                    ></video>
                                 </div>
                             </div>
                         </div>
