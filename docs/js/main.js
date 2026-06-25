@@ -600,6 +600,7 @@ if (mobileMenuBtn && mobileMenu) {
         mobileMenu.classList.toggle('hidden');
     });
     mobileMenu.querySelectorAll('a').forEach(function (link) {
+        if (link.getAttribute('href') === '#') return; // section accordion toggles — don't close
         link.addEventListener('click', function () { mobileMenu.classList.add('hidden'); });
     });
 }

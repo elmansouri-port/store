@@ -423,7 +423,7 @@
       if (!mobileEl) continue;
       sm.parentNode.insertBefore(mobileEl, sm.nextSibling);
 
-      // Wire accordion toggle onto the section header link
+      // Accordion toggle — uses CSS classes (mob-section-hdr / is-open / mob-chev)
       if (headerEl && headerEl.tagName === 'A') {
         (function (content, header) {
           var chevron = document.createElement('svg');
@@ -431,32 +431,45 @@
           chevron.setAttribute('viewBox', '0 0 24 24');
           chevron.setAttribute('stroke', 'currentColor');
           chevron.setAttribute('stroke-width', '2');
-          chevron.setAttribute('data-mob-chev', '1');
-          chevron.style.cssText = 'width:1rem;height:1rem;flex-shrink:0;margin-left:auto;transition:transform 0.2s ease;';
+          chevron.setAttribute('aria-hidden', 'true');
+          chevron.className = 'mob-chev';
           chevron.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>';
-          header.style.display = 'flex';
-          header.style.justifyContent = 'space-between';
-          header.style.alignItems = 'center';
-          header.style.cursor = 'pointer';
+          header.classList.add('mob-section-hdr');
           header.appendChild(chevron);
 
           header.addEventListener('click', function (e) {
             e.preventDefault();
             var opening = !content.classList.contains('open');
-            // Close all sections first
-            document.querySelectorAll('.mega-menu-mobile-content').forEach(function (c) {
+            document.querySelectorAll('#mobile-menu .mega-menu-mobile-content').forEach(function (c) {
               c.classList.remove('open');
             });
-            document.querySelectorAll('[data-mob-chev]').forEach(function (c) {
-              c.style.transform = '';
+            document.querySelectorAll('#mobile-menu .mob-section-hdr').forEach(function (h) {
+              h.classList.remove('is-open');
             });
             if (opening) {
               content.classList.add('open');
-              chevron.style.transform = 'rotate(180deg)';
+              header.classList.add('is-open');
             }
           });
         })(mobileEl, headerEl);
       }
+    }
+
+    // Hamburger ↔ X icon — reacts to #mobile-menu hidden class changes
+    var mobileBtn   = document.getElementById('mobile-menu-btn');
+    var mobilePanel = document.getElementById('mobile-menu');
+    var hamSVG   = '<svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>';
+    var closeSVG = '<svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>';
+
+    if (mobileBtn && mobilePanel) {
+      new MutationObserver(function () {
+        var isHidden = mobilePanel.classList.contains('hidden');
+        mobileBtn.innerHTML = isHidden ? hamSVG : closeSVG;
+        if (isHidden) {
+          mobilePanel.querySelectorAll('.mega-menu-mobile-content').forEach(function (c) { c.classList.remove('open'); });
+          mobilePanel.querySelectorAll('.mob-section-hdr').forEach(function (h) { h.classList.remove('is-open'); });
+        }
+      }).observe(mobilePanel, { attributes: true, attributeFilter: ['class'] });
     }
   }
 

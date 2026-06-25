@@ -772,6 +772,67 @@ input[type="number"] {
 .stats-number-2 { color: #fdb0cc; }
 .stats-number-3 { color: #a6c6f9; }
 
+/* ===== Mobile Nav Drawer ===== */
+#mobile-menu {
+    max-height: calc(100dvh - 4rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+/* Section accordion header (Produits / Tarifs / Ressources) */
+#mobile-menu .mob-section-hdr {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.75rem 0.5rem !important;
+    border-radius: 10px;
+    font-size: 0.9375rem !important;
+    font-weight: 600 !important;
+    color: #1e1b4b !important;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+}
+#mobile-menu .mob-section-hdr:hover,
+#mobile-menu .mob-section-hdr:active {
+    background: #f5f3ff;
+}
+#mobile-menu .mob-section-hdr.is-open {
+    color: #5e2d91 !important;
+    background: #f5f3ff;
+}
+
+/* Chevron icon inside the accordion header */
+#mobile-menu .mob-chev {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
+    color: #9ca3af;
+    transition: transform 0.22s ease, color 0.15s ease;
+}
+#mobile-menu .mob-section-hdr.is-open .mob-chev {
+    transform: rotate(180deg);
+    color: #5e2d91;
+}
+
+/* Smooth height reveal for open accordion panels */
+.mega-menu-mobile-content {
+    display: none;
+}
+.mega-menu-mobile-content.open {
+    display: block;
+    animation: mobileAccordionIn 0.2s ease;
+}
+@keyframes mobileAccordionIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
 /* --- Product Image Shadow --- */
 .product-frame-shadow {
     box-shadow: 
