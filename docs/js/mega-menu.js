@@ -397,31 +397,65 @@
     var submenus = document.querySelectorAll('.mobile-submenu');
     for (var j = 0; j < submenus.length; j++) {
       var sm = submenus[j];
-      var link = sm.querySelector('a');
-      if (!link) continue;
-      var isProd = link.getAttribute('href') && link.getAttribute('href').indexOf('/products/') !== -1;
-      var isRes = link.getAttribute('href') && link.getAttribute('href').indexOf('/blog') !== -1;
-      var isTarifsMobile = link.getAttribute('href') && link.getAttribute('href').indexOf('/tarifs/') !== -1;
-      var isPartenaireMobile = link.getAttribute('href') && link.getAttribute('href').indexOf('/partenaires') !== -1;
-      if (!isProd && !isRes && !isTarifsMobile && !isPartenaireMobile) continue;
+      if (!sm.querySelector('a')) continue;
+
+      // Detect section type from the preceding header link's text
+      var headerEl = sm.previousElementSibling;
+      var headerText = headerEl ? headerEl.textContent.trim().toLowerCase() : '';
 
       var mobileContent;
-      if (isProd) {
+      if (headerText.indexOf('produit') !== -1) {
         mobileContent = productsMobileHTML;
-      } else if (isRes) {
+      } else if (headerText.indexOf('tarif') !== -1) {
+        mobileContent = tarifsMobileHTML;
+      } else if (headerText.indexOf('ressource') !== -1) {
         mobileContent = ressourcesMobileHTML;
-      } else if (isPartenaireMobile) {
+      } else if (headerText.indexOf('partenaire') !== -1) {
         mobileContent = partenaireMobileHTML;
       } else {
-        mobileContent = tarifsMobileHTML;
+        continue;
       }
 
       sm.style.display = 'none';
       var wrapper = document.createElement('div');
       wrapper.innerHTML = mobileContent;
       var mobileEl = wrapper.firstElementChild;
-      if (mobileEl) {
-        sm.parentNode.insertBefore(mobileEl, sm.nextSibling);
+      if (!mobileEl) continue;
+      sm.parentNode.insertBefore(mobileEl, sm.nextSibling);
+
+      // Wire accordion toggle onto the section header link
+      if (headerEl && headerEl.tagName === 'A') {
+        (function (content, header) {
+          var chevron = document.createElement('svg');
+          chevron.setAttribute('fill', 'none');
+          chevron.setAttribute('viewBox', '0 0 24 24');
+          chevron.setAttribute('stroke', 'currentColor');
+          chevron.setAttribute('stroke-width', '2');
+          chevron.setAttribute('data-mob-chev', '1');
+          chevron.style.cssText = 'width:1rem;height:1rem;flex-shrink:0;margin-left:auto;transition:transform 0.2s ease;';
+          chevron.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>';
+          header.style.display = 'flex';
+          header.style.justifyContent = 'space-between';
+          header.style.alignItems = 'center';
+          header.style.cursor = 'pointer';
+          header.appendChild(chevron);
+
+          header.addEventListener('click', function (e) {
+            e.preventDefault();
+            var opening = !content.classList.contains('open');
+            // Close all sections first
+            document.querySelectorAll('.mega-menu-mobile-content').forEach(function (c) {
+              c.classList.remove('open');
+            });
+            document.querySelectorAll('[data-mob-chev]').forEach(function (c) {
+              c.style.transform = '';
+            });
+            if (opening) {
+              content.classList.add('open');
+              chevron.style.transform = 'rotate(180deg)';
+            }
+          });
+        })(mobileEl, headerEl);
       }
     }
   }
