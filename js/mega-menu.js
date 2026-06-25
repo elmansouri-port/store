@@ -148,17 +148,6 @@
         productsMobileItems,
         '<a href="/products" class="mega-menu-mobile-see-all">Voir tous les produits <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
       '</div>',
-      '<div class="mega-menu-mobile-section">',
-        '<p class="mega-menu-mobile-section-title">À la une</p>',
-        '<a href="/products/webinar" class="mega-menu-mobile-item">',
-          '<span class="mega-menu-mobile-item-icon">' + svgIcon('video-camera') + '</span>',
-          '<span class="mega-menu-mobile-item-text"><p class="mega-menu-mobile-item-title">Rainbow Webinar</p><p class="mega-menu-mobile-item-desc">Nouveau — Webinaires interactifs en direct et en replay.</p></span>',
-        '</a>',
-      '</div>',
-      '<div class="mega-menu-mobile-footer">',
-        '<a href="/Démo" class="mega-menu-btn mega-menu-btn-secondary" style="justify-content:center;">Réserver une démo</a>',
-        '<a href="/contact" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Nous contacter</a>',
-      '</div>',
     '</div>'
   ].join('');
 
@@ -177,17 +166,6 @@
         '<p class="mega-menu-mobile-section-title">Apprendre &amp; Découvrir</p>',
         ressourcesMobileItems,
         '<a href="/ressources" class="mega-menu-mobile-see-all">Parcourir toutes les ressources <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
-      '</div>',
-      '<div class="mega-menu-mobile-section">',
-        '<p class="mega-menu-mobile-section-title">Guide populaire</p>',
-        '<a href="/tutorials" class="mega-menu-mobile-item">',
-          '<span class="mega-menu-mobile-item-icon">' + svgIcon('light-bulb') + '</span>',
-          '<span class="mega-menu-mobile-item-text"><p class="mega-menu-mobile-item-title">Débuter avec Rainbow</p><p class="mega-menu-mobile-item-desc">Configurez et commencez à utiliser Rainbow en 10 minutes.</p></span>',
-        '</a>',
-      '</div>',
-      '<div class="mega-menu-mobile-footer">',
-        '<a href="/blog" class="mega-menu-btn mega-menu-btn-secondary" style="justify-content:center;">Visiter notre blog</a>',
-        '<a href="/support" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Obtenir de l\'aide</a>',
       '</div>',
     '</div>'
   ].join('');
@@ -226,9 +204,6 @@
         '<p class="mega-menu-mobile-section-title">Nos tarifs</p>',
         tarifsMobileItems,
         '<a href="/tarifs" class="mega-menu-mobile-see-all">Voir tous les plans <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
-      '</div>',
-      '<div class="mega-menu-mobile-footer">',
-        '<a href="/contact" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Nous contacter</a>',
       '</div>',
     '</div>'
   ].join('');
@@ -269,9 +244,6 @@
         '<p class="mega-menu-mobile-section-title">Programme partenaires</p>',
         partenaireMobileItems,
         '<a href="/partenaires" class="mega-menu-mobile-see-all">Découvrir le programme <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
-      '</div>',
-      '<div class="mega-menu-mobile-footer">',
-        '<a href="/partenaires" class="mega-menu-btn mega-menu-btn-primary" style="justify-content:center;">Devenir partenaire</a>',
       '</div>',
     '</div>'
   ].join('');
