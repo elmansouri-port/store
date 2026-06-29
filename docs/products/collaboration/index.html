@@ -164,13 +164,13 @@
         <div id="mobile-menu" class="md:hidden hidden border-t border-indigo-50 bg-white px-6 py-4 space-y-3">
             <a href="#" class="block text-sm text-gray-600 py-2" data-i18n="nav.product">Produits</a>
             <div class="mobile-submenu space-y-1">
-                <a href="/store/products/webinar" class="block py-1">Rainbow Webinar</a>
                 <a href="/store/products/collaboration" class="block py-1">Rainbow Collaboration</a>
+                <a href="/store/products/webinar" class="block py-1">Rainbow Webinar</a>
             </div>
             <a href="#" class="block text-sm text-gray-600 py-2">Tarifs</a>
             <div class="mobile-submenu space-y-1">
-                <a href="/store/products/webinar/pricing" class="block py-1">Rainbow Webinar</a>
                 <a href="/store/products/collaboration/pricing" class="block py-1">Rainbow Collaboration</a>
+                <a href="/store/products/webinar/pricing" class="block py-1">Rainbow Webinar</a>
             </div>
             <a href="#" class="block text-sm text-gray-600 py-2">Ressources</a>
             <div class="mobile-submenu space-y-1">
@@ -268,69 +268,65 @@
                         Collaborez autrement, simplement
                     </h2>
 
-                    <div class="w-full">
-                        <!-- Top Row (2 columns) -->
-                        <div class="grid md:grid-cols-2 border-t border-b border-dashed border-gray-200">
-                            <!-- Top Left -->
-                            <div
-                                class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-dashed border-gray-200 flex flex-col justify-between">
-                                <p class="text-gray-500 text-[15px] leading-relaxed max-w-md mb-10">
-                                    <strong class="text-navy-900 font-semibold">Partage d'écran.</strong>
-                                    Partagez votre écran en un clic pour collaborer en temps réel et guider vos
-                                    collègues sans effort.
+                    <div class="flex flex-col gap-4">
+                        <!-- Row 1 -->
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                            <!-- Big: Chat video -->
+                            <div class="md:col-span-3 p-8 md:p-12 flex flex-col rounded-[15px]" style="background: linear-gradient(135deg, rgba(94,45,145,0.08), rgba(94,45,145,0.03));">
+                                <p class="text-gray-500 text-[15px] leading-relaxed max-w-2xl mb-10">
+                                    <strong class="text-navy-900 font-semibold block mb-2">Messagerie d’équipe​</strong>
+                                    Échangez en temps réel avec vos équipes grâce à
+desconversations organisées par projet ou par sujet.
                                 </p>
-                                <div class="aspect-[16/9] rounded-xl flex items-center justify-center ">
-                                    <img src="/store/images/buble.png" alt="" style="border-radius: 10px;">
+                                <div class="flex-1 flex items-center justify-center">
+                                    <div class="rounded-xl overflow-hidden w-full" style="aspect-ratio:768/576">
+                                        <video src="/store/images/collaboration-page/chat-rainbow-ui.mp4" width="768" height="576"
+                                            muted loop playsinline preload="metadata" class="w-full h-full object-cover"
+                                            onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Top Right -->
-                            <div class="p-8 md:p-12 flex flex-col justify-between">
+                            <!-- Small: Partage d'écran -->
+                            <div class="md:col-span-2 p-8 md:p-12 flex flex-col rounded-[15px]" style="background: linear-gradient(135deg, rgba(207,0,114,0.08), rgba(207,0,114,0.03));">
                                 <p class="text-gray-500 text-[15px] leading-relaxed max-w-md mb-10">
-                                    <strong class="text-navy-900 font-semibold">Chat avec collaborateur.</strong>
-                                    Échangez instantanément avec vos collègues via des messages directs ou des canaux
-                                    d'équipe dédiés.
+                                    <strong class="text-navy-900 font-semibold block mb-2">Partage d'écran</strong>
+                                    Présentez, expliquez et collaborez en direct pendant vos appels et réunions.​
                                 </p>
-                                <div class="rounded-xl overflow-hidden" style="aspect-ratio:768/576">
-                                    <video src="/store/images/collaboration-page/chat-rainbow-ui.mp4" width="768" height="576"
-                                        muted loop playsinline preload="metadata" class="w-full h-full object-cover"
-                                        onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+                                <div class="flex-1 flex items-center justify-center">
+                                    <img src="/store/images/collaboration-page/visio-collaboration.webp" alt="" class="w-full object-contain rounded-xl">
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Bottom Row (3 columns) -->
-                        <div class="grid md:grid-cols-3 border-b border-dashed border-gray-200">
-                            <!-- Bottom Left -->
-                            <div
-                                class="p-8 md:p-10 border-b md:border-b-0 md:border-r border-dashed border-gray-200 flex flex-col justify-between">
-                                <p class="text-gray-500 text-[14px] leading-relaxed mb-8">
-                                    <strong class="text-navy-900 font-semibold">Archivez-le.</strong> Lorem ipsum dolor
-                                    sit amet, consectetur adipiscing elit sed do.
-                                </p>
-                                <div class="aspect-square rounded-xl flex items-center justify-center">
-                                    <img src="/store/images/collaboration-page/text-format.webp" alt=""
-                                        style="border-radius: 10px;">
+                        <!-- Row 2 -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- Mise en forme du texte -->
+                            <div class="p-8 md:p-10 flex flex-col rounded-[15px]" style="background: linear-gradient(135deg, rgba(0,133,202,0.08), rgba(0,133,202,0.03));">
+                                <div class="mb-8" style="min-height: 5.5rem;">
+                                    <strong class="text-navy-900 font-semibold block mb-2 text-[15px]">Mise en forme du texte</strong>
+                                    <p class="text-gray-500 text-[14px] leading-relaxed">Structurez vos messages avec du gras, de l'italique, du code et des listes pour une communication claire.</p>
+                                </div>
+                                <div class="flex-1 flex items-center justify-center">
+                                    <img src="/store/images/collaboration-page/text-format.webp" alt="" class="w-full object-contain rounded-xl">
                                 </div>
                             </div>
-                            <!-- Bottom Middle -->
-                            <div
-                                class="p-8 md:p-10 border-b md:border-b-0 md:border-r border-dashed border-gray-200 flex flex-col justify-between">
-                                <p class="text-gray-500 text-[14px] leading-relaxed mb-8">
-                                    <strong class="text-navy-900 font-semibold">Discussions de tâches.</strong> Lorem
-                                    ipsum dolor sit amet, consectetur adipiscing elit.
-                                </p>
-                                <div class="aspect-square rounded-xl flex items-center justify-center">
-                                    <img src="/store/images/collaboration-page/documents-type.webp" alt="" style="border-radius: 10px;">
+                            <!-- Partage de fichiers -->
+                            <div class="p-8 md:p-10 flex flex-col rounded-[15px]" style="background: linear-gradient(135deg, rgba(94,45,145,0.08), rgba(0,133,202,0.05));">
+                                <div class="mb-8" style="min-height: 5.5rem;">
+                                    <strong class="text-navy-900 font-semibold block mb-2 text-[15px]">Partage de fichiers</strong>
+                                    <p class="text-gray-500 text-[14px] leading-relaxed">Partagez et retrouvez facilement vos documents au sein de vos conversations, sans multiplier les outils.</p>
+                                </div>
+                                <div class="flex-1 flex items-center justify-center">
+                                    <img src="/store/images/collaboration-page/documents-type.webp" alt="" class="w-full object-contain rounded-xl">
                                 </div>
                             </div>
-                            <!-- Bottom Right -->
-                            <div class="p-8 md:p-10 flex flex-col justify-between">
-                                <p class="text-gray-500 text-[14px] leading-relaxed mb-8">
-                                    <strong class="text-navy-900 font-semibold">Notifications.</strong> Lorem ipsum
-                                    dolor sit amet, consectetur adipiscing elit.
-                                </p>
-                                <div class="aspect-square rounded-xl flex items-center justify-center">
-                                    <img src="/store/images/collaboration-page/analytics.webp" alt="" style="border-radius: 10px;">
+                            <!-- Analytiques de réunion -->
+                            <div class="p-8 md:p-10 flex flex-col rounded-[15px]" style="background: linear-gradient(135deg, rgba(207,0,114,0.06), rgba(94,45,145,0.06));">
+                                <div class="mb-8" style="min-height: 5.5rem;">
+                                    <strong class="text-navy-900 font-semibold block mb-2 text-[15px]">Analytiques de réunion</strong>
+                                    <p class="text-gray-500 text-[14px] leading-relaxed">Visualisez le temps de parole de chaque participant et mesurez l'engagement de vos équipes après chaque visio.</p>
+                                </div>
+                                <div class="flex-1 flex items-center justify-center">
+                                    <img src="/store/images/collaboration-page/analytics.webp" alt="" class="w-full object-contain rounded-xl">
                                 </div>
                             </div>
                         </div>

@@ -88,26 +88,36 @@
         }
 
         /* ===== SIDEBAR STYLES ===== */
+        .sidebar-section-label {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #c4b5fd;
+            padding: 0 14px;
+            margin-bottom: 6px;
+        }
+
         .sidebar-item {
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            padding: 12px 16px;
-            border-radius: 10px;
+            padding: 10px 14px;
+            border-radius: 12px;
             cursor: pointer;
             text-decoration: none;
-            transition: background 0.15s, border-color 0.15s;
-            border-left: 3px solid transparent;
-            margin-bottom: 4px;
+            transition: background 0.18s, box-shadow 0.18s;
+            margin-bottom: 2px;
+            position: relative;
         }
 
-        .sidebar-item:hover {
+        .sidebar-item:hover:not(.sidebar-item-soon) {
             background: #f5f3ff;
         }
 
         .sidebar-active {
-            background: #f5f3ff !important;
-            border-left-color: #5e2d91 !important;
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%) !important;
+            box-shadow: 0 1px 6px rgba(94,45,145,0.10) !important;
         }
 
         .sidebar-active .sidebar-item-name {
@@ -115,10 +125,16 @@
             font-weight: 700;
         }
 
+        .sidebar-item-soon {
+            opacity: 0.38;
+            cursor: default;
+            pointer-events: none;
+        }
+
         .sidebar-item-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -129,12 +145,32 @@
             font-size: 0.875rem;
             font-weight: 600;
             color: #1e1b4b;
+            line-height: 1.3;
         }
 
         .sidebar-item-desc {
-            font-size: 0.75rem;
+            font-size: 0.6875rem;
             color: #9ca3af;
-            margin-top: 1px;
+            margin-top: 2px;
+            line-height: 1.4;
+        }
+
+        .sidebar-help-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: #faf9ff;
+            border: 1px solid #ede9fe;
+            text-decoration: none;
+            transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
+        }
+
+        .sidebar-help-card:hover {
+            background: #f5f3ff;
+            border-color: #c4b5fd;
+            box-shadow: 0 2px 10px rgba(94,45,145,0.08);
         }
 
         /* ===== TWO-COLUMN LAYOUT ===== */
@@ -150,19 +186,18 @@
 
         @media (min-width: 768px) {
             .page-sidebar {
-                display: block;
-                width: 240px;
+                display: flex;
+                flex-direction: column;
+                width: 264px;
                 flex-shrink: 0;
                 position: sticky;
                 top: 64px;
                 height: calc(100vh - 64px);
                 overflow-y: auto;
-                background: #ffffff;
-                border-right: 1px solid #f3f4f6;
-                box-shadow: 2px 0 8px rgba(0,0,0,0.03);
-                padding: 24px 12px 24px 12px;
-                display: flex;
-                flex-direction: column;
+                background: linear-gradient(180deg, #faf9ff 0%, #ffffff 70%);
+                border-right: 1px solid #ede9fe;
+                border-top-right-radius: 16px;
+                padding: 28px 10px 20px;
                 justify-content: space-between;
             }
         }
@@ -172,11 +207,15 @@
             display: flex;
             overflow-x: auto;
             gap: 8px;
-            padding: 12px 16px;
+            padding: 11px 16px;
             background: #ffffff;
-            border-bottom: 1px solid #f3f4f6;
+            border-bottom: 1px solid #ede9fe;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
+            position: sticky;
+            top: 64px;
+            z-index: 40;
+            box-shadow: 0 2px 10px rgba(94,45,145,0.06);
         }
 
         .mobile-pill-bar::-webkit-scrollbar {
@@ -193,7 +232,7 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 7px 14px;
+            padding: 7px 16px;
             border-radius: 999px;
             background: #f5f3ff;
             color: #5e2d91;
@@ -201,20 +240,34 @@
             font-weight: 600;
             white-space: nowrap;
             text-decoration: none;
-            border: 1px solid #ede9fe;
-            transition: background 0.15s;
+            border: 1.5px solid #ddd6fe;
+            transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
         }
 
         .mobile-pill:hover {
             background: #ede9fe;
+            border-color: #c4b5fd;
+            box-shadow: 0 2px 8px rgba(94,45,145,0.12);
         }
 
         .mobile-pill.disabled {
             background: #f9fafb;
-            color: #9ca3af;
+            color: #b0b7c3;
             border-color: #e5e7eb;
-            opacity: 0.7;
+            opacity: 0.6;
             pointer-events: none;
+        }
+
+        .mobile-soon-tag {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: #e5e7eb;
+            color: #9ca3af;
+            padding: 1px 5px;
+            border-radius: 999px;
+            line-height: 1.6;
         }
 
         /* Right content column fills remaining space */
@@ -274,13 +327,13 @@
         <div id="mobile-menu" class="md:hidden hidden border-t border-indigo-50 bg-white px-6 py-4 space-y-3">
             <a href="#" class="block text-sm text-gray-600 py-2" data-i18n="nav.product">Produits</a>
             <div class="mobile-submenu space-y-1">
-                <a href="/store/products/webinar" class="block py-1">Rainbow Webinar</a>
                 <a href="/store/products/collaboration" class="block py-1">Rainbow Collaboration</a>
+                <a href="/store/products/webinar" class="block py-1">Rainbow Webinar</a>
             </div>
             <a href="#" class="block text-sm text-gray-600 py-2">Tarifs</a>
             <div class="mobile-submenu space-y-1">
-                <a href="/store/products/webinar/pricing" class="block py-1">Rainbow Webinar</a>
                 <a href="/store/products/collaboration/pricing" class="block py-1">Rainbow Collaboration</a>
+                <a href="/store/products/webinar/pricing" class="block py-1">Rainbow Webinar</a>
             </div>
             <a href="#" class="block text-sm text-gray-600 py-2">Ressources</a>
             <div class="mobile-submenu space-y-1">
@@ -315,25 +368,13 @@
 
         <!-- LEFT: Sticky Sidebar (desktop only) -->
         <aside class="page-sidebar">
-            <div>
-                <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 px-4 mb-3">Nos solutions</p>
+            <div class="flex flex-col gap-1">
+                <!-- Active products label -->
+                <p class="sidebar-section-label">Nos solutions</p>
 
-                <!-- Webinar item -->
-                <a href="#webinar" id="sidebar-webinar" class="sidebar-item sidebar-active">
-                    <div class="sidebar-item-icon" style="background: #f5f3ff;">
-                        <svg class="w-5 h-5" style="color:#5e2d91" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.277A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="sidebar-item-name">Rainbow Webinar</div>
-                        <div class="sidebar-item-desc">Webinaires &amp; événements en ligne</div>
-                    </div>
-                </a>
-
-                <!-- Collaboration item -->
-                <a href="#collaboration" id="sidebar-collaboration" class="sidebar-item">
-                    <div class="sidebar-item-icon" style="background: #eef2ff;">
+                <!-- Collaboration -->
+                <a href="#collaboration" id="sidebar-collaboration" class="sidebar-item sidebar-active">
+                    <div class="sidebar-item-icon" style="background: linear-gradient(135deg, #eef2ff, #e0e7ff);">
                         <svg class="w-5 h-5" style="color:#4f46e5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
                         </svg>
@@ -344,40 +385,62 @@
                     </div>
                 </a>
 
+                <!-- Webinar -->
+                <a href="#webinar" id="sidebar-webinar" class="sidebar-item">
+                    <div class="sidebar-item-icon" style="background: linear-gradient(135deg, #ede9fe, #ddd6fe);">
+                        <svg class="w-5 h-5" style="color:#5e2d91" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.277A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="sidebar-item-name">Rainbow Webinar</div>
+                        <div class="sidebar-item-desc">Webinaires &amp; événements en ligne</div>
+                    </div>
+                </a>
+
+                <!-- Divider -->
+                <div class="my-3 mx-2 border-t border-dashed border-gray-100"></div>
+                <p class="sidebar-section-label">Prochainement</p>
+
                 <!-- Voice (coming soon) -->
-                <div class="sidebar-item" style="opacity:0.5; cursor:default;">
-                    <div class="sidebar-item-icon" style="background: #f9fafb;">
+                <div class="sidebar-item sidebar-item-soon">
+                    <div class="sidebar-item-icon" style="background: #f3f4f6;">
                         <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                         </svg>
                     </div>
                     <div>
-                        <div class="sidebar-item-name" style="color:#6b7280;">Rainbow Voice</div>
+                        <div class="sidebar-item-name">Rainbow Voice</div>
                         <div class="sidebar-item-desc">Téléphonie cloud avancée</div>
-                        <span style="display:inline-block;margin-top:4px;font-size:0.65rem;font-weight:700;background:#e5e7eb;color:#6b7280;border-radius:999px;padding:1px 7px;text-transform:uppercase;letter-spacing:0.05em;">Bientôt</span>
                     </div>
                 </div>
 
                 <!-- Analytics (coming soon) -->
-                <div class="sidebar-item" style="opacity:0.5; cursor:default;">
-                    <div class="sidebar-item-icon" style="background: #f9fafb;">
+                <div class="sidebar-item sidebar-item-soon">
+                    <div class="sidebar-item-icon" style="background: #f3f4f6;">
                         <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                         </svg>
                     </div>
                     <div>
-                        <div class="sidebar-item-name" style="color:#6b7280;">Rainbow Analytics</div>
+                        <div class="sidebar-item-name">Rainbow Analytics</div>
                         <div class="sidebar-item-desc">Tableaux de bord &amp; rapports</div>
-                        <span style="display:inline-block;margin-top:4px;font-size:0.65rem;font-weight:700;background:#e5e7eb;color:#6b7280;border-radius:999px;padding:1px 7px;text-transform:uppercase;letter-spacing:0.05em;">Bientôt</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Sidebar bottom link -->
-            <div class="px-4 pb-2 mt-auto">
-                <a href="/store/contact" class="flex items-center gap-2 text-xs text-gray-400 hover:text-brand-500 transition-colors font-medium">
-                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    Besoin d'aide ?
+            <!-- Bottom help card -->
+            <div class="mt-auto pt-4 px-1">
+                <a href="/store/contact" class="sidebar-help-card">
+                    <div style="width:34px;height:34px;border-radius:9px;background:#ffffff;border:1px solid #ede9fe;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <svg class="w-4 h-4" style="color:#a78bfa" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p style="font-size:0.8rem;font-weight:600;color:#1e1b4b;line-height:1.3;">Besoin d'aide ?</p>
+                        <p style="font-size:0.6875rem;color:#9ca3af;margin-top:1px;">Contactez notre équipe</p>
+                    </div>
                 </a>
             </div>
         </aside>
@@ -387,21 +450,23 @@
 
             <!-- Mobile pill bar -->
             <div class="mobile-pill-bar">
-                <a href="#webinar" class="mobile-pill">
-                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.277A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
-                    Webinar
-                </a>
                 <a href="#collaboration" class="mobile-pill">
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                     Collaboration
                 </a>
+                <a href="#webinar" class="mobile-pill">
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.277A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+                    Webinar
+                </a>
                 <span class="mobile-pill disabled">
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                    Voice — Bientôt
+                    Voice
+                    <span class="mobile-soon-tag">Bientôt</span>
                 </span>
                 <span class="mobile-pill disabled">
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                    Analytics — Bientôt
+                    Analytics
+                    <span class="mobile-soon-tag">Bientôt</span>
                 </span>
             </div>
 
@@ -1169,40 +1234,39 @@
         }
     </script>
     <script>
-        // ===== IntersectionObserver for sidebar active state =====
-        (function() {
+        // ===== Scroll-based sidebar active state =====
+        (function () {
             var sections = [
-                { id: 'webinar', sidebarId: 'sidebar-webinar' },
+                { id: 'webinar',       sidebarId: 'sidebar-webinar' },
                 { id: 'collaboration', sidebarId: 'sidebar-collaboration' }
             ];
 
             function setActive(sidebarId) {
-                sections.forEach(function(s) {
+                sections.forEach(function (s) {
                     var el = document.getElementById(s.sidebarId);
                     if (!el) return;
-                    if (s.sidebarId === sidebarId) {
-                        el.classList.add('sidebar-active');
-                    } else {
-                        el.classList.remove('sidebar-active');
-                    }
+                    el.classList.toggle('sidebar-active', s.sidebarId === sidebarId);
                 });
             }
 
-            var observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        var sid = 'sidebar-' + entry.target.id;
-                        setActive(sid);
-                    }
+            function updateActive() {
+                var scrollY = window.scrollY || window.pageYOffset;
+                // Use 40% from the top of the viewport as the detection line
+                var threshold = scrollY + window.innerHeight * 0.4;
+                var active = sections[0].sidebarId;
+
+                sections.forEach(function (s) {
+                    var el = document.getElementById(s.id);
+                    if (!el) return;
+                    var top = el.getBoundingClientRect().top + scrollY;
+                    if (top <= threshold) active = s.sidebarId;
                 });
-            }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
 
-            sections.forEach(function(s) {
-                var el = document.getElementById(s.id);
-                if (el) observer.observe(el);
-            });
+                setActive(active);
+            }
 
-            setActive('sidebar-webinar'); // default
+            window.addEventListener('scroll', updateActive, { passive: true });
+            updateActive();
         })();
     </script>
 </body>

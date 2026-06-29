@@ -45,8 +45,8 @@
   }
 
   var productsItems = [
-    makeItem('/store/products/webinar', 'video-camera', 'Rainbow Webinar', 'Webinaires live et en replay avec outils d\'engagement intégrés.'),
     makeItem('/store/products/collaboration', 'chat', 'Rainbow Collaboration', 'Messagerie d\'équipe, canaux et partage de fichiers en un seul endroit.'),
+    makeItem('/store/products/webinar', 'video-camera', 'Rainbow Webinar', 'Webinaires live et en replay avec outils d\'engagement intégrés.'),
     makeItem('/store/products/smart-hotel', 'calendar', 'Rainbow Smart Hotel', 'Réservation de salles et gestion de calendrier pour les hôtels.'),
     makeItem('/store/products/analytics', 'chart-bar', 'Rainbow Analytics', 'Rapports en temps réel et analyses de vos données de communication.'),
     makeItem('/store/products/voice', 'phone', 'Rainbow Voice', 'Téléphonie cloud avec voix HD, SVI et routage d\'appels.'),
@@ -63,12 +63,12 @@
         '</div>',
         '<div class="mega-menu-side">',
           '<p class="mega-menu-section-title">À la une</p>',
-          '<a href="/store/products/webinar" class="mega-menu-showcase">',
-            '<div class="mega-menu-showcase-img">' + svgIcon('video-camera') + '</div>',
+          '<a href="/store/products/collaboration" class="mega-menu-showcase">',
+            '<div class="mega-menu-showcase-img">' + svgIcon('chat') + '</div>',
             '<div class="mega-menu-showcase-body">',
-              '<p class="mega-menu-showcase-title">Rainbow Webinar</p>',
-              '<p class="mega-menu-showcase-desc">Engagez votre audience avec des webinaires interactifs en direct et en replay.</p>',
-              '<span class="mega-menu-showcase-tag">Nouveau</span>',
+              '<p class="mega-menu-showcase-title">Rainbow Collaboration</p>',
+              '<p class="mega-menu-showcase-desc">Messagerie, visioconférence et téléphonie unifiés pour vos équipes au quotidien.</p>',
+              '<span class="mega-menu-showcase-tag">Populaire</span>',
             '</div>',
           '</a>',
           '<p class="mega-menu-section-title">Intégrations</p>',
@@ -133,8 +133,8 @@
   ].join('');
 
   var productsMobileItems = [
-    makeMobileItem('/store/products/webinar', 'video-camera', 'Rainbow Webinar', 'Webinaires live et en replay.'),
     makeMobileItem('/store/products/collaboration', 'chat', 'Rainbow Collaboration', 'Messagerie et canaux d\'équipe.'),
+    makeMobileItem('/store/products/webinar', 'video-camera', 'Rainbow Webinar', 'Webinaires live et en replay.'),
     makeMobileItem('/store/products/smart-hotel', 'calendar', 'Rainbow Smart Hotel', 'Réservation de salles intelligente.'),
     makeMobileItem('/store/products/analytics', 'chart-bar', 'Rainbow Analytics', 'Rapports en temps réel.'),
     makeMobileItem('/store/products/voice', 'phone', 'Rainbow Voice', 'Téléphonie cloud.'),
@@ -171,8 +171,8 @@
   ].join('');
 
   var tarifsItems = [
-    makeItem('/store/products/webinar/pricing', 'video-camera', 'Rainbow Webinar', 'Plans et tarifs pour nos solutions de webinaires interactifs.'),
-    makeItem('/store/products/collaboration/pricing', 'chat', 'Rainbow Collaboration', 'Tarifs adaptés à vos besoins de collaboration d\'équipe.')
+    makeItem('/store/products/collaboration/pricing', 'chat', 'Rainbow Collaboration', 'Tarifs adaptés à vos besoins de collaboration d\'équipe.'),
+    makeItem('/store/products/webinar/pricing', 'video-camera', 'Rainbow Webinar', 'Plans et tarifs pour nos solutions de webinaires interactifs.')
   ].join('');
 
   var tarifsHTML = [
@@ -194,8 +194,8 @@
   ].join('');
 
   var tarifsMobileItems = [
-    makeMobileItem('/store/products/webinar/pricing', 'video-camera', 'Rainbow Webinar', 'Plans webinaires.'),
-    makeMobileItem('/store/products/collaboration/pricing', 'chat', 'Rainbow Collaboration', 'Plans collaboration.')
+    makeMobileItem('/store/products/collaboration/pricing', 'chat', 'Rainbow Collaboration', 'Plans collaboration.'),
+    makeMobileItem('/store/products/webinar/pricing', 'video-camera', 'Rainbow Webinar', 'Plans webinaires.')
   ].join('');
 
   var tarifsMobileHTML = [
