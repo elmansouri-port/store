@@ -3,7 +3,7 @@
     "allow": [
       "Bash(npm install)",
       "Bash(npm install:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Stripe credit card payment for monthly subscriptions\n\nReplace demo checkout with real Stripe Elements integration:\n- Backend: /api/create-subscription and /api/stripe-key endpoints\n- Frontend: Stripe CardElement with real-time validation\n- Success confirmation view after payment\n- Price IDs configurable via environment variables\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Stripe credit card payment for monthly subscriptions\n\nReplace Démo checkout with real Stripe Elements integration:\n- Backend: /api/create-subscription and /api/stripe-key endpoints\n- Frontend: Stripe CardElement with real-time validation\n- Success confirmation view after payment\n- Price IDs configurable via environment variables\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git push:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
@@ -62,7 +62,9 @@
       "Bash(do sed -i '/href=\"\"\\\\/solutions\"\"/d;/href=\"\"\\\\/industries\"\"/d' \"$f\")",
       "Bash(git ls-remote *)",
       "Bash(git config *)",
-      "Bash(git remote *)"
+      "Bash(git remote *)",
+      "Bash(FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch -f --msg-filter 'grep -v \"^Co-Authored-By: Claude\" || true' refs/heads/front-rework)",
+      "PowerShell(\\(Get-Command pdftoppm -ErrorAction SilentlyContinue\\).Source)"
     ]
   }
 }

@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   'use strict';
 
   var icons = {
@@ -94,7 +94,8 @@
     makeItem('/store/docs', 'book-open', 'Documentation', 'Docs API complètes, guides d\'intégration et références techniques.'),
     makeItem('/store/community', 'users', 'Communauté', 'Rejoignez la communauté Rainbow pour partager vos idées et obtenir de l\'aide.'),
     makeItem('/store/support', 'lifebuoy', 'Support', 'Obtenez de l\'aide technique, signalez des problèmes et trouvez des solutions.'),
-    makeItem('/store/changelog', 'sparkles', 'Nouveautés', 'Restez informé des dernières fonctionnalités, versions et améliorations.')
+    makeItem('/store/changelog', 'sparkles', 'Nouveautés', 'Restez informé des dernières fonctionnalités, versions et améliorations.'),
+    makeItem('/store/partenaires', 'users', 'Partenaires', 'Rejoignez le réseau Rainbow et développez votre activité.')
   ].join('');
 
   var ressourcesHTML = [
@@ -157,7 +158,8 @@
     makeMobileItem('/store/docs', 'book-open', 'Documentation', 'Docs API et références.'),
     makeMobileItem('/store/community', 'users', 'Communauté', 'Partagez vos idées.'),
     makeMobileItem('/store/support', 'lifebuoy', 'Support', 'Obtenez de l\'aide.'),
-    makeMobileItem('/store/changelog', 'sparkles', 'Nouveautés', 'Dernières fonctionnalités et versions.')
+    makeMobileItem('/store/changelog', 'sparkles', 'Nouveautés', 'Dernières fonctionnalités et versions.'),
+    makeMobileItem('/store/partenaires', 'users', 'Partenaires', 'Rejoignez le réseau Rainbow.')
   ].join('');
 
   var ressourcesMobileHTML = [
@@ -204,46 +206,6 @@
         '<p class="mega-menu-mobile-section-title">Nos tarifs</p>',
         tarifsMobileItems,
         '<a href="/store/tarifs" class="mega-menu-mobile-see-all">Voir tous les plans <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
-      '</div>',
-    '</div>'
-  ].join('');
-
-  var partenairesItems = [
-    makeItem('/store/partenaires', 'users', 'Devenir un partenaire', 'Rejoignez le réseau Rainbow et développez votre activité avec nos solutions UCaaS souveraines.'),
-    makeItem('/store/partners/portal', 'sparkles', 'Programme de fidélité', 'Accédez aux avantages exclusifs, certifications et récompenses de notre programme.'),
-    makeItem('/store/partners/docs', 'book-open', 'Ressources partenaires', 'Guides, supports marketing, formations et outils dédiés à nos partenaires.')
-  ].join('');
-
-  var partenairesHTML = [
-    '<div class="mega-menu mega-menu-tarifs" role="menu">',
-      '<div class="mega-menu-inner">',
-        '<div class="mega-menu-main">',
-          '<p class="mega-menu-section-title">Programme partenaires</p>',
-          '<div class="mega-menu-grid">' + partenairesItems + '</div>',
-          '<a href="/store/partenaires" class="mega-menu-see-all">Découvrir le programme <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
-        '</div>',
-      '</div>',
-      '<div class="mega-menu-footer">',
-        '<p class="mega-menu-footer-text">Rejoignez plus de 3 000 partenaires Rainbow à travers le monde.</p>',
-        '<div class="mega-menu-footer-actions">',
-          '<a href="/store/partenaires" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('users') + 'Devenir partenaire</a>',
-        '</div>',
-      '</div>',
-    '</div>'
-  ].join('');
-
-  var partenaireMobileItems = [
-    makeMobileItem('/store/partenaires', 'users', 'Devenir un partenaire', 'Rejoignez le réseau Rainbow.'),
-    makeMobileItem('/store/partners/portal', 'sparkles', 'Programme de fidélité', 'Avantages exclusifs.'),
-    makeMobileItem('/store/partners/docs', 'book-open', 'Ressources partenaires', 'Guides et certifications.')
-  ].join('');
-
-  var partenaireMobileHTML = [
-    '<div class="mega-menu-mobile-content">',
-      '<div class="mega-menu-mobile-section">',
-        '<p class="mega-menu-mobile-section-title">Programme partenaires</p>',
-        partenaireMobileItems,
-        '<a href="/store/partenaires" class="mega-menu-mobile-see-all">Découvrir le programme <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
       '</div>',
     '</div>'
   ].join('');
@@ -345,8 +307,7 @@
       var isProducts = dd.querySelector('[data-i18n="nav.product"]') !== null;
       var isRessources = trigger.textContent.trim().toLowerCase() === 'ressources';
       var isTarifs = trigger.textContent.trim().toLowerCase() === 'tarifs';
-      var isPartenaires = trigger.textContent.trim().toLowerCase() === 'partenaires';
-      if (!isProducts && !isRessources && !isTarifs && !isPartenaires) continue;
+      if (!isProducts && !isRessources && !isTarifs) continue;
 
       var megaHTML, mobileHTML;
       if (isProducts) {
@@ -355,9 +316,6 @@
       } else if (isRessources) {
         megaHTML = ressourcesHTML;
         mobileHTML = ressourcesMobileHTML;
-      } else if (isPartenaires) {
-        megaHTML = partenairesHTML;
-        mobileHTML = partenaireMobileHTML;
       } else {
         megaHTML = tarifsHTML;
         mobileHTML = tarifsMobileHTML;
@@ -382,8 +340,6 @@
         mobileContent = tarifsMobileHTML;
       } else if (headerText.indexOf('ressource') !== -1) {
         mobileContent = ressourcesMobileHTML;
-      } else if (headerText.indexOf('partenaire') !== -1) {
-        mobileContent = partenaireMobileHTML;
       } else {
         continue;
       }

@@ -63,6 +63,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/mega-menu.css">
+<style>
+.compliance-card {
+    perspective: 1000px;
+}
+.compliance-card-inner {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    transition: transform 0.65s cubic-bezier(.4,0,.2,1);
+    transform-style: preserve-3d;
+    border-radius: 20px;
+    box-shadow: 0 2px 12px rgba(80,70,160,0.06);
+}
+.compliance-card:hover .compliance-card-inner { transform: rotateY(180deg); }
+.compliance-card-front,
+.compliance-card-back {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.compliance-card-front {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+.compliance-card-back {
+    transform: rotateY(180deg);
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.75rem 3.5rem;
+}
+.compliance-card-back p {
+    font-size: 0.9375rem;
+    color: #374151;
+    line-height: 1.7;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.compliance-card-back-arrow {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 34px;
+    height: 34px;
+    border-radius: 9999px;
+    border: 1.5px solid #ddd8f0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5e2d91;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    text-decoration: none;
+}
+.compliance-card-back-arrow:hover { background: #5e2d91; border-color: #5e2d91; color: white; }
+.compliance-card-back-arrow svg { width: 14px; height: 14px; }
+</style>
 </head>
 <body class="font-sans text-gray-600 antialiased bg-white">
 
@@ -92,7 +155,6 @@
                     </a>
 
                 </div>
-                <a href="/partenaires" class="text-sm text-gray-500 hover:text-navy-900 transition-colors font-medium" style="font-size:1rem">Partenaires</a>
             </div>
             <div class="hidden md:flex items-center gap-4 shrink-0">
                 <div class="lang-switcher" id="lang-switcher">
@@ -104,7 +166,7 @@
                     <div class="lang-dropdown" id="lang-dropdown"></div>
                 </div>
                 <a href="/login" class="px-5 py-2.5 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-sm font-semibold transition-all active:scale-95 inline-flex items-center justify-center" data-i18n="nav.signin">Se connecter</a>
-                <a href="/tarifs" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold whitespace-nowrap shadow-md hover:shadow-lg transition-all">Découvrez nos plan</a>
+                <a href="/tarifs" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold whitespace-nowrap shadow-md hover:shadow-lg transition-all">Essai gratuit</a>
             </div>
             <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Menu">
                 <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -113,13 +175,13 @@
         <div id="mobile-menu" class="md:hidden hidden border-t border-indigo-50 bg-white px-6 py-4 space-y-3">
             <a href="#" class="block text-sm text-gray-600 py-2" data-i18n="nav.product">Produits</a>
             <div class="mobile-submenu space-y-1">
-                <a href="/products/webinar" class="block py-1">Rainbow Webinar</a>
                 <a href="/products/collaboration" class="block py-1">Rainbow Collaboration</a>
+                <a href="/products/webinar" class="block py-1">Rainbow Webinar</a>
             </div>
             <a href="#" class="block text-sm text-gray-600 py-2">Tarifs</a>
             <div class="mobile-submenu space-y-1">
-                <a href="/products/webinar/pricing" class="block py-1">Rainbow Webinar</a>
                 <a href="/products/collaboration/pricing" class="block py-1">Rainbow Collaboration</a>
+                <a href="/products/webinar/pricing" class="block py-1">Rainbow Webinar</a>
             </div>
             <a href="#" class="block text-sm text-gray-600 py-2">Ressources</a>
             <div class="mobile-submenu space-y-1">
@@ -128,11 +190,10 @@
                 <a href="/support" class="block py-1" data-i18n="nav.support">Support</a>
                 <a href="/tutorials" class="block py-1" data-i18n="nav.tutorials">Tutoriels</a>
             </div>
-            <a href="/partenaires" class="block text-sm text-gray-600 py-2">Partenaires</a>
             <div id="mobile-lang-switcher" class="flex flex-wrap gap-2 py-2"></div>
             <div class="flex flex-col gap-3 pt-2">
                 <a href="/login" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">Se connecter</a>
-                <a href="/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all">Explorez nos produits</a>
+                <a href="/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all">Essai gratuit</a>
             </div>
         </div>
     </nav>
@@ -170,11 +231,10 @@
             <!-- CTAs -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
                 <a href="/tarifs" class="px-8 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap shadow-2xl shadow-purple-900/20 transition-all active:scale-95">
-                    Découvrez nos plan
+                    Découvrez nos plans
                 </a>
-                <a href="/support" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">
-                    <svg class="w-5 h-5 mr-3 fill-current text-purple-900 group-hover:text-brand-500 transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    Regarder  une d&eacute;mo
+                <a href="https://example.com/giantlink" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">
+                    Contacter un agent
                 </a>
             </div>
             
@@ -272,7 +332,7 @@
                     <span class="text-brand-500">z&eacute;ro friction dans vos &eacute;changes</span>
                 </h2>
                 <p class="text-lg text-gray-600 leading-relaxed font-medium">
-                    Centralisez vos &eacute;changes avec Rainbow et gagnez du temps au quotidien.
+                    Chat, visio, fichiers, webinaires — une seule app, zéro jonglage.
                 </p>
             </div>
 
@@ -358,7 +418,7 @@
                                     Organisez facilement webinaires, conf&eacute;rences et d&eacute;monstrations pour engager vos audiences.
                                 </p>
                                 <div class="flex items-center text-sm font-bold" style="color: #ea5800;">
-                                    <a href="/products/collaboration"><span class="hover:underline cursor-pointer">En savoir plus</span>
+                                    <a href="https://www.al-enterprise.com/-/media/assets/internet/documents/ale-strasbourg-eurometropolis-long-case-study-fr.pdf"><span class="hover:underline cursor-pointer">En savoir plus</span>
                                     <span class="ml-1 opacity-70">&rarr;</span></a>
                                 </div>
                             </div>
@@ -367,7 +427,7 @@
 
                     <!-- Quote Section -->
                     <div class="pt-8 border-t border-gray-200 relative">
-                        <div id="platform-quote" class="relative">
+                        <div id="platform-quote" class="relative text-center">
                             <div class="quote-item" data-quote-index="0">
                                 <p class="text-gray-600 italic text-lg mb-2 leading-relaxed">
                                     &laquo; Rainbow a transform&eacute; la fa&ccedil;on dont nos &eacute;quipes synchronisent leurs projets au quotidien. &raquo;
@@ -386,10 +446,10 @@
                             </div>
                             <div class="quote-item absolute inset-0" data-quote-index="2" style="opacity: 0; pointer-events: none;">
                                 <p class="text-gray-600 italic text-lg mb-2 leading-relaxed">
-                                    &laquo; Rainbow nous a permis d&rsquo;organiser des webinaires &agrave; grande &eacute;chelle sans aucun effort technique. &raquo;
+                                    &laquo; La facilité d'usage était un critère clé pour nous. La bibliothèque de médias, notamment vidéo, nous permet d'assurer un accompagnement de qualité auprès de nos utilisateurs. &raquo;
                                 </p>
                                 <p class="text-xs font-bold uppercase tracking-widest text-gray-400">
-                                    Directrice Marketing, Nexva
+                                    RESPONSABLE SI, EUROMÉTROPOLE DE STRASBOURG​
                                 </p>
                             </div>
                         </div>
@@ -484,7 +544,7 @@
                             <!-- CTA Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap transition-all shadow-md hover:shadow-lg">
-                                    Découvrez nos plan
+                                    Découvrez nos plans
                                 </a>
                                 <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
                                     En savoir plus
@@ -507,10 +567,11 @@
                             <p class="hidden lg:block text-lg text-gray-600 leading-relaxed mb-6">
                                 &Eacute;changez en toute confiance gr&acirc;ce &agrave; une plateforme souveraine, h&eacute;berg&eacute;e en Europe et conforme aux exigences de s&eacute;curit&eacute; les plus strictes.
                             </p>
+
                             <!-- CTA Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap transition-all shadow-md hover:shadow-lg">
-                                    Découvrez nos plan
+                                    Découvrez nos plans
                                 </a>
                                 <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
                                     En savoir plus
@@ -536,7 +597,7 @@
                             <!-- CTA Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap transition-all shadow-md hover:shadow-lg">
-                                    Découvrez nos plan
+                                    Découvrez nos plans
                                 </a>
                                 <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
                                     En savoir plus
@@ -562,7 +623,7 @@
                             <!-- CTA Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap transition-all shadow-md hover:shadow-lg">
-                                    Découvrez nos plan
+                                    Découvrez nos plans
                                 </a>
                                 <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
                                     En savoir plus
@@ -610,10 +671,10 @@
                 <!-- Stat 2 -->
                 <div class="text-center group">
                     <div class="text-4xl lg:text-6xl font-semibold stats-number-2 mb-4 transition-transform group-hover:scale-105 duration-300">
-                        <span class="counter-number" data-counter="43" data-duration="2000">0</span>
+                        <span class="counter-number" data-counter="94" data-duration="2000">0</span><span>%</span>
                     </div>
                     <p class="text-base md:text-lg font-medium text-white/90 max-w-[280px] mx-auto leading-relaxed">
-                        le nombre moyen d'applications utilis&eacute;es par les &eacute;quipes dans Rainbow
+                        de renouvellement client chaque ann&eacute;e
                     </p>
                 </div>
 
@@ -652,82 +713,93 @@
                 
                 <!-- Card 0: HIPAA (col-span-4) - hasDots, hasBlob -->
                 <div class="md:col-span-4">
-                    <div class="compliance-card group">
+                    <div class="compliance-card group" style="min-height: 300px;">
                         <div class="compliance-card-inner">
-                            <div class="compliance-card-logo-area">
-                                <img src="/images/hipaa.png" alt="HIPAA" />
+                            <div class="compliance-card-front">
+                                <div class="compliance-card-logo-area">
+                                    <img src="/images/hipaa.png" alt="HIPAA" />
+                                </div>
+                                <h3 class="compliance-card-title">HIPAA</h3>
+                                <div class="card-deco-blob"></div>
+                                <div class="card-deco-dots">
+                                    <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                                    <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                                    <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                                    <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                                </div>
                             </div>
-                            <h3 class="compliance-card-title">HIPAA</h3>
-                            <p class="compliance-card-body">Compliance with HIPAA ensures the protection of sensitive health information and reinforces the security of your data.</p>
-                        </div>
-                        <div class="compliance-card-arrow">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                        </div>
-                        <!-- Decorations: Blob + Dots -->
-                        <div class="card-deco-blob"></div>
-                        <div class="card-deco-dots">
-                            <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
-                            <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
-                            <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
-                            <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                            <div class="compliance-card-back">
+                                <p>Compliance with HIPAA ensures the protection of sensitive health information and reinforces the security of your data.</p>
+                                <a href="#" class="compliance-card-back-arrow">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 1: GDPR (col-span-5) - hasWaves -->
                 <div class="md:col-span-5">
-                    <div class="compliance-card group">
+                    <div class="compliance-card group" style="min-height: 300px;">
                         <div class="compliance-card-inner">
-                            <div class="compliance-card-logo-area">
-                                <img src="/images/rgpd.jpg" alt="GDPR" />
+                            <div class="compliance-card-front">
+                                <div class="compliance-card-logo-area">
+                                    <img src="/images/rgpd.jpg" alt="GDPR" />
+                                </div>
+                                <h3 class="compliance-card-title">GDPR</h3>
+                                <!-- Decoration: Waves -->
+                                <div class="card-deco-waves">
+                                    <svg viewBox="0 0 100 100">
+                                        <path d="M-20,120 C 20,80 60,80 120,-20" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                        <path d="M-10,120 C 30,90 70,90 120,-10" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                        <path d="M0,120 C 40,100 80,100 120,0" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                        <path d="M10,120 C 50,110 90,110 120,10" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                        <path d="M20,120 C 60,120 100,120 120,20" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                    </svg>
+                                    <div class="card-wave-dot-1"></div>
+                                    <div class="card-wave-dot-2"></div>
+                                </div>
                             </div>
-                            <h3 class="compliance-card-title">GDPR</h3>
-                            <p class="compliance-card-body">We comply with the GDPR to guarantee the privacy of personal data and give you full control over your information.</p>
-                        </div>
-                        <div class="compliance-card-arrow">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                        </div>
-                        <!-- Decoration: Waves -->
-                        <div class="card-deco-waves">
-                            <svg viewBox="0 0 100 100">
-                                <path d="M-20,120 C 20,80 60,80 120,-20" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                                <path d="M-10,120 C 30,90 70,90 120,-10" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                                <path d="M0,120 C 40,100 80,100 120,0" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                                <path d="M10,120 C 50,110 90,110 120,10" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                                <path d="M20,120 C 60,120 100,120 120,20" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                            </svg>
-                            <div class="card-wave-dot-1"></div>
-                            <div class="card-wave-dot-2"></div>
+                            <div class="compliance-card-back">
+                                <p>We comply with the GDPR to guarantee the privacy of personal data and give you full control over your information.</p>
+                                <a href="#" class="compliance-card-back-arrow">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 2: ACN (col-span-3) - hasWaves, hasDots, hasBlob -->
                 <div class="md:col-span-3">
-                    <div class="compliance-card group">
+                    <div class="compliance-card group" style="min-height: 300px;">
                         <div class="compliance-card-inner">
-                            <div class="compliance-card-logo-area">
-                                <img src="/images/acn.png" alt="ACN" />
+                            <div class="compliance-card-front">
+                                <div class="compliance-card-logo-area">
+                                    <img src="/images/acn.png" alt="ACN" />
+                                </div>
+                                <h3 class="compliance-card-title">ACN</h3>
+                                <!-- Decorations: Blob + Dots + Waves -->
+                                <div class="card-deco-blob"></div>
+                                <div class="card-deco-dots">
+                                    <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                                    <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                                    <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                                    <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                                </div>
                             </div>
-                            <h3 class="compliance-card-title">ACN</h3>
-                            <p class="compliance-card-body">RAINBOW is aligned with the Australian Cyber Security Framework to ensure a robust and secure infrastructure.</p>
-                        </div>
-                        <div class="compliance-card-arrow">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                        </div>
-                        <!-- Decorations: Blob + Dots + Waves -->
-                        <div class="card-deco-blob"></div>
-                        <div class="card-deco-dots">
-                            <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
-                            <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
-                            <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
-                            <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                            <div class="compliance-card-back">
+                                <p>RAINBOW is aligned with the Australian Cyber Security Framework to ensure a robust and secure infrastructure.</p>
+                                <a href="#" class="compliance-card-back-arrow">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -736,93 +808,105 @@
 
                 <!-- Card 3: ISO 27001 (col-span-5) - hasWaves -->
                 <div class="md:col-span-5">
-                    <div class="compliance-card group">
+                    <div class="compliance-card group" style="min-height: 300px;">
                         <div class="compliance-card-inner">
-                            <div class="compliance-card-logo-area">
-                                <img src="/images/iso27001.png" alt="ISO 27001" />
+                            <div class="compliance-card-front">
+                                <div class="compliance-card-logo-area">
+                                    <img src="/images/iso27001.png" alt="ISO 27001" />
+                                </div>
+                                <h3 class="compliance-card-title">ISO 27001</h3>
+                                <!-- Decoration: Waves -->
+                                <div class="card-deco-waves">
+                                    <svg viewBox="0 0 100 100">
+                                        <path d="M-20,120 C 20,80 60,80 120,-20" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                        <path d="M-10,120 C 30,90 70,90 120,-10" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                        <path d="M0,120 C 40,100 80,100 120,0" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                        <path d="M10,120 C 50,110 90,110 120,10" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                        <path d="M20,120 C 60,120 100,120 120,20" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                    </svg>
+                                    <div class="card-wave-dot-1"></div>
+                                    <div class="card-wave-dot-2"></div>
+                                </div>
                             </div>
-                            <h3 class="compliance-card-title">ISO 27001</h3>
-                            <p class="compliance-card-body">Our ISO 27001 certification Démonstrates our commitment to the highest standards in information security management.</p>
-                        </div>
-                        <div class="compliance-card-arrow">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                        </div>
-                        <!-- Decoration: Waves -->
-                        <div class="card-deco-waves">
-                            <svg viewBox="0 0 100 100">
-                                <path d="M-20,120 C 20,80 60,80 120,-20" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                                <path d="M-10,120 C 30,90 70,90 120,-10" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                                <path d="M0,120 C 40,100 80,100 120,0" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                                <path d="M10,120 C 50,110 90,110 120,10" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                                <path d="M20,120 C 60,120 100,120 120,20" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                            </svg>
-                            <div class="card-wave-dot-1"></div>
-                            <div class="card-wave-dot-2"></div>
+                            <div class="compliance-card-back">
+                                <p>Our ISO 27001 certification demonstrates our commitment to the highest standards in information security management.</p>
+                                <a href="#" class="compliance-card-back-arrow">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 4: BSI C5 (col-span-3) - hasDots, hasBlob -->
                 <div class="md:col-span-3">
-                    <div class="compliance-card group">
+                    <div class="compliance-card group" style="min-height: 300px;">
                         <div class="compliance-card-inner">
-                            <div class="compliance-card-logo-area">
-                                <img src="/images/anssi.png" alt="BSI C5" />
+                            <div class="compliance-card-front">
+                                <div class="compliance-card-logo-area">
+                                    <img src="/images/anssi.png" alt="BSI C5" />
+                                </div>
+                                <h3 class="compliance-card-title">BSI C5</h3>
+                                <!-- Decorations: Blob + Dots -->
+                                <div class="card-deco-blob"></div>
+                                <div class="card-deco-dots">
+                                    <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                                    <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                                    <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                                    <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                                </div>
                             </div>
-                            <h3 class="compliance-card-title">BSI C5</h3>
-                            <p class="compliance-card-body">Certification based on the BSI C5 standard for cloud security, ensuring the protection and availability of your data.</p>
-                        </div>
-                        <div class="compliance-card-arrow">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                        </div>
-                        <!-- Decorations: Blob + Dots -->
-                        <div class="card-deco-blob"></div>
-                        <div class="card-deco-dots">
-                            <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
-                            <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
-                            <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
-                            <div class="card-deco-dots-row"><div class="card-deco-dot"></div><div class="card-deco-dot"></div><div class="card-deco-dot"></div></div>
+                            <div class="compliance-card-back">
+                                <p>Certification based on the BSI C5 standard for cloud security, ensuring the protection and availability of your data.</p>
+                                <a href="#" class="compliance-card-back-arrow">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 5: HDS (col-span-4) - hasWaves -->
                 <div class="md:col-span-4">
-                    <div class="compliance-card group">
+                    <div class="compliance-card group" style="min-height: 300px;">
                         <div class="compliance-card-inner">
-                            <div class="compliance-card-logo-area">
-                                <img src="/images/hds.webp" alt="HDS" />
+                            <div class="compliance-card-front">
+                                <div class="compliance-card-logo-area">
+                                    <img src="/images/hds.webp" alt="HDS" />
+                                </div>
+                                <h3 class="compliance-card-title">HDS</h3>
+                                <!-- Decoration: Waves -->
+                                <div class="card-deco-waves">
+                                    <svg viewBox="0 0 100 100">
+                                        <path d="M-20,120 C 20,80 60,80 120,-20" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                        <path d="M-10,120 C 30,90 70,90 120,-10" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                        <path d="M0,120 C 40,100 80,100 120,0" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                        <path d="M10,120 C 50,110 90,110 120,10" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                        <path d="M20,120 C 60,120 100,120 120,20" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
+                                    </svg>
+                                    <div class="card-wave-dot-1"></div>
+                                    <div class="card-wave-dot-2"></div>
+                                </div>
                             </div>
-                            <h3 class="compliance-card-title">HDS</h3>
-                            <p class="compliance-card-body">HDS certification guarantees secure hosting of your health data in compliance with French regulations.</p>
-                        </div>
-                        <div class="compliance-card-arrow">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                        </div>
-                        <!-- Decoration: Waves -->
-                        <div class="card-deco-waves">
-                            <svg viewBox="0 0 100 100">
-                                <path d="M-20,120 C 20,80 60,80 120,-20" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                                <path d="M-10,120 C 30,90 70,90 120,-10" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                                <path d="M0,120 C 40,100 80,100 120,0" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                                <path d="M10,120 C 50,110 90,110 120,10" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                                <path d="M20,120 C 60,120 100,120 120,20" fill="none" stroke="#f0c0d4" stroke-width="1.2" />
-                            </svg>
-                            <div class="card-wave-dot-1"></div>
-                            <div class="card-wave-dot-2"></div>
+                            <div class="compliance-card-back">
+                                <p>HDS certification guarantees secure hosting of your health data in compliance with French regulations.</p>
+                                <a href="#" class="compliance-card-back-arrow">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="text-center mt-16">
-                <a href="/security" class="text-brand-500 font-bold hover:text-pink-600 transition-all group inline-flex items-center">
+                <a href="#" class="text-brand-500 font-bold hover:text-pink-600 transition-all group inline-flex items-center">
                     En savoir plus sur notre engagement s&eacute;curit&eacute;
                     <span class="ml-2 transition-transform group-hover:translate-x-1">&rarr;</span>
                 </a>
@@ -848,28 +932,6 @@
             <!-- Product Cards -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
                 
-                <!-- Rainbow Webinar -->
-                <div class="product-range-card group">
-                    <div class="product-range-card-image" style="position: relative;">
-                        <img src="/images/webinar_live.png" alt="Rainbow Webinar" />
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to top, #43379e, transparent); pointer-events: none;"></div>
-                    </div>
-                    <div class="product-range-card-content">
-                        <h3 class="product-range-card-title">
-                            Rainbow <span style="color: #43379e;">Webinar</span>
-                        </h3>
-                        <p class="product-range-card-subtitle">
-                            La solution souveraine pour vos &eacute;v&eacute;nements digitaux
-                        </p>
-                        <a href="/products/webinar" class="product-range-cta-primary" style="background-color: #43379e;">
-                            D&eacute;couvrir Webinar
-                        </a>
-                        <a href="/products/webinar" class="product-range-cta-secondary" style="color: #43379e;">
-                            Voir les fonctionnalit&eacute;s &rarr;
-                        </a>
-                    </div>
-                </div>
-
                 <!-- Rainbow Collaboration -->
                 <div class="product-range-card group">
                     <div class="product-range-card-image" style="position: relative;">
@@ -884,9 +946,31 @@
                             Communications unifi&eacute;es pour les entreprises modernes
                         </p>
                         <a href="/products/collaboration" class="product-range-cta-primary" style="background-color: #6e264a;">
-                            D&eacute;couvrir Collaboration
+                            D&eacute;couvrir Rainbow Collaboration
                         </a>
                         <a href="/products/collaboration" class="product-range-cta-secondary" style="color: #6e264a;">
+                            Voir les fonctionnalit&eacute;s &rarr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rainbow Webinar -->
+                <div class="product-range-card group">
+                    <div class="product-range-card-image" style="position: relative;">
+                        <img src="/images/webinar_live.png" alt="Rainbow Webinar" />
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to top, #43379e, transparent); pointer-events: none;"></div>
+                    </div>
+                    <div class="product-range-card-content">
+                        <h3 class="product-range-card-title">
+                            Rainbow <span style="color: #43379e;">Webinar</span>
+                        </h3>
+                        <p class="product-range-card-subtitle">
+                            La solution souveraine pour vos &eacute;v&eacute;nements digitaux
+                        </p>
+                        <a href="/products/webinar" class="product-range-cta-primary" style="background-color: #43379e;">
+                            D&eacute;couvrir  Rainbow Webinar
+                        </a>
+                        <a href="/products/webinar" class="product-range-cta-secondary" style="color: #43379e;">
                             Voir les fonctionnalit&eacute;s &rarr;
                         </a>
                     </div>
@@ -1075,7 +1159,7 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
             <div class="text-center mb-16">
-                <h2 class="text-2xl md:text-4xl lg:text-5xl font-semibold mb-6 tracking-tight hero-badge-gradient">
+                <h2 class="text-2xl md:text-4xl lg:text-5xl font-semibold mb-6 tracking-tight text-gray-900">
                     Questions fr&eacute;quentes
                 </h2>
                 <p class="text-lg md:text-xl text-gray-600">
@@ -1113,18 +1197,17 @@
     </section>
 
 <!-- ===== CTA SECTION ===== -->
-<section class="py-20 lg:py-28 px-6" style="background: #eae7f3;">
+ <section class="py-20 lg:py-28 px-6" ><!--style="background: #eae7f3;" -->
   <div class="max-w-6xl mx-auto">
     <div class="sp-preview">
       <div class="sp-cta-banner">
         <div class="sp-cta-content">
           <h2 class="sp-cta-h2">Prêt à transformer votre<br />communication d'équipe&nbsp;?</h2>
-          <p class="sp-cta-sub">Rejoignez plus de 10&nbsp;000+ organisations qui utilisent Rainbow pour se connecter, collaborer et grandir. Sans carte bancaire.</p>
+          <p class="sp-cta-sub">Essayez nos solutions Rainbow gratuitement pendant 30 jours. Sans carte bancaire.</p>
           <div class="sp-cta-actions">
             <a href="/tarifs" class="btn-cta-primary">Commencer l'essai gratuit &rarr;</a>
-            <a href="/support" class="btn-cta-secondary">Voir une démo</a>
+            <a href="/tarifs" class="btn-cta-secondary">Voir les tarifs</a>
           </div>
-          <div class="sp-cta-note">14 jours sans engagement &middot; Sans carte bancaire &middot; Accès complet des fonctionnalités</div>
         </div>
       </div>
     </div>

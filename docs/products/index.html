@@ -119,7 +119,6 @@
                     </a>
 
                 </div>
-                <a href="/store/partenaires" class="text-sm text-gray-500 hover:text-navy-900 transition-colors font-medium" style="font-size:1rem">Partenaires</a>
             </div>
             <div class="hidden md:flex items-center gap-4 shrink-0">
                 <div class="lang-switcher" id="lang-switcher">
@@ -131,7 +130,7 @@
                     <div class="lang-dropdown" id="lang-dropdown"></div>
                 </div>
                 <a href="/store/login" class="px-5 py-2.5 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-sm font-semibold transition-all active:scale-95 inline-flex items-center justify-center" data-i18n="nav.signin">Se connecter</a>
-                <a href="/store/tarifs" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all">Découvrez nos plans</a>
+                <a href="/store/tarifs" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all">Essai gratuit</a>
             </div>
             <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Menu">
                 <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -155,11 +154,10 @@
                 <a href="/store/support" class="block py-1" data-i18n="nav.support">Support</a>
                 <a href="/store/tutorials" class="block py-1" data-i18n="nav.tutorials">Tutoriels</a>
             </div>
-            <a href="/store/partenaires" class="block text-sm text-gray-600 py-2">Partenaires</a>
             <div id="mobile-lang-switcher" class="flex flex-wrap gap-2 py-2"></div>
             <div class="flex flex-col gap-3 pt-2">
                 <a href="/store/login" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">Se connecter</a>
-                <a href="/store/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all">Découvrez nos plans</a>
+                <a href="/store/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all">Essai gratuit</a>
             </div>
         </div>
     </nav>
@@ -840,97 +838,89 @@
 
                     <div class="grid lg:grid-cols-3 gap-6 items-start">
                         <!-- Left Column: FAQ Items -->
-                        <div class="lg:col-span-2 flex flex-col gap-3">
+                        <div class="lg:col-span-2 flex flex-col gap-4">
                             <!-- FAQ 1 -->
-                            <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors active"
-                                onclick="faqAccordion(this)">
-                                <div class="flex justify-between items-start gap-4">
-                                    <h4 class="font-semibold text-navy-900">Qu'est-ce que Rainbow et à qui
-                                        s'adresse-t-il ?</h4>
-                                    <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7" />
+                            <div class="faq-card open">
+                                <button class="faq-card-button" onclick="faqToggle(this)">
+                                    <span class="faq-card-question">Qu'est-ce que Rainbow et à qui s'adresse-t-il ?</span>
+                                    <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
-                                </div>
-                                <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
-                                    Rainbow est une plateforme de gestion de tâches et de flux de travail conçue pour
-                                    les équipes produit, les développeurs et les créatifs qui souhaitent avancer plus
-                                    vite avec clarté et contrôle.
+                                </button>
+                                <div class="faq-card-answer-wrapper">
+                                    <div class="faq-card-answer-inner">
+                                        <div class="faq-card-answer-border">
+                                            <p class="faq-card-answer">Rainbow est une plateforme de gestion de tâches et de flux de travail conçue pour les équipes produit, les développeurs et les créatifs qui souhaitent avancer plus vite avec clarté et contrôle.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- FAQ 2 -->
-                            <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="faqAccordion(this)">
-                                <div class="flex justify-between items-start gap-4">
-                                    <h4 class="font-semibold text-navy-900">Puis-je utiliser Rainbow sans connaissances
-                                        techniques ?</h4>
-                                    <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7" />
+                            <div class="faq-card">
+                                <button class="faq-card-button" onclick="faqToggle(this)">
+                                    <span class="faq-card-question">Puis-je utiliser Rainbow sans connaissances techniques ?</span>
+                                    <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
-                                </div>
-                                <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
-                                    Oui, l'interface de Rainbow est intuitive et facile à prendre en main, même pour
-                                    les utilisateurs n'ayant pas de profil technique, tout en offrant des
-                                    fonctionnalités avancées pour les experts.
+                                </button>
+                                <div class="faq-card-answer-wrapper">
+                                    <div class="faq-card-answer-inner">
+                                        <div class="faq-card-answer-border">
+                                            <p class="faq-card-answer">Oui, l'interface de Rainbow est intuitive et facile à prendre en main, même pour les utilisateurs n'ayant pas de profil technique, tout en offrant des fonctionnalités avancées pour les experts.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- FAQ 3 -->
-                            <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="faqAccordion(this)">
-                                <div class="flex justify-between items-start gap-4">
-                                    <h4 class="font-semibold text-navy-900">Rainbow s'intègre-t-il avec d'autres outils
-                                        comme Slack ou Figma ?</h4>
-                                    <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7" />
+                            <div class="faq-card">
+                                <button class="faq-card-button" onclick="faqToggle(this)">
+                                    <span class="faq-card-question">Rainbow s'intègre-t-il avec d'autres outils comme Slack ou Figma ?</span>
+                                    <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
-                                </div>
-                                <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
-                                    Absolument ! Rainbow propose des intégrations natives avec Slack, Figma, Microsoft
-                                    Teams, Salesforce et de nombreux autres outils pour centraliser votre travail.
+                                </button>
+                                <div class="faq-card-answer-wrapper">
+                                    <div class="faq-card-answer-inner">
+                                        <div class="faq-card-answer-border">
+                                            <p class="faq-card-answer">Absolument ! Rainbow propose des intégrations natives avec Slack, Figma, Microsoft Teams, Salesforce et de nombreux autres outils pour centraliser votre travail.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- FAQ 4 -->
-                            <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="faqAccordion(this)">
-                                <div class="flex justify-between items-start gap-4">
-                                    <h4 class="font-semibold text-navy-900">Comment fonctionne l'automatisation des
-                                        tâches dans Rainbow ?</h4>
-                                    <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7" />
+                            <div class="faq-card">
+                                <button class="faq-card-button" onclick="faqToggle(this)">
+                                    <span class="faq-card-question">Comment fonctionne l'automatisation des tâches dans Rainbow ?</span>
+                                    <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
-                                </div>
-                                <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
-                                    Nos outils d'automatisation vous permettent de créer des règles personnalisées
-                                    pour gérer les tâches répétitives, assigner des membres automatiquement et
-                                    définir des alertes contextuelles.
+                                </button>
+                                <div class="faq-card-answer-wrapper">
+                                    <div class="faq-card-answer-inner">
+                                        <div class="faq-card-answer-border">
+                                            <p class="faq-card-answer">Nos outils d'automatisation vous permettent de créer des règles personnalisées pour gérer les tâches répétitives, assigner des membres automatiquement et définir des alertes contextuelles.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- FAQ 5 -->
-                            <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="faqAccordion(this)">
-                                <div class="flex justify-between items-start gap-4">
-                                    <h4 class="font-semibold text-navy-900">Rainbow est-il sécurisé et conforme ?</h4>
-                                    <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7" />
+                            <div class="faq-card">
+                                <button class="faq-card-button" onclick="faqToggle(this)">
+                                    <span class="faq-card-question">Rainbow est-il sécurisé et conforme ?</span>
+                                    <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
-                                </div>
-                                <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
-                                    Oui. Rainbow utilise un chiffrement de bout en bout et est hébergé sur des
-                                    serveurs certifiés ISO 27001 et conformes au RGPD pour garantir la sécurité et la
-                                    confidentialité de vos données.
+                                </button>
+                                <div class="faq-card-answer-wrapper">
+                                    <div class="faq-card-answer-inner">
+                                        <div class="faq-card-answer-border">
+                                            <p class="faq-card-answer">Oui. Rainbow utilise un chiffrement de bout en bout et est hébergé sur des serveurs certifiés ISO 27001 et conformes au RGPD pour garantir la sécurité et la confidentialité de vos données.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1154,10 +1144,11 @@
         }
     </script>
     <script>
-        function faqAccordion(el) {
-            var wasActive = el.classList.contains('active');
-            document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('active'); });
-            if (!wasActive) el.classList.add('active');
+        function faqToggle(btn) {
+            var card = btn.closest('.faq-card');
+            var isOpen = card.classList.contains('open');
+            document.querySelectorAll('.faq-card').forEach(function(c) { c.classList.remove('open'); });
+            if (!isOpen) card.classList.add('open');
         }
     </script>
 </body>

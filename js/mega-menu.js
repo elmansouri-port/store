@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   'use strict';
 
   var icons = {
@@ -45,8 +45,8 @@
   }
 
   var productsItems = [
-    makeItem('/products/webinar', 'video-camera', 'Rainbow Webinar', 'Webinaires live et en replay avec outils d\'engagement intégrés.'),
     makeItem('/products/collaboration', 'chat', 'Rainbow Collaboration', 'Messagerie d\'équipe, canaux et partage de fichiers en un seul endroit.'),
+    makeItem('/products/webinar', 'video-camera', 'Rainbow Webinar', 'Webinaires live et en replay avec outils d\'engagement intégrés.'),
     makeItem('/products/smart-hotel', 'calendar', 'Rainbow Smart Hotel', 'Réservation de salles et gestion de calendrier pour les hôtels.'),
     makeItem('/products/analytics', 'chart-bar', 'Rainbow Analytics', 'Rapports en temps réel et analyses de vos données de communication.'),
     makeItem('/products/voice', 'phone', 'Rainbow Voice', 'Téléphonie cloud avec voix HD, SVI et routage d\'appels.'),
@@ -63,12 +63,12 @@
         '</div>',
         '<div class="mega-menu-side">',
           '<p class="mega-menu-section-title">À la une</p>',
-          '<a href="/products/webinar" class="mega-menu-showcase">',
-            '<div class="mega-menu-showcase-img">' + svgIcon('video-camera') + '</div>',
+          '<a href="/products/collaboration" class="mega-menu-showcase">',
+            '<div class="mega-menu-showcase-img">' + svgIcon('chat') + '</div>',
             '<div class="mega-menu-showcase-body">',
-              '<p class="mega-menu-showcase-title">Rainbow Webinar</p>',
-              '<p class="mega-menu-showcase-desc">Engagez votre audience avec des webinaires interactifs en direct et en replay.</p>',
-              '<span class="mega-menu-showcase-tag">Nouveau</span>',
+              '<p class="mega-menu-showcase-title">Rainbow Collaboration</p>',
+              '<p class="mega-menu-showcase-desc">Messagerie, visioconférence et téléphonie unifiés pour vos équipes au quotidien.</p>',
+              '<span class="mega-menu-showcase-tag">Populaire</span>',
             '</div>',
           '</a>',
           '<p class="mega-menu-section-title">Intégrations</p>',
@@ -94,7 +94,8 @@
     makeItem('/docs', 'book-open', 'Documentation', 'Docs API complètes, guides d\'intégration et références techniques.'),
     makeItem('/community', 'users', 'Communauté', 'Rejoignez la communauté Rainbow pour partager vos idées et obtenir de l\'aide.'),
     makeItem('/support', 'lifebuoy', 'Support', 'Obtenez de l\'aide technique, signalez des problèmes et trouvez des solutions.'),
-    makeItem('/changelog', 'sparkles', 'Nouveautés', 'Restez informé des dernières fonctionnalités, versions et améliorations.')
+    makeItem('/changelog', 'sparkles', 'Nouveautés', 'Restez informé des dernières fonctionnalités, versions et améliorations.'),
+    makeItem('/partenaires', 'users', 'Partenaires', 'Rejoignez le réseau Rainbow et développez votre activité.')
   ].join('');
 
   var ressourcesHTML = [
@@ -133,8 +134,8 @@
   ].join('');
 
   var productsMobileItems = [
-    makeMobileItem('/products/webinar', 'video-camera', 'Rainbow Webinar', 'Webinaires live et en replay.'),
     makeMobileItem('/products/collaboration', 'chat', 'Rainbow Collaboration', 'Messagerie et canaux d\'équipe.'),
+    makeMobileItem('/products/webinar', 'video-camera', 'Rainbow Webinar', 'Webinaires live et en replay.'),
     makeMobileItem('/products/smart-hotel', 'calendar', 'Rainbow Smart Hotel', 'Réservation de salles intelligente.'),
     makeMobileItem('/products/analytics', 'chart-bar', 'Rainbow Analytics', 'Rapports en temps réel.'),
     makeMobileItem('/products/voice', 'phone', 'Rainbow Voice', 'Téléphonie cloud.'),
@@ -157,7 +158,8 @@
     makeMobileItem('/docs', 'book-open', 'Documentation', 'Docs API et références.'),
     makeMobileItem('/community', 'users', 'Communauté', 'Partagez vos idées.'),
     makeMobileItem('/support', 'lifebuoy', 'Support', 'Obtenez de l\'aide.'),
-    makeMobileItem('/changelog', 'sparkles', 'Nouveautés', 'Dernières fonctionnalités et versions.')
+    makeMobileItem('/changelog', 'sparkles', 'Nouveautés', 'Dernières fonctionnalités et versions.'),
+    makeMobileItem('/partenaires', 'users', 'Partenaires', 'Rejoignez le réseau Rainbow.')
   ].join('');
 
   var ressourcesMobileHTML = [
@@ -171,8 +173,8 @@
   ].join('');
 
   var tarifsItems = [
-    makeItem('/products/webinar/pricing', 'video-camera', 'Rainbow Webinar', 'Plans et tarifs pour nos solutions de webinaires interactifs.'),
-    makeItem('/products/collaboration/pricing', 'chat', 'Rainbow Collaboration', 'Tarifs adaptés à vos besoins de collaboration d\'équipe.')
+    makeItem('/products/collaboration/pricing', 'chat', 'Rainbow Collaboration', 'Tarifs adaptés à vos besoins de collaboration d\'équipe.'),
+    makeItem('/products/webinar/pricing', 'video-camera', 'Rainbow Webinar', 'Plans et tarifs pour nos solutions de webinaires interactifs.')
   ].join('');
 
   var tarifsHTML = [
@@ -194,8 +196,8 @@
   ].join('');
 
   var tarifsMobileItems = [
-    makeMobileItem('/products/webinar/pricing', 'video-camera', 'Rainbow Webinar', 'Plans webinaires.'),
-    makeMobileItem('/products/collaboration/pricing', 'chat', 'Rainbow Collaboration', 'Plans collaboration.')
+    makeMobileItem('/products/collaboration/pricing', 'chat', 'Rainbow Collaboration', 'Plans collaboration.'),
+    makeMobileItem('/products/webinar/pricing', 'video-camera', 'Rainbow Webinar', 'Plans webinaires.')
   ].join('');
 
   var tarifsMobileHTML = [
@@ -204,46 +206,6 @@
         '<p class="mega-menu-mobile-section-title">Nos tarifs</p>',
         tarifsMobileItems,
         '<a href="/tarifs" class="mega-menu-mobile-see-all">Voir tous les plans <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
-      '</div>',
-    '</div>'
-  ].join('');
-
-  var partenairesItems = [
-    makeItem('/partenaires', 'users', 'Devenir un partenaire', 'Rejoignez le réseau Rainbow et développez votre activité avec nos solutions UCaaS souveraines.'),
-    makeItem('/partners/portal', 'sparkles', 'Programme de fidélité', 'Accédez aux avantages exclusifs, certifications et récompenses de notre programme.'),
-    makeItem('/partners/docs', 'book-open', 'Ressources partenaires', 'Guides, supports marketing, formations et outils dédiés à nos partenaires.')
-  ].join('');
-
-  var partenairesHTML = [
-    '<div class="mega-menu mega-menu-tarifs" role="menu">',
-      '<div class="mega-menu-inner">',
-        '<div class="mega-menu-main">',
-          '<p class="mega-menu-section-title">Programme partenaires</p>',
-          '<div class="mega-menu-grid">' + partenairesItems + '</div>',
-          '<a href="/partenaires" class="mega-menu-see-all">Découvrir le programme <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
-        '</div>',
-      '</div>',
-      '<div class="mega-menu-footer">',
-        '<p class="mega-menu-footer-text">Rejoignez plus de 3 000 partenaires Rainbow à travers le monde.</p>',
-        '<div class="mega-menu-footer-actions">',
-          '<a href="/partenaires" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('users') + 'Devenir partenaire</a>',
-        '</div>',
-      '</div>',
-    '</div>'
-  ].join('');
-
-  var partenaireMobileItems = [
-    makeMobileItem('/partenaires', 'users', 'Devenir un partenaire', 'Rejoignez le réseau Rainbow.'),
-    makeMobileItem('/partners/portal', 'sparkles', 'Programme de fidélité', 'Avantages exclusifs.'),
-    makeMobileItem('/partners/docs', 'book-open', 'Ressources partenaires', 'Guides et certifications.')
-  ].join('');
-
-  var partenaireMobileHTML = [
-    '<div class="mega-menu-mobile-content">',
-      '<div class="mega-menu-mobile-section">',
-        '<p class="mega-menu-mobile-section-title">Programme partenaires</p>',
-        partenaireMobileItems,
-        '<a href="/partenaires" class="mega-menu-mobile-see-all">Découvrir le programme <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
       '</div>',
     '</div>'
   ].join('');
@@ -345,8 +307,7 @@
       var isProducts = dd.querySelector('[data-i18n="nav.product"]') !== null;
       var isRessources = trigger.textContent.trim().toLowerCase() === 'ressources';
       var isTarifs = trigger.textContent.trim().toLowerCase() === 'tarifs';
-      var isPartenaires = trigger.textContent.trim().toLowerCase() === 'partenaires';
-      if (!isProducts && !isRessources && !isTarifs && !isPartenaires) continue;
+      if (!isProducts && !isRessources && !isTarifs) continue;
 
       var megaHTML, mobileHTML;
       if (isProducts) {
@@ -355,9 +316,6 @@
       } else if (isRessources) {
         megaHTML = ressourcesHTML;
         mobileHTML = ressourcesMobileHTML;
-      } else if (isPartenaires) {
-        megaHTML = partenairesHTML;
-        mobileHTML = partenaireMobileHTML;
       } else {
         megaHTML = tarifsHTML;
         mobileHTML = tarifsMobileHTML;
@@ -382,8 +340,6 @@
         mobileContent = tarifsMobileHTML;
       } else if (headerText.indexOf('ressource') !== -1) {
         mobileContent = ressourcesMobileHTML;
-      } else if (headerText.indexOf('partenaire') !== -1) {
-        mobileContent = partenaireMobileHTML;
       } else {
         continue;
       }

@@ -870,35 +870,15 @@ input[type="number"] {
 
 /* --- Compliance Card (Laurenn style) --- */
 .compliance-card {
-    background: white;
-    border-radius: 20px;
-    padding: 36px 36px 30px;
     height: 100%;
-    display: flex;
-    flex-direction: column;
     position: relative;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(80, 70, 160, 0.06);
-    transition: transform 0.3s ease;
-}
-
-.compliance-card:hover {
-    transform: translateY(-4px);
-}
-
-.compliance-card-inner {
-    z-index: 10;
-    position: relative;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
 }
 
 .compliance-card-logo-area {
-    height: 120px;
-    margin-bottom: 12px;
+    height: 110px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
 }
 
 .compliance-card-logo-area img {
@@ -910,8 +890,9 @@ input[type="number"] {
 .compliance-card-title {
     font-weight: 800;
     color: #1a1a2e;
-    margin-bottom: 12px;
-    font-size: 20px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 8px;
 }
 
 .compliance-card-body {
@@ -919,39 +900,6 @@ input[type="number"] {
     line-height: 1.65;
     color: #666882;
     padding-bottom: 40px;
-}
-
-.compliance-card-arrow {
-    position: absolute;
-    bottom: 28px;
-    right: 32px;
-    width: 38px;
-    height: 38px;
-    border-radius: 9999px;
-    border: 1.5px solid #e0e0ee;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 20;
-}
-
-.compliance-card:hover .compliance-card-arrow {
-    background: #6B5CE7;
-    border-color: #6B5CE7;
-}
-
-.compliance-card-arrow svg {
-    width: 18px;
-    height: 18px;
-    color: #6B5CE7;
-    transition: color 0.3s ease;
-}
-
-.compliance-card:hover .compliance-card-arrow svg {
-    color: white;
 }
 
 /* --- Card Decorative Elements --- */

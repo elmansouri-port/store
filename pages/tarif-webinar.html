@@ -119,7 +119,6 @@
                     </a>
 
                 </div>
-                <a href="/partenaires" class="text-sm text-gray-500 hover:text-navy-900 transition-colors font-medium" style="font-size:1rem">Partenaires</a>
             </div>
             <div class="hidden md:flex items-center gap-4 shrink-0">
                 <div class="lang-switcher" id="lang-switcher">
@@ -131,7 +130,7 @@
                     <div class="lang-dropdown" id="lang-dropdown"></div>
                 </div>
                 <a href="/login" class="px-5 py-2.5 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-sm font-semibold transition-all active:scale-95 inline-flex items-center justify-center" data-i18n="nav.signin">Se connecter</a>
-                <a href="/tarifs" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all">Découvrez nos plans</a>
+                <a href="/tarifs" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all">Essai gratuit</a>
             </div>
             <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Menu">
                 <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -140,13 +139,13 @@
         <div id="mobile-menu" class="md:hidden hidden border-t border-indigo-50 bg-white px-6 py-4 space-y-3">
             <a href="#" class="block text-sm text-gray-600 py-2" data-i18n="nav.product">Produits</a>
             <div class="mobile-submenu space-y-1">
-                <a href="/products/webinar" class="block py-1">Rainbow Webinar</a>
                 <a href="/products/collaboration" class="block py-1">Rainbow Collaboration</a>
+                <a href="/products/webinar" class="block py-1">Rainbow Webinar</a>
             </div>
             <a href="#" class="block text-sm text-gray-600 py-2">Tarifs</a>
             <div class="mobile-submenu space-y-1">
-                <a href="/products/webinar/pricing" class="block py-1">Rainbow Webinar</a>
                 <a href="/products/collaboration/pricing" class="block py-1">Rainbow Collaboration</a>
+                <a href="/products/webinar/pricing" class="block py-1">Rainbow Webinar</a>
             </div>
             <a href="#" class="block text-sm text-gray-600 py-2">Ressources</a>
             <div class="mobile-submenu space-y-1">
@@ -155,11 +154,10 @@
                 <a href="/support" class="block py-1" data-i18n="nav.support">Support</a>
                 <a href="/tutorials" class="block py-1" data-i18n="nav.tutorials">Tutoriels</a>
             </div>
-            <a href="/partenaires" class="block text-sm text-gray-600 py-2">Partenaires</a>
             <div id="mobile-lang-switcher" class="flex flex-wrap gap-2 py-2"></div>
             <div class="flex flex-col gap-3 pt-2">
                 <a href="/login" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">Se connecter</a>
-                <a href="/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all">Découvrez nos plans</a>
+                <a href="/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all">Essai gratuit</a>
             </div>
         </div>
     </nav>
@@ -648,100 +646,106 @@
 
                     <div class="grid lg:grid-cols-3 gap-6 items-start">
                         <!-- Left Column: FAQ Items -->
-                        <div class="lg:col-span-2 flex flex-col gap-3">
+                        <div class="lg:col-span-2 flex flex-col gap-4">
                             <!-- FAQ 1 -->
-                            <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors active"
-                                onclick="faqAccordion(this)">
-                                <div class="flex justify-between items-start gap-4">
-                                    <h4 class="font-semibold text-navy-900">Qu'est-ce que Rainbow Webinar ?</h4>
-                                    <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7" />
+                            <div class="faq-card open">
+                                <button class="faq-card-button" onclick="faqToggle(this)">
+                                    <span class="faq-card-question">Qu'est-ce que Rainbow Webinar ?</span>
+                                    <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
-                                </div>
-                                <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
-                                    Rainbow Webinar est une plateforme de webinaires et d'événements en ligne conçue pour les entreprises qui souhaitent organiser des présentations interactives, des sessions de formation et des conférences à distance, avec des outils de sondage, de chat et de partage d'écran intégrés.
+                                </button>
+                                <div class="faq-card-answer-wrapper">
+                                    <div class="faq-card-answer-inner">
+                                        <div class="faq-card-answer-border">
+                                            <p class="faq-card-answer">Rainbow Webinar est une plateforme de webinaires et d'événements en ligne conçue pour les entreprises qui souhaitent organiser des présentations interactives, des sessions de formation et des conférences à distance, avec des outils de sondage, de chat et de partage d'écran intégrés.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- FAQ 2 -->
-                            <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="faqAccordion(this)">
-                                <div class="flex justify-between items-start gap-4">
-                                    <h4 class="font-semibold text-navy-900">Quel est le nombre maximum de participants ?</h4>
-                                    <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7" />
+                            <div class="faq-card">
+                                <button class="faq-card-button" onclick="faqToggle(this)">
+                                    <span class="faq-card-question">Quel est le nombre maximum de participants ?</span>
+                                    <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
-                                </div>
-                                <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
-                                    Selon votre formule : jusqu'à 10 participants avec le plan Débutant, jusqu'à 250 participants avec le plan Professionnel, et jusqu'à 1 000 participants avec le plan Entreprise.
+                                </button>
+                                <div class="faq-card-answer-wrapper">
+                                    <div class="faq-card-answer-inner">
+                                        <div class="faq-card-answer-border">
+                                            <p class="faq-card-answer">Selon votre formule : jusqu'à 10 participants avec le plan Débutant, jusqu'à 250 participants avec le plan Professionnel, et jusqu'à 1 000 participants avec le plan Entreprise.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- FAQ 3 -->
-                            <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="faqAccordion(this)">
-                                <div class="flex justify-between items-start gap-4">
-                                    <h4 class="font-semibold text-navy-900">Puis-je enregistrer mes webinaires ?</h4>
-                                    <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7" />
+                            <div class="faq-card">
+                                <button class="faq-card-button" onclick="faqToggle(this)">
+                                    <span class="faq-card-question">Puis-je enregistrer mes webinaires ?</span>
+                                    <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
-                                </div>
-                                <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
-                                    Oui, l'enregistrement cloud est disponible dans les formules Professionnel et Entreprise. Vous pouvez enregistrer vos webinaires, les partager en replay et bénéficier de transcriptions automatiques avec le plan Entreprise.
+                                </button>
+                                <div class="faq-card-answer-wrapper">
+                                    <div class="faq-card-answer-inner">
+                                        <div class="faq-card-answer-border">
+                                            <p class="faq-card-answer">Oui, l'enregistrement cloud est disponible dans les formules Professionnel et Entreprise. Vous pouvez enregistrer vos webinaires, les partager en replay et bénéficier de transcriptions automatiques avec le plan Entreprise.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- FAQ 4 -->
-                            <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="faqAccordion(this)">
-                                <div class="flex justify-between items-start gap-4">
-                                    <h4 class="font-semibold text-navy-900">Puis-je personnaliser l'apparence de mon webinaire ?</h4>
-                                    <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7" />
+                            <div class="faq-card">
+                                <button class="faq-card-button" onclick="faqToggle(this)">
+                                    <span class="faq-card-question">Puis-je personnaliser l'apparence de mon webinaire ?</span>
+                                    <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
-                                </div>
-                                <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
-                                    Absolument. Les plans Professionnel et Entreprise offrent la personnalisation de marque blanche, des salles d'attente personnalisables, et le plan Entreprise permet également d'utiliser votre propre domaine pour une expérience entièrement sur mesure.
+                                </button>
+                                <div class="faq-card-answer-wrapper">
+                                    <div class="faq-card-answer-inner">
+                                        <div class="faq-card-answer-border">
+                                            <p class="faq-card-answer">Absolument. Les plans Professionnel et Entreprise offrent la personnalisation de marque blanche, des salles d'attente personnalisables, et le plan Entreprise permet également d'utiliser votre propre domaine pour une expérience entièrement sur mesure.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- FAQ 5 -->
-                            <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="faqAccordion(this)">
-                                <div class="flex justify-between items-start gap-4">
-                                    <h4 class="font-semibold text-navy-900">Comment fonctionne la période d'essai ?</h4>
-                                    <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7" />
+                            <div class="faq-card">
+                                <button class="faq-card-button" onclick="faqToggle(this)">
+                                    <span class="faq-card-question">Comment fonctionne la période d'essai ?</span>
+                                    <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
-                                </div>
-                                <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
-                                    Le plan Professionnel est proposé avec un essai gratuit de 14 jours, sans carte bancaire requise. Vous bénéficiez de toutes les fonctionnalités pendant la période d'essai, et vous pouvez annuler à tout moment.
+                                </button>
+                                <div class="faq-card-answer-wrapper">
+                                    <div class="faq-card-answer-inner">
+                                        <div class="faq-card-answer-border">
+                                            <p class="faq-card-answer">Le plan Professionnel est proposé avec un essai gratuit de 14 jours, sans carte bancaire requise. Vous bénéficiez de toutes les fonctionnalités pendant la période d'essai, et vous pouvez annuler à tout moment.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- FAQ 6 -->
-                            <div class="faq-item p-5 cursor-pointer rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-                                onclick="faqAccordion(this)">
-                                <div class="flex justify-between items-start gap-4">
-                                    <h4 class="font-semibold text-navy-900">Quelles intégrations sont disponibles ?</h4>
-                                    <svg class="faq-icon w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7" />
+                            <div class="faq-card">
+                                <button class="faq-card-button" onclick="faqToggle(this)">
+                                    <span class="faq-card-question">Quelles intégrations sont disponibles ?</span>
+                                    <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
-                                </div>
-                                <div class="faq-answer mt-3 text-sm text-gray-500 leading-relaxed">
-                                    Rainbow Webinar s'intègre avec les principaux calendriers (Google Calendar, Outlook), les CRM comme Salesforce et HubSpot, ainsi que les plateformes de marketing automation. Le plan Entreprise donne accès à une API dédiée pour des intégrations sur mesure.
+                                </button>
+                                <div class="faq-card-answer-wrapper">
+                                    <div class="faq-card-answer-inner">
+                                        <div class="faq-card-answer-border">
+                                            <p class="faq-card-answer">Rainbow Webinar s'intègre avec les principaux calendriers (Google Calendar, Outlook), les CRM comme Salesforce et HubSpot, ainsi que les plateformes de marketing automation. Le plan Entreprise donne accès à une API dédiée pour des intégrations sur mesure.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -937,10 +941,11 @@
         }
     </script>
     <script>
-        function faqAccordion(el) {
-            var wasActive = el.classList.contains('active');
-            document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('active'); });
-            if (!wasActive) el.classList.add('active');
+        function faqToggle(btn) {
+            var card = btn.closest('.faq-card');
+            var isOpen = card.classList.contains('open');
+            document.querySelectorAll('.faq-card').forEach(function(c) { c.classList.remove('open'); });
+            if (!isOpen) card.classList.add('open');
         }
     </script>
 </body>
