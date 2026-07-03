@@ -86,12 +86,64 @@
             color: #7c3aed;
             font-weight: 600;
         }
+
+        /* ── Floating anchor nav ── */
+        .float-nav {
+            position: fixed;
+            top: 76px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px);
+            z-index: 45;
+            background: #ede9fe;
+            border-radius: 999px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            box-shadow: 0 4px 24px rgba(94,45,145,.13), 0 1px 4px rgba(94,45,145,.08);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s ease, transform .25s ease;
+            white-space: nowrap;
+        }
+        .float-nav.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+        .float-nav-item {
+            padding: 8px 22px;
+            border-radius: 999px;
+            font-size: .875rem;
+            font-weight: 500;
+            color: #5e2d91;
+            cursor: pointer;
+            transition: background .18s, font-weight .18s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .float-nav-item:hover {
+            background: rgba(255,255,255,.55);
+        }
+        .float-nav-item.active {
+            background: #fff;
+            font-weight: 700;
+            box-shadow: 0 1px 6px rgba(94,45,145,.12);
+        }
     </style>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/mega-menu.css">
 </head>
 
 <body class="font-sans text-gray-700 antialiased">
+
+    <!-- ===== FLOATING ANCHOR NAV ===== -->
+    <nav class="float-nav" id="float-nav" role="navigation" aria-label="Navigation de la page">
+        <a href="#apercu" class="float-nav-item active" data-section="apercu">Aperçu</a>
+        <a href="#solutions" class="float-nav-item" data-section="solutions">Solutions</a>
+        <a href="#features" class="float-nav-item" data-section="features">Fonctionnalités</a>
+        <a href="#tarifs" class="float-nav-item" data-section="tarifs">Tarifs</a>
+    </nav>
 
     <!-- ===== NAV ===== -->
     <nav id="navbar" class="fixed top-0 w-full z-50 glass-nav">
@@ -198,7 +250,7 @@
             style="background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 600px);">
 
             <!-- STATS BANNER -->
-            <section class="py-20 relative z-10 text-center" style="background: linear-gradient(135deg, #2d0a4c 0%, #5e2d91 40%, #7c3aad 70%, #4a1a6e 100%);">
+            <section id="apercu" class="py-20 relative z-10 text-center" style="background: linear-gradient(135deg, #2d0a4c 0%, #5e2d91 40%, #7c3aad 70%, #4a1a6e 100%);">
                 <div class="max-w-6xl mx-auto px-6">
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
                         <div class="flex flex-col items-center">
@@ -216,6 +268,54 @@
                         <div class="flex flex-col items-center">
                             <span class="text-4xl md:text-5xl font-bold text-white tracking-tight">4.9/5</span>
                             <span class="text-sm md:text-base text-purple-200 mt-2 font-medium">satisfaction client</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SOLUTIONS SECTION -->
+            <section id="solutions" class="py-24 relative z-10 border-t border-gray-100 bg-white">
+                <div class="max-w-6xl mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-5xl font-extrabold text-navy-900 tracking-tight mb-4">Deux solutions. Un seul écosystème.</h2>
+                        <p class="text-gray-500 max-w-2xl mx-auto text-[17px] leading-relaxed">Rainbow Collaboration pour vos échanges quotidiens. Rainbow Webinar pour vos événements en ligne. Complémentaires, pas redondants.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Collaboration card -->
+                        <div class="rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-brand-50 p-10 flex flex-col shadow-sm hover:shadow-lg transition-all duration-300 group">
+                            <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-200 transition-colors">
+                                <svg class="w-6 h-6 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-navy-900 mb-3">Rainbow Collaboration</h3>
+                            <p class="text-gray-500 leading-relaxed mb-6">Messages, appels, réunions vidéo et partage de fichiers dans un outil unique. Hébergé en Europe, conçu pour la sécurité des données de votre entreprise.</p>
+                            <ul class="space-y-2 mb-8 text-gray-600 text-sm flex-1">
+                                <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Messagerie instantanée et canaux d'équipe</li>
+                                <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Vidéoconférences jusqu'à 200 participants</li>
+                                <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Partage de fichiers et espaces de travail</li>
+                                <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Intégrations CRM et outils métiers</li>
+                            </ul>
+                            <a href="/products/collaboration" class="inline-flex items-center gap-2 text-brand-500 font-semibold text-sm hover:gap-3 transition-all">
+                                Découvrir Rainbow Collaboration
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                            </a>
+                        </div>
+                        <!-- Webinar card -->
+                        <div class="rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-indigo-50 p-10 flex flex-col shadow-sm hover:shadow-lg transition-all duration-300 group">
+                            <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-200 transition-colors">
+                                <svg class="w-6 h-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-navy-900 mb-3">Rainbow Webinar</h3>
+                            <p class="text-gray-500 leading-relaxed mb-6">Organisez vos événements en ligne à grande échelle : formations, conférences, démonstrations produit. Un studio professionnel accessible depuis votre navigateur.</p>
+                            <ul class="space-y-2 mb-8 text-gray-600 text-sm flex-1">
+                                <li class="flex items-center gap-2"><svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Webinars jusqu'à 10 000 participants</li>
+                                <li class="flex items-center gap-2"><svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Sondages, Q&A et interactions en temps réel</li>
+                                <li class="flex items-center gap-2"><svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Enregistrement et rediffusion automatique</li>
+                                <li class="flex items-center gap-2"><svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Analytics et rapports d'engagement détaillés</li>
+                            </ul>
+                            <a href="/products/webinar" class="inline-flex items-center gap-2 text-indigo-600 font-semibold text-sm hover:gap-3 transition-all">
+                                Découvrir Rainbow Webinar
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -411,7 +511,7 @@
             </section>
 
             <!-- PRICING SECTION -->
-            <section
+            <section id="tarifs"
                 class="py-32 bg-white relative overflow-hidden z-10 border-t border-b border-dashed border-gray-200">
                 <div class="max-w-6xl mx-auto px-6 relative z-10">
                     <div class="text-center mb-16">
@@ -1150,6 +1250,58 @@
             document.querySelectorAll('.faq-card').forEach(function(c) { c.classList.remove('open'); });
             if (!isOpen) card.classList.add('open');
         }
+    </script>
+
+    <script>
+        // ── Floating anchor nav scroll-spy ──
+        (function () {
+            var floatNav = document.getElementById('float-nav');
+            var heroEl = document.querySelector('header');
+            var sectionIds = ['apercu', 'solutions', 'features', 'tarifs'];
+
+            function getActive() {
+                var current = sectionIds[0];
+                for (var i = 0; i < sectionIds.length; i++) {
+                    var el = document.getElementById(sectionIds[i]);
+                    if (!el) continue;
+                    if (el.getBoundingClientRect().top <= 120) current = sectionIds[i];
+                }
+                return current;
+            }
+
+            function update() {
+                var heroBottom = heroEl ? heroEl.getBoundingClientRect().bottom : -1;
+                if (heroBottom < 64) {
+                    floatNav.classList.add('visible');
+                } else {
+                    floatNav.classList.remove('visible');
+                }
+
+                var active = getActive();
+                document.querySelectorAll('.float-nav-item').forEach(function (item) {
+                    if (item.dataset.section === active) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', update, { passive: true });
+            update();
+
+            document.querySelectorAll('.float-nav-item').forEach(function (item) {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var target = document.getElementById(item.dataset.section);
+                    if (target) {
+                        var offset = 96;
+                        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                        window.scrollTo({ top: top, behavior: 'smooth' });
+                    }
+                });
+            });
+        })();
     </script>
 </body>
 

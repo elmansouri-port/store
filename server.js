@@ -177,7 +177,8 @@ app.use(helmet({
             fontSrc: ["'self'", "https://fonts.gstatic.com"],
             imgSrc: ["'self'", "data:", "blob:", "https://flagcdn.com", "https://images.unsplash.com"],
             frameSrc: ["'self'", "https://js.stripe.com", "https://www.youtube.com"],
-            connectSrc: ["'self'", "https://api.stripe.com", "https://rainbow-market.zendesk.com"]
+            connectSrc: ["'self'", "https://api.stripe.com", "https://rainbow-market.zendesk.com", "https://s138097979.t.eloqua.com"],
+            formAction: ["'self'", "https://s138097979.t.eloqua.com"]
         }
     },
     crossOriginEmbedderPolicy: false

@@ -5,3 +5,5 @@ data/*.db-journal
 data/*.db-shm
 data/*.db-wal
 uploads/
+form-model.txt
+*.pdf
