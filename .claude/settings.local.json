@@ -64,7 +64,12 @@
       "Bash(git config *)",
       "Bash(git remote *)",
       "Bash(FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch -f --msg-filter 'grep -v \"^Co-Authored-By: Claude\" || true' refs/heads/front-rework)",
-      "PowerShell(\\(Get-Command pdftoppm -ErrorAction SilentlyContinue\\).Source)"
+      "PowerShell(\\(Get-Command pdftoppm -ErrorAction SilentlyContinue\\).Source)",
+      "PowerShell(git *)",
+      "PowerShell(npm run *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\yelmanso\\\\vs project\\\\leadgen\\\\MarketPlace\\\\MarketPlace\" -Force)",
+      "Bash(Select-Object Name, Mode)",
+      "Bash(Format-Table -AutoSize)"
     ]
   }
 }
