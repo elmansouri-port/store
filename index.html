@@ -1389,5 +1389,100 @@
     <script src="js/i18n.js"></script>
     <script src="js/mega-menu.js"></script>
     <script src="js/homepage-animations.js"></script>
+    <script>
+        (function () {
+            function stripHtml(str) {
+                if (!str) return '';
+                return str.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+            }
+            function initFaqCardListeners() {
+                document.querySelectorAll('.faq-card-button').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var card = btn.closest('.faq-card');
+                        var wasOpen = card.classList.contains('open');
+                        document.querySelectorAll('.faq-card').forEach(function (c) {
+                            c.classList.remove('open');
+                            var b = c.querySelector('.faq-card-button');
+                            if (b) b.setAttribute('aria-expanded', 'false');
+                        });
+                        if (!wasOpen) {
+                            card.classList.add('open');
+                            btn.setAttribute('aria-expanded', 'true');
+                        }
+                    });
+                });
+            }
+            function renderFaq(items) {
+                var container = document.getElementById('faq-items-container');
+                if (!container) return;
+                container.innerHTML = '';
+                items.forEach(function (item) {
+                    var card = document.createElement('div');
+                    card.className = 'faq-card';
+                    var btn = document.createElement('button');
+                    btn.className = 'faq-card-button';
+                    btn.setAttribute('aria-expanded', 'false');
+                    var q = document.createElement('span');
+                    q.className = 'faq-card-question';
+                    q.textContent = item.question;
+                    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    svg.setAttribute('class', 'faq-card-chevron');
+                    svg.setAttribute('fill', 'none');
+                    svg.setAttribute('viewBox', '0 0 24 24');
+                    svg.setAttribute('stroke', 'currentColor');
+                    svg.setAttribute('stroke-width', '2');
+                    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    path.setAttribute('stroke-linecap', 'round');
+                    path.setAttribute('stroke-linejoin', 'round');
+                    path.setAttribute('d', 'M19 9l-7 7-7-7');
+                    svg.appendChild(path);
+                    btn.appendChild(q);
+                    btn.appendChild(svg);
+                    var wrapper = document.createElement('div');
+                    wrapper.className = 'faq-card-answer-wrapper';
+                    var inner = document.createElement('div');
+                    inner.className = 'faq-card-answer-inner';
+                    var border = document.createElement('div');
+                    border.className = 'faq-card-answer-border';
+                    var p = document.createElement('p');
+                    p.className = 'faq-card-answer';
+                    p.textContent = item.answer;
+                    border.appendChild(p);
+                    inner.appendChild(border);
+                    wrapper.appendChild(inner);
+                    card.appendChild(btn);
+                    card.appendChild(wrapper);
+                    container.appendChild(card);
+                });
+                initFaqCardListeners();
+            }
+            function fetchFaq() {
+                var loadingEl = document.getElementById('faq-loading');
+                if (!loadingEl) return;
+                var errorEl = document.getElementById('faq-error');
+                var containerEl = document.getElementById('faq-items-container');
+                var url = 'https://rainbow-market.zendesk.com/api/v2/help_center/sections/33369381353746/articles.json?locale=fr&per_page=20&page=1&sort_by=position&sort_order=asc';
+                loadingEl.classList.remove('hidden');
+                if (errorEl) errorEl.classList.add('hidden');
+                if (containerEl) containerEl.classList.add('hidden');
+                fetch(url, { headers: { 'Accept': 'application/json' } })
+                    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+                    .then(function (data) {
+                        var items = (data.articles || []).filter(function (a) { return !a.draft; }).map(function (a) {
+                            return { question: a.title || '', answer: stripHtml(a.body || a.snippet || '').slice(0, 500) };
+                        });
+                        if (!items.length) throw new Error('empty');
+                        renderFaq(items);
+                        loadingEl.classList.add('hidden');
+                        if (containerEl) containerEl.classList.remove('hidden');
+                    })
+                    .catch(function () {
+                        loadingEl.classList.add('hidden');
+                        if (errorEl) errorEl.classList.remove('hidden');
+                    });
+            }
+            document.addEventListener('DOMContentLoaded', fetchFaq);
+        })();
+    </script>
 </body>
 </html>
