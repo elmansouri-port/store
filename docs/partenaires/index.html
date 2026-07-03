@@ -46,7 +46,8 @@
         @media(max-width:640px){.page-heading{font-size:1.9rem}}
 
         /* ---- Circle visual ---- */
-        .visual-wrap{position:relative;width:300px;margin:0 0 32px 0}
+        .visual-wrap{position:relative;width:100%;margin:0 0 32px 0}
+        .visual-wrap img{width:100%;height:auto;display:block;border-radius:12px}
         .circle-outer{width:300px;height:300px;border-radius:50%;overflow:hidden;position:relative;background:linear-gradient(160deg,#e0d7f5 0%,#cce6ff 50%,#d4f0d2 100%)}
         /* decorative arcs (like GoTo's teal shapes) */
         .arc-deco{position:absolute;top:0;right:0;width:140px;height:140px;border:18px solid rgba(94,45,145,.18);border-radius:50%;transform:translate(40%,-40%)}
@@ -196,45 +197,8 @@
 
                 <!-- Circular visual (GoTo-style) -->
                 <div class="visual-wrap" style="margin-bottom:48px">
-                    <!-- outer circle with gradient bg + arcs -->
-                    <div class="circle-outer">
-                        <!-- arc decorations (teal/purple arcs like GoTo) -->
-                        <div class="arc-deco"></div>
-                        <div class="arc-deco2"></div>
-                        <!-- second set of arcs bottom-left -->
-                        <div style="position:absolute;bottom:0;left:0;width:110px;height:110px;border:14px solid rgba(52,178,51,.14);border-radius:50%;transform:translate(-35%,35%)"></div>
-
-                        <!-- People SVG illustration -->
-                        <svg class="people-svg" viewBox="0 0 260 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Person 1 (left) -->
-                            <circle cx="82" cy="62" r="32" fill="rgba(255,255,255,0.55)"/>
-                            <circle cx="82" cy="52" r="20" fill="rgba(255,255,255,0.7)"/>
-                            <path d="M42 140 C42 110 122 110 122 140 L122 200 L42 200 Z" fill="rgba(255,255,255,0.55)"/>
-                            <!-- Person 2 (right) -->
-                            <circle cx="178" cy="58" r="32" fill="rgba(255,255,255,0.55)"/>
-                            <circle cx="178" cy="48" r="20" fill="rgba(255,255,255,0.7)"/>
-                            <path d="M138 136 C138 106 218 106 218 136 L218 200 L138 200 Z" fill="rgba(255,255,255,0.55)"/>
-                            <!-- Book / tablet they're looking at -->
-                            <rect x="100" y="100" width="60" height="44" rx="6" fill="rgba(94,45,145,0.25)"/>
-                            <rect x="106" y="107" width="48" height="6" rx="3" fill="rgba(255,255,255,0.7)"/>
-                            <rect x="106" y="118" width="38" height="4" rx="2" fill="rgba(255,255,255,0.5)"/>
-                            <rect x="106" y="127" width="30" height="4" rx="2" fill="rgba(255,255,255,0.5)"/>
-                        </svg>
+                    <img src="/store/images/meetings.png" alt="Partners">
                     </div>
-
-                    <!-- "Rainbow Partner Network" badge -->
-                    <div class="pn-badge">
-                        <div class="pn-badge-icon">
-                            <svg style="width:18px;height:18px" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <div class="pn-badge-text-top">Rainbow</div>
-                            <div class="pn-badge-text-sub">Partner Network</div>
-                        </div>
-                    </div>
-                </div><!-- /visual-wrap -->
 
                 <!-- Partner types -->
                 <p class="list-intro">Choisissez le type de partenariat qui vous est adapté.</p>
@@ -285,7 +249,18 @@
 
                     <div class="form-body">
                         <!-- FORM -->
-                        <form id="partner-form" novalidate>
+                        <form id="partner-form" method="post" action="https://s138097979.t.eloqua.com/e/f2" novalidate>
+                            <!-- Eloqua required hidden fields -->
+                            <input type="hidden" name="elqFormName" value="MKT">
+                            <input type="hidden" name="elqSiteId" value="138097979">
+                            <input type="hidden" name="elqCampaignId" value="">
+                            <input type="hidden" name="hiddenCampaignId" value="">
+                            <input type="hidden" name="hiddenField" value="">
+                            <input type="hidden" name="marketingActivityName" value="Sales Inquiry form submit">
+                            <input type="hidden" name="hp" value="">
+                            <input type="hidden" name="optInALUECommunications" value="0">
+                            <!-- paragraphText: populated from visible dropdowns before submit -->
+                            <textarea name="paragraphText" id="f-paragraph" style="display:none" aria-hidden="true"></textarea>
 
                             <!-- Prénom / Nom -->
                             <div class="field-row">
@@ -301,7 +276,7 @@
 
                             <!-- Email -->
                             <div class="field-wrap">
-                                <input type="email" id="f-email" name="email" placeholder="Courriel professionnel" class="form-input" required autocomplete="email">
+                                <input type="email" id="f-email" name="emailAddress" placeholder="Courriel professionnel" class="form-input" required autocomplete="email">
                                 <p class="err-msg" id="e-email">Adresse e-mail valide requise</p>
                             </div>
 
@@ -313,30 +288,29 @@
 
                             <!-- Téléphone -->
                             <div class="field-wrap">
-                                <input type="tel" id="f-phone" name="phone" placeholder="Numéro de téléphone" class="form-input" autocomplete="tel">
+                                <input type="tel" id="f-phone" name="busPhone" placeholder="Numéro de téléphone" class="form-input" autocomplete="tel">
                             </div>
 
                             <!-- Pays -->
                             <div class="field-wrap">
                                 <div class="select-wrap">
-                                    <select id="f-country" name="country" class="form-input" required>
+                                    <select id="f-country" name="countryID1" class="form-input" required>
                                         <option value="">Pays</option>
-                                        <option value="FR">France</option>
-                                        <option value="BE">Belgique</option>
-                                        <option value="CH">Suisse</option>
-                                        <option value="LU">Luxembourg</option>
-                                        <option value="DE">Allemagne</option>
-                                        <option value="ES">Espagne</option>
-                                        <option value="IT">Italie</option>
-                                        <option value="NL">Pays-Bas</option>
-                                        <option value="GB">Royaume-Uni</option>
-                                        <option value="PT">Portugal</option>
-                                        <option value="MA">Maroc</option>
-                                        <option value="DZ">Algérie</option>
-                                        <option value="TN">Tunisie</option>
-                                        <option value="US">États-Unis</option>
-                                        <option value="CA">Canada</option>
-                                        <option value="OTHER">Autre</option>
+                                        <option value="a082000000PV1BGAA1">France</option>
+                                        <option value="a082000000PV1ARAA1">Belgique</option>
+                                        <option value="a082000000PV1DSAA1">Suisse</option>
+                                        <option value="a082000000PV1C6AAL">Luxembourg</option>
+                                        <option value="a082000000PV1BNAA1">Allemagne</option>
+                                        <option value="a082000000PV1DIAA1">Espagne</option>
+                                        <option value="a082000000PV1BmAAL">Italie</option>
+                                        <option value="a082000000PV1CWAA1">Pays-Bas</option>
+                                        <option value="a082000000PV1DlAAL">Royaume-Uni</option>
+                                        <option value="a082000000PV1CtAAL">Portugal</option>
+                                        <option value="a082000000PV1CQAA1">Maroc</option>
+                                        <option value="a082000000PV1A9AAL">Algérie</option>
+                                        <option value="a082000000PV1DdAAL">Tunisie</option>
+                                        <option value="a082000000PV1DmAAL">États-Unis</option>
+                                        <option value="a082000000PV1AiAAL">Canada</option>
                                     </select>
                                 </div>
                                 <p class="err-msg" id="e-country">Veuillez sélectionner un pays</p>
@@ -345,7 +319,7 @@
                             <!-- CA prévisionnel -->
                             <div class="field-wrap">
                                 <div class="select-wrap">
-                                    <select id="f-revenue" name="revenue" class="form-input">
+                                    <select id="f-revenue" class="form-input">
                                         <option value="">Ventes prévues pour la première année</option>
                                         <option value="under100k">Moins de 100 000 €</option>
                                         <option value="100k-500k">100 000 € – 500 000 €</option>
@@ -358,7 +332,7 @@
                             <!-- Type de partenariat -->
                             <div class="field-wrap">
                                 <div class="select-wrap">
-                                    <select id="f-type" name="partnerType" class="form-input" required>
+                                    <select id="f-type" class="form-input" required>
                                         <option value="">Intérêt d'un partenariat</option>
                                         <option value="agent">Agent partenaire</option>
                                         <option value="revendeur">Revendeur</option>
@@ -374,7 +348,7 @@
                             <!-- Produit -->
                             <div class="field-wrap">
                                 <div class="select-wrap">
-                                    <select id="f-product" name="product" class="form-input">
+                                    <select id="f-product" class="form-input">
                                         <option value="">Produit</option>
                                         <option value="collaboration">Rainbow Collaboration</option>
                                         <option value="webinar">Rainbow Webinar</option>
@@ -401,17 +375,22 @@
                                 <a href="/store/privacy">me désengage</a>.
                             </p>
                         </form>
-
                         <!-- SUCCESS STATE -->
                         <div id="success-msg">
-                            <div class="success-icon">
-                                <svg style="width:28px;height:28px;color:#16a34a" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
-                                </svg>
+                            <div style="text-align:center;padding:36px 16px 20px">
+                                <div style="width:68px;height:68px;background:linear-gradient(135deg,#ede9fe 0%,#ddd6fe 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 4px 18px rgba(94,45,145,.15)">
+                                    <svg style="width:32px;height:32px;color:#5e2d91" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                                    </svg>
+                                </div>
+                                <h3 style="font-size:1.25rem;font-weight:700;color:#111827;margin-bottom:10px">Candidature envoyée&nbsp;!</h3>
+                                <p style="font-size:.875rem;color:#6b7280;line-height:1.7;max-width:270px;margin:0 auto 6px">Notre équipe partenaires reviendra vers vous dans les</p>
+                                <p style="font-size:.9rem;font-weight:600;color:#111827;margin-bottom:24px">2 à 3 jours ouvrés</p>
+                                <a href="/store/" style="display:inline-flex;align-items:center;gap:6px;font-size:.875rem;font-weight:600;color:#5e2d91;text-decoration:none">
+                                    <svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+                                    Retour à l'accueil
+                                </a>
                             </div>
-                            <h3 style="font-size:1.25rem;font-weight:700;color:#111827;margin-bottom:8px">Candidature envoyée !</h3>
-                            <p style="font-size:.9rem;color:#6b7280;line-height:1.6;max-width:280px;margin:0 auto 20px">Un membre de notre équipe partenaires vous contactera sous 2 à 3 jours ouvrés.</p>
-                            <a href="/store/" style="font-size:.875rem;font-weight:600;color:#5e2d91;text-decoration:none">← Retour à l'accueil</a>
                         </div>
                     </div>
                 </div>
@@ -533,12 +512,14 @@
         e.preventDefault();
         var ok = true;
 
-        if(!val('firstName'))          { setErr('f-first','e-first',true);   ok=false; } else setErr('f-first','e-first',false);
-        if(!val('lastName'))           { setErr('f-last','e-last',true);     ok=false; } else setErr('f-last','e-last',false);
-        if(!validEmail(val('email')))  { setErr('f-email','e-email',true);   ok=false; } else setErr('f-email','e-email',false);
-        if(!val('company'))            { setErr('f-company','e-company',true); ok=false; } else setErr('f-company','e-company',false);
-        if(!val('country'))            { setErr('f-country','e-country',true); ok=false; } else setErr('f-country','e-country',false);
-        if(!val('partnerType'))        { setErr('f-type','e-type',true);     ok=false; } else setErr('f-type','e-type',false);
+        if(!val('firstName'))              { setErr('f-first','e-first',true);   ok=false; } else setErr('f-first','e-first',false);
+        if(!val('lastName'))               { setErr('f-last','e-last',true);     ok=false; } else setErr('f-last','e-last',false);
+        if(!validEmail(val('emailAddress'))){ setErr('f-email','e-email',true);   ok=false; } else setErr('f-email','e-email',false);
+        if(!val('company'))                { setErr('f-company','e-company',true); ok=false; } else setErr('f-company','e-company',false);
+        if(!val('countryID1'))             { setErr('f-country','e-country',true); ok=false; } else setErr('f-country','e-country',false);
+
+        var typeEl = document.getElementById('f-type');
+        if(!typeEl || !typeEl.value){ setErr('f-type','e-type',true); ok=false; } else setErr('f-type','e-type',false);
 
         if(!ok){
             var firstErr = form.querySelector('.err');
@@ -546,15 +527,31 @@
             return;
         }
 
-        submitBtn.classList.add('loading');
+        // Build paragraphText from visual-only dropdowns
+        var parts = [];
+        var revenueEl = document.getElementById('f-revenue');
+        var productEl = document.getElementById('f-product');
+        if(typeEl && typeEl.value)    parts.push('Partenariat: ' + typeEl.options[typeEl.selectedIndex].text);
+        if(revenueEl && revenueEl.value) parts.push('CA prévisionnel: ' + revenueEl.options[revenueEl.selectedIndex].text);
+        if(productEl && productEl.value) parts.push('Produit: ' + productEl.options[productEl.selectedIndex].text);
+        document.getElementById('f-paragraph').value = parts.join(' | ');
 
-        // Replace setTimeout with real fetch to your API:
-        // fetch('/api/partner-application', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({...}) })
-        setTimeout(function(){
-            submitBtn.classList.remove('loading');
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+
+        // POST to Eloqua with no-cors — request is sent and tracked,
+        // response is intentionally ignored (opaque), no page redirect occurs
+        var fd = new FormData(form);
+        fd.set('paragraphText', document.getElementById('f-paragraph').value);
+
+        fetch('https://s138097979.t.eloqua.com/e/f2', {
+            method: 'POST',
+            mode: 'no-cors',
+            body: fd
+        }).finally(function(){
             form.style.display = 'none';
             successMsg.style.display = 'block';
-        }, 1100);
+        });
     });
 })();
 </script>
