@@ -42,39 +42,35 @@
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;
-            min-height: 460px;
+            min-height: 420px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             position: relative;
-            padding-top: 80px;
-        }
-        .blog-hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(255,255,255,.15) 0%, rgba(255,255,255,.55) 100%);
+            padding-top: 110px;
+            padding-bottom: 120px;
         }
         .blog-hero-content { position: relative; z-index: 1; text-align: center; width: 100%; padding: 0 1.5rem; }
 
         /* ── Category pills ── */
         .cat-pill {
             display: inline-block;
-            padding: 6px 16px;
+            padding: 6px 18px;
             border-radius: 999px;
             font-size: 0.8125rem;
             font-weight: 500;
             cursor: pointer;
             transition: all .18s;
-            background: #1e1b4b;
-            color: #fff;
-            border: 2px solid transparent;
+            background: rgba(255,255,255,0.75);
+            color: #5e2d91;
+            border: 1.5px solid rgba(196,181,253,0.7);
             white-space: nowrap;
+            backdrop-filter: blur(6px);
         }
-        .cat-pill:hover { background: #5e2d91; }
-        .cat-pill.active { background: #5e2d91; border-color: #5e2d91; }
-        .cat-pill.inactive { background: #1e1b4b; }
+        .cat-pill:hover { background: rgba(255,255,255,0.95); border-color: #a78bfa; }
+        .cat-pill.active { background: #5e2d91; color: #fff; border-color: #5e2d91; }
+        .cat-pill.inactive { background: rgba(255,255,255,0.75); color: #5e2d91; }
 
         /* ── Search bar ── */
         .blog-search {
@@ -98,20 +94,21 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255,255,255,.85);
-            backdrop-filter: blur(8px);
-            border: 1.5px solid #e5e7eb;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
+            border: 1.5px solid rgba(196,181,253,0.6);
             border-radius: 999px;
-            padding: 8px 20px;
+            padding: 9px 22px;
             font-size: .9375rem;
-            color: #6b7280;
+            color: #7c3aed;
         }
+        .search-bar-wrap input::placeholder { color: #a78bfa; }
 
         /* ── Featured card ── */
         .featured-card {
             background: #fff;
             border-radius: 20px;
-            box-shadow: 0 2px 16px rgba(30,27,75,.07);
+            box-shadow: 0 8px 40px rgba(30,27,75,.16), 0 2px 8px rgba(30,27,75,.08);
             overflow: hidden;
             display: flex;
             flex-direction: row;
@@ -131,7 +128,7 @@
         .resource-card {
             background: #fff;
             border-radius: 20px;
-            box-shadow: 0 2px 16px rgba(30,27,75,.07);
+            box-shadow: 0 8px 40px rgba(30,27,75,.16), 0 2px 8px rgba(30,27,75,.08);
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -276,7 +273,7 @@
     <!-- ===== HERO BANNER ===== -->
     <div class="blog-hero">
         <div class="blog-hero-content">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 tracking-tight mb-6">Blog Rainbow</h1>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6" style="color:#fff; text-shadow: 0 2px 16px rgba(94,45,145,0.18);">Blog Rainbow</h1>
             <!-- Search -->
             <div class="flex justify-center mb-6">
                 <div class="search-bar-wrap">
@@ -298,7 +295,7 @@
     </div>
 
     <!-- ===== FEATURED SECTION ===== -->
-    <section class="py-16 px-6 bg-gray-50">
+    <section class="px-6 bg-transparent" style="margin-top: -110px; position: relative; z-index: 10; padding-bottom: 48px;">
         <div class="max-w-6xl mx-auto">
             <div class="grid lg:grid-cols-[1fr_380px] gap-6 items-stretch">
 
