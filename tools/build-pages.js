@@ -32,6 +32,7 @@ const ROUTES = {
   'tarif1': 'pages/tarif1.html',
   'tarif2': 'pages/tarif2.html',
   'tarif3': 'pages/tarif3.html',
+  'blog': 'pages/blog.html',
   'contact': 'pages/contact.html',
   'login': 'pages/client-login.html',
   'register': 'pages/signup.html',
