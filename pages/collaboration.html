@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -86,6 +86,17 @@
             color: #7c3aed;
             font-weight: 600;
         }
+
+        /* ===== Floating Section Nav (scroll-spy pill bar) ===== */
+        .section-anchor { scroll-margin-top: 130px; }
+        #section-nav { position: fixed; top: 74px; left: 50%; transform: translateX(-50%) translateY(-14px); z-index: 40; opacity: 0; pointer-events: none; transition: opacity 0.35s ease, transform 0.35s ease; }
+        #section-nav.visible { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+        .section-nav-inner { display: flex; align-items: center; gap: 4px; padding: 6px; background: #f0eef8; border: 1px solid #e5e1f3; border-radius: 9999px; max-width: calc(100vw - 24px); overflow-x: auto; scrollbar-width: none; }
+        .section-nav-inner::-webkit-scrollbar { display: none; }
+        .section-nav-link { flex: 0 0 auto; padding: 8px 18px; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; color: #7b74a3; white-space: nowrap; text-decoration: none; transition: color 0.2s ease, background 0.2s ease; }
+        .section-nav-link:hover { color: #5e2d91; }
+        .section-nav-link.active { color: #ffffff; background: #5e2d91; }
+        @media (max-width: 767px) { #section-nav { top: 66px; } .section-nav-link { padding: 7px 14px; font-size: 0.8125rem; } }
     </style>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/mega-menu.css">
@@ -99,7 +110,7 @@
             <a href="/" class="flex items-center gap-2.5 shrink-0">
                 <img src="/images/Rainbow-logo-banner.png" alt="Rainbow" class="h-8 w-auto" />
             </a>
-            <div class="hidden md:flex items-center justify-center flex-1 gap-8">
+            <div class="hidden lg:flex items-center justify-center flex-1 gap-8">
                 <div class="nav-dropdown">
                     <a href="#" class="text-sm text-gray-500 hover:text-navy-900 transition-colors font-medium">
                         <span data-i18n="nav.product">Produits</span>
@@ -130,7 +141,7 @@
 
                 </div>
             </div>
-            <div class="hidden md:flex items-center gap-4 shrink-0">
+            <div class="hidden lg:flex items-center gap-4 shrink-0">
                 <div class="lang-switcher" id="lang-switcher">
                     <button onclick="document.getElementById('lang-switcher').classList.toggle('open')">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -151,14 +162,14 @@
                 <a href="/tarifs"
                     class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold whitespace-nowrap shadow-md hover:shadow-lg transition-all">Essai gratuit</a>
             </div>
-            <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Menu">
+            <button id="mobile-menu-btn" class="lg:hidden p-2" aria-label="Menu">
                 <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
         </div>
-        <div id="mobile-menu" class="md:hidden hidden border-t border-indigo-50 bg-white px-6 py-4 space-y-3">
+        <div id="mobile-menu" class="lg:hidden hidden border-t border-indigo-50 bg-white px-6 py-4 space-y-3">
             <a href="#" class="block text-sm text-gray-600 py-2" data-i18n="nav.product">Produits</a>
             <div class="mobile-submenu space-y-1">
                 <a href="/products/collaboration" class="block py-1">Rainbow Collaboration</a>
@@ -187,28 +198,36 @@
         </div>
     </nav>
 
+    <!-- ===== FLOATING SECTION NAV (scroll-spy pill bar) ===== -->
+    <nav id="section-nav" aria-label="Sections de la page">
+        <div class="section-nav-inner">
+            <a href="#fonctionnalites" class="section-nav-link">Fonctionnalit&eacute;s</a>
+            <a href="#tarifs" class="section-nav-link">Tarifs</a>
+            <a href="#questions-frequentes" class="section-nav-link">FAQ</a>
+        </div>
+    </nav>
+
     <!-- HERO SECTION -->
     <header class="pt-32 pb-20 px-6 relative overflow-hidden bg-[#ffffff]">
         <div class="max-w-6xl mx-auto grid lg:grid-cols-5 gap-16 items-center relative z-10">
             <!-- Left Side (Text & CTA) -->
             <div class="lg:col-span-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold mb-5 bg-brand-100 text-brand-500 uppercase tracking-widest">
+                    Communication d'&eacute;quipe souveraine
+                </div>
                 <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-navy-900 leading-[1.15] tracking-tight">
-                    Rainbow Collaboration&nbsp;: tous vos &eacute;changes d'&eacute;quipe dans un seul outil, h&eacute;berg&eacute; en France
+                    <span class="text-brand-500">Rainbow Collaboration</span>&nbsp;: tous vos &eacute;changes d'&eacute;quipe dans un seul outil, h&eacute;berg&eacute; en France
                 </h1>
                 <p class="mt-6 text-lg sm:text-xl text-gray-600 leading-relaxed max-w-lg">
                     Messages, appels, r&eacute;unions vid&eacute;os et partage de fichiers, fini de jongler entre Teams, WhatsApp et votre bo&icirc;te mail.
                 </p>
                 <div class="mt-8 flex flex-col sm:flex-row gap-4 items-center">
                     <a href="/tarifs"
-                        class="px-8 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap shadow-2xl shadow-purple-900/20 transition-all active:scale-95">Découvrez
-                        nos plans</a>
-                    <a href="/contact"
+                        class="px-8 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap shadow-2xl shadow-purple-900/20 transition-all active:scale-95">Essai
+                        gratuit</a>
+                    <a href="/products/collaboration/pricing"
                         class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-base font-bold whitespace-nowrap shrink-0 transition-all group active:scale-95 inline-flex items-center justify-center">
-                        <svg class="w-5 h-5 mr-3 fill-current text-purple-900 group-hover:text-brand-500 transition-colors"
-                            fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" />
-                        </svg>
-                        Voir une démo
+                        Découvrez nos plans
                     </a>
                 </div>
             </div>
@@ -254,12 +273,12 @@
             </section>
 
             <!-- BENTO GRID SECTION -->
-            <section class="py-24 relative z-10 border-t border-gray-100"
+            <section id="fonctionnalites" class="section-anchor py-24 relative z-10 border-t border-gray-100"
                 style="background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 30%, #ffffff 70%, #f5f3ff 100%);">
                 <div class="max-w-6xl mx-auto px-6">
                     <h2
                         class="text-4xl md:text-5xl font-extrabold text-navy-900 text-center mb-20 leading-[1.15] tracking-tight">
-                        Six fonctionnalit&eacute;s. Un seul endroit. Z&eacute;ro jonglage
+                        Retrouvez les meilleures fonctionnalit&eacute;s en seul endroit. Z&eacute;ro jonglage
                     </h2>
 
                     <div class="flex flex-col gap-4">
@@ -302,11 +321,11 @@
                                     <img src="/images/collaboration-page/text-format.webp" alt="" class="w-full object-contain rounded-xl">
                                 </div>
                             </div>
-                            <!-- Partage de fichiers -->
+                            <!-- Transcriptions de visioconférences -->
                             <div class="p-8 md:p-10 flex flex-col rounded-[15px]" style="background: linear-gradient(135deg, rgba(94,45,145,0.08), rgba(0,133,202,0.05));">
                                 <div class="mb-8" style="min-height: 5.5rem;">
-                                    <strong class="text-navy-900 font-semibold block mb-2 text-[15px]">Partage de fichiers</strong>
-                                    <p class="text-gray-500 text-[14px] leading-relaxed">Partagez et retrouvez vos documents directement dans vos conversations, sans changer d'outil, sans multiplier les versions, sans chercher dans votre bo&icirc;te mail ce qui a &eacute;t&eacute; envoy&eacute; quand.</p>
+                                    <strong class="text-navy-900 font-semibold block mb-2 text-[15px]">Transcriptions de visioconf&eacute;rences</strong>
+                                    <p class="text-gray-500 text-[14px] leading-relaxed">Fini les prises de notes pendant vos appels. Rainbow transcrit automatiquement chaque conversation vid&eacute;o et la rattache directement au fil de discussion correspondant. Retrouvez n'importe quel &eacute;change en quelques secondes, m&ecirc;me six mois apr&egrave;s.</p>
                                 </div>
                                 <div class="flex-1 flex items-center justify-center">
                                     <img src="/images/collaboration-page/documents-type.webp" alt="" class="w-full object-contain rounded-xl">
@@ -328,8 +347,8 @@
             </section>
 
             <!-- PRICING SECTION -->
-            <section
-                class="py-32 bg-gray-50 relative overflow-hidden z-10 border-t border-b border-dashed border-gray-200">
+            <section id="tarifs"
+                class="section-anchor py-32 bg-gray-50 relative overflow-hidden z-10 border-t border-b border-dashed border-gray-200">
                 <div class="max-w-6xl mx-auto px-6 relative z-10">
                     <div class="text-center mb-16">
                         <h2 class="text-4xl md:text-5xl font-extrabold text-navy-900 mb-6 tracking-tight">Commencez gratuitement, &eacute;voluez sans contrainte</h2>
@@ -714,7 +733,7 @@
             </section>
 
             <!-- ===== QUESTIONS FRÉQUENTES SECTION (Zendesk API) ===== -->
-            <section id="questions-frequentes" class="py-20 lg:py-28 faq-section" style="background-color: #c5deff47;">
+            <section id="questions-frequentes" class="section-anchor py-20 lg:py-28 faq-section" style="background-color: #c5deff47;">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16">
                         <h2 class="text-2xl md:text-4xl lg:text-5xl font-semibold mb-6 tracking-tight text-gray-900">
@@ -752,7 +771,7 @@
                     <div class="sp-preview">
                         <div class="sp-cta-banner">
                             <div class="sp-cta-content">
-                                <h2 class="sp-cta-h2">16&nbsp;000 organisations ont arr&ecirc;t&eacute; de jongler entre leurs outils. Vous aussi&nbsp;?</h2>
+                                <h2 class="sp-cta-h2">Des milliers d'organisations ont arr&ecirc;t&eacute; de jongler entre leurs outils. Vous aussi&nbsp;?</h2>
                                 <p class="sp-cta-sub">Commencez gratuitement. Aucune carte bancaire requise. Configuration en moins de 5 minutes.</p>
                                 <div class="sp-cta-actions">
                                     <a href="/tarifs" class="btn-cta-primary">Commencez gratuitement &rarr;</a>
@@ -879,9 +898,7 @@
     <script src="/js/mega-menu.js"></script>
     <script src="/js/i18n.js"></script>
     <script>
-        document.getElementById('mobile-menu-btn').addEventListener('click', function () {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
+
 
         document.addEventListener('click', function (e) {
             var sw = document.getElementById('lang-switcher');
@@ -1049,6 +1066,48 @@
             }
             document.addEventListener('DOMContentLoaded', fetchFaq);
         })();
+    </script>
+    <script>
+    (function() {
+        var sectionNav = document.getElementById('section-nav');
+        if (!sectionNav) return;
+        var links = Array.prototype.slice.call(sectionNav.querySelectorAll('.section-nav-link'));
+        var anchorLinks = links.filter(function(l){ return l.getAttribute('href').charAt(0) === '#'; });
+        var sections = anchorLinks.map(function(link) { return document.getElementById(link.getAttribute('href').slice(1)); });
+        var footer = document.querySelector('footer');
+        var OFFSET = 150;
+        anchorLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var target = document.getElementById(link.getAttribute('href').slice(1));
+                if (!target) return;
+                e.preventDefault();
+                var y = target.getBoundingClientRect().top + window.pageYOffset - (OFFSET - 20);
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            });
+        });
+        // Document-relative top (offsetTop is unreliable here: sections live inside a
+        // position:relative wrapper, so offsetTop is measured against that box, not the page).
+        function docTop(el) { return el.getBoundingClientRect().top + window.pageYOffset; }
+        function update() {
+            var scrollY = window.pageYOffset;
+            var valid = sections.filter(Boolean);
+            var firstTop = valid.length ? Math.min.apply(null, valid.map(docTop)) : Infinity;
+            var footerTop = footer ? docTop(footer) : Infinity;
+            if (scrollY + OFFSET >= firstTop - 200 && scrollY + OFFSET < footerTop) { sectionNav.classList.add('visible'); }
+            else { sectionNav.classList.remove('visible'); }
+            // Order-independent scroll-spy: highlight the section with the greatest
+            // document-top that is still above the current scroll position.
+            var activeIndex = -1, activeTop = -Infinity;
+            for (var i = 0; i < sections.length; i++) {
+                if (sections[i]) { var t = docTop(sections[i]); if (t - OFFSET <= scrollY && t > activeTop) { activeTop = t; activeIndex = i; } }
+            }
+            if (activeIndex === -1) activeIndex = 0;
+            anchorLinks.forEach(function(link, i) { link.classList.toggle('active', i === activeIndex); });
+        }
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+    })();
     </script>
 </body>
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -125,6 +125,101 @@
 }
 .compliance-card-back-arrow:hover { background: #5e2d91; border-color: #5e2d91; color: white; }
 .compliance-card-back-arrow svg { width: 14px; height: 14px; }
+
+/* ===== Floating Section Nav (scroll-spy pill bar) ===== */
+.section-anchor { scroll-margin-top: 130px; }
+
+#section-nav {
+    position: fixed;
+    top: 74px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-14px);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+#section-nav.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+.section-nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px;
+    background: #f0eef8;
+    border: 1px solid #e5e1f3;
+    border-radius: 9999px;
+    max-width: calc(100vw - 24px);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.section-nav-inner::-webkit-scrollbar { display: none; }
+.section-nav-link {
+    flex: 0 0 auto;
+    padding: 8px 18px;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #7b74a3;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+.section-nav-link:hover { color: #5e2d91; }
+.section-nav-link.active {
+    color: #ffffff;
+    background: #5e2d91;
+}
+@media (max-width: 767px) {
+    #section-nav { top: 66px; }
+    .section-nav-link { padding: 7px 14px; font-size: 0.8125rem; }
+}
+
+/* ===== Certifications carousel (one sliding row) ===== */
+.cert-carousel { position: relative; display: flex; align-items: center; gap: 10px; }
+.cert-carousel-track {
+    flex: 1 1 auto;
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 10px 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Fade the horizontal edges to hint the row is scrollable */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 56px, #000 calc(100% - 56px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 56px, #000 calc(100% - 56px), transparent 100%);
+}
+.cert-carousel-track::-webkit-scrollbar { display: none; }
+/* Programmatic flip (one-time hint on first appearance) */
+.compliance-card.flip-demo .compliance-card-inner { transform: rotateY(180deg); }
+.cert-slide {
+    flex: 0 0 auto;
+    width: 280px;
+    scroll-snap-align: start;
+}
+@media (max-width: 640px) { .cert-slide { width: 80%; } }
+.cert-carousel-arrow {
+    flex: 0 0 auto;
+    width: 44px; height: 44px;
+    border-radius: 9999px;
+    border: 1px solid #e5e1f3;
+    background: #ffffff;
+    color: #5e2d91;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(80,55,145,0.12);
+    transition: background 0.2s, color 0.2s, opacity 0.2s;
+    z-index: 2;
+}
+.cert-carousel-arrow:hover { background: #5e2d91; color: #ffffff; }
+.cert-carousel-arrow svg { width: 20px; height: 20px; }
+.cert-carousel-arrow[disabled] { opacity: 0.3; cursor: default; box-shadow: none; }
+.cert-carousel-arrow[disabled]:hover { background: #ffffff; color: #5e2d91; }
 </style>
 </head>
 <body class="font-sans text-gray-600 antialiased bg-white">
@@ -135,7 +230,7 @@
             <a href="/" class="flex items-center gap-2.5 shrink-0">
                 <img src="/images/Rainbow-logo-banner.png" alt="Rainbow" class="h-8 w-auto" />
             </a>
-            <div class="hidden md:flex items-center justify-center flex-1 gap-8">
+            <div class="hidden lg:flex items-center justify-center flex-1 gap-8">
                 <div class="nav-dropdown">
                     <a href="#" class="text-sm text-gray-500 hover:text-navy-900 transition-colors font-medium">
                         <span data-i18n="nav.product">Produits</span>
@@ -156,7 +251,7 @@
 
                 </div>
             </div>
-            <div class="hidden md:flex items-center gap-4 shrink-0">
+            <div class="hidden lg:flex items-center gap-4 shrink-0">
                 <div class="lang-switcher" id="lang-switcher">
                     <button onclick="document.getElementById('lang-switcher').classList.toggle('open')">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/></svg>
@@ -168,11 +263,11 @@
                 <a href="/login" class="px-5 py-2.5 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-sm font-semibold transition-all active:scale-95 inline-flex items-center justify-center" data-i18n="nav.signin">Se connecter</a>
                 <a href="/tarifs" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold whitespace-nowrap shadow-md hover:shadow-lg transition-all">Essai gratuit</a>
             </div>
-            <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Menu">
+            <button id="mobile-menu-btn" class="lg:hidden p-2" aria-label="Menu">
                 <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
         </div>
-        <div id="mobile-menu" class="md:hidden hidden border-t border-indigo-50 bg-white px-6 py-4 space-y-3">
+        <div id="mobile-menu" class="lg:hidden hidden border-t border-indigo-50 bg-white px-6 py-4 space-y-3">
             <a href="#" class="block text-sm text-gray-600 py-2" data-i18n="nav.product">Produits</a>
             <div class="mobile-submenu space-y-1">
                 <a href="/products/collaboration" class="block py-1">Rainbow Collaboration</a>
@@ -195,6 +290,18 @@
                 <a href="/login" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">Se connecter</a>
                 <a href="/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all">Essai gratuit</a>
             </div>
+        </div>
+    </nav>
+
+    <!-- ===== FLOATING SECTION NAV (scroll-spy pill bar) ===== -->
+    <nav id="section-nav" aria-label="Sections de la page">
+        <div class="section-nav-inner">
+            <a href="#fonctionnalites" class="section-nav-link">Fonctionnalit&eacute;s</a>
+            <a href="#cibles" class="section-nav-link">Cibles</a>
+            <a href="#certifications" class="section-nav-link">Certifications</a>
+            <a href="#solutions" class="section-nav-link">Solutions</a>
+            <a href="#actualites" class="section-nav-link">Actualit&eacute;s</a>
+            <a href="#questions-frequentes" class="section-nav-link">FAQ</a>
         </div>
     </nav>
 
@@ -311,21 +418,21 @@
     </section>
 
     <!-- ===== UNIFIED PLATFORM SECTION (Laurenn style - gray-50 bg) ===== -->
-    <section class="pt-16 lg:pt-20 pb-20 lg:pb-28 relative overflow-hidden" style="background-color: #c5deff47;">
+    <section id="fonctionnalites" class="section-anchor pt-16 lg:pt-20 pb-20 lg:pb-28 relative overflow-hidden" style="background-color: #c5deff47;">
         <div class="max-w-6xl mx-auto px-6 relative z-10 animate-on-scroll">
             <div class="text-center max-w-4xl mx-auto mb-16">
                 <h2 class="text-2xl md:text-4xl lg:text-5xl font-semibold mb-6 text-gray-900 tracking-tight">
                     Tout ce dont vos &eacute;quipes ont besoin pour travailler ensemble, sans quitter Rainbow.
                 </h2>
                 <p class="text-lg text-gray-600 leading-relaxed font-medium">
-                    Messages, appels, r&eacute;unions vid&eacute;o, webinaires, partage de fichiers&nbsp;: chaque outil dont vous avez besoin, dans un seul environnement. Fini les 4 apps ouvertes en permanence.
+                    Messages, appels, r&eacute;unions vid&eacute;o, webinaires, partage de fichiers&nbsp;: tous les outils dont vous avez besoin, dans un seul environnement. Fini les 4 apps ouvertes en permanence.
                 </p>
             </div>
 
             <!-- Mobile: Image carousel with dots -->
             <div class="lg:hidden">
                 <div id="platform-mobile-image-wrapper" class="relative w-full rounded-xl overflow-hidden bg-gray-900 shadow-xl ring-1 ring-black/5 mb-6" style="aspect-ratio: 800 / 650;">
-                    <img src="/images/echanger.jpg" alt="" class="platform-mobile-image block absolute inset-0 w-full h-full object-cover" data-platform-index="0" />
+                    <img src="/images/echanger.png" alt="" class="platform-mobile-image block absolute inset-0 w-full h-full object-cover" data-platform-index="0" />
                     <img src="/images/dicuter.jpg" alt="" class="platform-mobile-image hidden absolute inset-0 w-full h-full object-cover" data-platform-index="1" />
                     <img src="/images/organiser.jpg" alt="" class="platform-mobile-image hidden absolute inset-0 w-full h-full object-cover" data-platform-index="2" />
                 </div>
@@ -414,7 +521,34 @@
                     <!-- Quote Section -->
                     <div class="pt-8 border-t border-gray-200 relative">
                         <div id="platform-quote" class="relative text-center">
+                            <!-- Quote 0: Échanger avec vos équipes -->
                             <div class="quote-item" data-quote-index="0">
+                                <p class="text-gray-600 italic text-lg mb-2 leading-relaxed">
+                                    &laquo;&nbsp;Nos &eacute;quipes collaborent enfin au m&ecirc;me endroit. Espaces partag&eacute;s, fichiers, discussions&nbsp;: tout est centralis&eacute; et accessible en un instant.&nbsp;&raquo;
+                                </p>
+                                <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">
+                                    Responsable collaboration, Herrenberg
+                                </p>
+                                <a href="#" class="text-xs font-semibold text-brand-500 hover:underline inline-flex items-center gap-1">
+                                    Lire le t&eacute;moignage complet <span>&rarr;</span>
+                                </a>
+                            </div>
+
+                            <!-- Quote 1: Discuter en temps réel -->
+                            <div class="quote-item" data-quote-index="1" style="opacity: 0; pointer-events: none; position: absolute; top: 0; left: 0; width: 100%;">
+                                <p class="text-gray-600 italic text-lg mb-2 leading-relaxed">
+                                    &laquo;&nbsp;Passer d'un message &agrave; un appel visio en un clic a transform&eacute; notre r&eacute;activit&eacute;. Nous &eacute;changeons en temps r&eacute;el, sans jamais quitter Rainbow.&nbsp;&raquo;
+                                </p>
+                                <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">
+                                    Directrice des op&eacute;rations, EYDAP
+                                </p>
+                                <a href="#" class="text-xs font-semibold text-brand-500 hover:underline inline-flex items-center gap-1">
+                                    Lire le t&eacute;moignage complet <span>&rarr;</span>
+                                </a>
+                            </div>
+
+                            <!-- Quote 2: Organiser des réunions et événements -->
+                            <div class="quote-item" data-quote-index="2" style="opacity: 0; pointer-events: none; position: absolute; top: 0; left: 0; width: 100%;">
                                 <p class="text-gray-600 italic text-lg mb-2 leading-relaxed">
                                     &laquo;&nbsp;La facilit&eacute; d'usage &eacute;tait un crit&egrave;re cl&eacute; pour nous. La biblioth&egrave;que de m&eacute;dias, notamment vid&eacute;o, nous permet d'assurer un accompagnement de qualit&eacute; aupr&egrave;s de nos utilisateurs.&nbsp;&raquo;
                                 </p>
@@ -432,7 +566,7 @@
                 <!-- Right: Image Display with blur transitions -->
                 <div class="order-1 lg:order-2 lg:col-span-7 flex items-center">
                     <div id="platform-image-wrapper" class="relative w-full rounded-xl overflow-hidden bg-gray-900 shadow-xl ring-1 ring-black/5" style="aspect-ratio: 800 / 650;">
-                        <img src="/images/echanger.jpg" alt="" class="platform-image absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out" style="opacity: 1; filter: blur(0); z-index: 10;" />
+                        <img src="/images/echanger.png" alt="" class="platform-image absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out" style="opacity: 1; filter: blur(0); z-index: 10;" />
                         <img src="/images/dicuter.jpg" alt="" class="platform-image absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out" style="opacity: 0; filter: blur(4px); z-index: 0;" />
                         <img src="/images/organiser.jpg" alt="" class="platform-image absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out" style="opacity: 0; filter: blur(4px); z-index: 0;" />
                     </div>
@@ -442,7 +576,7 @@
     </section>
 
     <!-- ===== TARGET AUDIENCE SECTION (sliding pill tabs) ===== -->
-    <section class="py-20 lg:py-28" style="background-color: #f9f8fe;">
+    <section id="cibles" class="section-anchor py-20 lg:py-28" style="background-color: #f9f8fe;">
         <div class="max-w-6xl mx-auto px-6 animate-on-scroll">
             <div class="text-center max-w-3xl mx-auto mb-6">
                 <h2 class="text-2xl md:text-4xl lg:text-5xl font-semibold mb-6 text-gray-900 tracking-tight">
@@ -661,7 +795,7 @@
     <div style="height: 0; background-color: #5e2d91;"></div>
 
     <!-- ===== SECURITY CERTIFICATIONS SECTION (Laurenn style) ===== -->
-    <section class="py-20 lg:py-28 bg-gray-50">
+    <section id="certifications" class="section-anchor py-20 lg:py-28 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
             <div class="text-center mb-16">
@@ -672,12 +806,16 @@
                 </p>
             </div>
 
-            <!-- Unified Staggered Grid - 12 Column Layout -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 max-w-6xl mx-auto">
+            <!-- Certifications carousel (one sliding row) -->
+            <div class="cert-carousel max-w-6xl mx-auto">
+                <button type="button" class="cert-carousel-arrow cert-prev" aria-label="Certification pr&eacute;c&eacute;dente">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <div class="cert-carousel-track" id="cert-track">
                 <!-- Row 1 - 4-5-3 span -->
                 
-                <!-- Card 0: HIPAA (col-span-4) - hasDots, hasBlob -->
-                <div class="md:col-span-4">
+                <!-- HIPAA -->
+                <div class="cert-slide">
                     <div class="compliance-card group" style="min-height: 300px;">
                         <div class="compliance-card-inner">
                             <div class="compliance-card-front">
@@ -705,8 +843,8 @@
                     </div>
                 </div>
 
-                <!-- Card 1: GDPR (col-span-5) - hasWaves -->
-                <div class="md:col-span-5">
+                <!-- GDPR -->
+                <div class="cert-slide">
                     <div class="compliance-card group" style="min-height: 300px;">
                         <div class="compliance-card-inner">
                             <div class="compliance-card-front">
@@ -739,8 +877,8 @@
                     </div>
                 </div>
 
-                <!-- Card 2: ACN (col-span-3) - hasWaves, hasDots, hasBlob -->
-                <div class="md:col-span-3">
+                <!-- ACN -->
+                <div class="cert-slide">
                     <div class="compliance-card group" style="min-height: 300px;">
                         <div class="compliance-card-inner">
                             <div class="compliance-card-front">
@@ -771,8 +909,8 @@
 
                 <!-- Row 2 - 5-3-4 span -->
 
-                <!-- Card 3: ISO 27001 (col-span-5) - hasWaves -->
-                <div class="md:col-span-5">
+                <!-- ISO 27001 -->
+                <div class="cert-slide">
                     <div class="compliance-card group" style="min-height: 300px;">
                         <div class="compliance-card-inner">
                             <div class="compliance-card-front">
@@ -805,8 +943,8 @@
                     </div>
                 </div>
 
-                <!-- Card 4: BSI C5 (col-span-3) - hasDots, hasBlob -->
-                <div class="md:col-span-3">
+                <!-- BSI C5 -->
+                <div class="cert-slide">
                     <div class="compliance-card group" style="min-height: 300px;">
                         <div class="compliance-card-inner">
                             <div class="compliance-card-front">
@@ -835,8 +973,8 @@
                     </div>
                 </div>
 
-                <!-- Card 5: HDS (col-span-4) - hasWaves -->
-                <div class="md:col-span-4">
+                <!-- HDS -->
+                <div class="cert-slide">
                     <div class="compliance-card group" style="min-height: 300px;">
                         <div class="compliance-card-inner">
                             <div class="compliance-card-front">
@@ -869,9 +1007,8 @@
                     </div>
                 </div>
 
-                <!-- Row 3 - ANSSI (centered) -->
-                <div class="md:col-span-12 flex justify-center">
-                    <div class="w-full md:w-1/3">
+                <!-- ANSSI -->
+                <div class="cert-slide">
                         <div class="compliance-card group" style="min-height: 300px;">
                             <div class="compliance-card-inner">
                                 <div class="compliance-card-front">
@@ -898,8 +1035,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
+                </div>
+                <button type="button" class="cert-carousel-arrow cert-next" aria-label="Certification suivante">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
             </div>
 
             <div class="text-center mt-16">
@@ -912,7 +1052,7 @@
     </section>
 
     <!-- ===== PRODUCT RANGE SECTION (Laurenn style) ===== -->
-    <section class="py-20 lg:py-28 bg-white product-range-section">
+    <section id="solutions" class="section-anchor py-20 lg:py-28 bg-white product-range-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
             <div class="text-center mb-16 lg:mb-16">
@@ -1019,18 +1159,18 @@
     </section>
 
     <!-- ===== TESTIMONIALS SECTION (Laurenn style - Expand on Hover) ===== -->
-    <section aria-labelledby="testimonials-heading" class="bg-gray-50 py-20 lg:py-28 relative overflow-hidden">
+    <section id="actualites" aria-labelledby="testimonials-heading" class="section-anchor bg-gray-50 py-20 lg:py-28 relative overflow-hidden">
         <div class="max-w-7xl px-4 sm:px-6 lg:px-8 z-10 mx-auto">
             <div class="flex flex-col items-center justify-center max-w-4xl mx-auto mb-6">
                 <div class="flex justify-center">
                 </div>
 
                 <h2 id="testimonials-heading" class="text-2xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-center text-gray-900">
-                    Ils ont transform&eacute; leur quotidien avec <br/>
+                    Retrouvez toutes les actualit&eacute;s de <br/>
                     <span class="text-brand-500">Rainbow</span>
                 </h2>
                 <p class="text-center mt-6 text-gray-600 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-                    D&eacute;couvrez comment nos clients utilisent la puissance de Rainbow pour leurs &eacute;v&eacute;nements les plus critiques.
+                    Articles, guides, livres blancs&hellip; restez connect&eacute;s sur les informations utiles.
                 </p>
             </div>
 
@@ -1039,15 +1179,15 @@
                 <div class="expand-cards-container" id="expand-cards-container">
                     <div class="expand-cards-row">
                         
-                        <!-- Card 1: Marketing Manager -->
-                        <div class="expand-card expanded" data-card-id="1">
-                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800" alt="Marketing Manager" class="expand-card-bg" />
+                        <!-- Card 1: Souveraineté -->
+                        <div class="expand-card" data-card-id="1">
+                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800" alt="Souverainet&eacute;" class="expand-card-bg" />
                             <div class="expand-card-overlay"></div>
                             <div class="expand-card-content">
                                 <!-- Expanded Content -->
                                 <div class="expand-card-expanded-content">
-                                    <h3 class="expand-card-title">Marketing Manager</h3>
-                                    <p class="expand-card-description">Organisez des &eacute;v&eacute;nements d'envergure et g&eacute;n&eacute;rez des leads qualifi&eacute;s gr&acirc;ce &agrave; une interface intuitive et performante.</p>
+                                    <h3 class="expand-card-title">Souverainet&eacute;</h3>
+                                    <p class="expand-card-description">H&eacute;bergement en France, conformit&eacute; RGPD et ind&eacute;pendance totale&nbsp;: tout sur la ma&icirc;trise de vos donn&eacute;es.</p>
                                     <div class="expand-card-arrow-btn">
                                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -1056,19 +1196,19 @@
                                 </div>
                                 <!-- Collapsed Content -->
                                 <div class="expand-card-collapsed-content">
-                                    <span class="expand-card-vertical-text">Marketing Manager</span>
+                                    <span class="expand-card-vertical-text">Souverainet&eacute;</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Card 2: Responsable Formation -->
-                        <div class="expand-card" data-card-id="2">
-                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800" alt="Responsable Formation" class="expand-card-bg" />
+                        <!-- Card 2: Actualités -->
+                        <div class="expand-card expanded" data-card-id="2">
+                            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800" alt="Actualit&eacute;s" class="expand-card-bg" />
                             <div class="expand-card-overlay"></div>
                             <div class="expand-card-content">
                                 <div class="expand-card-expanded-content">
-                                    <h3 class="expand-card-title">Responsable Formation</h3>
-                                    <p class="expand-card-description">Digitalisez vos parcours d'apprentissage et accompagnez la mont&eacute;e en comp&eacute;tences de vos &eacute;quipes en temps r&eacute;el.</p>
+                                    <h3 class="expand-card-title">Actualit&eacute;s</h3>
+                                    <p class="expand-card-description">Nouveaut&eacute;s produit, annonces et &eacute;volutions de la plateforme Rainbow, en continu.</p>
                                     <div class="expand-card-arrow-btn">
                                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -1076,19 +1216,19 @@
                                     </div>
                                 </div>
                                 <div class="expand-card-collapsed-content">
-                                    <span class="expand-card-vertical-text">Responsable Formation</span>
+                                    <span class="expand-card-vertical-text">Actualit&eacute;s</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Card 3: Moderateur Logistique -->
+                        <!-- Card 3: Guides -->
                         <div class="expand-card" data-card-id="3">
-                            <img src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?auto=format&fit=crop&q=80&w=800" alt="Moderateur Logistique" class="expand-card-bg" />
+                            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=800" alt="Guides" class="expand-card-bg" />
                             <div class="expand-card-overlay"></div>
                             <div class="expand-card-content">
                                 <div class="expand-card-expanded-content">
-                                    <h3 class="expand-card-title">Mod&eacute;rateur Logistique</h3>
-                                    <p class="expand-card-description">G&eacute;rez vos flux de participants et assurez le bon d&eacute;roulement technique de vos sessions les plus complexes.</p>
+                                    <h3 class="expand-card-title">Guides</h3>
+                                    <p class="expand-card-description">Tutoriels, livres blancs et bonnes pratiques pour exploiter tout le potentiel de Rainbow.</p>
                                     <div class="expand-card-arrow-btn">
                                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -1096,19 +1236,19 @@
                                     </div>
                                 </div>
                                 <div class="expand-card-collapsed-content">
-                                    <span class="expand-card-vertical-text">Mod&eacute;rateur Logistique</span>
+                                    <span class="expand-card-vertical-text">Guides</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Card 4: Sales Director -->
+                        <!-- Card 4: Solutions -->
                         <div class="expand-card" data-card-id="4">
-                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800" alt="Sales Director" class="expand-card-bg" />
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800" alt="Solutions" class="expand-card-bg" />
                             <div class="expand-card-overlay"></div>
                             <div class="expand-card-content">
                                 <div class="expand-card-expanded-content">
-                                    <h3 class="expand-card-title">Sales Director</h3>
-                                    <p class="expand-card-description">R&eacute;alisez des d&eacute;monstrations produits percutantes et convertissez vos prospects plus rapidement avec des outils de vente int&eacute;gr&eacute;s.</p>
+                                    <h3 class="expand-card-title">Solutions</h3>
+                                    <p class="expand-card-description">Des r&eacute;ponses concr&egrave;tes &agrave; vos enjeux, m&eacute;tier par m&eacute;tier et secteur par secteur.</p>
                                     <div class="expand-card-arrow-btn">
                                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -1116,19 +1256,19 @@
                                     </div>
                                 </div>
                                 <div class="expand-card-collapsed-content">
-                                    <span class="expand-card-vertical-text">Sales Director</span>
+                                    <span class="expand-card-vertical-text">Solutions</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Card 5: Comm Interne -->
+                        <!-- Card 5: Rainbow IA -->
                         <div class="expand-card" data-card-id="5">
-                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800" alt="Comm Interne" class="expand-card-bg" />
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800" alt="Rainbow IA" class="expand-card-bg" />
                             <div class="expand-card-overlay"></div>
                             <div class="expand-card-content">
                                 <div class="expand-card-expanded-content">
-                                    <h3 class="expand-card-title">Comm Interne</h3>
-                                    <p class="expand-card-description">F&eacute;d&eacute;rez vos &eacute;quipes internationales et partagez la culture d'entreprise &agrave; travers des sessions interactives et engageantes.</p>
+                                    <h3 class="expand-card-title">Rainbow IA</h3>
+                                    <p class="expand-card-description">Comment l'intelligence artificielle r&eacute;invente vos communications au quotidien.</p>
                                     <div class="expand-card-arrow-btn">
                                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -1136,7 +1276,27 @@
                                     </div>
                                 </div>
                                 <div class="expand-card-collapsed-content">
-                                    <span class="expand-card-vertical-text">Comm Interne</span>
+                                    <span class="expand-card-vertical-text">Rainbow IA</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 6: Cas d'usage -->
+                        <div class="expand-card" data-card-id="6">
+                            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800" alt="Cas d'usage" class="expand-card-bg" />
+                            <div class="expand-card-overlay"></div>
+                            <div class="expand-card-content">
+                                <div class="expand-card-expanded-content">
+                                    <h3 class="expand-card-title">Cas d'usage</h3>
+                                    <p class="expand-card-description">Retours d'exp&eacute;rience clients et sc&eacute;narios inspirants pour vous projeter.</p>
+                                    <div class="expand-card-arrow-btn">
+                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="expand-card-collapsed-content">
+                                    <span class="expand-card-vertical-text">Cas d'usage</span>
                                 </div>
                             </div>
                         </div>
@@ -1145,8 +1305,8 @@
 
                     <!-- Bottom Link -->
                     <div class="expand-cards-footer">
-                        <a href="#">
-                            Voir tous les cas d'usage
+                        <a href="/blog">
+                            Voir toutes les actualit&eacute;s
                             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                             </svg>
@@ -1158,7 +1318,7 @@
     </section>
 
     <!-- ===== QUESTIONS FRÉQUENTES SECTION (Laurenn style - Zendesk API) ===== -->
-    <section id="questions-frequentes" class="py-20 lg:py-28 faq-section" style="background-color: #c5deff47;">
+    <section id="questions-frequentes" class="section-anchor py-20 lg:py-28 faq-section" style="background-color: #c5deff47;">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
             <div class="text-center mb-16">
@@ -1385,6 +1545,96 @@
                 nav.classList.remove('scrolled');
             }
         });
+
+        // Floating section nav: show/hide + scroll-spy
+        (function() {
+            var sectionNav = document.getElementById('section-nav');
+            if (!sectionNav) return;
+            var links = Array.prototype.slice.call(sectionNav.querySelectorAll('.section-nav-link'));
+            var sections = links.map(function(link) {
+                return document.getElementById(link.getAttribute('href').slice(1));
+            });
+            var footer = document.querySelector('footer');
+            var OFFSET = 150; // main nav + floating pill height
+
+            // Smooth scroll on click (with fixed-nav offset)
+            links.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    var target = document.getElementById(link.getAttribute('href').slice(1));
+                    if (!target) return;
+                    e.preventDefault();
+                    var y = target.getBoundingClientRect().top + window.pageYOffset - (OFFSET - 20);
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                });
+            });
+
+            function update() {
+                var scrollY = window.pageYOffset;
+                var firstTop = sections[0] ? sections[0].offsetTop : Infinity;
+                var footerTop = footer ? footer.offsetTop : Infinity;
+
+                // Visible once the first section is reached, hidden inside the footer
+                if (scrollY + OFFSET >= firstTop - 200 && scrollY + OFFSET < footerTop) {
+                    sectionNav.classList.add('visible');
+                } else {
+                    sectionNav.classList.remove('visible');
+                }
+
+                // Scroll-spy: highlight the section currently under the nav offset
+                var activeIndex = 0;
+                for (var i = 0; i < sections.length; i++) {
+                    if (sections[i] && sections[i].offsetTop - OFFSET <= scrollY) {
+                        activeIndex = i;
+                    }
+                }
+                links.forEach(function(link, i) {
+                    link.classList.toggle('active', i === activeIndex);
+                });
+            }
+
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update);
+            update();
+        })();
+
+        // Certifications carousel arrows
+        (function() {
+            var track = document.getElementById('cert-track');
+            if (!track) return;
+            var prev = document.querySelector('.cert-prev');
+            var next = document.querySelector('.cert-next');
+            function step() {
+                var slide = track.querySelector('.cert-slide');
+                return slide ? slide.getBoundingClientRect().width + 16 : 296;
+            }
+            function updateArrows() {
+                var maxScroll = track.scrollWidth - track.clientWidth - 2;
+                if (prev) prev.disabled = track.scrollLeft <= 2;
+                if (next) next.disabled = track.scrollLeft >= maxScroll;
+            }
+            if (prev) prev.addEventListener('click', function(){ track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+            if (next) next.addEventListener('click', function(){ track.scrollBy({ left: step(), behavior: 'smooth' }); });
+            track.addEventListener('scroll', updateArrows, { passive: true });
+            window.addEventListener('resize', updateArrows);
+            updateArrows();
+
+            // One-time hint: flip the 2nd card for 2s when the carousel first enters view,
+            // so users notice the cards are flippable.
+            var slides = track.querySelectorAll('.cert-slide');
+            var demoCard = slides[1] ? slides[1].querySelector('.compliance-card') : null;
+            if (demoCard && 'IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            io.disconnect();
+                            demoCard.classList.add('flip-demo');
+                            setTimeout(function(){ demoCard.classList.remove('flip-demo'); }, 2000);
+                        }
+                    });
+                }, { threshold: 0.4 });
+                io.observe(track);
+            }
+        })();
     </script>
     <script src="js/i18n.js"></script>
     <script src="js/mega-menu.js"></script>
