@@ -7,3 +7,7 @@ data/*.db-wal
 uploads/
 form-model.txt
 *.pdf
+
+# Unreferenced full-size image backups (accidental duplicates; real images are optimized)
+images/*-2.jpg
+docs/images/*-2.jpg
