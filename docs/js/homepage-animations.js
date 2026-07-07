@@ -246,6 +246,122 @@ function initUnifiedPlatformTabs() {
     var autoPlayInterval = null;
     var TAB_DURATION = 6000;
 
+    // Every tab expands to the SAME height (the tallest content) and the quote
+    // block is locked to its tallest quote, so switching tabs never changes the
+    // left column height — which also stops the image from re-centering.
+    var maxContentHeight = 0;
+
+    function measurePlatformHeights() {
+        // Tallest tab content (measure with transitions off and height freed,
+        // synchronously, so nothing is painted mid-measure).
+        var m = 0;
+        tabItems.forEach(function(item) {
+            var c = item.querySelector('.platform-tab-content');
+            if (!c) return;
+            var prev = { t: c.style.transition, h: c.style.height, mh: c.style.maxHeight };
+            c.style.transition = 'none';
+            c.style.height = 'auto';
+            c.style.maxHeight = 'none';
+            m = Math.max(m, c.scrollHeight);
+            c.style.height = prev.h;
+            c.style.maxHeight = prev.mh;
+            void c.offsetWidth;
+            c.style.transition = prev.t;
+        });
+        if (m > 0) maxContentHeight = m;
+
+        // Tallest quote: fix the container height and center every quote in it,
+        // so switching only fades opacity — zero reflow.
+        var qc = document.getElementById('platform-quote');
+        if (qc) {
+            var qs = qc.querySelectorAll('.quote-item');
+            var mq = 0;
+            qs.forEach(function(q) {
+                q.style.position = 'absolute';
+                q.style.top = '50%';
+                q.style.left = '0';
+                q.style.width = '100%';
+                q.style.transform = 'translateY(-50%)';
+                mq = Math.max(mq, q.offsetHeight);
+            });
+            if (mq > 0) qc.style.height = mq + 'px';
+        }
+
+        // Mobile: lock the text area to its tallest panel.
+        var firstMobile = document.querySelector('.platform-mobile-text');
+        if (firstMobile) {
+            var mobileWrap = firstMobile.parentElement;
+            var mm = 0;
+            mobileWrap.querySelectorAll('.platform-mobile-text').forEach(function(el) {
+                var wasHidden = el.classList.contains('hidden');
+                el.classList.remove('hidden');
+                mm = Math.max(mm, el.offsetHeight);
+                if (wasHidden) el.classList.add('hidden');
+            });
+            if (mm > 0) mobileWrap.style.minHeight = mm + 'px';
+        }
+
+        lockTabsWrapperHeight();
+    }
+
+    // The active tab's TITLE is also bigger (text-lg -> text-2xl) and the long
+    // one wraps onto two lines, which changes the column height on its own.
+    // Simulate each of the three "tab N active" states (synchronously, nothing
+    // is painted), take the tallest total, and lock the tabs wrapper to it.
+    function lockTabsWrapperHeight() {
+        var wrap = tabItems[0] ? tabItems[0].parentElement : null;
+        if (!wrap || !wrap.offsetParent || !maxContentHeight) return;
+        wrap.style.minHeight = '';
+
+        var saved = [];
+        tabItems.forEach(function(item) {
+            var title = item.querySelector('.platform-tab-title');
+            var content = item.querySelector('.platform-tab-content');
+            saved.push({
+                title: title,
+                content: content,
+                titleClass: title ? title.getAttribute('class') : null,
+                h: content ? content.style.height : '',
+                mh: content ? content.style.maxHeight : '',
+                tr: content ? content.style.transition : ''
+            });
+            if (content) content.style.transition = 'none';
+        });
+
+        var maxTotal = 0;
+        for (var s = 0; s < tabItems.length; s++) {
+            saved.forEach(function(st, i) {
+                if (st.title) {
+                    if (i === s) {
+                        st.title.classList.remove('text-lg', 'text-gray-400');
+                        st.title.classList.add('text-xl', 'md:text-2xl');
+                    } else {
+                        st.title.classList.remove('text-xl', 'md:text-2xl');
+                        st.title.classList.add('text-lg');
+                    }
+                }
+                if (st.content) {
+                    st.content.style.maxHeight = 'none';
+                    st.content.style.height = (i === s) ? maxContentHeight + 'px' : '0px';
+                }
+            });
+            maxTotal = Math.max(maxTotal, wrap.offsetHeight);
+        }
+
+        // Restore everything exactly as it was.
+        saved.forEach(function(st) {
+            if (st.title && st.titleClass !== null) st.title.setAttribute('class', st.titleClass);
+            if (st.content) {
+                st.content.style.height = st.h;
+                st.content.style.maxHeight = st.mh;
+                void st.content.offsetWidth;
+                st.content.style.transition = st.tr;
+            }
+        });
+
+        if (maxTotal > 0) wrap.style.minHeight = maxTotal + 'px';
+    }
+
     tabItems.forEach(function(item, index) {
         item.addEventListener('click', function() {
             stopAutoPlay();
@@ -286,12 +402,12 @@ function initUnifiedPlatformTabs() {
                 }
                 if (content) {
                     content.style.opacity = '1';
-                    // Use the real content height so the expand of this tab and the
-                    // collapse of the previous one animate in true lockstep (no bump).
-                    // Note: padding-top is NOT animated here — if it were, reading
-                    // scrollHeight in the same frame would come back short and clip
-                    // the bottom ("En savoir plus"). The description's pt-3 gives the gap.
-                    content.style.maxHeight = content.scrollHeight + 'px';
+                    // All tabs open to the same (tallest) height so the section
+                    // never changes height when switching. Falls back to the
+                    // tab's own height if measurement hasn't run (mobile init).
+                    var target = maxContentHeight || content.scrollHeight;
+                    content.style.maxHeight = target + 'px';
+                    content.style.height = target + 'px';
                 }
             } else {
                 item.classList.remove('active');
@@ -306,6 +422,7 @@ function initUnifiedPlatformTabs() {
                 }
                 if (content) {
                     content.style.maxHeight = '0';
+                    content.style.height = '0';
                     content.style.opacity = '0';
                 }
             }
@@ -365,22 +482,15 @@ function initUnifiedPlatformTabs() {
             }
         });
 
+        // Quotes are all absolutely positioned & centered in a fixed-height
+        // container (see measurePlatformHeights), so switching is a pure fade.
         var quoteContainer = document.getElementById('platform-quote');
         if (quoteContainer) {
             var quotes = quoteContainer.querySelectorAll('.quote-item');
             quotes.forEach(function(q) {
                 var qi = parseInt(q.getAttribute('data-quote-index'), 10);
-                if (qi === index) {
-                    q.style.opacity = '1';
-                    q.style.pointerEvents = 'auto';
-                    q.style.position = 'relative';
-                } else {
-                    q.style.opacity = '0';
-                    q.style.pointerEvents = 'none';
-                    q.style.position = 'absolute';
-                    q.style.top = '0';
-                    q.style.left = '0';
-                }
+                q.style.opacity = (qi === index) ? '1' : '0';
+                q.style.pointerEvents = (qi === index) ? 'auto' : 'none';
             });
         }
     }
@@ -400,12 +510,17 @@ function initUnifiedPlatformTabs() {
         }
     }
 
-    // Re-measure the open tab's height once fonts/layout settle (and on resize),
-    // otherwise the height locked at init can be too small and clip the
-    // "En savoir plus" link once the real font renders.
+    // Re-measure once fonts/layout settle (and on resize), otherwise the
+    // heights locked at init can be too small and clip content once the real
+    // font renders — then re-apply the locked height to the open tab.
     function refreshActiveHeight() {
+        measurePlatformHeights();
         var active = document.querySelector('.platform-tab-item.active .platform-tab-content');
-        if (active) active.style.maxHeight = active.scrollHeight + 'px';
+        if (active) {
+            var target = maxContentHeight || active.scrollHeight;
+            active.style.maxHeight = target + 'px';
+            active.style.height = target + 'px';
+        }
     }
 
     window.addEventListener('resize', refreshActiveHeight);
@@ -414,6 +529,7 @@ function initUnifiedPlatformTabs() {
         document.fonts.ready.then(refreshActiveHeight);
     }
 
+    measurePlatformHeights();
     switchToTab(0);
     startAutoPlay();
 }

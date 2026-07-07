@@ -702,6 +702,13 @@ input[type="number"] {
     height: calc(100% - 1rem);
 }
 
+/* Quote switching is a pure cross-fade: all quotes sit stacked & centered in a
+   fixed-height container (sized by JS to the tallest quote), so the section
+   height never changes when tabs rotate. */
+.quote-item {
+    transition: opacity 0.4s ease;
+}
+
 /* --- Stats Section Purple Background --- */
 .stats-purple-bg {
     background: #5e2d91;
