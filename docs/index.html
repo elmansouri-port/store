@@ -50,7 +50,7 @@
                             green: '#34B233'
                         }
                     },
-                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    fontFamily: { sans: ['Google Sans', 'system-ui', 'sans-serif'] },
                     borderRadius: { 'btn': '10px' }
                 }
             }
@@ -60,7 +60,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/store/css/style.css">
     <link rel="stylesheet" href="/store/css/mega-menu.css">
 <style>
@@ -125,6 +125,10 @@
 }
 .compliance-card-back-arrow:hover { background: #5e2d91; border-color: #5e2d91; color: white; }
 .compliance-card-back-arrow svg { width: 14px; height: 14px; }
+
+/* ===== Lang switcher (minimal, no border — matches all other pages) ===== */
+.lang-switcher button { display: flex; align-items: center; gap: 4px; font-size: 0.8125rem; color: #64748b; cursor: pointer; background: none; border: none; padding: 4px 8px; border-radius: 6px; transition: color 0.2s; }
+.lang-switcher button:hover { color: #0f172a; }
 
 /* ===== Floating Section Nav (scroll-spy pill bar) ===== */
 .section-anchor { scroll-margin-top: 130px; }
@@ -289,7 +293,7 @@
             <div id="mobile-lang-switcher" class="flex flex-wrap gap-2 py-2"></div>
             <div class="flex flex-col gap-3 pt-2">
                 <a href="/store/login" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">Se connecter</a>
-                <a href="/store/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all">Essai gratuit</a>
+                <a href="/store/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all whitespace-nowrap">Essai gratuit</a>
             </div>
         </div>
     </nav>
@@ -1639,8 +1643,8 @@
             }
         })();
     </script>
-    <script src="js/i18n.js"></script>
     <script src="js/mega-menu.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/homepage-animations.js"></script>
     <script>
         (function () {
