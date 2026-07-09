@@ -103,6 +103,7 @@ app.get('/products/webinar',              (req, res) => sendPage(req, res, P('pa
 app.get('/products/webinar/pricing',      (req, res) => sendPage(req, res, P('pages/tarif-webinar.html')));
 app.get('/products/collaboration/pricing',(req, res) => sendPage(req, res, P('pages/tarif-collaboration.html')));
 app.get('/tarifs',                        (req, res) => sendPage(req, res, P('pages/tarifs.html')));
+app.get('/tarif1',                        (req, res) => sendPage(req, res, P('pages/tarif1.html')));
 app.get('/blog',                           (req, res) => sendPage(req, res, P('pages/blog.html')));
 app.get('/blog/the-power-of-rainbow',     (req, res) => sendPage(req, res, P('pages/blog/the-power-of-rainbow.html')));
 app.get('/contact',                       (req, res) => sendPage(req, res, P('pages/contact.html')));

@@ -91,11 +91,11 @@
         .section-anchor { scroll-margin-top: 130px; }
         #section-nav { position: fixed; top: 74px; left: 50%; transform: translateX(-50%) translateY(-14px); z-index: 40; opacity: 0; pointer-events: none; transition: opacity 0.35s ease, transform 0.35s ease; }
         #section-nav.visible { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
-        .section-nav-inner { display: flex; align-items: center; gap: 4px; padding: 6px; background: #f0eef8; border: 1px solid #e5e1f3; border-radius: 9999px; box-shadow: 0 4px 16px rgba(30, 27, 75, 0.1); max-width: calc(100vw - 24px); overflow-x: auto; scrollbar-width: none; }
+        .section-nav-inner { display: flex; align-items: center; gap: 6px; padding: 7px; background: #f3edfd; border: 1px solid rgba(124, 58, 237, 0.10); border-radius: 9999px; box-shadow: 0 6px 22px rgba(94, 45, 145, 0.15); max-width: calc(100vw - 24px); overflow-x: auto; scrollbar-width: none; }
         .section-nav-inner::-webkit-scrollbar { display: none; }
-        .section-nav-link { flex: 0 0 auto; padding: 8px 18px; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; color: #7b74a3; white-space: nowrap; text-decoration: none; transition: color 0.2s ease, background 0.2s ease; }
-        .section-nav-link:hover { color: #5e2d91; }
-        .section-nav-link.active { color: #ffffff; background: #5e2d91; }
+        .section-nav-link { flex: 0 0 auto; padding: 9px 22px; border-radius: 9999px; font-size: 0.9375rem; font-weight: 700; color: #4a2373; white-space: nowrap; text-decoration: none; transition: color 0.2s ease, background 0.2s ease; }
+        .section-nav-link:hover { background: rgba(124, 58, 237, 0.08); }
+        .section-nav-link.active { color: #4a2373; background: #e7d9fb; }
         @media (max-width: 767px) { #section-nav { top: 66px; } .section-nav-link { padding: 7px 14px; font-size: 0.8125rem; } }
     </style>
     <link rel="stylesheet" href="/store/css/style.css">
@@ -208,33 +208,32 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <header class="pt-32 pb-20 px-6 relative overflow-hidden bg-[#ffffff]">
-        <div class="max-w-6xl mx-auto grid lg:grid-cols-5 gap-16 items-center relative z-10">
+    <header class="pt-36 lg:pt-40 pb-24 lg:pb-28 px-6 relative overflow-hidden bg-[#ffffff]">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 lg:gap-14 items-center relative z-10">
             <!-- Left Side (Text & CTA) -->
-            <div class="lg:col-span-2">
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold mb-5 bg-brand-100 text-brand-500 uppercase tracking-widest">
+            <div class="lg:col-span-7">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold mb-6 bg-brand-100 text-brand-500 uppercase tracking-widest">
                     Communication d'&eacute;quipe souveraine
                 </div>
-                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-navy-900 leading-[1.15] tracking-tight">
+                <h1 class="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-navy-900 leading-[1.15] tracking-tight max-w-2xl">
                     <span class="text-brand-500">Rainbow Collaboration</span>&nbsp;: tous vos &eacute;changes d'&eacute;quipe dans un seul outil, h&eacute;berg&eacute; en France
                 </h1>
-                <p class="mt-6 text-lg sm:text-xl text-gray-600 leading-relaxed max-w-lg">
+                <p class="mt-6 text-base sm:text-lg text-gray-600 leading-relaxed max-w-xl">
                     Messages, appels, r&eacute;unions vid&eacute;os et partage de fichiers, fini de jongler entre Teams, WhatsApp et votre bo&icirc;te mail.
                 </p>
-                <div class="mt-8 flex flex-col sm:flex-row gap-4 items-center">
+                <div class="mt-9 flex flex-col sm:flex-row gap-4">
                     <a href="/store/tarifs"
-                        class="px-8 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap shadow-2xl shadow-purple-900/20 transition-all active:scale-95">Essai
-                        gratuit</a>
+                        class="inline-flex items-center justify-center px-8 py-3.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap shadow-xl shadow-purple-900/20 transition-all active:scale-95">Essai gratuit</a>
                     <a href="/store/products/collaboration/pricing"
-                        class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-base font-bold whitespace-nowrap shrink-0 transition-all group active:scale-95 inline-flex items-center justify-center">
-                        Découvrez nos plans
+                        class="inline-flex items-center justify-center px-8 py-3.5 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-base font-bold whitespace-nowrap transition-all active:scale-95">
+                        D&eacute;couvrez nos plans
                     </a>
                 </div>
             </div>
 
-            <!-- Right Side (Webinar Image) -->
-            <div class="relative lg:col-span-3">
-                <img src="/store/images/rainbow_chat.png" alt="Rainbow Webinar" class="w-full h-auto rounded-xl shadow-lg">
+            <!-- Right Side (Collaboration Image) -->
+            <div class="relative lg:col-span-5">
+                <img src="/store/images/rainbow_chat.png" alt="Rainbow Collaboration" class="w-full h-auto rounded-2xl shadow-xl">
             </div>
         </div>
     </header>
@@ -416,7 +415,7 @@
                                         </div>
 
                                         <a href="/store/login"
-                                            class="block w-full py-3.5 px-4 text-center rounded-[10px] bg-brand-500 text-white hover:bg-brand-600 font-bold transition-all shadow-md text-sm hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">Essayer gratuitement 30 jours</a>
+                                            class="block w-full py-3.5 px-4 text-center rounded-[10px] bg-brand-500 text-white hover:bg-brand-600 font-bold transition-all shadow-md text-sm hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">Essai gratuit</a>
                                         <p class="text-center text-xs text-gray-400 mt-3">Vous pourrez choisir un abonnement à tout moment</p>
                                     </div>
                                 </div>

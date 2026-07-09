@@ -151,12 +151,12 @@
 .section-nav-inner {
     display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 6px;
-    background: #f0eef8;
-    border: 1px solid #e5e1f3;
+    gap: 6px;
+    padding: 7px;
+    background: #f3edfd;
+    border: 1px solid rgba(124, 58, 237, 0.10);
     border-radius: 9999px;
-    box-shadow: 0 4px 16px rgba(30, 27, 75, 0.1);
+    box-shadow: 0 6px 22px rgba(94, 45, 145, 0.15);
     max-width: calc(100vw - 24px);
     overflow-x: auto;
     scrollbar-width: none;
@@ -164,19 +164,19 @@
 .section-nav-inner::-webkit-scrollbar { display: none; }
 .section-nav-link {
     flex: 0 0 auto;
-    padding: 8px 18px;
+    padding: 9px 22px;
     border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #7b74a3;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #4a2373;
     white-space: nowrap;
     text-decoration: none;
     transition: color 0.2s ease, background 0.2s ease;
 }
-.section-nav-link:hover { color: #5e2d91; }
+.section-nav-link:hover { background: rgba(124, 58, 237, 0.08); }
 .section-nav-link.active {
-    color: #ffffff;
-    background: #5e2d91;
+    color: #4a2373;
+    background: #e7d9fb;
 }
 @media (max-width: 767px) {
     #section-nav { top: 66px; }
@@ -345,8 +345,8 @@
                 <a href="/tarifs" class="px-8 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap shadow-2xl shadow-purple-900/20 transition-all active:scale-95 inline-flex items-center justify-center">
                     D&eacute;couvrez nos plans
                 </a>
-                <a href="https://example.com/giantlink" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">
-                    Contacter un agent
+                <a href="https://giantlink.ma/form-ale" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">
+                    Contacter un expert
                 </a>
             </div>
             
@@ -532,9 +532,9 @@
                                     &laquo;&nbsp;Nos &eacute;quipes collaborent enfin au m&ecirc;me endroit. Espaces partag&eacute;s, fichiers, discussions&nbsp;: tout est centralis&eacute; et accessible en un instant.&nbsp;&raquo;
                                 </p>
                                 <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">
-                                    Responsable collaboration, Herrenberg
+                                    Responsable collaboration, Ville de Herrenberg
                                 </p>
-                                <a href="https://www.al-enterprise.com/en/company/customers/stadt-herrenberg" class="text-xs font-semibold text-brand-500 hover:underline inline-flex items-center gap-1">
+                                <a href="https://www.al-enterprise.com/en/company/customers/stadt-herrenberg" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-500 hover:underline inline-flex items-center gap-1">
                                     Lire le t&eacute;moignage complet <span>&rarr;</span>
                                 </a>
                             </div>
@@ -545,9 +545,9 @@
                                     &laquo;&nbsp;Passer d'un message &agrave; un appel visio en un clic a transform&eacute; notre r&eacute;activit&eacute;. Nous &eacute;changeons en temps r&eacute;el, sans jamais quitter Rainbow.&nbsp;&raquo;
                                 </p>
                                 <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">
-                                    Directrice des op&eacute;rations, EYDAP
+                                    Directrice des op&eacute;rations, R&eacute;gion Bourgogne-Franche-Comt&eacute;
                                 </p>
-                                <a href="https://www.al-enterprise.com/en/company/customers/stadt-herrenberg" class="text-xs font-semibold text-brand-500 hover:underline inline-flex items-center gap-1">
+                                <a href="https://www.al-enterprise.com/fr-fr/entreprise/clients/bourgogne-franche-comte" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-500 hover:underline inline-flex items-center gap-1">
                                     Lire le t&eacute;moignage complet <span>&rarr;</span>
                                 </a>
                             </div>
@@ -658,8 +658,8 @@
                                 <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap transition-all shadow-md hover:shadow-lg">
                                     Découvrez nos plans
                                 </a>
-                                <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
-                                    En savoir plus
+                                <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
+                                    Essai gratuit
                                 </a>
                             </div>
                         </div>
@@ -685,8 +685,8 @@
                                 <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap transition-all shadow-md hover:shadow-lg">
                                     Découvrez nos plans
                                 </a>
-                                <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
-                                    En savoir plus
+                                <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
+                                    Essai gratuit
                                 </a>
                             </div>
                         </div>
@@ -711,8 +711,8 @@
                                 <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap transition-all shadow-md hover:shadow-lg">
                                     Découvrez nos plans
                                 </a>
-                                <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
-                                    En savoir plus
+                                <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
+                                    Essai gratuit
                                 </a>
                             </div>
                         </div>
@@ -737,8 +737,8 @@
                                 <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap transition-all shadow-md hover:shadow-lg">
                                     Découvrez nos plans
                                 </a>
-                                <a href="/products" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
-                                    En savoir plus
+                                <a href="/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-lg font-bold">
+                                    Essai gratuit
                                 </a>
                             </div>
                          </div>
