@@ -81,7 +81,7 @@
       '<div class="mega-menu-footer">',
         '<p class="mega-menu-footer-text">Besoin d\'aide pour choisir ? Nous sommes là pour vous guider.</p>',
         '<div class="mega-menu-footer-actions">',
-          '<a href="/store/Démo" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('question-mark-circle') + 'Réserver une démo</a>',
+          '<a href="/store/contact" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('question-mark-circle') + 'Contacter un expert</a>',
           '<a href="/store/contact" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Nous contacter</a>',
         '</div>',
       '</div>',

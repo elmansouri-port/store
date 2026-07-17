@@ -106,6 +106,8 @@ app.get('/tarifs',                        (req, res) => sendPage(req, res, P('pa
 app.get('/tarif1',                        (req, res) => sendPage(req, res, P('pages/tarif1.html')));
 app.get('/blog',                           (req, res) => sendPage(req, res, P('pages/blog.html')));
 app.get('/blog/the-power-of-rainbow',     (req, res) => sendPage(req, res, P('pages/blog/the-power-of-rainbow.html')));
+app.get('/faq',                            (req, res) => sendPage(req, res, P('pages/faq.html')));
+app.get('/form-ale',                      (req, res) => sendPage(req, res, P('pages/form-ale.html')));
 app.get('/contact',                       (req, res) => sendPage(req, res, P('pages/contact.html')));
 app.get('/partenaires',                   (req, res) => sendPage(req, res, P('pages/partenaires.html')));
 

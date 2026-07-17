@@ -1565,3 +1565,62 @@ input[type="number"] {
     height: 20px;
     width: 20px;
 }
+
+/* ===== Currency switcher (pricing tables) ===== */
+.cur-switcher { position: relative; display: inline-block; }
+.cur-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1e1b4b;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s;
+    font-family: inherit;
+}
+.cur-btn:hover { border-color: #c4b5fd; }
+.cur-switcher.open .cur-btn { border-color: #5e2d91; box-shadow: 0 0 0 3px rgba(94,45,145,.1); }
+.cur-btn .cur-sym { font-weight: 700; color: #5e2d91; }
+.cur-btn .cur-chev { width: 14px; height: 14px; color: #9ca3af; transition: transform .2s; }
+.cur-switcher.open .cur-btn .cur-chev { transform: rotate(180deg); }
+.cur-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 1px solid #ece8fb;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(30,27,75,.14);
+    padding: 5px;
+    min-width: 190px;
+    z-index: 60;
+}
+.cur-switcher.open .cur-menu { display: block; }
+.cur-opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    text-align: left;
+    padding: 9px 12px;
+    border: none;
+    background: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #374151;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background .12s;
+}
+.cur-opt:hover { background: #f5f3ff; }
+.cur-opt.active { color: #5e2d91; font-weight: 700; background: #f5f3ff; }
+.cur-opt .cur-opt-sym { width: 16px; font-weight: 700; color: #5e2d91; text-align: center; }
+.cur-selector-row { margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.cur-selector-row .cur-label { font-size: 0.8125rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: .04em; }

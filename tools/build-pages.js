@@ -32,6 +32,7 @@ const ROUTES = {
   'tarif1': 'pages/tarif1.html',
   'blog': 'pages/blog.html',
   'blog/the-power-of-rainbow': 'pages/blog/the-power-of-rainbow.html',
+  'faq': 'pages/faq.html',
   'contact': 'pages/contact.html',
   'partenaires': 'pages/partenaires.html',
 };
