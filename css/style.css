@@ -389,12 +389,21 @@ input[type="number"] {
     100% { transform: translateX(-50%); }
 }
 .animate-marquee {
-    animation: marquee 30s linear infinite;
+    animation: marquee 45s linear infinite;
 }
 .marquee-container {
     overflow: hidden;
     mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+/* Enlarged, balanced logo heights (desktop/laptop). Scoped to the band so it
+   doesn't affect other elements using these Tailwind heights. Anchored to
+   md:h-14 = 5rem, others scaled proportionally to keep the optical balance. */
+@media (min-width: 768px) {
+    .animate-marquee .md\:h-9  { height: 3.2rem; }
+    .animate-marquee .md\:h-11 { height: 3.9rem; }
+    .animate-marquee .md\:h-12 { height: 4.3rem; }
+    .animate-marquee .md\:h-14 { height: 5rem; }
 }
 
 /* --- Hero Word Shuffler Animation (CSS-based) --- */

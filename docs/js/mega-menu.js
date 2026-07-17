@@ -329,16 +329,22 @@
       var sm = submenus[j];
       if (!sm.querySelector('a')) continue;
 
-      // Detect section type from the preceding header link's text
+      // Detect section type. Prefer stable signals (data-i18n key on the header,
+      // or the submenu's own link hrefs) over the header text, which changes with
+      // the active language and would otherwise miss translated labels.
       var headerEl = sm.previousElementSibling;
       var headerText = headerEl ? headerEl.textContent.trim().toLowerCase() : '';
+      var i18nKey = headerEl ? (headerEl.getAttribute('data-i18n') || '') : '';
 
       var mobileContent;
-      if (headerText.indexOf('produit') !== -1) {
+      if (i18nKey === 'nav.product' || headerText.indexOf('produit') !== -1 ||
+          headerText.indexOf('product') !== -1 || sm.querySelector('a[href*="/products/"]')) {
         mobileContent = productsMobileHTML;
-      } else if (headerText.indexOf('tarif') !== -1) {
+      } else if (i18nKey === 'nav.pricing' || headerText.indexOf('tarif') !== -1 ||
+          headerText.indexOf('pricing') !== -1 || sm.querySelector('a[href*="/tarif"]')) {
         mobileContent = tarifsMobileHTML;
-      } else if (headerText.indexOf('ressource') !== -1) {
+      } else if (i18nKey === 'nav.resources' || headerText.indexOf('ressource') !== -1 ||
+          headerText.indexOf('resource') !== -1 || sm.querySelector('a[href="/store/blog"], a[href="/store/support"]')) {
         mobileContent = ressourcesMobileHTML;
       } else {
         continue;
@@ -354,14 +360,19 @@
       // Accordion toggle — uses CSS classes (mob-section-hdr / is-open / mob-chev)
       if (headerEl && headerEl.tagName === 'A') {
         (function (content, header) {
-          var chevron = document.createElement('svg');
+          var SVGNS = 'http://www.w3.org/2000/svg';
+          var chevron = document.createElementNS(SVGNS, 'svg');
           chevron.setAttribute('fill', 'none');
           chevron.setAttribute('viewBox', '0 0 24 24');
           chevron.setAttribute('stroke', 'currentColor');
           chevron.setAttribute('stroke-width', '2');
           chevron.setAttribute('aria-hidden', 'true');
-          chevron.className = 'mob-chev';
-          chevron.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>';
+          chevron.setAttribute('class', 'mob-chev');
+          var chevPath = document.createElementNS(SVGNS, 'path');
+          chevPath.setAttribute('stroke-linecap', 'round');
+          chevPath.setAttribute('stroke-linejoin', 'round');
+          chevPath.setAttribute('d', 'M19 9l-7 7-7-7');
+          chevron.appendChild(chevPath);
           header.classList.add('mob-section-hdr');
           header.appendChild(chevron);
 

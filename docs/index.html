@@ -267,24 +267,25 @@
                 <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
         </div>
-        <div id="mobile-menu" class="lg:hidden hidden border-t border-indigo-50 bg-white px-6 py-4 space-y-3">
-            <a href="#" class="block text-sm text-gray-600 py-2" data-i18n="nav.product">Produits</a>
+        <div id="mobile-menu" class="lg:hidden hidden border-t border-gray-100 bg-white px-5 pt-2 pb-6 shadow-lg space-y-1">
+            <a href="#" class="mob-section-hdr"><span data-i18n="nav.product">Produits</span></a>
             <div class="mobile-submenu space-y-1">
                 <a href="/store/products/collaboration" class="block py-1">Rainbow Collaboration</a>
                 <a href="/store/products/webinar" class="block py-1">Rainbow Webinar</a>
             </div>
-            <a href="/store/tarifs" class="block text-sm text-gray-600 py-2">Tarifs</a>
-            <a href="#" class="block text-sm text-gray-600 py-2">Ressources</a>
+            <a href="/store/tarifs" class="mob-section-hdr">Tarifs</a>
+            <a href="#" class="mob-section-hdr">Ressources</a>
             <div class="mobile-submenu space-y-1">
                 <a href="/store/blog" class="block py-1" data-i18n="nav.blog">Blog</a>
                 <a href="/store/reviews" class="block py-1" data-i18n="nav.reviews">Avis</a>
                 <a href="/store/support" class="block py-1" data-i18n="nav.support">Support</a>
                 <a href="/store/tutorials" class="block py-1" data-i18n="nav.tutorials">Tutoriels</a>
             </div>
-            <div id="mobile-lang-switcher" class="flex flex-wrap gap-2 py-2"></div>
-            <div class="flex flex-col gap-3 pt-2">
-                <a href="/store/login" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-lg font-bold transition-all group active:scale-95 inline-flex items-center justify-center">Se connecter</a>
-                <a href="/store/tarifs" class="block w-full text-center text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-btn py-2.5 shadow-md transition-all whitespace-nowrap">Essai gratuit</a>
+            <div class="h-px bg-gray-100 mx-1 my-2"></div>
+            <div id="mobile-lang-switcher" class="flex flex-wrap gap-2 px-1 py-1"></div>
+            <div class="flex flex-col gap-2.5 pt-3">
+                <a href="/store/login" class="w-full text-center px-6 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-base font-semibold transition-all active:scale-95">Se connecter</a>
+                <a href="/store/tarifs" class="w-full text-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-semibold shadow-md hover:shadow-lg transition-all active:scale-95">Essai gratuit</a>
             </div>
         </div>
     </nav>
@@ -364,49 +365,151 @@
                 Ils nous font confiance
             </p>
             <div class="marquee-container relative flex overflow-x-hidden">
-                <div class="flex animate-marquee whitespace-nowrap gap-10 md:gap-16 items-center py-4">
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/bestford.png" alt="Bestford" class="h-full w-auto object-contain max-w-[140px]" />
+                <div class="flex animate-marquee whitespace-nowrap gap-10 md:gap-[7rem] items-center py-4">
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/bestford-insurance.png" alt="Bestford Insurance" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
                     </div>
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/eydap.png" alt="EYDAP" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/herrenberg.png" alt="Herrenberg" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
                     </div>
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/herrenberg.png" alt="Herrenberg" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/loughborough-university-london.png" alt="Loughborough University London" class="h-8 md:h-9 w-auto object-contain max-w-[200px]" />
                     </div>
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/london_university.png" alt="London University" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/eydap.webp" alt="EYDAP" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
                     </div>
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/acn.png" alt="ACN" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/hellweg.png" alt="Hellweg" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
                     </div>
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/nexon.png" alt="Nexon" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/taketa-city.png" alt="Taketa City" class="h-8 md:h-9 w-auto object-contain max-w-[200px]" />
                     </div>
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/perpignan.png" alt="Perpignan" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/kingsway-hospitals.jpg" alt="Kingsway Hospitals" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/mayfair-hotels-resorts.jpg" alt="Mayfair Hotels & Resorts" class="h-10 md:h-12 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/csf-inox.png" alt="CSF Inox" class="h-8 md:h-9 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/careoutlook.webp" alt="CareOutlook" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/region-occitanie.png" alt="Region Occitanie" class="h-10 md:h-12 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/montpellier-mediterranee-metropole.png" alt="Montpellier Mediterranee Metropole" class="h-8 md:h-9 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/perpignan-mediterranee-metropole.png" alt="Perpignan Mediterranee Metropole" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/doma-hotels.jpg" alt="DOMA Hotels" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/morbihan.jpg" alt="Morbihan" class="h-10 md:h-12 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/hokkaido.png" alt="Hokkaido" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/chu-rennes.webp" alt="CHU Rennes" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/nexon.webp" alt="Nexon" class="h-10 md:h-12 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/obrien-winter-partners.jpg" alt="O'Brien Winter Partners" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/ludwigshafen.png" alt="Ludwigshafen" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/paytren.webp" alt="Paytren" class="h-10 md:h-12 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/centre-hospitalier-mayotte.png" alt="Centre Hospitalier de Mayotte" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/region-bourgogne-franche-comte.jpg" alt="Region Bourgogne-Franche-Comte" class="h-11 md:h-14 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <img src="/store/images/clients/ajuntament-cunit.png" alt="Ajuntament Cunit" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
                     </div>
                     <!-- Duplicate for seamless loop -->
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/bestford.png" alt="Bestford" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/bestford-insurance.png" alt="Bestford Insurance" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
                     </div>
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/eydap.png" alt="EYDAP" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/herrenberg.png" alt="Herrenberg" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
                     </div>
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/herrenberg.png" alt="Herrenberg" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/loughborough-university-london.png" alt="Loughborough University London" class="h-8 md:h-9 w-auto object-contain max-w-[200px]" />
                     </div>
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/london_university.png" alt="London University" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/eydap.webp" alt="EYDAP" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
                     </div>
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/acn.png" alt="ACN" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/hellweg.png" alt="Hellweg" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
                     </div>
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/nexon.png" alt="Nexon" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/taketa-city.png" alt="Taketa City" class="h-8 md:h-9 w-auto object-contain max-w-[200px]" />
                     </div>
-                    <div class="h-10 md:h-12 w-auto flex-shrink-0 flex items-center justify-center">
-                        <img src="/store/images/perpignan.png" alt="Perpignan" class="h-full w-auto object-contain max-w-[140px]" />
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/kingsway-hospitals.jpg" alt="Kingsway Hospitals" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/mayfair-hotels-resorts.jpg" alt="Mayfair Hotels & Resorts" class="h-10 md:h-12 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/csf-inox.png" alt="CSF Inox" class="h-8 md:h-9 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/careoutlook.webp" alt="CareOutlook" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/region-occitanie.png" alt="Region Occitanie" class="h-10 md:h-12 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/montpellier-mediterranee-metropole.png" alt="Montpellier Mediterranee Metropole" class="h-8 md:h-9 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/perpignan-mediterranee-metropole.png" alt="Perpignan Mediterranee Metropole" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/doma-hotels.jpg" alt="DOMA Hotels" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/morbihan.jpg" alt="Morbihan" class="h-10 md:h-12 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/hokkaido.png" alt="Hokkaido" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/chu-rennes.webp" alt="CHU Rennes" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/nexon.webp" alt="Nexon" class="h-10 md:h-12 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/obrien-winter-partners.jpg" alt="O'Brien Winter Partners" class="h-12 md:h-14 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/ludwigshafen.png" alt="Ludwigshafen" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/paytren.webp" alt="Paytren" class="h-10 md:h-12 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/centre-hospitalier-mayotte.png" alt="Centre Hospitalier de Mayotte" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/region-bourgogne-franche-comte.jpg" alt="Region Bourgogne-Franche-Comte" class="h-11 md:h-14 w-auto object-contain max-w-[200px]" />
+                    </div>
+                    <div class="flex-shrink-0 flex items-center justify-center" aria-hidden="true">
+                        <img src="/store/images/clients/ajuntament-cunit.png" alt="Ajuntament Cunit" class="h-9 md:h-11 w-auto object-contain max-w-[200px]" />
                     </div>
                 </div>
             </div>
@@ -600,7 +703,7 @@
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                         </svg>
-                        <span class="hidden sm:inline whitespace-nowrap">ONG &amp; secteur public</span>
+                        <span class="hidden sm:inline whitespace-nowrap">secteur public</span>
                         <span class="sm:hidden">Public</span>
                     </button>
 
@@ -662,7 +765,7 @@
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                 </svg>
-                                ONG &amp; secteur public
+                                secteur public
                             </div>
                             <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-4 text-gray-900 leading-tight">
                                 Une collaboration souveraine et s&eacute;curis&eacute;e
