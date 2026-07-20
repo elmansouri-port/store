@@ -508,7 +508,7 @@ Mega menu: `.nav-dropdown` with `opacity: 0; pointer-events: none` → `.nav-dro
 ### Customer Journey Flow
 
 ```
-index.html → /tarifs → /register (3 steps) → /verify-email → /login → /portal
+index.html → /tarifs → /register (3 steps) → /verify-email → https://web.openrainbow.net/rb/2.176.0/login → /portal
 ```
 
 URL parameter context passed through:
@@ -680,7 +680,7 @@ GitHub Pages static routing via `docs/` folder:
 | `/` | `docs/index.html` |
 | `/tarifs` | `docs/tarifs/index.html` |
 | `/register` | `docs/register/index.html` |
-| `/login` | `docs/login/index.html` |
+| `https://web.openrainbow.net/rb/2.176.0/login` | `docshttps://web.openrainbow.net/rb/2.176.0/login/index.html` |
 | `/verify-email` | `docs/verify-email/index.html` |
 | `/contact` | `docs/contact/index.html` |
 

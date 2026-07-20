@@ -1144,7 +1144,7 @@ Fixed top bar with: logo, desktop nav links (dropdown-enabled), language switche
 | `nav_dropdown_pricing` | Repeatable item | Pricing dropdown links |
 | `nav_dropdown_resources` | Repeatable item | Resources dropdown links |
 | `nav_signin_label` | Text | e.g. "Se connecter" |
-| `nav_signin_url` | URL | e.g. `/login` |
+| `nav_signin_url` | URL | e.g. `https://web.openrainbow.net/rb/2.176.0/login` |
 | `nav_cta_label` | Text | e.g. "Essai gratuit" |
 | `nav_cta_url` | URL | e.g. `/tarifs` |
 | `nav_languages` | Repeatable item | Each language: `code` (e.g. `FR`), `label` (e.g. "Français"), `url` |

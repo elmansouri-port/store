@@ -35,6 +35,7 @@ const ROUTES = {
   'faq': 'pages/faq.html',
   'contact': 'pages/contact.html',
   'partenaires': 'pages/partenaires.html',
+  'form-al': 'pages/form-ale.html'
 };
 
 const ASSET_DIRS = ['css', 'js', 'images', 'img', 'i18n'];
