@@ -68,6 +68,7 @@
         @media (max-width:860px) {
             body {
                 overflow: auto;
+                align-items: flex-start;
                 padding: 16px;
             }
 
@@ -82,7 +83,7 @@
 
         @media (max-width:520px) {
             body {
-                padding: 0;
+                padding: 8px 0 0;
             }
 
             .shell {
@@ -329,6 +330,7 @@
             align-items: stretch;
             flex: 1;
             min-height: 0;
+            margin-top: 40px;
         }
 
         @media (max-width:680px) {
@@ -398,7 +400,7 @@
         .cal-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
+            gap: 34px;
         }
 
         .cal-wd {
@@ -731,11 +733,28 @@
             .info-panel {
                 padding-bottom: 18px;
             }
+
+            .book-cols {
+                gap: 12px;
+                margin-top: 12px;
+            }
+
+            .cal-grid {
+                gap: 8px;
+            }
+
+            .slots-col {
+                min-height: 0;
+            }
         }
 
-        @media (max-width:480px) {
+        @media (max-width:520px) {
+            .cal-grid {
+                gap: 6px;
+            }
+
             .slots-col {
-                min-height: 180px;
+                min-height: 160px;
             }
 
             .meta-row {
@@ -769,7 +788,6 @@
             font-weight: 700;
             font-family: inherit;
             cursor: pointer;
-            transition: background .16s, box-shadow .2s, transform .16s;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -797,46 +815,11 @@
         }
 
         @media (max-width:860px) {
-            body {
-                padding-bottom: 84px;
-            }
-
             .step .btn-primary {
-                position: fixed;
-                bottom: 16px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: min(calc(100% - 32px), 628px);
-                margin: 0 !important;
-                z-index: 100;
-                border-radius: 14px;
-                box-shadow: 0 8px 24px -6px rgba(94, 45, 145, .32);
-            }
-
-            .step .btn-primary:hover:not(:disabled) {
-                transform: translateX(-50%) translateY(-1px);
-            }
-        }
-
-        @media (max-width:520px) {
-            body {
-                padding: 0 0 70px;
-            }
-
-            .step .btn-primary {
-                bottom: 0;
-                left: 0;
-                right: 0;
-                transform: none;
                 width: 100%;
-                border-radius: 0;
-                box-shadow: none;
-            }
-
-            .step .btn-primary:hover:not(:disabled) {
-                transform: none;
             }
         }
+
 
         .btn-back {
             display: inline-flex;
