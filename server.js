@@ -71,11 +71,11 @@ app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.tailwindcss.com"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.tailwindcss.com", "https://unpkg.com"],
             scriptSrcAttr: ["'unsafe-inline'"],
-            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://unpkg.com"],
             fontSrc: ["'self'", "https://fonts.gstatic.com"],
-            imgSrc: ["'self'", "data:", "blob:", "https://flagcdn.com", "https://images.unsplash.com"],
+            imgSrc: ["'self'", "data:", "blob:", "https://flagcdn.com", "https://images.unsplash.com", "https://*.basemaps.cartocdn.com", "https://unpkg.com"],
             frameSrc: ["'self'", "https://www.youtube.com"],
             connectSrc: ["'self'", "https://rainbow-market.zendesk.com", "https://s138097979.t.eloqua.com"],
             formAction: ["'self'", "https://s138097979.t.eloqua.com"]
@@ -90,6 +90,7 @@ app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use('/i18n', express.static(I18N_DIR));
 
 // ── PAGE ROUTES ────────────────────────────────────────────────────────────────
@@ -110,6 +111,7 @@ app.get('/faq',                            (req, res) => sendPage(req, res, P('p
 app.get('/form-al',                       (req, res) => sendPage(req, res, P('pages/form-ale.html')));
 app.get('/contact',                       (req, res) => sendPage(req, res, P('pages/contact.html')));
 app.get('/partenaires',                   (req, res) => sendPage(req, res, P('pages/partenaires.html')));
+app.get('/trouver-un-partenaire',         (req, res) => sendPage(req, res, P('pages/trouver-un-partenaire.html')));
 
 // ── API ────────────────────────────────────────────────────────────────────────
 

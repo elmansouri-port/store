@@ -640,6 +640,8 @@ input[type="number"] {
 .pill-tab-btn.text-active {
     color: #111827;
 }
+.pill-tab-btn svg { color: #9ca3af; transition: color .2s ease; }
+.pill-tab-btn.text-active svg { color: var(--pill-accent, #111827); }
 
 /* --- Tab Content Transitions --- */
 .tab-panel-wrapper {
