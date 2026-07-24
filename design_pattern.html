@@ -1,0 +1,1823 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rainbow — Brand & Design Guidelines</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: { 50:'#f5f3ff',100:'#ede9fe',200:'#ddd6fe',300:'#c4b5fd',400:'#a78bfa',500:'#5e2d91',600:'#4a2373',700:'#3c1c5e' },
+        navy: { 900:'#1e1b4b',800:'#312e81',700:'#3730a3' },
+        laurenn: { purple:'#5e2d91',purpleLight:'#7c3aad',purpleDark:'#4a2373',orange:'#FF4500',pink:'#CF0072',blue:'#0085CA',green:'#34B233' }
+      },
+      fontFamily: { sans:['Google Sans','system-ui','sans-serif'], mono:['JetBrains Mono','monospace'] },
+      borderRadius: { btn:'10px' }
+    }
+  }
+}
+</script>
+<style>
+  *{box-sizing:border-box}
+  body{font-family:'Google Sans',sans-serif;background:#fafaf9;color:#1a1a2e}
+
+  /* Sidebar */
+  .ds-sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;overflow-y:auto;background:#fff;border-right:1px solid #e5e7eb;z-index:50;padding:0 0 40px}
+  .ds-sidebar::-webkit-scrollbar{width:4px}
+  .ds-sidebar::-webkit-scrollbar-track{background:transparent}
+  .ds-sidebar::-webkit-scrollbar-thumb{background:#e5e7eb;border-radius:99px}
+  .ds-content{margin-left:240px;min-height:100vh}
+
+  /* Sidebar nav */
+  .ds-nav-group{padding:24px 16px 0}
+  .ds-nav-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;padding:0 8px;margin-bottom:6px}
+  .ds-nav-link{display:block;padding:6px 8px;font-size:13px;color:#6b7280;border-radius:6px;text-decoration:none;transition:background .15s,color .15s}
+  .ds-nav-link:hover{background:#f5f3ff;color:#5e2d91}
+  .ds-nav-link.active{background:#f5f3ff;color:#5e2d91;font-weight:600}
+
+  /* Content sections */
+  .ds-section{padding:64px 56px;border-bottom:1px solid #f3f4f6;max-width:960px;position:relative}
+  .ds-section:last-child{border-bottom:none}
+  main{counter-reset:sec}
+  .ds-section:not(.ds-cover){counter-increment:sec}
+  .ds-section:not(.ds-cover)::before{content:counter(sec,decimal-leading-zero);position:absolute;top:58px;left:56px;font-size:76px;font-weight:800;letter-spacing:-.04em;color:rgba(94,45,145,.045);line-height:1;z-index:0;pointer-events:none;user-select:none}
+  .ds-section-title{font-size:28px;font-weight:800;color:#170926;letter-spacing:-.03em;margin-bottom:6px;position:relative;z-index:1}
+  .ds-section:not(.ds-cover) .ds-section-title::before{content:"section " counter(sec,decimal-leading-zero);display:block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7c3aad;margin-bottom:12px}
+  .ds-section-sub{position:relative;z-index:1}
+  .ds-section-sub{font-size:15px;color:#6b7280;line-height:1.6;margin-bottom:40px;max-width:560px}
+
+  /* Component group */
+  .ds-group-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin-bottom:12px;margin-top:36px}
+  .ds-group-label:first-child{margin-top:0}
+
+  /* Canvas (live preview area) */
+  .ds-canvas{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px;margin-bottom:8px}
+  .ds-canvas-dark{background:linear-gradient(135deg,#0f0b2e 0%,#1e1b4b 100%);border:1px solid rgba(255,255,255,.06)}
+  .ds-canvas-muted{background:#f9fafb}
+
+  /* Code block */
+  .ds-code{font-family:'JetBrains Mono',monospace;font-size:12px;background:#f8f7ff;border:1px solid #ede9fe;border-radius:8px;padding:12px 16px;color:#4a2373;line-height:1.7;overflow-x:auto;margin-bottom:24px;white-space:pre}
+
+  /* Callout boxes */
+  .ds-callout{padding:14px 18px;border-radius:10px;font-size:13px;line-height:1.6;margin-bottom:16px;display:flex;gap:10px}
+  .ds-callout-warn{background:#fffbeb;border:1px solid #fcd34d;color:#92400e}
+  .ds-callout-info{background:#f0f9ff;border:1px solid #bae6fd;color:#0c4a6e}
+  .ds-callout-error{background:#fef2f2;border:1px solid #fecaca;color:#7f1d1d}
+  .ds-callout-ok{background:#f0fdf4;border:1px solid #bbf7d0;color:#14532d}
+
+  /* Color swatch */
+  .swatch{display:flex;flex-direction:column;gap:0;border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,.06);flex:1;min-width:0}
+  .swatch-block{height:72px;width:100%}
+  .swatch-info{background:#fff;padding:10px 12px;border-top:1px solid rgba(0,0,0,.06)}
+  .swatch-name{font-size:11px;font-weight:600;color:#374151}
+  .swatch-hex{font-size:11px;font-family:'JetBrains Mono',monospace;color:#6b7280;margin-top:2px}
+
+  /* Token row */
+  .ds-token-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f3f4f6;font-size:13px}
+  .ds-token-row:last-child{border-bottom:none}
+  .ds-token-name{font-family:'JetBrains Mono',monospace;color:#5e2d91;font-size:12px;flex:0 0 220px}
+  .ds-token-value{color:#374151;flex:0 0 120px}
+  .ds-token-desc{color:#9ca3af;flex:1}
+  .ds-token-preview{flex:0 0 40px;display:flex;align-items:center;justify-content:flex-end}
+
+  /* Type specimen */
+  .ds-type-row{display:flex;align-items:baseline;gap:24px;padding:20px 0;border-bottom:1px solid #f3f4f6}
+  .ds-type-row:last-child{border-bottom:none}
+  .ds-type-meta{flex:0 0 160px;font-size:11px;color:#9ca3af;font-family:'JetBrains Mono',monospace;line-height:1.8}
+
+  /* Do/don't */
+  .ds-do-dont{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+  .ds-do{border:1.5px solid #86efac;border-radius:12px;overflow:hidden}
+  .ds-dont{border:1.5px solid #fca5a5;border-radius:12px;overflow:hidden}
+  .ds-do-header{background:#f0fdf4;padding:8px 16px;font-size:11px;font-weight:700;color:#15803d;letter-spacing:.08em;text-transform:uppercase}
+  .ds-dont-header{background:#fef2f2;padding:8px 16px;font-size:11px;font-weight:700;color:#dc2626;letter-spacing:.08em;text-transform:uppercase}
+  .ds-do-body,.ds-dont-body{padding:20px;background:#fff}
+
+  /* Shadow samples */
+  .shadow-sample{background:#fff;border-radius:12px;padding:20px 24px;font-size:13px}
+
+  /* Radius samples */
+  .radius-sample{background:#ede9fe;height:56px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#5e2d91}
+
+  /* Chip */
+  .ds-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:.04em}
+
+  /* Spacing ruler */
+  .space-ruler{display:flex;align-items:flex-end;gap:12px}
+  .space-block{background:#ede9fe;border-radius:4px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;font-size:10px;color:#7c3aad;font-weight:600;transition:background .2s}
+  .space-block:hover{background:#ddd6fe}
+
+  /* Motion sample */
+  .motion-box{width:48px;height:48px;border-radius:10px;background:#5e2d91;cursor:pointer;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+  .motion-box:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(94,45,145,.25)}
+
+  /* Scrollspy active */
+  .scrollspy-active .ds-nav-link{background:#f5f3ff;color:#5e2d91;font-weight:600}
+
+  /* ══ SECTION-CARD (paper surface for new documentation groups) ══ */
+  .ds-paper{background:#fff;border:1px solid #e8eaed;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 4px 12px rgba(0,0,0,.03);margin-bottom:20px}
+  .ds-paper:last-child{margin-bottom:0}
+
+  /* ══ TABLE ══ */
+  .ds-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;font-size:12.5px}
+  .ds-table thead tr{background:#f9fafb}
+  .ds-table th{text-align:left;padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;border-bottom:1px solid #e5e7eb;white-space:nowrap}
+  .ds-table td{padding:10px 14px;border-bottom:1px solid #f3f4f6;color:#374151;vertical-align:top;line-height:1.5}
+  .ds-table tbody tr:nth-child(even){background:#fafbfc}
+  .ds-table tbody tr:hover{background:#f8f7ff}
+  .ds-table tbody tr:last-child td{border-bottom:none}
+  .ds-table code{font-family:'JetBrains Mono',monospace;font-size:11px;background:#f5f3ff;color:#5e2d91;padding:1px 5px;border-radius:4px}
+  .ds-table-wrap{overflow-x:auto;border-radius:14px}
+  .ds-status-yes{color:#15803d;font-weight:700}
+  .ds-status-no{color:#d1d5db;font-weight:700}
+  .ds-status-partial{color:#b45309;font-weight:700}
+
+  /* ══ FLOW / DIAGRAM ══ */
+  .ds-flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+  .ds-flow-step{flex:1;min-width:130px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 14px;text-align:center;position:relative}
+  .ds-flow-step.dashed{border-style:dashed;background:#fafbfc;color:#9ca3af}
+  .ds-flow-step.accent{border-color:#ddd6fe;background:#f5f3ff}
+  .ds-flow-step-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:6px}
+  .ds-flow-step-title{font-size:13px;font-weight:700;color:#170926;line-height:1.35}
+  .ds-flow-step-sub{font-size:10.5px;color:#6b7280;margin-top:4px;line-height:1.4}
+  .ds-flow-arrow{display:flex;align-items:center;justify-content:center;padding:0 6px;color:#c4b5fd;font-size:18px;flex:0 0 auto}
+  .ds-flow-vert{display:flex;flex-direction:column;gap:0;align-items:stretch}
+  .ds-flow-vert .ds-flow-arrow{padding:4px 0;justify-content:flex-start;margin-left:24px}
+
+  /* ══ EYEBROW / GROUP HEADER for multi-part documentation groups ══ */
+  .ds-group-header{display:flex;align-items:baseline;gap:10px;margin:0 0 4px}
+  .ds-group-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#fff;background:#5e2d91;border-radius:6px;padding:2px 7px}
+  .ds-group-title{font-size:17px;font-weight:700;color:#170926;letter-spacing:-.01em}
+  .ds-group-sub{font-size:12.5px;color:#9ca3af;margin:2px 0 18px}
+</style>
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="ds-sidebar">
+  <div style="padding:20px 16px 0">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+      <img src="/images/rainbow-logo.png" alt="" style="width:28px;height:28px;border-radius:7px" aria-hidden="true">
+      <span style="font-size:13px;font-weight:700;color:#170926">Rainbow DS</span>
+    </div>
+    <div style="font-size:11px;color:#9ca3af;padding-left:36px">v1.1 · Jul 2026</div>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-label">Overview</div>
+    <a href="#principles" class="ds-nav-link">Design Principles</a>
+    <a href="#brand" class="ds-nav-link">Brand Identity</a>
+    <a href="#logos" class="ds-nav-link">Logos & Brand Assets</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-label">Foundations</div>
+    <a href="#colors" class="ds-nav-link">Colors</a>
+    <a href="#typography" class="ds-nav-link">Typography</a>
+    <a href="#spacing" class="ds-nav-link">Spacing</a>
+    <a href="#radius" class="ds-nav-link">Border Radius</a>
+    <a href="#shadows" class="ds-nav-link">Shadows</a>
+    <a href="#motion" class="ds-nav-link">Motion</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-label">Components</div>
+    <a href="#buttons" class="ds-nav-link">Buttons</a>
+    <a href="#badges" class="ds-nav-link">Badges & Pills</a>
+    <a href="#inputs" class="ds-nav-link">Form Inputs</a>
+    <a href="#cards" class="ds-nav-link">Cards</a>
+    <a href="#navigation" class="ds-nav-link">Navigation</a>
+    <a href="#stepper" class="ds-nav-link">Step Indicator</a>
+    <a href="#tabs" class="ds-nav-link">Pill Tabs</a>
+    <a href="#toggle" class="ds-nav-link">Toggle Switch</a>
+    <a href="#faq" class="ds-nav-link">FAQ</a>
+    <a href="#solution-cards" class="ds-nav-link">Solution Cards</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-label">Patterns</div>
+    <a href="#hero" class="ds-nav-link">Hero Section</a>
+    <a href="#stats" class="ds-nav-link">Stats Section</a>
+    <a href="#pricing" class="ds-nav-link">Pricing Cards</a>
+    <a href="#cta-banner" class="ds-nav-link">CTA Banner</a>
+    <a href="#marquee" class="ds-nav-link">Trust Marquee</a>
+    <a href="#footer-pattern" class="ds-nav-link">Footer</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-label">Guidance</div>
+    <a href="#issues" class="ds-nav-link" style="color:#dc2626">⚠ Issues to Fix</a>
+    <a href="#dos-donts" class="ds-nav-link">Do / Don't</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-label">Operations</div>
+    <a href="#architecture" class="ds-nav-link">1 · Architecture</a>
+    <a href="#cms" class="ds-nav-link">2 · CMS Integration</a>
+    <a href="#leads" class="ds-nav-link">3 · Leads Tracking</a>
+    <a href="#content-ops" class="ds-nav-link">4 · Content Process</a>
+    <a href="#seo" class="ds-nav-link">5 · Meta &amp; SEO</a>
+  </div>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="ds-content">
+
+  <!-- ─── COVER ─── -->
+  <section class="ds-section ds-cover" style="padding:0 0 40px;border-bottom:none;max-width:none">
+    <div style="min-height:78vh;background:linear-gradient(135deg,#fff8f2 0%,#fff 30%,#faf5ff 60%,#f7f0ff 100%);border:1px solid #ede9fe;border-radius:24px;position:relative;overflow:hidden;display:flex;align-items:center">
+      <div style="position:absolute;inset:0;background:radial-gradient(circle at 82% 18%, rgba(207,0,114,.05) 0%, transparent 50%), radial-gradient(circle at 15% 85%, rgba(255,69,0,.04) 0%, transparent 50%)"></div>
+      <div style="display:grid;grid-template-columns:56% 44%;width:100%;padding:72px 56px;position:relative;z-index:1;align-items:center;gap:24px">
+        <div>
+          <div style="display:flex;gap:6px;margin-bottom:20px">
+            <div style="width:9px;height:9px;border-radius:2px;background:#34B233"></div>
+            <div style="width:9px;height:9px;border-radius:2px;background:#0085CA"></div>
+            <div style="width:9px;height:9px;border-radius:2px;background:#6639B7"></div>
+            <div style="width:9px;height:9px;border-radius:2px;background:#CF0072"></div>
+            <div style="width:9px;height:9px;border-radius:2px;background:#FF4500"></div>
+          </div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9ca3af;margin-bottom:16px">Rainbow · by Alcatel-Lucent Enterprise</div>
+          <h1 style="font-size:4.2rem;font-weight:800;letter-spacing:-.04em;line-height:1.03;color:#170926;margin-bottom:18px">Brand &amp;<br>Design <span style="color:#e5e0f0">Guidelines</span></h1>
+          <p style="font-size:17px;color:#6b7280;line-height:1.65;max-width:480px;margin-bottom:36px">The single reference for how Rainbow looks, moves, and speaks — extracted from the live site, reconciled where two variants competed once, and extended into how the product is built, tracked, and maintained end-to-end.</p>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-top:20px;border-top:1px solid #ede9fe;max-width:520px">
+            <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c4b5fd">Version</div><div style="font-size:13px;font-weight:600;color:#170926;margin-top:4px">1.1 · Jul 2026</div></div>
+            <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c4b5fd">Pages audited</div><div style="font-size:13px;font-weight:600;color:#170926;margin-top:4px">12 live routes</div></div>
+            <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c4b5fd">Owner</div><div style="font-size:13px;font-weight:600;color:#170926;margin-top:4px">Web &amp; Growth</div></div>
+            <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c4b5fd">Scope</div><div style="font-size:13px;font-weight:600;color:#170926;margin-top:4px">Brand → Ops</div></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;position:relative">
+          <div style="font-size:320px;font-weight:800;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(94,45,145,.08);user-select:none">R</div>
+          <img src="/images/rainbow-logo.png" alt="Rainbow" style="position:absolute;width:130px;height:130px;object-fit:contain;filter:drop-shadow(0 20px 40px rgba(94,45,145,.18))">
+        </div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#34B233 20%,#0085CA 40%,#6639B7 60%,#CF0072 80%,#FF4500 100%)"></div>
+    </div>
+  </section>
+
+  <!-- ─── PRINCIPLES ─── -->
+  <section id="principles" class="ds-section">
+    <div class="ds-chip" style="background:#f5f3ff;color:#5e2d91;border:1px solid #ddd6fe;margin-bottom:16px">Design System · Rainbow by ALE</div>
+    <h1 class="ds-section-title">Design Principles</h1>
+    <p class="ds-section-sub">The four values that govern every decision — from micro-interactions to page layout.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
+      <div style="padding:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-left:3px solid #5e2d91">
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">01 — Clarity over decoration</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6">Every visual element must earn its place. Glassmorphism and gradients create depth, not noise. If removing something makes the page cleaner, remove it.</div>
+      </div>
+      <div style="padding:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-left:3px solid #CF0072">
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">02 — Motion with purpose</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6">Animation guides attention, confirms state, and signals hierarchy. Never animate for entertainment. Spring easing <code style="font-size:11px;background:#f5f3ff;padding:1px 4px;border-radius:4px">cubic-bezier(.16,1,.3,1)</code> is our signature curve.</div>
+      </div>
+      <div style="padding:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-left:3px solid #0085CA">
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">03 — Trust through consistency</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6">Enterprise buyers make decisions on perceived reliability. Consistent spacing, type, and color patterns signal craftsmanship. Inconsistency erodes confidence.</div>
+      </div>
+      <div style="padding:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-left:3px solid #34B233">
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">04 — Accessible by default</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6">Contrast ratios, focus states, and keyboard navigation are non-negotiable. AA compliance is the floor, not the ceiling.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BRAND ─── -->
+  <section id="brand" class="ds-section">
+    <h2 class="ds-section-title">Brand Identity</h2>
+    <p class="ds-section-sub">Rainbow is a B2B SaaS platform by Alcatel-Lucent Enterprise. The brand voice is premium, clear, and human — never cold or corporate.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="ds-group-label">Personality</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span class="ds-chip" style="background:#f5f3ff;color:#5e2d91;border:1px solid #ddd6fe">Premium</span>
+          <span class="ds-chip" style="background:#f5f3ff;color:#5e2d91;border:1px solid #ddd6fe">Trustworthy</span>
+          <span class="ds-chip" style="background:#f5f3ff;color:#5e2d91;border:1px solid #ddd6fe">Modern</span>
+          <span class="ds-chip" style="background:#fdf2f8;color:#CF0072;border:1px solid #f9a8d4">Friendly</span>
+          <span class="ds-chip" style="background:#f0f9ff;color:#0085CA;border:1px solid #bae6fd">Innovative</span>
+        </div>
+      </div>
+      <div>
+        <div class="ds-group-label">Visual Language</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.8">
+          Glassmorphism surfaces · Radial gradient blobs · Spring-eased motion · Purple-to-indigo gradients · Tight letter-spacing on headings
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── LOGOS & BRAND ASSETS ─── -->
+  <section id="logos" class="ds-section">
+    <h2 class="ds-section-title">Logos & Brand Assets</h2>
+    <p class="ds-section-sub">Four approved files, each with one correct context. Never recolor, outline, rotate, or reconstruct the mark from CSS shapes.</p>
+
+    <div class="ds-group-label">Primary Lockup — Rainbow-AL-logo-banner.webp</div>
+    <div class="ds-canvas" style="display:flex;align-items:center;justify-content:center;padding:48px">
+      <img src="/images/Rainbow-AL-logo-banner.webp" alt="Rainbow by Alcatel-Lucent" style="height:64px;width:auto">
+    </div>
+    <div style="display:flex;gap:16px;margin-bottom:8px">
+      <div style="flex:1;font-size:12px;color:#6b7280;line-height:1.6"><strong style="color:#170926">Usage:</strong> Navbar, every page, top-left. Rendered at <code style="font-family:monospace;font-size:11px;background:#f5f3ff;padding:1px 5px;border-radius:4px">h-12</code> (48px) with auto width. This is the only lockup that pairs the Rainbow "R" mark with the "by Alcatel·Lucent" endorsement — use it wherever the product needs to be introduced as a Rainbow property.</div>
+      <div style="flex:1;font-size:12px;color:#6b7280;line-height:1.6"><strong style="color:#170926">Clear space:</strong> Keep empty space equal to the height of the "R" glyph on all sides. <strong style="color:#170926">Min size:</strong> 32px tall — below that the "by Alcatel·Lucent" lockup stops being legible.</div>
+    </div>
+
+    <div class="ds-group-label" style="margin-top:32px">Icon Mark — rainbow-logo.png</div>
+    <div class="ds-canvas" style="display:flex;align-items:center;gap:32px;padding:40px">
+      <img src="/images/rainbow-logo.png" alt="Rainbow icon" style="width:70px;height:70px;object-fit:contain">
+      <div style="font-size:12px;color:#6b7280;line-height:1.7;max-width:420px">The "R" glyph alone, used when the wordmark would be redundant or too small to read: footer CTA band icon (70×70px), favicon, social avatars, loading states. Never place it where the full lockup would fit — the icon-only mark is for confirmation and decoration, not first introduction.</div>
+    </div>
+
+    <div class="ds-group-label" style="margin-top:32px">Corporate Endorsement — Alcatel-Lucent Enterprise</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="ds-canvas" style="padding:36px;display:flex;align-items:center;justify-content:center">
+        <img src="/images/ale-logo.png" alt="Alcatel-Lucent Enterprise" style="height:44px;width:auto">
+      </div>
+      <div class="ds-canvas ds-canvas-dark" style="padding:36px;display:flex;align-items:center;justify-content:center">
+        <img src="/images/ale_white.png" alt="Alcatel-Lucent Enterprise" style="height:44px;width:auto;opacity:.95">
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;margin-bottom:8px">
+      <div style="font-size:11px;color:#9ca3af;text-align:center">ale-logo.png — light backgrounds</div>
+      <div style="font-size:11px;color:#9ca3af;text-align:center">ale_white.png — dark backgrounds only (white ink, invisible on white)</div>
+    </div>
+    <div class="ds-callout ds-callout-info">
+      <span>ℹ</span>
+      <div><strong>ale-logo.png is currently unused in the live codebase</strong> even though every page footer is a dark <code style="font-family:monospace;font-size:11px">.footer-premium</code> surface where <code style="font-family:monospace;font-size:11px">ale_white.png</code> is correctly used. Keep <code style="font-family:monospace;font-size:11px">ale-logo.png</code> reserved for the day a light-surface footer or printed one-pager needs the ALE mark — don't delete it as "dead weight."</div>
+    </div>
+
+    <div class="ds-group-label" style="margin-top:24px">Do / Don't</div>
+    <div class="ds-do-dont">
+      <div class="ds-do">
+        <div class="ds-do-header">✓ Do</div>
+        <div class="ds-do-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Pair the right lockup with the right background</div>
+          <div style="font-size:12px;color:#6b7280">Full-color lockup on white/light surfaces, white-ink ALE mark only on the navy/purple gradient footer.</div>
+        </div>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-header">✗ Don't</div>
+        <div class="ds-dont-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Rebuild the "R" mark out of divs and gradients</div>
+          <div style="font-size:12px;color:#6b7280">The gradient-square placeholder used in mockups (e.g. earlier drafts of this very page) is for wireframing only — ship the real PNG/WEBP asset.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── COLORS ─── -->
+  <section id="colors" class="ds-section">
+    <h2 class="ds-section-title">Colors</h2>
+    <p class="ds-section-sub">All color values extracted from the live codebase. A critical inconsistency exists between two purple values — see the callout below.</p>
+
+    <div class="ds-callout ds-callout-error">
+      <span>⚠</span>
+      <div><strong>Two purples in play:</strong> every page's Tailwind config agrees on <code style="font-family:monospace;font-size:11px">brand.500 = #5e2d91</code>, but <code style="font-family:monospace;font-size:11px">#7c3aed</code> shows up inline throughout (glass-card borders, glow shadows, gradient-text) without a token name. <strong>Resolution: keep #5e2d91 as the single brand.500 identity color, and give #7c3aed a real name — brand.vibrant — for glass borders and glow/shadow accents only. Never use it for logo, primary buttons, or body text links.</strong></div>
+    </div>
+
+    <div class="ds-group-label">Brand Purple Scale</div>
+    <div style="display:flex;gap:8px;margin-bottom:24px">
+      <div class="swatch"><div class="swatch-block" style="background:#f5f3ff"></div><div class="swatch-info"><div class="swatch-name">brand.50</div><div class="swatch-hex">#f5f3ff</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#ede9fe"></div><div class="swatch-info"><div class="swatch-name">brand.100</div><div class="swatch-hex">#ede9fe</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#ddd6fe"></div><div class="swatch-info"><div class="swatch-name">brand.200</div><div class="swatch-hex">#ddd6fe</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#c4b5fd"></div><div class="swatch-info"><div class="swatch-name">brand.300</div><div class="swatch-hex">#c4b5fd</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#a78bfa"></div><div class="swatch-info"><div class="swatch-name">brand.400</div><div class="swatch-hex">#a78bfa</div></div></div>
+      <div class="swatch" style="box-shadow:0 0 0 2px #5e2d91"><div class="swatch-block" style="background:#5e2d91"></div><div class="swatch-info"><div class="swatch-name">brand.500 ★</div><div class="swatch-hex">#5e2d91</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#4a2373"></div><div class="swatch-info"><div class="swatch-name">brand.600</div><div class="swatch-hex">#4a2373</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#3c1c5e"></div><div class="swatch-info"><div class="swatch-name">brand.700</div><div class="swatch-hex">#3c1c5e</div></div></div>
+    </div>
+
+    <div class="ds-group-label">Interactive / Vibrant Variants</div>
+    <div style="display:flex;gap:8px;margin-bottom:24px">
+      <div class="swatch"><div class="swatch-block" style="background:#7c3aed"></div><div class="swatch-info"><div class="swatch-name">brand.vibrant</div><div class="swatch-hex">#7c3aed</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#7c3aad"></div><div class="swatch-info"><div class="swatch-name">brand.purpleLight</div><div class="swatch-hex">#7c3aad</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#6B5CE7"></div><div class="swatch-info"><div class="swatch-name">compliance.accent</div><div class="swatch-hex">#6B5CE7</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#4f46e5"></div><div class="swatch-info"><div class="swatch-name">indigo.600</div><div class="swatch-hex">#4f46e5</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#6366f1"></div><div class="swatch-info"><div class="swatch-name">indigo.400</div><div class="swatch-hex">#6366f1</div></div></div>
+    </div>
+
+    <div class="ds-group-label">Navy / Dark Backgrounds</div>
+    <div style="display:flex;gap:8px;margin-bottom:24px">
+      <div class="swatch"><div class="swatch-block" style="background:#0f0b2e"></div><div class="swatch-info"><div class="swatch-name">dark.deepest</div><div class="swatch-hex">#0f0b2e</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#151936"></div><div class="swatch-info"><div class="swatch-name">dark.stats</div><div class="swatch-hex">#151936</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#170926"></div><div class="swatch-info"><div class="swatch-name">dark.cta-text</div><div class="swatch-hex">#170926</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#1e1b4b"></div><div class="swatch-info"><div class="swatch-name">navy.900</div><div class="swatch-hex">#1e1b4b</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#312e81"></div><div class="swatch-info"><div class="swatch-name">navy.800</div><div class="swatch-hex">#312e81</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#3730a3"></div><div class="swatch-info"><div class="swatch-name">navy.700</div><div class="swatch-hex">#3730a3</div></div></div>
+    </div>
+
+    <div class="ds-group-label">Accent Colors (Laurenn palette)</div>
+    <div style="display:flex;gap:8px;margin-bottom:24px">
+      <div class="swatch"><div class="swatch-block" style="background:#FF4500"></div><div class="swatch-info"><div class="swatch-name">laurenn.orange</div><div class="swatch-hex">#FF4500</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#CF0072"></div><div class="swatch-info"><div class="swatch-name">laurenn.pink</div><div class="swatch-hex">#CF0072</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#0085CA"></div><div class="swatch-info"><div class="swatch-name">laurenn.blue</div><div class="swatch-hex">#0085CA</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#34B233"></div><div class="swatch-info"><div class="swatch-name">laurenn.green</div><div class="swatch-hex">#34B233</div></div></div>
+    </div>
+
+    <div class="ds-group-label">Neutral Grays</div>
+    <div style="display:flex;gap:8px;margin-bottom:24px">
+      <div class="swatch"><div class="swatch-block" style="background:#111827"></div><div class="swatch-info"><div class="swatch-name">gray.900</div><div class="swatch-hex">#111827</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#374151"></div><div class="swatch-info"><div class="swatch-name">gray.700</div><div class="swatch-hex">#374151</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#4b5563"></div><div class="swatch-info"><div class="swatch-name">gray.600</div><div class="swatch-hex">#4b5563</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#6b7280"></div><div class="swatch-info"><div class="swatch-name">gray.500</div><div class="swatch-hex">#6b7280</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#9ca3af"></div><div class="swatch-info"><div class="swatch-name">gray.400</div><div class="swatch-hex">#9ca3af</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#d1d5db"></div><div class="swatch-info"><div class="swatch-name">gray.300</div><div class="swatch-hex">#d1d5db</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#e5e7eb"></div><div class="swatch-info"><div class="swatch-name">gray.200</div><div class="swatch-hex">#e5e7eb</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#f3f4f6"></div><div class="swatch-info"><div class="swatch-name">gray.100</div><div class="swatch-hex">#f3f4f6</div></div></div>
+    </div>
+
+    <div class="ds-group-label">Semantic</div>
+    <div style="display:flex;gap:8px">
+      <div class="swatch"><div class="swatch-block" style="background:#10b981"></div><div class="swatch-info"><div class="swatch-name">success</div><div class="swatch-hex">#10b981</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#ef4444"></div><div class="swatch-info"><div class="swatch-name">error</div><div class="swatch-hex">#ef4444</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#f59e0b"></div><div class="swatch-info"><div class="swatch-name">warning</div><div class="swatch-hex">#f59e0b</div></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#3b82f6"></div><div class="swatch-info"><div class="swatch-name">info</div><div class="swatch-hex">#3b82f6</div></div></div>
+    </div>
+  </section>
+
+  <!-- ─── TYPOGRAPHY ─── -->
+  <section id="typography" class="ds-section">
+    <h2 class="ds-section-title">Typography</h2>
+    <p class="ds-section-sub">Google Sans is the sole typeface. Weights 400, 500 and 700 are loaded. Tight letter-spacing (<code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">-0.03em</code>) on all display and headline sizes.</p>
+
+    <div class="ds-canvas" style="padding:40px">
+      <div class="ds-type-row">
+        <div class="ds-type-meta">Display<br>3.25rem · 800<br>ls: -0.03em · lh: 1.15</div>
+        <div style="font-size:3.25rem;font-weight:800;color:#170926;letter-spacing:-.03em;line-height:1.15">Start for free today</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">H1<br>2.75rem · 800<br>ls: -0.03em · lh: 1.15</div>
+        <div style="font-size:2.75rem;font-weight:800;color:#170926;letter-spacing:-.03em;line-height:1.15">Rainbow Webinar</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">H2<br>2rem · 800<br>ls: -0.03em · lh: 1.2</div>
+        <div style="font-size:2rem;font-weight:800;color:#170926;letter-spacing:-.03em;line-height:1.2">Simple, transparent pricing</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">H3<br>1.5rem · 700<br>ls: -0.02em · lh: 1.3</div>
+        <div style="font-size:1.5rem;font-weight:700;color:#170926;letter-spacing:-.02em;line-height:1.3">Professional Plan</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">H4<br>1.125rem · 700<br>ls: -0.01em · lh: 1.4</div>
+        <div style="font-size:1.125rem;font-weight:700;color:#170926;letter-spacing:-.01em;line-height:1.4">Feature title</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">Body Large<br>1.0625rem · 400<br>lh: 1.65</div>
+        <div style="font-size:1.0625rem;color:#4b5563;line-height:1.65;max-width:480px">Cloud communication platform for enterprises of any size. Secure, scalable, and built for the modern workplace.</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">Body<br>0.9375rem · 400<br>lh: 1.65</div>
+        <div style="font-size:0.9375rem;color:#4b5563;line-height:1.65;max-width:480px">Up to 250 participants per webinar with cloud recording included in every professional plan.</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">Small<br>0.875rem · 400<br>lh: 1.6</div>
+        <div style="font-size:0.875rem;color:#6b7280;line-height:1.6">Secondary copy and supporting text for cards and form helpers.</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">Caption<br>0.8125rem · 500<br>lh: 1.5</div>
+        <div style="font-size:0.8125rem;font-weight:500;color:#9ca3af;line-height:1.5">Nav items · Dropdown labels · Helper text</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">Label / Tag<br>0.6875rem · 700<br>ls: +0.12em · uppercase</div>
+        <div style="font-size:0.6875rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af">Section labels · Category tags</div>
+      </div>
+    </div>
+
+    <div class="ds-group-label">Gradient Text</div>
+    <div class="ds-canvas">
+      <div class="gradient-text" style="font-size:2rem;font-weight:800;letter-spacing:-.03em;margin-bottom:8px">Unified platform</div>
+      <div class="hero-badge-gradient" style="font-size:1.25rem;font-weight:700;letter-spacing:-.02em">Rainbow — by ALE</div>
+    </div>
+    <div class="ds-code">.gradient-text {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-badge-gradient {
+  background: linear-gradient(135deg, #5e2d91, #CF0072);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}</div>
+  </section>
+
+  <!-- ─── SPACING ─── -->
+  <section id="spacing" class="ds-section">
+    <h2 class="ds-section-title">Spacing</h2>
+    <p class="ds-section-sub">Tailwind's 4px base grid. Section vertical rhythm is consistently <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">py-20</code> (80px) to <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">py-28</code> (112px).</p>
+
+    <div class="ds-canvas ds-canvas-muted">
+      <div class="space-ruler" style="align-items:flex-end;gap:10px">
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:4px;background:#ede9fe"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">1<br>4px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:8px;background:#ede9fe"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">2<br>8px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:12px;background:#ddd6fe"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">3<br>12px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:16px;background:#ddd6fe"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">4<br>16px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:24px;background:#c4b5fd"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">6<br>24px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:32px;background:#c4b5fd"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">8<br>32px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:48px;background:#a78bfa"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">12<br>48px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:64px;background:#a78bfa"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">16<br>64px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:80px;background:#7c3aed;opacity:.6"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">20<br>80px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:96px;background:#5e2d91;opacity:.5"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">24<br>96px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:112px;background:#5e2d91;opacity:.7"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">28<br>112px</div></div>
+        <div style="text-align:center"><div class="space-block" style="width:16px;height:128px;background:#5e2d91;opacity:.9"></div><div style="font-size:10px;color:#9ca3af;margin-top:6px">32<br>128px</div></div>
+      </div>
+    </div>
+
+    <div class="ds-group-label" style="margin-top:24px">Container widths</div>
+    <div class="ds-token-row"><span class="ds-token-name">max-w-lg</span><span class="ds-token-value">512px</span><span class="ds-token-desc">Auth pages (login, register)</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">max-w-4xl</span><span class="ds-token-value">896px</span><span class="ds-token-desc">Narrow content sections</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">max-w-6xl</span><span class="ds-token-value">1152px</span><span class="ds-token-desc">Primary page container (nav, most sections)</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">max-w-7xl</span><span class="ds-token-value">1280px</span><span class="ds-token-desc">Wide sections (expand cards)</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">px-6</span><span class="ds-token-value">24px</span><span class="ds-token-desc">Default horizontal page padding</span></div>
+  </section>
+
+  <!-- ─── BORDER RADIUS ─── -->
+  <section id="radius" class="ds-section">
+    <h2 class="ds-section-title">Border Radius</h2>
+    <p class="ds-section-sub">Two radius systems coexist — Tailwind utilities and custom pixel values in CSS. These should be unified into a single token set.</p>
+
+    <div class="ds-callout ds-callout-warn">
+      <span>⚠</span>
+      <div>Inconsistency: Tailwind uses <code style="font-family:monospace;font-size:11px">rounded-xl</code> (12px) while custom CSS uses <code style="font-family:monospace;font-size:11px">border-radius: 20px</code> and <code style="font-family:monospace;font-size:11px">24px</code>. Standardize around the scale below.</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:12px">
+      <div><div class="radius-sample" style="border-radius:4px">4px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">rounded<br>sm</div></div>
+      <div><div class="radius-sample" style="border-radius:8px">8px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">rounded-lg<br>card-inner</div></div>
+      <div><div class="radius-sample" style="border-radius:10px">10px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">rounded-btn<br>button</div></div>
+      <div><div class="radius-sample" style="border-radius:12px">12px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">rounded-xl<br>btn-cta</div></div>
+      <div><div class="radius-sample" style="border-radius:16px">16px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">rounded-2xl<br>product-card</div></div>
+      <div><div class="radius-sample" style="border-radius:20px">20px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">stat-card<br>compliance</div></div>
+      <div><div class="radius-sample" style="border-radius:24px">24px</div><div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px">cta-banner<br>sp-preview</div></div>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:12px;align-items:center">
+      <div style="flex:1;background:#ede9fe;height:48px;border-radius:9999px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#5e2d91">rounded-full · ∞</div>
+      <div style="font-size:11px;color:#9ca3af;flex:0 0 180px">Badges, pills, lang switcher, scrollbar thumbs</div>
+    </div>
+  </section>
+
+  <!-- ─── SHADOWS ─── -->
+  <section id="shadows" class="ds-section">
+    <h2 class="ds-section-title">Shadows</h2>
+    <p class="ds-section-sub">All shadows use the brand purple tint <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">rgba(124,58,237,…)</code> rather than pure black. This keeps the palette cohesive.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+      <div>
+        <div class="shadow-sample" style="box-shadow:0 1px 6px rgba(0,0,0,.05)">shadow-xs</div>
+        <div style="font-size:10px;font-family:monospace;color:#9ca3af;margin-top:8px;padding:0 4px">0 1px 6px rgba(0,0,0,.05)</div>
+        <div style="font-size:11px;color:#6b7280;padding:0 4px">Form inputs (resting)</div>
+      </div>
+      <div>
+        <div class="shadow-sample" style="box-shadow:0 4px 16px rgba(124,58,237,.04)">shadow-sm</div>
+        <div style="font-size:10px;font-family:monospace;color:#9ca3af;margin-top:8px;padding:0 4px">0 4px 16px rgba(124,58,237,.04)</div>
+        <div style="font-size:11px;color:#6b7280;padding:0 4px">FAQ hover, lang dropdown</div>
+      </div>
+      <div>
+        <div class="shadow-sample" style="box-shadow:0 8px 32px rgba(0,0,0,.03),inset 0 1px 0 rgba(255,255,255,.6)">glass-card</div>
+        <div style="font-size:10px;font-family:monospace;color:#9ca3af;margin-top:8px;padding:0 4px">0 8px 32px rgba(0,0,0,.03)<br>+ inset 0 1px 0 rgba(255,255,255,.6)</div>
+        <div style="font-size:11px;color:#6b7280;padding:0 4px">Glass morphism cards</div>
+      </div>
+      <div>
+        <div class="shadow-sample" style="box-shadow:0 20px 40px rgba(124,58,237,.08)">shadow-md</div>
+        <div style="font-size:10px;font-family:monospace;color:#9ca3af;margin-top:8px;padding:0 4px">0 20px 40px rgba(124,58,237,.08)</div>
+        <div style="font-size:11px;color:#6b7280;padding:0 4px">hover-lift raised state</div>
+      </div>
+      <div>
+        <div class="shadow-sample" style="box-shadow:0 32px 64px rgba(124,58,237,.08)">shadow-lg</div>
+        <div style="font-size:10px;font-family:monospace;color:#9ca3af;margin-top:8px;padding:0 4px">0 32px 64px rgba(124,58,237,.08)</div>
+        <div style="font-size:11px;color:#6b7280;padding:0 4px">Product card hover</div>
+      </div>
+      <div>
+        <div class="shadow-sample" style="box-shadow:0 4px 20px rgba(124,58,237,.25)">shadow-glow</div>
+        <div style="font-size:10px;font-family:monospace;color:#9ca3af;margin-top:8px;padding:0 4px">0 4px 20px rgba(124,58,237,.25)</div>
+        <div style="font-size:11px;color:#6b7280;padding:0 4px">Primary CTA button glow</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MOTION ─── -->
+  <section id="motion" class="ds-section">
+    <h2 class="ds-section-title">Motion</h2>
+    <p class="ds-section-sub">One easing curve governs all interactive motion. Durations follow a clear scale. Hover over the box below to see the signature spring.</p>
+
+    <div class="ds-group-label">Signature Easing</div>
+    <div class="ds-canvas" style="display:flex;align-items:center;gap:32px;padding:40px">
+      <div class="motion-box"></div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:#170926;margin-bottom:4px">Spring — cubic-bezier(.16, 1, .3, 1)</div>
+        <div style="font-size:12px;color:#6b7280;line-height:1.7">Used on: hover-lift, product-card, testimonial-card, expand-card, pill-tab slider, faq-item, compliance-card-arrow, lang-dropdown. This single curve unifies all hover and transition motion across the system.</div>
+      </div>
+    </div>
+
+    <div class="ds-group-label">Duration Scale</div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.fast</span><span class="ds-token-value">0.15s</span><span class="ds-token-desc">Button hover shadow/transform (btn-cta-primary)</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.base</span><span class="ds-token-value">0.2s</span><span class="ds-token-desc">Nav chevron rotate, color transitions, lang switcher</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.moderate</span><span class="ds-token-value">0.3s</span><span class="ds-token-desc">glass-nav scroll effect, hover-lift, cert-badge</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.slow</span><span class="ds-token-value">0.4s</span><span class="ds-token-desc">FAQ answer reveal, pill-tab slider, tab panel transition</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.xslow</span><span class="ds-token-value">0.6–0.7s</span><span class="ds-token-desc">Scroll reveal (animate-on-scroll), stagger animations</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.ambient</span><span class="ds-token-value">3–9s</span><span class="ds-token-desc">glowPulse (3s), float (6s), ctaShine (6s), hero_slide (9s)</span></div>
+    <div class="ds-token-row"><span class="ds-token-name">duration.marquee</span><span class="ds-token-value">30s</span><span class="ds-token-desc">Trust logo infinite scroll</span></div>
+
+    <div class="ds-group-label" style="margin-top:24px">Named Keyframes</div>
+    <div class="ds-code">glowPulse   3s  ease-in-out  infinite   /* CTA button ambient glow */
+fadeInUp    0.7s ease-out  once       /* Scroll reveal entry */
+float       6s  ease-in-out infinite   /* Hero image levitation */
+marquee     30s linear      infinite   /* Trust logo strip */
+hero_slide  9s  ease-in-out infinite   /* Word shuffler */
+ctaShine    6s  ease-in-out infinite   /* CTA banner radial highlight */
+progressGrow 6s linear     forwards   /* Platform tab progress bar */
+fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
+
+    <div class="ds-group-label">Scroll Reveal</div>
+    <div class="ds-code">/* Add class, then observe with IntersectionObserver */
+.animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity .7s ease-out, transform .7s ease-out; }
+.animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+/* Staggered grid reveal */
+.animate-stagger > * { opacity: 0; transform: translateY(20px); }
+.animate-stagger.visible > *:nth-child(n) { animation: fadeInUpStagger .6s ease-out forwards; animation-delay: calc(n * .1s); }</div>
+  </section>
+
+  <!-- ─── BUTTONS ─── -->
+  <section id="buttons" class="ds-section">
+    <h2 class="ds-section-title">Buttons</h2>
+    <p class="ds-section-sub">Two systems exist in the codebase. The Tailwind inline pattern is the one actually deployed at scale — it's what ships in every navbar, hero, and footer CTA. Treat it as canonical.</p>
+
+    <div class="ds-callout ds-callout-warn">
+      <span>⚠</span>
+      <div><strong>Legacy class, low real usage:</strong> <code style="font-family:monospace;font-size:11px">.btn-cta-primary / .btn-cta-secondary</code> are defined in style.css but appear in only a single page today, and their hover shadow uses the vibrant accent <code style="font-family:monospace;font-size:11px">rgba(124,58,237,…)</code> instead of brand.500. The Tailwind inline pattern below (<code style="font-family:monospace;font-size:11px">rounded-btn bg-brand-500</code>) is what every navbar, hero, and footer CTA on the live site actually uses — standardize new work on it and let <code style="font-family:monospace;font-size:11px">.btn-cta-*</code> sunset.</div>
+    </div>
+
+    <div class="ds-group-label">Primary — canonical (Tailwind inline)</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+      <a href="#" class="px-5 py-2.5 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-sm font-semibold transition-colors">Se connecter</a>
+      <a href="#" class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all" style="background:#5e2d91">Essai gratuit</a>
+      <a href="#" style="opacity:.4;cursor:not-allowed" class="px-5 py-2.5 rounded-btn bg-brand-500 text-white text-sm font-semibold" >Disabled</a>
+    </div>
+    <div class="ds-code">&lt;a class="px-5 py-2.5 rounded-btn border-2 border-gray-200 text-gray-900 hover:bg-gray-50 text-sm font-semibold"&gt;Se connecter&lt;/a&gt;
+&lt;a class="px-5 py-2.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-md hover:shadow-lg"&gt;Essai gratuit&lt;/a&gt;</div>
+
+    <div class="ds-group-label">Large CTA (footer / hero band)</div>
+    <div class="ds-canvas ds-canvas-dark" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+      <a href="#" class="group inline-flex items-center gap-2.5" style="padding:16px 36px;border-radius:14px;background:#5e2d91;color:#fff;font-weight:700;font-size:15px;letter-spacing:-.01em;text-decoration:none">Commencez l'essai gratuit →</a>
+      <a href="#" style="padding:16px 36px;border-radius:14px;border:1px solid rgba(255,255,255,.25);color:#fff;font-weight:700;font-size:15px;text-decoration:none">Voir les tarifs</a>
+    </div>
+    <div class="ds-code">&lt;a style="border-radius:14px;background:#5e2d91" class="..."&gt;Commencez l'essai gratuit&lt;/a&gt;
+&lt;a style="border-radius:14px;border:1px solid rgba(255,255,255,.25)"&gt;Voir les tarifs&lt;/a&gt;</div>
+
+    <div class="ds-group-label">Legacy — .btn-cta-* (sunsetting)</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+      <a href="#" class="btn-cta-primary">Essai gratuit</a>
+      <a href="#" class="btn-cta-secondary">Voir une démo</a>
+    </div>
+
+    <div class="ds-group-label">Pricing card buttons</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+      <a href="#" style="display:inline-block;padding:14px 24px;border-radius:10px;font-weight:700;font-size:14px;border:2px solid #1e1b4b;color:#1e1b4b;text-decoration:none;transition:all .2s" onmouseover="this.style.background='#1e1b4b';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='#1e1b4b'">Commencer</a>
+      <a href="#" style="display:inline-block;padding:14px 24px;border-radius:10px;font-weight:700;font-size:14px;background:#1e1b4b;color:#fff;text-decoration:none">Essai gratuit 14 jours</a>
+      <a href="#" style="display:inline-block;padding:14px 24px;border-radius:10px;font-weight:600;font-size:14px;border:1px solid #e5e7eb;color:#1e1b4b;text-decoration:none">Contacter les ventes</a>
+    </div>
+  </section>
+
+  <!-- ─── BADGES ─── -->
+  <section id="badges" class="ds-section">
+    <h2 class="ds-section-title">Badges & Pills</h2>
+    <p class="ds-section-sub">Used for section labels, category tags, status indicators, and product identifiers.</p>
+
+    <div class="ds-group-label">Section Header Badges</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+      <div class="security-certs-header-badge">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <span>Enterprise Security</span>
+      </div>
+      <div class="testimonials-header-badge">Clients &amp; Success Stories</div>
+    </div>
+    <div class="ds-code">/* Section header badge (security / testimonials) */
+&lt;div class="security-certs-header-badge"&gt;...&lt;/div&gt;
+&lt;div class="testimonials-header-badge"&gt;...&lt;/div&gt;</div>
+
+    <div class="ds-group-label">Inline Pills</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+      <span class="ds-chip" style="background:#f5f3ff;color:#5e2d91;border:1px solid #ddd6fe">Rainbow Webinar</span>
+      <span class="ds-chip" style="background:#fdf2f8;color:#CF0072;border:1px solid #f9a8d4">Complet</span>
+      <span class="ds-chip" style="background:#f0f9ff;color:#0085CA;border:1px solid #bae6fd">Beta</span>
+      <span class="ds-chip" style="background:#f0fdf4;color:#34B233;border:1px solid #bbf7d0">Active</span>
+      <span class="ds-chip" style="background:#fff7ed;color:#FF4500;border:1px solid #fed7aa">Enterprise</span>
+    </div>
+
+    <div class="ds-group-label">Product Range Tags</div>
+    <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <span class="product-range-tag" style="color:#43379e;border-color:#43379e;background:#f0eeff">Webinar</span>
+      <span class="product-range-tag" style="color:#6e264a;border-color:#6e264a;background:#fdf2f8">Collaboration</span>
+      <span class="product-range-tag" style="color:#1e1b4b;border-color:#1e1b4b;background:#f0f0f8">Enterprise</span>
+    </div>
+  </section>
+
+  <!-- ─── FORM INPUTS ─── -->
+  <section id="inputs" class="ds-section">
+    <h2 class="ds-section-title">Form Inputs</h2>
+    <p class="ds-section-sub">Glass-style inputs with a focus ring using the brand purple. Consistent on all auth pages.</p>
+
+    <div class="ds-canvas">
+      <div style="max-width:400px;display:flex;flex-direction:column;gap:20px">
+        <div>
+          <label style="font-size:14px;font-weight:500;color:#6b7280;display:block;margin-bottom:6px">Email Address</label>
+          <div class="glass-input rounded-btn" style="padding:2px">
+            <input type="email" placeholder="you@company.com" style="width:100%;background:transparent;font-size:15px;padding:14px 16px;border-radius:10px;outline:none;color:#111827;font-family:'Google Sans',sans-serif">
+          </div>
+        </div>
+        <div>
+          <label style="font-size:14px;font-weight:500;color:#6b7280;display:block;margin-bottom:6px">Password</label>
+          <div class="glass-input rounded-btn" style="padding:2px">
+            <input type="password" placeholder="Create a strong password" style="width:100%;background:transparent;font-size:15px;padding:14px 16px;border-radius:10px;outline:none;color:#111827;font-family:'Google Sans',sans-serif">
+          </div>
+        </div>
+        <div>
+          <label style="font-size:14px;font-weight:500;color:#6b7280;display:block;margin-bottom:6px">Company Size</label>
+          <div class="glass-input rounded-btn" style="padding:2px">
+            <select style="width:100%;background:transparent;font-size:14px;padding:14px 16px;border-radius:10px;outline:none;color:#111827;font-family:'Google Sans',sans-serif;appearance:none;background-image:url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E);background-repeat:no-repeat;background-position:right 12px center">
+              <option value="">Select size</option>
+              <option>1–10</option>
+              <option>11–50</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">/* Resting */
+.glass-input { border: 1px solid #e5e7eb; background: #fff; border-radius: 10px; }
+/* Focus */
+.glass-input:focus-within { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,.12); }</div>
+  </section>
+
+  <!-- ─── CARDS ─── -->
+  <section id="cards" class="ds-section">
+    <h2 class="ds-section-title">Cards</h2>
+    <p class="ds-section-sub">Five distinct card types, each with specific surface treatments and motion behaviors.</p>
+
+    <div class="ds-group-label">Glass Card — .glass-card</div>
+    <div class="ds-canvas">
+      <div class="glass-card" style="padding:24px;border-radius:12px;max-width:320px">
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">Feature Card</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6">Backdrop blur, white/70, subtle brand border. Used for trust signals, feature highlights, and testimonials.</div>
+      </div>
+    </div>
+    <div class="ds-code">.glass-card {
+  background: rgba(255,255,255,.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(124,58,237,.06);
+  box-shadow: 0 8px 32px rgba(0,0,0,.03), inset 0 1px 0 rgba(255,255,255,.6);
+}</div>
+
+    <div class="ds-group-label">Stat Card — .stat-card (dark surface)</div>
+    <div class="ds-canvas ds-canvas-dark">
+      <div class="stat-card" style="max-width:220px;text-align:center">
+        <div style="font-size:2.5rem;font-weight:800;color:#d5bcf8;letter-spacing:-.03em">10K+</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:8px">Organizations worldwide</div>
+      </div>
+    </div>
+    <div class="ds-code">.stat-card {
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  padding: 32px;
+}</div>
+
+    <div class="ds-group-label">Product Range Card — .product-range-card</div>
+    <div class="ds-canvas" style="padding:24px">
+      <div class="product-range-card" style="max-width:300px">
+        <div class="product-range-card-image" style="background:#f5f3ff;display:flex;align-items:center;justify-content:center;height:120px">
+          <div style="font-size:40px">🎥</div>
+        </div>
+        <div class="product-range-card-content">
+          <div class="product-range-card-tags"><span class="product-range-tag" style="color:#43379e;border-color:#43379e;background:#f0eeff">Webinar</span></div>
+          <div class="product-range-card-title">Rainbow Webinar</div>
+          <div class="product-range-card-subtitle">Professional webinar platform</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-group-label">FAQ Card — .faq-card</div>
+    <div class="ds-canvas">
+      <div style="max-width:560px">
+        <div class="faq-card open" style="border-color:#5e2d91">
+          <button class="faq-card-button">
+            <span class="faq-card-question">Can I host up to 1,000 participants?</span>
+            <svg class="faq-card-chevron" style="transform:rotate(180deg)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-card-answer-wrapper" style="max-height:200px">
+            <div class="faq-card-answer-inner"><div class="faq-card-answer-border"><p class="faq-card-answer">Yes — the Enterprise plan supports up to 1,000 live participants with cloud recording included.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── NAVIGATION ─── -->
+  <section id="navigation" class="ds-section">
+    <h2 class="ds-section-title">Navigation</h2>
+    <p class="ds-section-sub">Frosted glass navbar fixed at top. 64px height. Mega-menu on desktop, accordion on mobile.</p>
+
+    <div class="ds-canvas" style="padding:0;overflow:hidden;border-radius:12px">
+      <nav style="background:rgba(255,255,255,.75);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(124,58,237,.06);height:64px;display:flex;align-items:center;padding:0 24px;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:28px;height:28px;background:linear-gradient(135deg,#5e2d91,#7c3aed);border-radius:7px"></div>
+          <span style="font-size:15px;font-weight:700;color:#1e1b4b">Rainbow</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:28px">
+          <span style="font-size:13px;color:#6b7280;font-weight:500;cursor:pointer">Products ▾</span>
+          <span style="font-size:13px;color:#6b7280;font-weight:500;cursor:pointer">Tarifs ▾</span>
+          <span style="font-size:13px;color:#6b7280;font-weight:500;cursor:pointer">Ressources ▾</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:13px;color:#6b7280;cursor:pointer">EN ▾</span>
+          <a href="#" style="padding:9px 18px;border-radius:10px;border:2px solid #e5e7eb;font-size:13px;font-weight:600;color:#111827;text-decoration:none">Se connecter</a>
+          <a href="#" style="padding:9px 18px;border-radius:10px;background:#5e2d91;font-size:13px;font-weight:600;color:#fff;text-decoration:none">Essai gratuit</a>
+        </div>
+      </nav>
+    </div>
+    <div class="ds-code">.glass-nav {
+  background: rgba(255,255,255,.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(124,58,237,.06);
+  height: 64px;   /* h-16 */
+}
+.glass-nav.scrolled { box-shadow: 0 1px 12px rgba(30,27,75,.06); }</div>
+  </section>
+
+  <!-- ─── STEPPER ─── -->
+  <section id="stepper" class="ds-section">
+    <h2 class="ds-section-title">Step Indicator</h2>
+    <p class="ds-section-sub">Used in multi-step forms (register, onboarding). Active step is a pill, completed steps are filled circles.</p>
+
+    <div class="ds-canvas" style="display:flex;flex-direction:column;gap:24px">
+      <div>
+        <div style="font-size:11px;color:#9ca3af;margin-bottom:12px">Step 1 of 3 — active</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:28px;height:10px;background:#5e2d91;border-radius:5px"></div>
+          <div style="width:10px;height:10px;background:#d1d5db;border-radius:50%"></div>
+          <div style="width:10px;height:10px;background:#d1d5db;border-radius:50%"></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:#9ca3af;margin-bottom:12px">Step 2 of 3 — one done</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:10px;height:10px;background:#5e2d91;border-radius:50%"></div>
+          <div style="width:28px;height:10px;background:#5e2d91;border-radius:5px"></div>
+          <div style="width:10px;height:10px;background:#d1d5db;border-radius:50%"></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:#9ca3af;margin-bottom:12px">Step 3 of 3 — all done</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:10px;height:10px;background:#5e2d91;border-radius:50%"></div>
+          <div style="width:10px;height:10px;background:#5e2d91;border-radius:50%"></div>
+          <div style="width:28px;height:10px;background:#5e2d91;border-radius:5px"></div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">.step-dot { width:10px; height:10px; border-radius:50%; background:#d1d5db; transition:all .3s; }
+.step-dot.active { background:#5e2d91; width:28px; border-radius:5px; }
+.step-dot.done { background:#5e2d91; }</div>
+  </section>
+
+  <!-- ─── TABS ─── -->
+  <section id="tabs" class="ds-section">
+    <h2 class="ds-section-title">Pill Tabs</h2>
+    <p class="ds-section-sub">Sliding pill background over a track. Used for product use-case switchers (index.html, webinar.html) — not for the billing toggle, which is a separate switch component (below).</p>
+
+    <div class="ds-canvas" style="display:flex;gap:24px;align-items:center">
+      <div class="pill-tab-container" style="position:relative">
+        <div class="pill-slider" style="left:6px;width:80px"></div>
+        <button class="pill-tab-btn text-active">Messagerie</button>
+        <button class="pill-tab-btn text-inactive">Visio</button>
+      </div>
+    </div>
+    <div class="ds-code">.pill-tab-container { background:#fff; border:1px solid rgba(229,231,235,.6); border-radius:12px; padding:6px; }
+.pill-slider { background:#f3f4f6; border-radius:8px; transition:left .4s cubic-bezier(.16,1,.3,1), width .4s cubic-bezier(.16,1,.3,1); }
+.pill-tab-btn.text-active { color:#111827; font-weight:600; }
+.pill-tab-btn.text-inactive { color:#9ca3af; }</div>
+  </section>
+
+  <!-- ─── TOGGLE SWITCH ─── -->
+  <section id="toggle" class="ds-section">
+    <h2 class="ds-section-title">Toggle Switch</h2>
+    <p class="ds-section-sub">The monthly/yearly billing control on the pricing page. An iOS-style checkbox switch, not a pill tab. Rainbow Collaboration and Rainbow Webinar each get their own instance; a shared <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">toggleBilling()</code> call keeps every <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.billing-toggle-input</code> on the page in sync.</p>
+
+    <div class="ds-canvas" style="display:flex;align-items:center;gap:12px">
+      <span style="font-size:14px;font-weight:700;color:#111827">Mensuel</span>
+      <label style="position:relative;display:inline-flex;align-items:center;cursor:pointer">
+        <input type="checkbox" style="position:absolute;opacity:0;width:1px;height:1px">
+        <div style="width:56px;height:28px;background:#e5e7eb;border-radius:9999px;box-shadow:inset 0 1px 2px rgba(0,0,0,.06);position:relative">
+          <div style="position:absolute;top:2px;left:2px;width:24px;height:24px;background:#fff;border:1px solid #d1d5db;border-radius:9999px;transition:all .2s"></div>
+        </div>
+      </label>
+      <span style="font-size:14px;font-weight:500;color:#6b7280">Annuel <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(94,45,145,.1);color:#5e2d91;font-weight:700;margin-left:4px;padding:2px 8px;border-radius:9999px;font-size:11px">-20%</span></span>
+    </div>
+    <div class="ds-code">&lt;input type="checkbox" class="billing-toggle-input sr-only peer" onchange="toggleBilling(this)"&gt;
+&lt;div class="w-14 h-7 bg-gray-200 rounded-full peer
+            peer-checked:after:translate-x-full peer-checked:bg-brand-500
+            after:content-[''] after:absolute after:top-[2px] after:left-[2px]
+            after:bg-white after:border after:border-gray-300 after:rounded-full
+            after:h-6 after:w-6 after:transition-all shadow-inner"&gt;&lt;/div&gt;
+
+/* toggleBilling(source) syncs every .billing-toggle-input on the page
+   and swaps .billing-label-monthly / .billing-label-yearly font weight */</div>
+  </section>
+
+  <!-- ─── FAQ ─── -->
+  <section id="faq" class="ds-section">
+    <h2 class="ds-section-title">FAQ</h2>
+    <p class="ds-section-sub">Two implementations exist across the project — <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.faq-card</code> (new, Laurenn style) and <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.faq-item</code> (older). Consolidate to <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.faq-card</code>.</p>
+    <div class="ds-callout ds-callout-warn"><span>⚠</span><div>Two different FAQ component implementations exist. Standardize on <code style="font-family:monospace;font-size:11px">.faq-card</code> system going forward.</div></div>
+
+    <div class="ds-canvas">
+      <div class="faq-items" style="max-width:560px">
+        <div class="faq-card">
+          <button class="faq-card-button">
+            <span class="faq-card-question" style="font-size:15px">What happens after the 14-day trial?</span>
+            <svg class="faq-card-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+        </div>
+        <div class="faq-card open" style="border-color:#5e2d91">
+          <button class="faq-card-button">
+            <span class="faq-card-question" style="font-size:15px">Can I cancel at any time?</span>
+            <svg class="faq-card-chevron" style="transform:rotate(180deg)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-card-answer-wrapper" style="max-height:200px">
+            <div class="faq-card-answer-inner"><div class="faq-card-answer-border"><p class="faq-card-answer" style="font-size:14px">Yes, you can cancel your subscription at any time. No lock-in periods.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SOLUTION CARDS ─── -->
+  <section id="solution-cards" class="ds-section">
+    <h2 class="ds-section-title">Solution Cards</h2>
+    <p class="ds-section-sub">Introduced in the registration flow (Step 1). Three-option selection with animated check, disabled Continue button until selection.</p>
+
+    <div class="ds-canvas" style="max-width:500px">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:2px solid #7c3aed;border-radius:12px;background:#f5f3ff;box-shadow:0 0 0 3px rgba(124,58,237,.10);cursor:pointer">
+          <div style="width:44px;height:44px;border-radius:10px;background:#f5f3ff;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+          </div>
+          <div style="flex:1">
+            <div style="font-weight:600;color:#170926;font-size:14px">Rainbow Webinar</div>
+            <div style="font-size:12px;color:#6b7280;margin-top:2px">Webinaires professionnels jusqu'à 1 000 participants</div>
+          </div>
+          <div style="width:22px;height:22px;border-radius:50%;background:#7c3aed;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:2px solid #e5e7eb;border-radius:12px;background:#fff;cursor:pointer">
+          <div style="width:44px;height:44px;border-radius:10px;background:#eef2ff;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#4f46e5" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div style="flex:1">
+            <div style="font-weight:600;color:#170926;font-size:14px">Rainbow Collaboration</div>
+            <div style="font-size:12px;color:#6b7280;margin-top:2px">Messagerie, visioconférence et partage de fichiers</div>
+          </div>
+          <div style="width:22px;height:22px;border-radius:50%;border:2px solid #d1d5db"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HERO PATTERN ─── -->
+  <section id="hero" class="ds-section">
+    <h2 class="ds-section-title">Hero Section Pattern</h2>
+    <p class="ds-section-sub">Full-bleed gradient background, decorative radial blobs, centered content, word shuffler animation, dual CTA.</p>
+
+    <div class="ds-canvas" style="padding:0;overflow:hidden">
+      <div class="hero-gradient" style="padding:56px 40px;position:relative;text-align:center">
+        <div class="blob blob-1" style="opacity:.5"></div>
+        <div style="position:relative;z-index:10">
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:99px;background:rgba(94,45,145,.08);border:1px solid rgba(94,45,145,.2);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5e2d91;margin-bottom:20px">New — Rainbow Webinar 3.0</div>
+          <h1 style="font-size:2.5rem;font-weight:800;color:#170926;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px">The platform for<br><span class="gradient-text">better webinaires</span></h1>
+          <p style="font-size:15px;color:#6b7280;max-width:420px;margin:0 auto 28px;line-height:1.65">Connect your teams with secure messaging, HD video, and enterprise telephony.</p>
+          <div style="display:flex;gap:12px;justify-content:center">
+            <a href="#" class="btn-cta-primary">Essai gratuit</a>
+            <a href="#" class="btn-cta-secondary">Voir une démo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">/* Background */
+.hero-gradient { background: linear-gradient(180deg, #fafafe 0%, #f5f3ff 40%, #ede9fe 70%, #fafafe 100%); }
+
+/* Anatomy: badge → h1 → sub → dual CTA → scroll indicator */
+/* Word shuffler: .hero-word-loader > .hero-words (CSS animation hero_slide 9s) */
+/* Blobs: .blob-1 (purple), .blob-2 (indigo), .blob-3 (violet) — position:absolute */</div>
+  </section>
+
+  <!-- ─── STATS PATTERN ─── -->
+  <section id="stats" class="ds-section">
+    <h2 class="ds-section-title">Stats Section Pattern</h2>
+    <p class="ds-section-sub">Dark background with subtle dot texture and radial highlights. Three colored stat numbers.</p>
+
+    <div class="ds-canvas" style="padding:0;overflow:hidden;border-radius:12px">
+      <div class="stats-bg" style="padding:48px 40px;position:relative">
+        <div style="position:relative;z-index:10;display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+          <div class="stat-card" style="text-align:center">
+            <div class="stats-number-1" style="font-size:2.5rem;font-weight:800;letter-spacing:-.03em">10K+</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:8px">Organizations</div>
+          </div>
+          <div class="stat-card" style="text-align:center">
+            <div class="stats-number-2" style="font-size:2.5rem;font-weight:800;letter-spacing:-.03em">50M+</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:8px">Users worldwide</div>
+          </div>
+          <div class="stat-card" style="text-align:center">
+            <div class="stats-number-3" style="font-size:2.5rem;font-weight:800;letter-spacing:-.03em">99.9%</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:8px">Uptime SLA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">.stats-bg { background: linear-gradient(135deg, #0f0b2e 0%, #1e1b4b 30%, #312e81 60%, #1e1b4b 100%); }
+.stats-number-1 { color: #d5bcf8; }  /* purple */
+.stats-number-2 { color: #fdb0cc; }  /* pink */
+.stats-number-3 { color: #a6c6f9; }  /* blue */</div>
+  </section>
+
+  <!-- ─── PRICING PATTERN ─── -->
+  <section id="pricing" class="ds-section">
+    <h2 class="ds-section-title">Pricing Cards Pattern</h2>
+    <p class="ds-section-sub">3-column layout on desktop. Center card (Pro) is highlighted with brand-50/40 gradient and inset shadow. Free card uses outline button, Pro uses filled, Enterprise uses subtle outline.</p>
+
+    <div class="ds-canvas">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #e5e7eb;border-radius:16px;overflow:hidden">
+        <!-- Free -->
+        <div style="padding:28px;border-right:1px dashed #e5e7eb;display:flex;flex-direction:column">
+          <div style="font-weight:700;font-size:18px;color:#1e1b4b;margin-bottom:4px">Débutant</div>
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:20px">Pour commencer</div>
+          <div style="font-size:2.5rem;font-weight:800;color:#1e1b4b;letter-spacing:-.03em;margin-bottom:4px">0$</div>
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:24px">/mois</div>
+          <div style="border-top:1px dashed #e5e7eb;margin-bottom:16px;padding-top:16px;flex:1">
+            <div style="font-size:13px;color:#4b5563;margin-bottom:8px;display:flex;gap:8px;align-items:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg>Jusqu'à 50 participants</div>
+            <div style="font-size:13px;color:#4b5563;margin-bottom:8px;display:flex;gap:8px;align-items:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg>Webinaires de 60 min</div>
+          </div>
+          <a href="#" style="display:block;width:100%;padding:13px;text-align:center;border-radius:10px;border:2px solid #1e1b4b;color:#1e1b4b;font-weight:700;font-size:13px;text-decoration:none">Commencer</a>
+        </div>
+        <!-- Pro (highlighted) -->
+        <div style="padding:28px;border-right:1px dashed #e5e7eb;display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(245,243,255,.4),#fff);position:relative;box-shadow:inset 0 1px 0 0 rgba(124,58,237,.08)">
+          <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:#5e2d91;color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:0 0 8px 8px">Populaire</div>
+          <div style="font-weight:700;font-size:18px;color:#1e1b4b;margin-bottom:4px;margin-top:16px">Professionnel</div>
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:20px">Pour les équipes</div>
+          <div style="font-size:2.5rem;font-weight:800;color:#1e1b4b;letter-spacing:-.03em;margin-bottom:4px">24$</div>
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:24px">/mois</div>
+          <div style="border-top:1px dashed #e5e7eb;margin-bottom:16px;padding-top:16px;flex:1">
+            <div style="font-size:13px;color:#4b5563;margin-bottom:8px;display:flex;gap:8px;align-items:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg>Jusqu'à 250 participants</div>
+            <div style="font-size:13px;color:#4b5563;margin-bottom:8px;display:flex;gap:8px;align-items:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg>Enregistrement cloud</div>
+          </div>
+          <a href="#" style="display:block;width:100%;padding:13px;text-align:center;border-radius:10px;background:#1e1b4b;color:#fff;font-weight:700;font-size:13px;text-decoration:none;box-shadow:0 4px 12px rgba(30,27,75,.25)">Essai gratuit 14 jours</a>
+        </div>
+        <!-- Enterprise -->
+        <div style="padding:28px;display:flex;flex-direction:column">
+          <div style="font-weight:700;font-size:18px;color:#1e1b4b;margin-bottom:4px">Entreprise</div>
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:20px">Sur mesure</div>
+          <div style="font-size:2.5rem;font-weight:800;color:#1e1b4b;letter-spacing:-.03em;margin-bottom:4px">49$</div>
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:24px">/mois</div>
+          <div style="border-top:1px dashed #e5e7eb;margin-bottom:16px;padding-top:16px;flex:1">
+            <div style="font-size:13px;color:#4b5563;margin-bottom:8px;display:flex;gap:8px;align-items:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#1e1b4b" stroke-width="2.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg>Jusqu'à 1 000 participants</div>
+            <div style="font-size:13px;color:#4b5563;margin-bottom:8px;display:flex;gap:8px;align-items:center"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#1e1b4b" stroke-width="2.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg>SSO SAML / OIDC</div>
+          </div>
+          <a href="#" style="display:block;width:100%;padding:13px;text-align:center;border-radius:10px;border:1px solid #e5e7eb;color:#1e1b4b;font-weight:600;font-size:13px;text-decoration:none">Contacter les ventes</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA BANNER ─── -->
+  <section id="cta-banner" class="ds-section">
+    <h2 class="ds-section-title">CTA Banner Pattern</h2>
+    <p class="ds-section-sub">Radial gradient background (top-left purple → bottom-right pink), centered content, dual CTA, "no credit card" footnote.</p>
+
+    <div class="ds-canvas" style="padding:0;overflow:hidden;border-radius:12px">
+      <div class="sp-cta-banner">
+        <div class="sp-cta-content">
+          <p class="sp-cta-h2">Prêt à transformer vos événements ?</p>
+          <p class="sp-cta-sub">Rejoignez 10 000+ organisations qui font confiance à Rainbow pour leurs communications d'entreprise.</p>
+          <div class="sp-cta-actions">
+            <a href="#" class="btn-cta-primary">Commencer gratuitement →</a>
+            <a href="#" class="btn-cta-secondary">Voir une démo</a>
+          </div>
+          <p class="sp-cta-note">Essai gratuit de 14 jours · Sans carte bancaire · Annulation à tout moment</p>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">.sp-cta-banner {
+  border-radius: 24px;
+  background-image:
+    radial-gradient(ellipse 100% 100% at 0% 0%,   rgba(190,150,240,.35) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 100% at 100% 100%, rgba(210,110,200,.32) 0%, transparent 70%);
+  box-shadow: 0 2px 60px rgba(100,60,160,.08);
+}</div>
+  </section>
+
+  <!-- ─── MARQUEE ─── -->
+  <section id="marquee" class="ds-section">
+    <h2 class="ds-section-title">Trust Marquee Pattern</h2>
+    <p class="ds-section-sub">Infinite horizontal scroll of trust logos. Gradient fade mask on left/right edges. 30s duration, linear easing.</p>
+
+    <div class="ds-canvas">
+      <div class="marquee-container" style="padding:16px 0">
+        <div class="animate-marquee" style="display:flex;gap:40px;white-space:nowrap;align-items:center">
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">ALCATEL</span>
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">ENTERPRISE</span>
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">TRUSTED BY</span>
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">10,000+</span>
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">ORGANISATIONS</span>
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">ALCATEL</span>
+          <span style="font-size:18px;font-weight:700;color:#d1d5db;letter-spacing:.05em">ENTERPRISE</span>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">.marquee-container {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+.animate-marquee { animation: marquee 30s linear infinite; }
+/* Duplicate the logo list inside the element to create seamless loop */</div>
+  </section>
+
+  <!-- ─── FOOTER PATTERN ─── -->
+  <section id="footer-pattern" class="ds-section">
+    <h2 class="ds-section-title">Footer Pattern — Mega Footer</h2>
+    <p class="ds-section-sub">Rolled out to every page in a single pass (Jul 2026) — one CTA band plus link grid, replacing what used to be a plain 5-column footer per page. Three ambient radial washes over the stats-section gradient give it depth without a texture image.</p>
+
+    <div class="ds-canvas ds-canvas-dark" style="border-radius:12px;overflow:hidden;padding:0">
+      <div class="footer-premium" style="padding:56px 32px 32px;position:relative">
+        <!-- CTA band -->
+        <div style="text-align:center;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:32px">
+          <img src="/images/rainbow-logo.png" alt="" style="width:44px;height:44px;object-fit:contain;margin:0 auto 16px">
+          <div style="color:#fff;font-weight:600;font-size:20px;letter-spacing:-.02em;max-width:420px;margin:0 auto 8px">La prochaine conversation de votre équipe mérite une infrastructure qui la protège.</div>
+          <div style="color:rgba(255,255,255,.65);font-size:13px;max-width:340px;margin:0 auto 20px">Essayez nos solutions Rainbow gratuitement pendant 30 jours. Sans carte bancaire.</div>
+          <div style="display:flex;gap:12px;justify-content:center">
+            <span style="padding:11px 22px;border-radius:14px;background:#5e2d91;color:#fff;font-weight:700;font-size:13px">Commencez l'essai gratuit</span>
+            <span style="padding:11px 22px;border-radius:14px;border:1px solid rgba(255,255,255,.25);color:#fff;font-weight:700;font-size:13px">Voir les tarifs</span>
+          </div>
+        </div>
+        <!-- Link columns -->
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px;margin-bottom:28px">
+          <div>
+            <img src="/images/ale_white.png" alt="Alcatel-Lucent Enterprise" style="height:28px;width:auto;opacity:.9;margin-bottom:10px">
+            <div style="font-size:12px;color:rgba(255,255,255,.4);line-height:1.6">ALE International<br>32 avenue Kléber<br>92700 Colombes, France</div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px">Solutions</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.55);line-height:2">Rainbow Collaboration<br>Rainbow Webinar<br>Tarifs<br>API</div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px">Developers</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.55);line-height:2">Guide technique<br>Code samples<br>Intégrations<br>Forum dev</div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px">Company</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.55);line-height:2">A propos<br>Partenaires<br>Contact</div>
+          </div>
+        </div>
+        <!-- Bottom bar -->
+        <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:18px;display:flex;justify-content:space-between;align-items:center">
+          <div style="display:flex;gap:8px">
+            <div style="width:26px;height:26px;border-radius:9999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)"></div>
+            <div style="width:26px;height:26px;border-radius:9999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)"></div>
+          </div>
+          <div style="display:flex;gap:14px;font-size:11px;color:rgba(255,255,255,.4)"><span>Privacy</span><span>Terms</span><span>Cookies</span><span>GDPR</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">.footer-premium { background: linear-gradient(180deg, #0f0b2e 0%, #1e1b4b 100%); }
+/* + 3 layered radial-gradient washes (purple top, pink bottom-right, purple bottom-left)
+   + 1 blurred brand-500/25 focal glow centered behind the CTA heading */
+
+/* Anatomy, top to bottom */
+/* 1. CTA band  — icon mark, h2, sub, dual CTA (same buttons as Large CTA above)   */
+/* 2. Link grid — brand/address column (1.4fr) + Solutions / Developers / Company */
+/* 3. Bottom bar — social icons (left) · legal links (right), 1px white/10 rule   */
+/* 4. Trademark line — 11px, white/40, full ALE/Nokia attribution text            */</div>
+  </section>
+
+  <!-- ─── ISSUES ─── -->
+  <section id="issues" class="ds-section">
+    <h2 class="ds-section-title">Issues to Fix</h2>
+    <p class="ds-section-sub">Design debt found during the audit, prioritized by user impact.</p>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="ds-callout ds-callout-error">
+        <span style="font-weight:700;flex-shrink:0">P0</span>
+        <div><strong>Dual brand purple.</strong> <code style="font-family:monospace;font-size:11px">#5e2d91</code> vs <code style="font-family:monospace;font-size:11px">#7c3aed</code> are used interchangeably as brand.500. Standardize in Tailwind config across ALL pages: brand.500 = <code style="font-family:monospace;font-size:11px">#5e2d91</code>, add brand.vibrant = <code style="font-family:monospace;font-size:11px">#7c3aed</code> for glass borders and glow effects.</div>
+      </div>
+      <div class="ds-callout ds-callout-error">
+        <span style="font-weight:700;flex-shrink:0">P0</span>
+        <div><strong>Two FAQ implementations.</strong> <code style="font-family:monospace;font-size:11px">.faq-item</code> (style.css, older) and <code style="font-family:monospace;font-size:11px">.faq-card</code> (style.css, Laurenn style) coexist. Migrate all pages to .faq-card and remove .faq-item.</div>
+      </div>
+      <div class="ds-callout ds-callout-warn">
+        <span style="font-weight:700;flex-shrink:0">P1</span>
+        <div><strong>Two button systems.</strong> <code style="font-family:monospace;font-size:11px">.btn-cta-primary</code> (border-radius 12px, shadow) and Tailwind inline buttons (<code style="font-family:monospace;font-size:11px">rounded-btn</code>, 10px) are both used — but the Tailwind pattern is the one actually shipping site-wide. Standardize on <code style="font-family:monospace;font-size:11px">rounded-btn bg-brand-500</code> and let .btn-cta-primary sunset rather than the reverse.</div>
+      </div>
+      <div class="ds-callout ds-callout-warn">
+        <span style="font-weight:700;flex-shrink:0">P1</span>
+        <div><strong>Border radius inconsistency.</strong> Tailwind classes (rounded-xl = 12px) mixed with raw CSS (border-radius: 20px, 24px). Create a shared token map or consolidate custom values into Tailwind config.</div>
+      </div>
+      <div class="ds-callout ds-callout-warn">
+        <span style="font-weight:700;flex-shrink:0">P1</span>
+        <div><strong>No CSS custom properties.</strong> All tokens are scattered across inline Tailwind config per-page and raw CSS. Extract into a <code style="font-family:monospace;font-size:11px">:root {}</code> token block in style.css to enable single-source theming.</div>
+      </div>
+      <div class="ds-callout ds-callout-info">
+        <span style="font-weight:700;flex-shrink:0">P2</span>
+        <div><strong>SVG icons are hardcoded inline.</strong> No central icon system. Consider an SVG sprite or a small icon component map to enable consistent sizing and color via stroke.</div>
+      </div>
+      <div class="ds-callout ds-callout-info">
+        <span style="font-weight:700;flex-shrink:0">P2</span>
+        <div><strong>Sparse sm: breakpoints.</strong> Most responsive jumps go mobile → md:/lg:, skipping the 640px range. This creates jarring transitions on tablet. Add sm: steps to key grid layouts.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DO / DON'T ─── -->
+  <section id="dos-donts" class="ds-section">
+    <h2 class="ds-section-title">Do / Don't</h2>
+    <p class="ds-section-sub">Core principles in practice.</p>
+
+    <div class="ds-do-dont">
+      <div class="ds-do">
+        <div class="ds-do-header">✓ Do</div>
+        <div class="ds-do-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Use spring easing for all hover transitions</div>
+          <div style="font-size:12px;color:#6b7280"><code style="font-size:11px">cubic-bezier(.16,1,.3,1)</code> is the brand signature. Use it on every lift, expand, and slide.</div>
+        </div>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-header">✗ Don't</div>
+        <div class="ds-dont-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Mix ease-in-out and linear for UI transitions</div>
+          <div style="font-size:12px;color:#6b7280">Reserve <code style="font-size:11px">linear</code> for ambient animations only (marquee, glow pulse). Never for interactive states.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-do-dont">
+      <div class="ds-do">
+        <div class="ds-do-header">✓ Do</div>
+        <div class="ds-do-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Use <code style="font-size:11px">#5e2d91</code> for all primary brand moments</div>
+          <div style="font-size:12px;color:#6b7280">Logo area, primary CTA, word animation, section badges. This is the ALE brand color.</div>
+        </div>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-header">✗ Don't</div>
+        <div class="ds-dont-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Use <code style="font-size:11px">#7c3aed</code> as the primary brand color</div>
+          <div style="font-size:12px;color:#6b7280">This vibrant purple is for glass borders, glow effects, and interactive accent states — not brand identity.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-do-dont">
+      <div class="ds-do">
+        <div class="ds-do-header">✓ Do</div>
+        <div class="ds-do-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Use letter-spacing: -0.03em on all headings</div>
+          <div style="font-size:12px;color:#6b7280">Tight tracking at large sizes is a design hallmark that makes headings feel premium and intentional.</div>
+        </div>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-header">✗ Don't</div>
+        <div class="ds-dont-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Add decorative elements without purpose</div>
+          <div style="font-size:12px;color:#6b7280">Blobs, gradients, and shine effects exist to create depth. If they don't serve the content, remove them.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-do-dont">
+      <div class="ds-do">
+        <div class="ds-do-header">✓ Do</div>
+        <div class="ds-do-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Tint shadows with brand purple</div>
+          <div style="font-size:12px;color:#6b7280"><code style="font-size:11px">rgba(124,58,237,…)</code> not <code style="font-size:11px">rgba(0,0,0,…)</code> for elevated components. Keeps the palette cohesive.</div>
+        </div>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-header">✗ Don't</div>
+        <div class="ds-dont-body">
+          <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Use pure black shadows on colored surfaces</div>
+          <div style="font-size:12px;color:#6b7280">Black shadows on purple/indigo backgrounds look muddy. Purple-tinted shadows keep cards feeling part of the system.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       OPERATIONS DOCUMENTATION — architecture, CMS, leads, content ops, SEO
+       Grounded in the live codebase (server.js, tools/build-pages.js, pages/*.html)
+       rather than an idealized target state. Gaps are called out, not hidden.
+       ═══════════════════════════════════════════════════════════ -->
+
+  <!-- ─── 1. ARCHITECTURE DOCUMENTATION ─── -->
+  <section id="architecture" class="ds-section">
+    <h2 class="ds-section-title">Architecture Documentation</h2>
+    <p class="ds-section-sub">How the site is actually built and served today — two parallel runtimes, three real third-party integrations, and no CI/CD.</p>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">1.1</span><span class="ds-group-title">System Architecture Diagram</span></div>
+      <p class="ds-group-sub">Two independent paths exist side by side: a static build that ships to GitHub Pages, and an Express server used for local/preview work. They serve the same source files but nothing keeps them in sync automatically.</p>
+      <div class="ds-flow" style="margin-bottom:14px">
+        <div class="ds-flow-step"><div class="ds-flow-step-label">Source</div><div class="ds-flow-step-title">index.html + pages/*.html</div><div class="ds-flow-step-sub">Hand-written HTML/Tailwind</div></div>
+        <div class="ds-flow-arrow">→</div>
+        <div class="ds-flow-step"><div class="ds-flow-step-label">Build</div><div class="ds-flow-step-title">tools/build-pages.js</div><div class="ds-flow-step-sub">Rewrites paths for /store/ base</div></div>
+        <div class="ds-flow-arrow">→</div>
+        <div class="ds-flow-step accent"><div class="ds-flow-step-label">Production</div><div class="ds-flow-step-title">docs/ → GitHub Pages</div><div class="ds-flow-step-sub">elmansouri-port.github.io/store/</div></div>
+      </div>
+      <div class="ds-flow">
+        <div class="ds-flow-step"><div class="ds-flow-step-label">Runtime (dev/preview)</div><div class="ds-flow-step-title">server.js — Express</div><div class="ds-flow-step-sub">helmet, cors, i18n locale detection</div></div>
+        <div class="ds-flow-arrow">→</div>
+        <div class="ds-flow-step dashed"><div class="ds-flow-step-label">API</div><div class="ds-flow-step-title">POST /api/contact</div><div class="ds-flow-step-sub">Stub — validates, saves nothing</div></div>
+      </div>
+      <div class="ds-flow" style="margin-top:14px">
+        <div class="ds-flow-step"><div class="ds-flow-step-label">Browser</div><div class="ds-flow-step-title">Stripe Elements</div><div class="ds-flow-step-sub">UI-only — no charge endpoint exists</div></div>
+        <div class="ds-flow-arrow">·</div>
+        <div class="ds-flow-step"><div class="ds-flow-step-label">Browser → CRM</div><div class="ds-flow-step-title">Eloqua (direct POST)</div><div class="ds-flow-step-sub">partenaires.html only — live</div></div>
+        <div class="ds-flow-arrow">·</div>
+        <div class="ds-flow-step"><div class="ds-flow-step-label">CMS-ish</div><div class="ds-flow-step-title">Zendesk Help Center API</div><div class="ds-flow-step-sub">tarifs.html FAQ — live, read-only</div></div>
+      </div>
+      <div class="ds-callout ds-callout-info" style="margin-top:16px"><span>ℹ</span><div>Source of truth for this diagram should move to draw.io/Figma/Excalidraw as the system grows past three integrations — this inline version is the living snapshot, not the canonical artifact.</div></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">1.2</span><span class="ds-group-title">Sitemap</span></div>
+      <p class="ds-group-sub">Every route registered in server.js, with the file it serves. Three routes point at files that don't exist in the repo.</p>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>URL</th><th>Page type</th><th>Served from</th><th>Parent</th></tr></thead>
+        <tbody>
+          <tr><td><code>/</code></td><td>Home</td><td>index.html</td><td>—</td></tr>
+          <tr><td><code>/products</code></td><td>Product hub</td><td>pages/products.html</td><td>/</td></tr>
+          <tr><td><code>/products/collaboration</code></td><td>Product detail</td><td>pages/collaboration.html</td><td>/products</td></tr>
+          <tr><td><code>/products/webinar</code></td><td>Product detail</td><td>pages/webinar.html</td><td>/products</td></tr>
+          <tr><td><code>/products/webinar/pricing</code></td><td>Pricing</td><td><span class="ds-status-no">✗ pages/tarif-webinar.html — missing</span></td><td>/products/webinar</td></tr>
+          <tr><td><code>/products/collaboration/pricing</code></td><td>Pricing</td><td><span class="ds-status-no">✗ pages/tarif-collaboration.html — missing</span></td><td>/products/collaboration</td></tr>
+          <tr><td><code>/tarifs</code></td><td>Pricing</td><td>pages/tarifs.html</td><td>/</td></tr>
+          <tr><td><code>/tarif1</code></td><td>Pricing (legacy)</td><td><span class="ds-status-no">✗ pages/tarif1.html — missing</span></td><td>/tarifs</td></tr>
+          <tr><td><code>/blog</code></td><td>Blog index</td><td>pages/blog.html</td><td>/</td></tr>
+          <tr><td><code>/blog/the-power-of-rainbow</code></td><td>Blog article</td><td>pages/blog/the-power-of-rainbow.html</td><td>/blog</td></tr>
+          <tr><td><code>/faq</code></td><td>FAQ</td><td>pages/faq.html</td><td>/</td></tr>
+          <tr><td><code>/form-al</code></td><td>Lead-gen form</td><td>pages/form-ale.html</td><td>/</td></tr>
+          <tr><td><code>/contact</code></td><td>Contact</td><td>pages/contact.html</td><td>/</td></tr>
+          <tr><td><code>/partenaires</code></td><td>Partner program</td><td>pages/partenaires.html</td><td>/</td></tr>
+          <tr><td><code>/trouver-un-partenaire</code></td><td>Partner locator</td><td>pages/trouver-un-partenaire.html</td><td>/</td></tr>
+          <tr><td><code>/healthz</code></td><td>Health check</td><td>JSON status</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ds-callout ds-callout-error" style="margin-top:14px"><span>⚠</span><div><strong>Three dead routes.</strong> <code>/products/webinar/pricing</code>, <code>/products/collaboration/pricing</code>, and <code>/tarif1</code> are wired in server.js but their target files don't exist — confirmed by <code>npm run build:pages</code> logging <code>skip (missing)</code> for all three. Either build the pages or remove the routes; see the Redirect Map in Section 5.6.</div></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">1.3</span><span class="ds-group-title">Tech Stack</span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Layer</th><th>Technology</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td>Frontend</td><td>Static HTML + Tailwind CSS (CDN)</td><td>No page-level build step; utility classes compiled client-side by <code>cdn.tailwindcss.com</code></td></tr>
+          <tr><td>Dev/preview server</td><td>Node.js + Express 4</td><td>server.js — helmet, cors, dotenv, locale-aware <code>sendPage()</code></td></tr>
+          <tr><td>Production hosting</td><td>GitHub Pages (static)</td><td>docs/ folder, base path <code>/store/</code></td></tr>
+          <tr><td>Static build tool</td><td>tools/build-pages.js (Node)</td><td>Rewrites absolute paths, copies css/js/images/img/i18n/assets into docs/</td></tr>
+          <tr><td>Payments UI</td><td>Stripe Elements</td><td>Client-side only — index.html checkout modal has no backend charge route</td></tr>
+          <tr><td>Marketing automation</td><td>Oracle Eloqua</td><td>partenaires.html posts to <code>s138097979.t.eloqua.com/e/f2</code></td></tr>
+          <tr><td>Content API</td><td>Zendesk Help Center API</td><td>tarifs.html fetches FAQ articles live, no auth</td></tr>
+          <tr><td>CI/CD</td><td>None</td><td>No <code>.github/workflows</code> — deploys are manual: build, commit docs/, push</td></tr>
+          <tr><td>Repository</td><td>github.com/elmansouri-port/store</td><td>Single main branch, no staging branch</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">1.4</span><span class="ds-group-title">Environments</span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Environment</th><th>URL</th><th>Notes</th><th>Credentials</th></tr></thead>
+        <tbody>
+          <tr><td>Local dev</td><td><code>localhost:3000</code></td><td><code>npm run dev</code> (nodemon)</td><td>.env, not committed — see vault entry below</td></tr>
+          <tr><td>Production</td><td>elmansouri-port.github.io/store/</td><td>Static docs/, rebuilt via <code>npm run build:pages</code></td><td>N/A — no server secrets in a static build</td></tr>
+          <tr><td>Node runtime (hosted)</td><td>Not deployed</td><td>server.js could run on a Node host but doesn't today</td><td>N/A</td></tr>
+          <tr><td>Eloqua (3rd party)</td><td>s138097979.t.eloqua.com</td><td>Site ID hardcoded in partenaires.html</td><td>1Password → "Marketing Ops · Eloqua"</td></tr>
+          <tr><td>Zendesk (3rd party)</td><td>rainbow-market.zendesk.com</td><td>Public read-only Help Center API</td><td>N/A — no auth required</td></tr>
+          <tr><td>Stripe (3rd party, planned)</td><td>api.stripe.com</td><td>No key wired into the codebase yet</td><td>1Password → "Payments · Stripe"</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ds-callout ds-callout-warn" style="margin-top:14px"><span>⚠</span><div>Never store API keys or passwords in this document, in code comments, or in commit messages — link to the vault entry only.</div></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">1.5</span><span class="ds-group-title">Component Inventory</span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Component</th><th>Source</th><th>Used on</th><th>Variants</th></tr></thead>
+        <tbody>
+          <tr><td>Glass navbar</td><td>css/style.css · <code>.glass-nav</code></td><td>Every page</td><td>scrolled / unscrolled</td></tr>
+          <tr><td>Mega menu</td><td>js/mega-menu.js, css/mega-menu.css</td><td>Every page</td><td>Products, Ressources</td></tr>
+          <tr><td>Billing toggle switch</td><td>pages/tarifs.html</td><td>Tarifs</td><td>Collaboration / Webinar instance, synced</td></tr>
+          <tr><td>FAQ card</td><td>css/style.css · <code>.faq-card</code></td><td>FAQ, Tarifs, Collaboration, Webinar, Products, Home</td><td>open / closed</td></tr>
+          <tr><td>Cert carousel</td><td>index.html</td><td>Homepage security section</td><td>7 cards, arrow nav</td></tr>
+          <tr><td>Mega footer</td><td>index.html · <code>.footer-premium</code></td><td>Every page (rolled out 2026-07-21)</td><td>—</td></tr>
+          <tr><td>Onboarding / Checkout modals</td><td>index.html</td><td>Homepage</td><td>—</td></tr>
+          <tr><td>Currency switcher</td><td>js/currency.js · <code>.cur-switcher</code></td><td>Tarifs</td><td>EUR / USD / GBP</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">1.6</span><span class="ds-group-title">Performance Budget</span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Metric</th><th>Target</th><th>Current tooling</th></tr></thead>
+        <tbody>
+          <tr><td>LCP</td><td>&lt; 2.5s</td><td class="ds-status-no">Not measured — no RUM or Lighthouse CI</td></tr>
+          <tr><td>INP</td><td>&lt; 200ms</td><td class="ds-status-no">Not measured</td></tr>
+          <tr><td>CLS</td><td>&lt; 0.1</td><td class="ds-status-no">Not measured</td></tr>
+          <tr><td>Image size</td><td>&lt; 200KB, WebP preferred</td><td class="ds-status-partial">Mixed — client logos still .jpg/.png in places</td></tr>
+          <tr><td>JS payload</td><td>&lt; 150KB total, no bundler</td><td>mega-menu.js + i18n.js + homepage-animations.js + currency.js, unminified</td></tr>
+          <tr><td>Font loading</td><td>Shared preload strategy</td><td class="ds-status-no">Google Sans re-requested per page, no preload hints</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ds-callout ds-callout-info" style="margin-top:14px"><span>ℹ</span><div>Nothing here is measured yet. Wire up Lighthouse CI or a RUM tool before optimizing — targets without a baseline are guesses.</div></div>
+    </div>
+  </section>
+
+  <!-- ─── 2. CMS INTEGRATION ─── -->
+  <section id="cms" class="ds-section">
+    <h2 class="ds-section-title">CMS Integration</h2>
+    <p class="ds-section-sub">There is no CMS today — every page is hand-authored HTML. The one exception, Zendesk-sourced FAQ content, is the working model for what "headless" should look like if a real CMS is introduced.</p>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">2.1</span><span class="ds-group-title">Content Model Schema <span class="ds-chip" style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;margin-left:8px;font-size:9px">proposed — no CMS live</span></span></div>
+      <p class="ds-group-sub">Modeled on the content types already live as static HTML, so adopting a CMS later is a lift-and-shift, not a redesign.</p>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Content type</th><th>Fields</th><th>Relations</th></tr></thead>
+        <tbody>
+          <tr><td>Page</td><td>title, slug, meta_title, meta_description, og_image, body_sections[], locale</td><td>→ Product (optional)</td></tr>
+          <tr><td>Product</td><td>name, tagline, hero_image, feature_blocks[]</td><td>has many → Pricing Tier</td></tr>
+          <tr><td>Pricing Tier</td><td>name, price_monthly, price_yearly, features[], cta_label</td><td>→ Product</td></tr>
+          <tr><td>Blog Article</td><td>title, slug, author, published_at, body, cover_image, tags[]</td><td>→ Blog index</td></tr>
+          <tr><td>FAQ Item</td><td>question, answer, category, order</td><td class="ds-status-yes">✓ already live — sourced from Zendesk Help Center</td></tr>
+          <tr><td>Partner</td><td>name, logo, region, tier</td><td>flat list — trouver-un-partenaire</td></tr>
+          <tr><td>Certification</td><td>name, logo, issuing_body</td><td>used in homepage cert carousel</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">2.2</span><span class="ds-group-title">Roles &amp; Permissions Matrix <span class="ds-chip" style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;margin-left:8px;font-size:9px">proposed</span></span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Role</th><th style="text-align:center">Create</th><th style="text-align:center">Edit</th><th style="text-align:center">Publish</th><th style="text-align:center">Delete</th></tr></thead>
+        <tbody>
+          <tr><td>Writer</td><td style="text-align:center" class="ds-status-yes">✓</td><td style="text-align:center" class="ds-status-yes">✓</td><td style="text-align:center" class="ds-status-no">–</td><td style="text-align:center" class="ds-status-no">–</td></tr>
+          <tr><td>Editor</td><td style="text-align:center" class="ds-status-yes">✓</td><td style="text-align:center" class="ds-status-yes">✓</td><td style="text-align:center" class="ds-status-yes">✓</td><td style="text-align:center" class="ds-status-no">–</td></tr>
+          <tr><td>Marketing Ops</td><td style="text-align:center" class="ds-status-no">–</td><td style="text-align:center" class="ds-status-partial">forms only</td><td style="text-align:center" class="ds-status-partial">forms only</td><td style="text-align:center" class="ds-status-no">–</td></tr>
+          <tr><td>Admin / Dev</td><td style="text-align:center" class="ds-status-yes">✓</td><td style="text-align:center" class="ds-status-yes">✓</td><td style="text-align:center" class="ds-status-yes">✓</td><td style="text-align:center" class="ds-status-yes">✓</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">2.3</span><span class="ds-group-title">Editorial Workflow</span></div>
+      <p class="ds-group-sub">"Publish" today literally means merging to <code style="font-family:'JetBrains Mono',monospace;font-size:11px;background:#f5f3ff;color:#5e2d91;padding:1px 5px;border-radius:4px">main</code> and rebuilding docs/ — there's no draft/review state in the tool, only in process discipline.</p>
+      <div class="ds-flow">
+        <div class="ds-flow-step"><div class="ds-flow-step-label">1</div><div class="ds-flow-step-title">Draft</div><div class="ds-flow-step-sub">Feature branch or local edit</div></div>
+        <div class="ds-flow-arrow">→</div>
+        <div class="ds-flow-step"><div class="ds-flow-step-label">2</div><div class="ds-flow-step-title">Review</div><div class="ds-flow-step-sub">PR + /code-review</div></div>
+        <div class="ds-flow-arrow">→</div>
+        <div class="ds-flow-step"><div class="ds-flow-step-label">3</div><div class="ds-flow-step-title">Approve</div><div class="ds-flow-step-sub">Merge to main</div></div>
+        <div class="ds-flow-arrow">→</div>
+        <div class="ds-flow-step accent"><div class="ds-flow-step-label">4</div><div class="ds-flow-step-title">Publish</div><div class="ds-flow-step-sub">npm run build:pages, commit docs/</div></div>
+        <div class="ds-flow-arrow">→</div>
+        <div class="ds-flow-step dashed"><div class="ds-flow-step-label">5</div><div class="ds-flow-step-title">Archive</div><div class="ds-flow-step-sub">No mechanism today</div></div>
+      </div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">2.4</span><span class="ds-group-title">API / Webhook Reference</span></div>
+      <p class="ds-group-sub">The one real headless read-endpoint in production, plus the one internal API route.</p>
+      <div class="ds-code" style="margin-bottom:12px">GET https://rainbow-market.zendesk.com/api/v2/help_center/sections/33369381353746/articles.json
+    ?locale=fr&per_page=20&page=1&sort_by=position&sort_order=asc
+
+Auth: none (public read endpoint)
+Called from: pages/tarifs.html, "Questions fréquentes" section
+Response: { articles: [{ title, body, position, ... }] }</div>
+      <div class="ds-code">POST /api/contact   (server.js, internal)
+Body: { name, email, message }
+Auth: none
+Status: stub — validates required fields, returns { success: true }, persists nothing
+Note: pages/contact.html doesn't even call this route — its submit handler is a client-only
+console.log(). Two disconnected stubs pretending to be one working feature.</div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">2.5</span><span class="ds-group-title">Media Asset Guidelines</span></div>
+      <div class="ds-callout ds-callout-warn" style="margin-bottom:14px"><span>⚠</span><div><strong>Naming is inconsistent today.</strong> <code style="font-family:'JetBrains Mono',monospace;font-size:11px">images/certs/</code> mixes case and format: <code style="font-family:'JetBrains Mono',monospace;font-size:11px">anssi-cspn.png, c5.png, ens.svg, hipaa.jpg, iso.svg, rgpd.jpg</code>. Standardize on the rules below going forward.</div></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Rule</th><th>Standard</th></tr></thead>
+        <tbody>
+          <tr><td>Naming</td><td>kebab-case, no spaces, no capitals — <code>chu-rennes.webp</code> not <code>CHU_Rennes.PNG</code></td></tr>
+          <tr><td>Format</td><td>SVG for logos/marks when available, WebP for photos, PNG only when transparency + raster is required</td></tr>
+          <tr><td>Dimensions — hero</td><td>1600×900 min, 16:9</td></tr>
+          <tr><td>Dimensions — cert/client badge</td><td>Max-height 64px at display size; supply at 2× for retina</td></tr>
+          <tr><td>Alt text</td><td>Required, descriptive (company/certification name) — never empty <code>alt=""</code> on a logo</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <!-- ─── 3. LEADS TRACKING LOGIC ─── -->
+  <section id="leads" class="ds-section">
+    <h2 class="ds-section-title">Leads Tracking Logic</h2>
+    <p class="ds-section-sub">One real, live CRM pipeline (Eloqua, partner form only). Everything else — GTM, GA4, contact form, lead scoring, consent — is either unwired or doesn't exist yet.</p>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">3.1</span><span class="ds-group-title">Funnel / Data Flow Diagram</span></div>
+      <div class="ds-flow">
+        <div class="ds-flow-step"><div class="ds-flow-step-label">Source</div><div class="ds-flow-step-title">Traffic source</div><div class="ds-flow-step-sub">Organic, paid, referral</div></div>
+        <div class="ds-flow-arrow">→</div>
+        <div class="ds-flow-step"><div class="ds-flow-step-label">Landing</div><div class="ds-flow-step-title">Page</div><div class="ds-flow-step-sub">Home, Tarifs, Products</div></div>
+        <div class="ds-flow-arrow">→</div>
+        <div class="ds-flow-step"><div class="ds-flow-step-label">Action</div><div class="ds-flow-step-title">CTA / Form</div><div class="ds-flow-step-sub">Checkout, Contact, Partner</div></div>
+        <div class="ds-flow-arrow">→</div>
+        <div class="ds-flow-step dashed"><div class="ds-flow-step-label">Tag mgmt</div><div class="ds-flow-step-title">GTM</div><div class="ds-flow-step-sub">Not installed</div></div>
+        <div class="ds-flow-arrow">→</div>
+        <div class="ds-flow-step dashed"><div class="ds-flow-step-label">Analytics</div><div class="ds-flow-step-title">GA4</div><div class="ds-flow-step-sub">Not installed</div></div>
+        <div class="ds-flow-arrow">+</div>
+        <div class="ds-flow-step accent"><div class="ds-flow-step-label">CRM</div><div class="ds-flow-step-title">Eloqua</div><div class="ds-flow-step-sub">Live — partner form only</div></div>
+        <div class="ds-flow-arrow">→</div>
+        <div class="ds-flow-step dashed"><div class="ds-flow-step-label">Automation</div><div class="ds-flow-step-title">Nurture platform</div><div class="ds-flow-step-sub">None observed</div></div>
+      </div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">3.2</span><span class="ds-group-title">Event Taxonomy Sheet</span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Event</th><th>Trigger</th><th>Component</th><th>Destination</th><th>Test status</th></tr></thead>
+        <tbody>
+          <tr><td><code>billing_toggle_change</code></td><td>Flip Mensuel/Annuel</td><td>pages/tarifs.html <code>.billing-toggle-input</code></td><td>GA4 (planned)</td><td class="ds-status-no">Not implemented</td></tr>
+          <tr><td><code>checkout_modal_open</code></td><td>Click plan CTA</td><td>index.html #checkout-modal</td><td>GA4 + CRM (planned)</td><td class="ds-status-no">Not implemented</td></tr>
+          <tr><td><code>partner_form_submit</code></td><td>Partner application sent</td><td>pages/partenaires.html #partner-form</td><td>Eloqua</td><td class="ds-status-yes">✓ Live</td></tr>
+          <tr><td><code>contact_form_submit</code></td><td>Contact form "sent"</td><td>pages/contact.html #contact-form</td><td class="ds-status-no">Nowhere — console.log only</td><td class="ds-status-no">Stubbed, not wired</td></tr>
+          <tr><td><code>mega_menu_open</code></td><td>Products/Ressources hover</td><td>js/mega-menu.js</td><td>GA4 (planned)</td><td class="ds-status-no">Not implemented</td></tr>
+          <tr><td><code>currency_change</code></td><td>Switch EUR/USD/GBP</td><td>js/currency.js <code>.cur-switcher</code></td><td>GA4 (planned)</td><td class="ds-status-no">Not implemented</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">3.3</span><span class="ds-group-title">UTM Naming Convention</span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Parameter</th><th>Rule</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><code>utm_source</code></td><td>lowercase, platform name</td><td>linkedin, google, newsletter</td></tr>
+          <tr><td><code>utm_medium</code></td><td>channel type</td><td>cpc, social, email, referral</td></tr>
+          <tr><td><code>utm_campaign</code></td><td>kebab-case, dated if time-bound</td><td>2026-07-webinar-launch</td></tr>
+          <tr><td><code>utm_content</code></td><td>creative/variant id, for A/B splits</td><td>hero-cta-v2</td></tr>
+          <tr><td><code>utm_term</code></td><td>paid search only</td><td>rainbow+collaboration</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ds-callout ds-callout-info" style="margin-top:14px"><span>ℹ</span><div>No campaign log exists yet. Start one the day the first paid campaign ships — a spreadsheet with one row per <code style="font-family:'JetBrains Mono',monospace;font-size:11px">source/medium/campaign</code> combination used, so nobody re-guesses the convention six months from now.</div></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">3.4</span><span class="ds-group-title">Form Field Mapping</span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Form field</th><th>Destination field</th><th>Required?</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td colspan="4" style="background:#f9fafb;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9ca3af">pages/contact.html — destination: none (client-only stub)</td></tr>
+          <tr><td>first_name, last_name</td><td class="ds-status-no">—</td><td>Yes</td><td rowspan="4">Payload is built and <code>console.log</code>'d; nothing is sent over the network</td></tr>
+          <tr><td>email</td><td class="ds-status-no">—</td><td>Yes</td></tr>
+          <tr><td>inquiry_type, message</td><td class="ds-status-no">—</td><td>message: yes</td></tr>
+          <tr><td>referrer_page, lead_source, utm_params, hotjar_id (hidden)</td><td class="ds-status-no">—</td><td>n/a</td></tr>
+          <tr><td colspan="4" style="background:#f9fafb;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9ca3af">pages/partenaires.html — destination: Eloqua (live)</td></tr>
+          <tr><td>Form fields</td><td>Eloqua native fields, form <code>elqFormName=MKT</code></td><td>Per Eloqua form config</td><td>Direct <code>fetch()</code> POST, <code>mode:'no-cors'</code> — response is intentionally opaque</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ds-callout ds-callout-error" style="margin-top:14px"><span>⚠</span><div><strong>Hidden lead-tracking fields exist but are dead.</strong> contact.html declares <code style="font-family:'JetBrains Mono',monospace;font-size:11px">referrer_page</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:11px">lead_source</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:11px">utm_params</code>, and <code style="font-family:'JetBrains Mono',monospace;font-size:11px">hotjar_id</code> as hidden inputs, but no script on the page ever populates them, and the form never sends anywhere. Either wire this form the way partenaires.html is wired, or remove the dead fields — don't leave them looking functional.</div></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">3.5</span><span class="ds-group-title">Lead Scoring Rules <span class="ds-chip" style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;margin-left:8px;font-size:9px">proposed — none exist</span></span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Criteria</th><th>Points</th><th>Threshold</th></tr></thead>
+        <tbody>
+          <tr><td>Visited /tarifs</td><td>+10</td><td rowspan="4">MQL at 40+, SQL hand-off at 70+</td></tr>
+          <tr><td>Opened checkout modal</td><td>+20</td></tr>
+          <tr><td>Submitted partner or contact form</td><td>+40</td></tr>
+          <tr><td>Enterprise plan selected</td><td>+15</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">3.6</span><span class="ds-group-title">Consent / Cookie Logic</span></div>
+      <div class="ds-callout ds-callout-error" style="margin-bottom:14px"><span>⚠</span><div><strong>No cookie consent mechanism exists anywhere on the site</strong> — no banner, no CMP, no gating of any script. This is a real gap given the footer's GDPR/trademark language and the "RGPD" certification badge already on the homepage.</div></div>
+      <div class="ds-flow">
+        <div class="ds-flow-step accent"><div class="ds-flow-step-label">Always on</div><div class="ds-flow-step-title">Necessary</div><div class="ds-flow-step-sub">Session, language pref, cart</div></div>
+        <div class="ds-flow-arrow">|</div>
+        <div class="ds-flow-step dashed"><div class="ds-flow-step-label">Post-consent</div><div class="ds-flow-step-title">Analytics</div><div class="ds-flow-step-sub">GA4, once installed</div></div>
+        <div class="ds-flow-arrow">|</div>
+        <div class="ds-flow-step dashed"><div class="ds-flow-step-label">Post-consent</div><div class="ds-flow-step-title">Marketing</div><div class="ds-flow-step-sub">Ad pixels, once installed</div></div>
+      </div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">3.7</span><span class="ds-group-title">Attribution Model</span></div>
+      <p style="font-size:13px;color:#4b5563;line-height:1.7">Recommend <strong>last-non-direct-click</strong> as the default once GA4 is installed — simplest model that survives a single-domain site with no paid-media program yet. <strong>Known limitation:</strong> Eloqua-sourced partner leads won't merge with GA4 session data until a CRM–analytics bridge exists, so partner-channel attribution will stay manual (Eloqua source field only) for the foreseeable future.</p>
+    </div>
+  </section>
+
+  <!-- ─── 4. CONTENT UPDATE PROCESS ─── -->
+  <section id="content-ops" class="ds-section">
+    <h2 class="ds-section-title">Content Update Process</h2>
+    <p class="ds-section-sub">No CMS means every content change is a code change. That raises the bar for QA and rollback discipline — both documented below using this repo's real git history.</p>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">4.1</span><span class="ds-group-title">Ownership Matrix</span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Page / section</th><th>Writer</th><th>Approver</th><th>Publisher</th></tr></thead>
+        <tbody>
+          <tr><td>Homepage</td><td>Marketing</td><td>Web Lead</td><td>Dev (git)</td></tr>
+          <tr><td>Tarifs / Pricing</td><td>Pricing / RevOps</td><td>Web Lead</td><td>Dev (git)</td></tr>
+          <tr><td>Blog</td><td>Content team</td><td>Editor</td><td>Dev (git)</td></tr>
+          <tr><td>Partenaires / Partner locator</td><td>Partnerships</td><td>Web Lead</td><td>Dev (git)</td></tr>
+          <tr><td>FAQ</td><td>Support</td><td>Support Lead</td><td>Zendesk — no code deploy needed</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">4.2</span><span class="ds-group-title">Update Cadence</span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Page</th><th>Frequency</th></tr></thead>
+        <tbody>
+          <tr><td>Homepage stats / testimonials</td><td>Quarterly</td></tr>
+          <tr><td>Blog</td><td>Ad hoc, per article</td></tr>
+          <tr><td>Pricing amounts</td><td>Rare — requires editing tarifs.html directly in two places (no single source of truth)</td></tr>
+          <tr><td>FAQ</td><td>Continuous — lives in Zendesk, no deploy needed</td></tr>
+          <tr><td>Certifications carousel</td><td>On renewal/expiry of a badge</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">4.3</span><span class="ds-group-title">Content QA Checklist</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:#374151"><span style="width:18px;height:18px;border:1.5px solid #d1d5db;border-radius:5px;flex-shrink:0"></span>Meta title/description present and within character limits (Section 5.1)</div>
+        <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:#374151"><span style="width:18px;height:18px;border:1.5px solid #d1d5db;border-radius:5px;flex-shrink:0"></span>Canonical tag points at the correct clean URL</div>
+        <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:#374151"><span style="width:18px;height:18px;border:1.5px solid #d1d5db;border-radius:5px;flex-shrink:0"></span>Mobile viewport checked at 375px and 768px</div>
+        <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:#374151"><span style="width:18px;height:18px;border:1.5px solid #d1d5db;border-radius:5px;flex-shrink:0"></span>No broken internal links (cross-check against Section 1.2's sitemap)</div>
+        <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:#374151"><span style="width:18px;height:18px;border:1.5px solid #d1d5db;border-radius:5px;flex-shrink:0"></span>Every image has descriptive alt text</div>
+        <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:#374151"><span style="width:18px;height:18px;border:1.5px solid #d1d5db;border-radius:5px;flex-shrink:0"></span>i18n keys present for FR/EN (or all supported locales)</div>
+        <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:#374151"><span style="width:18px;height:18px;border:1.5px solid #5e2d91;border-radius:5px;flex-shrink:0;background:#5e2d91;color:#fff;text-align:center;font-size:12px;line-height:16px">✓</span><strong>Ran <code style="font-family:'JetBrains Mono',monospace;font-size:11px;background:#f5f3ff;color:#5e2d91;padding:1px 5px;border-radius:4px">npm run build:pages</code> and diffed docs/ before committing</strong> — this exact step was missed on 2026-07-23 (see changelog below) and shipped a fix that never reached production</div>
+      </div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">4.4</span><span class="ds-group-title">Changelog</span></div>
+      <p class="ds-group-sub">Git commit history is the changelog of record — no separate doc to keep in sync. Recent entries:</p>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Date</th><th>Author</th><th>Change</th></tr></thead>
+        <tbody>
+          <tr><td>2026-07-24</td><td>Y. El Mansouri</td><td>Rebuild docs/ for ISO logo fix and pricing toggle split</td></tr>
+          <tr><td>2026-07-23</td><td>Y. El Mansouri</td><td>Fix ISO 27001 logo, reorder certs, split webinar/collab pricing controls <em style="color:#9ca3af">(docs/ rebuild missed — caught next day)</em></td></tr>
+          <tr><td>2026-07-22</td><td>Y. El Mansouri</td><td>Webinar: swap Invitations personnalisées and Salle d'attente cards</td></tr>
+          <tr><td>2026-07-21</td><td>Y. El Mansouri</td><td>Apply homepage mega footer to all pages; drop redundant CTA banners</td></tr>
+          <tr><td>2026-07-21</td><td>Y. El Mansouri</td><td>Add partner locator page and rebuild GitHub Pages</td></tr>
+          <tr><td>2026-07-20</td><td>Y. El Mansouri</td><td>Update form-al page</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">4.5</span><span class="ds-group-title">Rollback Procedure</span></div>
+      <ol style="font-size:13px;color:#374151;line-height:2;padding-left:20px">
+        <li><code style="font-family:'JetBrains Mono',monospace;font-size:11px;background:#f5f3ff;color:#5e2d91;padding:1px 5px;border-radius:4px">git revert &lt;bad-commit-sha&gt;</code> on <code style="font-family:'JetBrains Mono',monospace;font-size:11px;background:#f5f3ff;color:#5e2d91;padding:1px 5px;border-radius:4px">main</code> — never force-push or reset a shared branch</li>
+        <li>Run <code style="font-family:'JetBrains Mono',monospace;font-size:11px;background:#f5f3ff;color:#5e2d91;padding:1px 5px;border-radius:4px">npm run build:pages</code> to regenerate docs/ from the reverted source</li>
+        <li>Commit the resulting docs/ changes — GitHub Pages redeploys automatically on push (no CI step to trigger manually)</li>
+        <li>Verify at elmansouri-port.github.io/store/ that the bad change is gone</li>
+        <li>Confirm in git log that the revert commit references the original commit it undoes, for traceability</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ─── 5. META TAGS & SEO STANDARDS ─── -->
+  <section id="seo" class="ds-section">
+    <h2 class="ds-section-title">Meta Tags &amp; SEO Standards</h2>
+    <p class="ds-section-sub">index.html already does this right — canonical, OG, and JSON-LD are all present. The standard below is that pattern, generalized and applied to the inner pages that are currently missing it.</p>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">5.1</span><span class="ds-group-title">Meta Tag Template Per Page Type</span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Page type</th><th>Title formula</th><th>Description formula</th><th>Limits</th></tr></thead>
+        <tbody>
+          <tr><td>Home</td><td>{Brand} — {value prop}</td><td>{Brand}: {core benefit sentence}</td><td rowspan="4">Title ≤ 60 chars, Description ≤ 160 chars</td></tr>
+          <tr><td>Product</td><td>{Product name} — {Brand}</td><td>{Product name}: {feature summary}</td></tr>
+          <tr><td>Pricing</td><td>Tarifs {Brand} — {value prop}</td><td>Plans &amp; pricing for {Brand}</td></tr>
+          <tr><td>Blog article</td><td>{Article title} — {Brand} Blog</td><td>First 155 characters of the intro paragraph</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ds-code" style="margin-top:14px">&lt;!-- index.html — the one page already following this pattern --&gt;
+&lt;meta name="description" content="Rainbow by Alcatel-Lucent Enterprise: Secure cloud
+  communication and collaboration. Messaging, video conferencing, file sharing..."&gt;</div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">5.2</span><span class="ds-group-title">Canonical Tag Rules</span></div>
+      <p style="font-size:13px;color:#4b5563;line-height:1.7">Every page sets <code style="font-family:'JetBrains Mono',monospace;font-size:11px;background:#f5f3ff;color:#5e2d91;padding:1px 5px;border-radius:4px">rel="canonical"</code> to its own clean URL — index.html already does this. When query-based filters or pagination are introduced (currency selector, pricing filters), they must canonicalize back to the base URL rather than generating indexable duplicate URLs per parameter combination.</p>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">5.3</span><span class="ds-group-title">Open Graph / Twitter Card Defaults</span></div>
+      <div class="ds-callout ds-callout-error" style="margin-bottom:14px"><span>⚠</span><div><strong>Only index.html has OG/Twitter tags.</strong> pages/tarifs.html, pages/products.html, and pages/blog.html have none — every share of those pages on social/Slack/iMessage renders with no preview card.</div></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Property</th><th>Default</th><th>Override rule</th></tr></thead>
+        <tbody>
+          <tr><td>og:image</td><td>/images/Rainbow-AL-logo-banner.webp on brand-gradient card</td><td>Per-page hero image when one exists</td></tr>
+          <tr><td>og:title</td><td>Same as <code>&lt;title&gt;</code></td><td>Can shorten for social if the page title runs long</td></tr>
+          <tr><td>og:description</td><td>Same as meta description</td><td>Rarely needs override</td></tr>
+          <tr><td>twitter:card</td><td>summary_large_image</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">5.4</span><span class="ds-group-title">Structured Data Spec</span></div>
+      <div class="ds-table-wrap" style="margin-bottom:14px"><table class="ds-table">
+        <thead><tr><th>Page type</th><th>Schema.org type</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Home</td><td>SoftwareApplication + Offer[]</td><td class="ds-status-yes">✓ Live</td></tr>
+          <tr><td>FAQ</td><td>FAQPage</td><td class="ds-status-no">Not implemented — content already exists via Zendesk, just needs marking up</td></tr>
+          <tr><td>Company / About</td><td>Organization</td><td class="ds-status-no">Not implemented</td></tr>
+          <tr><td>Product detail</td><td>BreadcrumbList</td><td class="ds-status-no">Not implemented</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ds-code">&lt;!-- Live today, index.html --&gt;
+&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Rainbow by Alcatel-Lucent Enterprise",
+  "applicationCategory": "CommunicationApplication",
+  "offers": [
+    { "@type": "Offer", "name": "Essential", "price": "0", "priceCurrency": "EUR" },
+    { "@type": "Offer", "name": "Business", "price": "9.99", "priceCurrency": "EUR" }
+  ]
+}
+&lt;/script&gt;</div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">5.5</span><span class="ds-group-title">Indexation Rules</span></div>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Page type</th><th>Index?</th><th>Follow?</th><th>Reason</th></tr></thead>
+        <tbody>
+          <tr><td>Marketing pages (Home, Products, Pricing, Blog)</td><td class="ds-status-yes">index</td><td class="ds-status-yes">follow</td><td>Public, discoverable content</td></tr>
+          <tr><td>404.html</td><td class="ds-status-no">noindex</td><td class="ds-status-yes">follow</td><td>Error page, not a destination</td></tr>
+          <tr><td>Onboarding / Checkout modals</td><td>N/A</td><td>N/A</td><td>DOM overlays, not real routes</td></tr>
+          <tr><td>Dead routes (Section 1.2)</td><td class="ds-status-no">n/a — fix or remove first</td><td>—</td><td>Broken routes shouldn't be left indexable either way</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ds-paper">
+      <div class="ds-group-header"><span class="ds-group-num">5.6</span><span class="ds-group-title">Redirect Map</span></div>
+      <p class="ds-group-sub">No redirects exist in server.js today. These three known-broken routes (Section 1.2) need one of two fixes — build the missing page, or redirect until it exists.</p>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th>Old / broken URL</th><th>Target</th><th>Type</th><th>Reason</th></tr></thead>
+        <tbody>
+          <tr><td><code>/products/webinar/pricing</code></td><td><code>/tarifs</code></td><td>302 (temporary, until page exists)</td><td>pages/tarif-webinar.html missing</td></tr>
+          <tr><td><code>/products/collaboration/pricing</code></td><td><code>/tarifs</code></td><td>302 (temporary)</td><td>pages/tarif-collaboration.html missing</td></tr>
+          <tr><td><code>/tarif1</code></td><td><code>/tarifs</code></td><td>301 (permanent — legacy route)</td><td>pages/tarif1.html missing, no reason to keep the route name</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// Scrollspy
+const links = document.querySelectorAll('.ds-nav-link');
+const sections = document.querySelectorAll('.ds-section');
+function onScroll() {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  links.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+  });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+</script>
+</body>
+</html>
