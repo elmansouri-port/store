@@ -29,7 +29,6 @@ const ROUTES = {
   'products/webinar/pricing': 'pages/tarif-webinar.html',
   'products/collaboration/pricing': 'pages/tarif-collaboration.html',
   'tarifs': 'pages/tarifs.html',
-  'tarif1': 'pages/tarif1.html',
   'blog': 'pages/blog.html',
   'blog/the-power-of-rainbow': 'pages/blog/the-power-of-rainbow.html',
   'faq': 'pages/faq.html',

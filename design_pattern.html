@@ -1354,7 +1354,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
 
     <div class="ds-paper">
       <div class="ds-group-header"><span class="ds-group-num">1.2</span><span class="ds-group-title">Sitemap</span></div>
-      <p class="ds-group-sub">Every route registered in server.js, with the file it serves. Three routes point at files that don't exist in the repo.</p>
+      <p class="ds-group-sub">Every route registered in server.js, with the file it serves. Two routes point at files that don't exist in the repo.</p>
       <div class="ds-table-wrap"><table class="ds-table">
         <thead><tr><th>URL</th><th>Page type</th><th>Served from</th><th>Parent</th></tr></thead>
         <tbody>
@@ -1365,7 +1365,6 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
           <tr><td><code>/products/webinar/pricing</code></td><td>Pricing</td><td><span class="ds-status-no">✗ pages/tarif-webinar.html — missing</span></td><td>/products/webinar</td></tr>
           <tr><td><code>/products/collaboration/pricing</code></td><td>Pricing</td><td><span class="ds-status-no">✗ pages/tarif-collaboration.html — missing</span></td><td>/products/collaboration</td></tr>
           <tr><td><code>/tarifs</code></td><td>Pricing</td><td>pages/tarifs.html</td><td>/</td></tr>
-          <tr><td><code>/tarif1</code></td><td>Pricing (legacy)</td><td><span class="ds-status-no">✗ pages/tarif1.html — missing</span></td><td>/tarifs</td></tr>
           <tr><td><code>/blog</code></td><td>Blog index</td><td>pages/blog.html</td><td>/</td></tr>
           <tr><td><code>/blog/the-power-of-rainbow</code></td><td>Blog article</td><td>pages/blog/the-power-of-rainbow.html</td><td>/blog</td></tr>
           <tr><td><code>/faq</code></td><td>FAQ</td><td>pages/faq.html</td><td>/</td></tr>
@@ -1376,7 +1375,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
           <tr><td><code>/healthz</code></td><td>Health check</td><td>JSON status</td><td>—</td></tr>
         </tbody>
       </table></div>
-      <div class="ds-callout ds-callout-error" style="margin-top:14px"><span>⚠</span><div><strong>Three dead routes.</strong> <code>/products/webinar/pricing</code>, <code>/products/collaboration/pricing</code>, and <code>/tarif1</code> are wired in server.js but their target files don't exist — confirmed by <code>npm run build:pages</code> logging <code>skip (missing)</code> for all three. Either build the pages or remove the routes; see the Redirect Map in Section 5.6.</div></div>
+      <div class="ds-callout ds-callout-error" style="margin-top:14px"><span>⚠</span><div><strong>Two dead routes.</strong> <code>/products/webinar/pricing</code> and <code>/products/collaboration/pricing</code> are wired in server.js but their target files don't exist — confirmed by <code>npm run build:pages</code> logging <code>skip (missing)</code> for both. Either build the pages or remove the routes; see the Redirect Map in Section 5.6.</div></div>
     </div>
 
     <div class="ds-paper">
@@ -1788,13 +1787,12 @@ console.log(). Two disconnected stubs pretending to be one working feature.</div
 
     <div class="ds-paper">
       <div class="ds-group-header"><span class="ds-group-num">5.6</span><span class="ds-group-title">Redirect Map</span></div>
-      <p class="ds-group-sub">No redirects exist in server.js today. These three known-broken routes (Section 1.2) need one of two fixes — build the missing page, or redirect until it exists.</p>
+      <p class="ds-group-sub">No redirects exist in server.js today. These two known-broken routes (Section 1.2) need one of two fixes — build the missing page, or redirect until it exists.</p>
       <div class="ds-table-wrap"><table class="ds-table">
         <thead><tr><th>Old / broken URL</th><th>Target</th><th>Type</th><th>Reason</th></tr></thead>
         <tbody>
           <tr><td><code>/products/webinar/pricing</code></td><td><code>/tarifs</code></td><td>302 (temporary, until page exists)</td><td>pages/tarif-webinar.html missing</td></tr>
           <tr><td><code>/products/collaboration/pricing</code></td><td><code>/tarifs</code></td><td>302 (temporary)</td><td>pages/tarif-collaboration.html missing</td></tr>
-          <tr><td><code>/tarif1</code></td><td><code>/tarifs</code></td><td>301 (permanent — legacy route)</td><td>pages/tarif1.html missing, no reason to keep the route name</td></tr>
         </tbody>
       </table></div>
     </div>

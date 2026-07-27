@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-27T00:00:00.000Z",
+  "title": "Design System: Rainbow by ALE",
+  "extensions": {
+    "colorMeta": {
+      "brand-500": { "role": "primary", "displayName": "Signal Purple", "canonical": "#5e2d91", "tonalRamp": ["#3c1c5e", "#4a2373", "#5e2d91", "#a78bfa", "#c4b5fd", "#ddd6fe", "#ede9fe", "#f5f3ff"] },
+      "brand-vibrant": { "role": "secondary", "displayName": "Vibrant Accent", "canonical": "#7c3aed", "tonalRamp": ["#4a2373", "#5e2d91", "#7c3aed", "#a78bfa", "#c4b5fd", "#ddd6fe", "#ede9fe", "#f5f3ff"] },
+      "navy-900": { "role": "secondary", "displayName": "Navy Ink", "canonical": "#1e1b4b", "tonalRamp": ["#0f0b2e", "#151936", "#1e1b4b", "#312e81", "#3730a3", "#6366f1", "#a5b4fc", "#e0e7ff"] },
+      "laurenn-orange": { "role": "tertiary", "displayName": "Signal Orange", "canonical": "#FF4500", "tonalRamp": ["#7c1d00", "#b32900", "#FF4500", "#ff7a47", "#ff9d73", "#ffc0a3", "#ffe0d1", "#fff3ee"] },
+      "laurenn-pink": { "role": "tertiary", "displayName": "Signal Pink", "canonical": "#CF0072", "tonalRamp": ["#63003a", "#960054", "#CF0072", "#e83f9c", "#f06fb6", "#f7a3d1", "#fbd0e6", "#fdeef5"] },
+      "laurenn-blue": { "role": "tertiary", "displayName": "Signal Blue", "canonical": "#0085CA", "tonalRamp": ["#004a70", "#00669b", "#0085CA", "#3fa3db", "#72bce6", "#a6d5f0", "#d3ebf9", "#eef7fc" ] },
+      "laurenn-green": { "role": "tertiary", "displayName": "Signal Green", "canonical": "#34B233", "tonalRamp": ["#175114", "#227a20", "#34B233", "#5ec95d", "#87d886", "#b0e7af", "#d7f3d6", "#eefaee"] },
+      "gray-900": { "role": "neutral", "displayName": "Ink", "canonical": "#111827", "tonalRamp": ["#111827", "#374151", "#4b5563", "#6b7280", "#9ca3af", "#d1d5db", "#e5e7eb", "#f3f4f6"] },
+      "success": { "role": "semantic", "displayName": "Success Green", "canonical": "#10b981" },
+      "error": { "role": "semantic", "displayName": "Error Red", "canonical": "#ef4444" },
+      "warning": { "role": "semantic", "displayName": "Warning Amber", "canonical": "#f59e0b" },
+      "info": { "role": "semantic", "displayName": "Info Blue", "canonical": "#3b82f6" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines only, one per page." },
+      "headline": { "displayName": "Headline", "purpose": "Page/section H1-H2, product names." },
+      "title": { "displayName": "Title", "purpose": "Card and plan titles." },
+      "body": { "displayName": "Body", "purpose": "Default paragraph copy." },
+      "label": { "displayName": "Label", "purpose": "Section eyebrows, category tags, uppercase micro-labels." }
+    },
+    "shadows": [
+      { "name": "shadow-xs", "value": "0 1px 6px rgba(0,0,0,.05)", "purpose": "Resting form inputs on plain white — the one sanctioned non-purple shadow." },
+      { "name": "shadow-sm", "value": "0 4px 16px rgba(124,58,237,.04)", "purpose": "FAQ hover, lang dropdown." },
+      { "name": "glass-card", "value": "0 8px 32px rgba(0,0,0,.03), inset 0 1px 0 rgba(255,255,255,.6)", "purpose": "Default glassmorphism card resting shadow, with an inset top highlight." },
+      { "name": "shadow-md", "value": "0 20px 40px rgba(124,58,237,.08)", "purpose": "hover-lift raised state." },
+      { "name": "shadow-lg", "value": "0 32px 64px rgba(124,58,237,.08)", "purpose": "Product card hover, deepest lift in the system." },
+      { "name": "shadow-glow", "value": "0 4px 20px rgba(124,58,237,.25)", "purpose": "Primary CTA ambient glow, pulses to 0 8px 36px rgba(124,58,237,.35)." }
+    ],
+    "motion": [
+      { "name": "ease-signature", "value": "cubic-bezier(.16,1,.3,1)", "purpose": "The one spring curve for all interactive hover/expand/slide transitions — hover-lift, product-card, faq-card, pill-tab slider, lang-dropdown." },
+      { "name": "ease-ambient-linear", "value": "linear", "purpose": "Reserved for ambient/infinite loops only — marquee, glow pulse, float. Never for interactive state changes." },
+      { "name": "duration-fast", "value": "0.15s", "purpose": "Button hover shadow/transform." },
+      { "name": "duration-base", "value": "0.2s", "purpose": "Nav chevron rotate, color transitions, toggle switch." },
+      { "name": "duration-moderate", "value": "0.3s", "purpose": "glass-nav scroll shadow, hover-lift, cert-badge." },
+      { "name": "duration-slow", "value": "0.4s", "purpose": "FAQ answer reveal, pill-tab slider." },
+      { "name": "duration-xslow", "value": "0.6-0.7s", "purpose": "Scroll reveal (animate-on-scroll), stagger animations." },
+      { "name": "duration-ambient", "value": "3-9s", "purpose": "glowPulse (3s), float (6s), ctaShine (6s), hero_slide (9s)." },
+      { "name": "duration-marquee", "value": "30s", "purpose": "Trust logo infinite scroll." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Canonical filled CTA — used in navbar, hero, footer band.",
+      "html": "<button class=\"ds-btn-primary\">Essai gratuit</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; border-radius: 10px; font-weight: 600; font-size: 14px; background: #5e2d91; color: #fff; border: none; box-shadow: 0 20px 40px rgba(124,58,237,0.08); transition: background 0.15s ease, box-shadow 0.15s ease; cursor: pointer; } .ds-btn-primary:hover { background: #4a2373; box-shadow: 0 32px 64px rgba(124,58,237,0.08); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(124,58,237,.35); } .ds-btn-primary:disabled { opacity: .4; cursor: not-allowed; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outlined companion to the primary button — login, secondary actions.",
+      "html": "<button class=\"ds-btn-secondary\">Se connecter</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; border-radius: 10px; font-weight: 600; font-size: 14px; background: transparent; color: #111827; border: 2px solid #e5e7eb; transition: background .15s ease, border-color .15s ease; cursor: pointer; } .ds-btn-secondary:hover { background: #f9fafb; } .ds-btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(124,58,237,.2); }"
+    },
+    {
+      "name": "Glass Card",
+      "kind": "card",
+      "refersTo": null,
+      "description": "The signature frosted card — trust signals, feature highlights, testimonials.",
+      "html": "<div class=\"ds-glass-card\"><div class=\"ds-glass-card-title\">Feature Card</div><div class=\"ds-glass-card-body\">Backdrop blur, white/70, subtle brand border.</div></div>",
+      "css": ".ds-glass-card { background: rgba(255,255,255,.7); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(124,58,237,.06); border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.03), inset 0 1px 0 rgba(255,255,255,.6); padding: 24px; max-width: 320px; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s cubic-bezier(.16,1,.3,1); } .ds-glass-card:hover { transform: translateY(-8px); box-shadow: 0 32px 64px rgba(124,58,237,.08), 0 0 0 1px rgba(124,58,237,.04); } .ds-glass-card-title { font-size: 13px; font-weight: 700; color: #170926; margin-bottom: 6px; } .ds-glass-card-body { font-size: 13px; color: #6b7280; line-height: 1.6; }"
+    },
+    {
+      "name": "Badge / Chip",
+      "kind": "chip",
+      "refersTo": "badge-chip",
+      "description": "Neutral inline pill; swap the palette to a laurenn-spectrum color only for a real status/category claim.",
+      "html": "<span class=\"ds-chip\">Rainbow Webinar</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; padding: 6px 16px; border-radius: 9999px; font-size: 13px; font-weight: 600; background: #f5f3ff; color: #5e2d91; border: 1px solid #ddd6fe; }"
+    },
+    {
+      "name": "FAQ Card",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Canonical FAQ accordion item (supersedes the legacy .faq-item). Active state gets a brand-purple border and a rotated chevron.",
+      "html": "<div class=\"ds-faq-card ds-faq-card--open\"><button class=\"ds-faq-card-button\"><span class=\"ds-faq-card-question\">Can I cancel at any time?</span><svg class=\"ds-faq-card-chevron\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M19 9l-7 7-7-7\"/></svg></button><div class=\"ds-faq-card-answer\">Yes, you can cancel your subscription at any time. No lock-in periods.</div></div>",
+      "css": ".ds-faq-card { border: 1px solid #e5e7eb; border-radius: 12px; background: #fff; overflow: hidden; transition: border-color .3s cubic-bezier(.16,1,.3,1); } .ds-faq-card--open { border-color: #5e2d91; } .ds-faq-card-button { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 16px 20px; background: none; border: none; cursor: pointer; text-align: left; } .ds-faq-card-question { font-size: 15px; font-weight: 600; color: #170926; } .ds-faq-card-chevron { transition: transform .3s cubic-bezier(.16,1,.3,1); flex-shrink: 0; color: #5e2d91; } .ds-faq-card--open .ds-faq-card-chevron { transform: rotate(180deg); } .ds-faq-card-answer { padding: 0 20px 16px; font-size: 14px; color: #6b7280; line-height: 1.6; } .ds-faq-card-button:focus-visible { outline: none; box-shadow: inset 0 0 0 2px rgba(124,58,237,.3); }"
+    },
+    {
+      "name": "Billing Toggle",
+      "kind": "input",
+      "refersTo": null,
+      "description": "iOS-style switch for the monthly/yearly pricing toggle — distinct from Pill Tabs, which switch between product use-cases rather than a binary state.",
+      "html": "<label class=\"ds-toggle\"><input type=\"checkbox\" class=\"ds-toggle-input\"><span class=\"ds-toggle-track\"><span class=\"ds-toggle-thumb\"></span></span></label>",
+      "css": ".ds-toggle { position: relative; display: inline-flex; align-items: center; cursor: pointer; } .ds-toggle-input { position: absolute; opacity: 0; width: 1px; height: 1px; } .ds-toggle-track { width: 56px; height: 28px; background: #e5e7eb; border-radius: 9999px; box-shadow: inset 0 1px 2px rgba(0,0,0,.06); position: relative; display: block; transition: background .2s; } .ds-toggle-thumb { position: absolute; top: 2px; left: 2px; width: 24px; height: 24px; background: #fff; border: 1px solid #d1d5db; border-radius: 9999px; transition: all .2s; } .ds-toggle-input:checked + .ds-toggle-track { background: #5e2d91; } .ds-toggle-input:checked + .ds-toggle-track .ds-toggle-thumb { transform: translateX(28px); border-color: #5e2d91; } .ds-toggle-input:focus-visible + .ds-toggle-track { box-shadow: 0 0 0 3px rgba(124,58,237,.25); }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": null,
+      "description": "Glass-style form field with a purple focus ring, consistent across auth/contact forms.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\">Email Address</label><div class=\"ds-field-control\"><input type=\"email\" class=\"ds-field-input\" placeholder=\"you@company.com\"></div></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; max-width: 360px; } .ds-field-label { font-size: 14px; font-weight: 500; color: #6b7280; } .ds-field-control { border: 1px solid #e5e7eb; background: #fff; border-radius: 10px; transition: border-color .2s, box-shadow .2s; } .ds-field-input { width: 100%; background: transparent; border: none; outline: none; font-size: 15px; padding: 14px 16px; color: #111827; font-family: 'Google Sans', sans-serif; } .ds-field-control:focus-within { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,.12); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Frosted Signal",
+    "overview": "Rainbow's site renders enterprise trust through glass. Every primary surface — navigation, feature cards, testimonials, form inputs — sits behind frosted, blurred glassmorphism: white at 70-75% opacity, backdrop-blur, and a hairline border tinted with the brand purple rather than plain black. Behind that glass, soft radial blobs of purple and indigo drift in the negative space; they are ambient signal, not noise. One steady identity color (brand-500, #5e2d91) carries every moment that says \"this is Rainbow\" — logo, primary buttons, section badges, the hero word-shuffler. A second, more vibrant purple (brand-vibrant, #7c3aed) never competes with it; it is reserved for glass borders, glow shadows, and interactive accent states. A four-color \"laurenn\" spectrum (orange, pink, blue, green) is rationed even further: it shows up only as deliberate proof — certification badges, status pills, category tags — never as decoration. This restraint is the point: the product's real differentiator is compliance and sovereignty, and a system that spent its color budget freely would undercut that seriousness. Motion follows one signature spring curve everywhere it appears, so the whole surface feels like a single calm, confident signal rather than a collection of components.",
+    "keyCharacteristics": [
+      "Frosted glass surfaces (blur + low-opacity white + purple-tinted hairline border) over ambient radial-gradient blobs",
+      "One identity purple (#5e2d91); a second vibrant purple for glow/border accents only; a 4-color spectrum rationed to proof moments",
+      "Tight letter-spacing (-0.03em to -0.02em) on every display/headline/title size",
+      "One spring easing curve (cubic-bezier(.16,1,.3,1)) governs all interactive motion; linear is reserved for ambient/infinite loops",
+      "Purple-tinted shadows (rgba(124,58,237,…)), never pure black, on any elevated surface"
+    ],
+    "rules": [
+      { "name": "The One Purple Rule", "body": "#5e2d91 is the only color allowed to say \"this is Rainbow.\" #7c3aed is expressive, not identifying — it can glow and outline, but it may never appear on a logo, a primary CTA fill, or a text link.", "section": "colors" },
+      { "name": "The Proof-Only Rule", "body": "The laurenn spectrum appears exactly where the product is making a factual claim (certified, active, this category) — never as generic decoration or a section accent.", "section": "colors" },
+      { "name": "The Tight Tracking Rule", "body": "Every size at Title and above uses negative letter-spacing. A heading set at default tracking reads as an unfinished draft in this system, not a neutral choice.", "section": "typography" },
+      { "name": "The Purple Shadow Rule", "body": "Every elevated surface tints its shadow with rgba(124,58,237,…). Pure black shadows on this palette's purple/indigo surfaces read as muddy.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use the signature spring, cubic-bezier(.16, 1, .3, 1), for every hover, expand, and slide transition.",
+      "Do tint every elevated surface's shadow with rgba(124,58,237,…) rather than black.",
+      "Do apply -0.03em to -0.02em letter-spacing on every Title-and-above heading.",
+      "Do use #5e2d91 for anything that identifies the brand: logo, primary buttons, active states, section badges.",
+      "Do reserve the laurenn spectrum (orange/pink/blue/green) for moments that state a real fact — a certification, a status, a category — never as a section accent chosen for variety.",
+      "Do build new FAQ UI on .faq-card, and new buttons on the Tailwind rounded-btn bg-brand-500 inline pattern."
+    ],
+    "donts": [
+      "Don't use #7c3aed (brand.vibrant) as a brand-identifying color — logo, primary button fill, or body link. It's for glass borders, glows, and accent states only.",
+      "Don't mix ease-in-out/default easing into interactive transitions — reserve linear strictly for ambient/infinite loops (marquee, glow pulse, float).",
+      "Don't add a blob, gradient wash, or shine effect that isn't doing compositional work; if removing a decorative element makes the section read more clearly, remove it.",
+      "Don't extend .faq-item or .btn-cta-primary/.btn-cta-secondary in new work — both are legacy, kept only for the one page that still uses them.",
+      "Don't introduce a hard 0px corner anywhere; every surface in this system is soft-cornered, down to 4px at minimum."
+    ]
+  }
+}
