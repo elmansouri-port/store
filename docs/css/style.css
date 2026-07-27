@@ -958,12 +958,12 @@ input[type="number"] {
 
 .card-deco-waves {
     position: absolute;
-    bottom: -20%;
-    right: -20%;
-    width: 45%;
-    height: 45%;
+    bottom: -10%;
+    right: -10%;
+    width: 65%;
+    height: 65%;
     pointer-events: none;
-    opacity: 0.35;
+    opacity: 0.8;
 }
 
 .card-deco-waves svg {
@@ -1602,8 +1602,6 @@ input[type="number"] {
     box-shadow: 0 10px 30px rgba(30,27,75,.14);
     padding: 5px;
     min-width: 190px;
-    max-height: 320px;
-    overflow-y: auto;
     z-index: 60;
 }
 .cur-switcher.open .cur-menu { display: block; }
@@ -1625,6 +1623,6 @@ input[type="number"] {
 }
 .cur-opt:hover { background: #f5f3ff; }
 .cur-opt.active { color: #5e2d91; font-weight: 700; background: #f5f3ff; }
-.cur-opt .cur-opt-sym { min-width: 16px; font-weight: 700; color: #5e2d91; text-align: center; flex-shrink: 0; }
+.cur-opt .cur-opt-sym { width: 16px; font-weight: 700; color: #5e2d91; text-align: center; }
 .cur-selector-row { margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 .cur-selector-row .cur-label { font-size: 0.8125rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: .04em; }

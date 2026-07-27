@@ -11,22 +11,10 @@
 (function () {
   'use strict';
 
-  var RATES = {
-    EUR: 1, USD: 1.08, GBP: 0.86, CHF: 0.95, SEK: 11.2, DKK: 7.46,
-    NOK: 11.6, PLN: 4.30, HUF: 395, CZK: 25.2, RON: 4.97, BGN: 1.9558
-  };
-  var SYMBOL = {
-    EUR: '€', USD: '$', GBP: '£', CHF: 'CHF', SEK: 'kr', DKK: 'kr',
-    NOK: 'kr', PLN: 'zł', HUF: 'Ft', CZK: 'Kč', RON: 'lei', BGN: 'лв'
-  };
-  var LABEL = {
-    EUR: 'Euro', USD: 'US Dollar', GBP: 'Livre sterling', CHF: 'Franc suisse',
-    SEK: 'Couronne suédoise', DKK: 'Couronne danoise', NOK: 'Couronne norvégienne',
-    PLN: 'Zloty', HUF: 'Forint', CZK: 'Couronne tchèque', RON: 'Leu', BGN: 'Lev'
-  };
-  // Currencies written number-first with the symbol as a suffix (continental European convention).
-  var SUFFIX_CURRENCIES = { EUR: true, SEK: true, DKK: true, NOK: true, PLN: true, HUF: true, CZK: true, RON: true, BGN: true };
-  var ORDER = ['EUR', 'USD', 'GBP', 'CHF', 'SEK', 'DKK', 'NOK', 'PLN', 'HUF', 'CZK', 'RON', 'BGN'];
+  var RATES = { EUR: 1, USD: 1.08, GBP: 0.86 };
+  var SYMBOL = { EUR: '€', USD: '$', GBP: '£' };
+  var LABEL = { EUR: 'Euro', USD: 'US Dollar', GBP: 'British Pound' };
+  var ORDER = ['EUR', 'USD', 'GBP'];
   var STORAGE_KEY = 'rainbow_currency';
 
   function getCurrency() {
@@ -47,7 +35,6 @@
     var whole = Math.abs(value - Math.round(value)) < 0.005;
     var num = whole ? String(Math.round(value)) : value.toFixed(2);
     if (target === 'EUR') return num.replace('.', ',') + '€';
-    if (SUFFIX_CURRENCIES[target]) return num.replace('.', ',') + ' ' + SYMBOL[target];
     return SYMBOL[target] + num;
   }
 
