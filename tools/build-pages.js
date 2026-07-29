@@ -34,6 +34,9 @@ const ROUTES = {
   'faq': 'pages/faq.html',
   'contact': 'pages/contact.html',
   'partenaires': 'pages/partenaires.html',
+  'a-propos-de-rainbow': 'pages/a-propos-de-rainbow.html',
+  'rainbow-donnees-hebergees-en-france': 'pages/rainbow-donnees-hebergees-en-france.html',
+  'centre-aide-rainbow': 'pages/centre-aide-rainbow.html',
   'trouver-un-partenaire': 'pages/trouver-un-partenaire.html',
   'form-al': 'pages/form-ale.html'
 };
