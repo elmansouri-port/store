@@ -114,6 +114,7 @@ app.get('/trouver-un-partenaire',         (req, res) => sendPage(req, res, P('pa
 app.get('/a-propos-de-rainbow',           (req, res) => sendPage(req, res, P('pages/a-propos-de-rainbow.html')));
 app.get('/rainbow-donnees-hebergees-en-france', (req, res) => sendPage(req, res, P('pages/rainbow-donnees-hebergees-en-france.html')));
 app.get('/centre-aide-rainbow',           (req, res) => sendPage(req, res, P('pages/centre-aide-rainbow.html')));
+app.get('/telecharger-application-rainbow', (req, res) => sendPage(req, res, P('pages/telecharger-application-rainbow.html')));
 
 // ── API ────────────────────────────────────────────────────────────────────────
 
