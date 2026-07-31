@@ -1602,11 +1602,24 @@ input[type="number"] {
     box-shadow: 0 10px 30px rgba(30,27,75,.14);
     padding: 5px;
     min-width: 190px;
+    max-width: calc(100vw - 32px);
     max-height: 320px;
     overflow-y: auto;
     z-index: 60;
 }
 .cur-switcher.open .cur-menu { display: block; }
+/* On narrow phones (e.g. iPhone 12, 390px) a centered menu can spill past the
+   viewport edge when its trigger button sits off-center in a wrapped row.
+   Left-align it to the button instead so it always stays on-screen. */
+@media (max-width: 480px) {
+    .cur-menu {
+        left: 0;
+        right: auto;
+        transform: none;
+        min-width: 170px;
+        max-width: calc(100vw - 48px);
+    }
+}
 .cur-opt {
     display: flex;
     align-items: center;

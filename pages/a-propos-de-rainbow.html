@@ -59,29 +59,42 @@
     <style>
         .section-anchor { scroll-margin-top: 110px; }
 
-        /* ── Logo flip-reveal (slot-machine style) ── */
-        .logo-flip-card { perspective: 1200px; height: 84px; }
-        @media (min-width: 768px) { .logo-flip-card { height: 96px; } }
-        .logo-flip-inner {
+        /* ── Logo carousel: left-to-right wave swap ── */
+        .logo-wave-row {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 14px;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+        .logo-wave-card {
             position: relative;
-            width: 100%; height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.9s cubic-bezier(.4,0,.2,1);
+            width: 100%;
+            max-width: 260px;
+            height: 130px;
+            margin: 0 auto;
+            overflow: hidden;
         }
-        .logo-flip-grid.flipped .logo-flip-inner { transform: rotateY(180deg); }
-        .logo-flip-face {
-            position: absolute; inset: 0;
-            display: flex; align-items: center; justify-content: center;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            border-radius: 14px;
-            background: #fff;
-            border: 1px solid rgba(94,45,145,.10);
-            padding: 8px 12px;
+        .logo-wave-reel {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            transform: translateY(0);
+            will-change: transform;
         }
-        .logo-flip-face img { max-height: 100%; width: auto; object-fit: contain; filter: grayscale(20%); opacity: .88; transition: filter .2s, opacity .2s; }
-        .logo-flip-card:hover .logo-flip-face img { filter: grayscale(0); opacity: 1; }
-        .logo-flip-back { transform: rotateY(180deg); }
+        .logo-wave-reel img {
+            width: 100%;
+            height: 130px;
+            flex: 0 0 130px;
+            object-fit: contain;
+            padding: 4px 6px;
+            display: block;
+        }
+        @media (max-width: 640px) {
+            .logo-wave-row { gap: 8px; }
+            .logo-wave-card { height: 92px; }
+            .logo-wave-reel img { height: 92px; flex-basis: 92px; padding: 2px 4px; }
+        }
 
         /* ── Timeline ── */
         .timeline-rail {
@@ -312,77 +325,35 @@
                         </p>
                     </div>
 
-                    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 md:gap-5 logo-flip-grid" id="logo-flip-grid">
-                        <div class="logo-flip-card">
-                            <div class="logo-flip-inner" style="transition-delay:0ms">
-                                <div class="logo-flip-face logo-flip-front"><img src="/images/clients/bestford-insurance.png" alt="Bestford Insurance"></div>
-                                <div class="logo-flip-face logo-flip-back"><img src="/images/clients/herrenberg.png" alt="Herrenberg"></div>
+                    <div class="logo-wave-row" id="logo-wave-row">
+                        <div class="logo-wave-card">
+                            <div class="logo-wave-reel">
+                                <img src="/images/clients/bestford-insurance.png" alt="Bestford Insurance">
+                                <img src="/images/clients/herrenberg.png" alt="Herrenberg">
                             </div>
                         </div>
-                        <div class="logo-flip-card">
-                            <div class="logo-flip-inner" style="transition-delay:90ms">
-                                <div class="logo-flip-face logo-flip-front"><img src="/images/clients/loughborough-university-london.png" alt="Loughborough University London"></div>
-                                <div class="logo-flip-face logo-flip-back"><img src="/images/clients/eydap.webp" alt="EYDAP"></div>
+                        <div class="logo-wave-card">
+                            <div class="logo-wave-reel">
+                                <img src="/images/clients/hellweg.png" alt="Hellweg">
+                                <img src="/images/clients/taketa-city.png" alt="Taketa City">
                             </div>
                         </div>
-                        <div class="logo-flip-card">
-                            <div class="logo-flip-inner" style="transition-delay:180ms">
-                                <div class="logo-flip-face logo-flip-front"><img src="/images/clients/hellweg.png" alt="Hellweg"></div>
-                                <div class="logo-flip-face logo-flip-back"><img src="/images/clients/taketa-city.png" alt="Taketa City"></div>
+                        <div class="logo-wave-card">
+                            <div class="logo-wave-reel">
+                                <img src="/images/clients/careoutlook.webp" alt="CareOutlook">
+                                <img src="/images/clients/region-occitanie.png" alt="R&eacute;gion Occitanie">
                             </div>
                         </div>
-                        <div class="logo-flip-card">
-                            <div class="logo-flip-inner" style="transition-delay:270ms">
-                                <div class="logo-flip-face logo-flip-front"><img src="/images/clients/kingsway-hospitals.jpg" alt="Kingsway Hospitals"></div>
-                                <div class="logo-flip-face logo-flip-back"><img src="/images/clients/mayfair-hotels-resorts.jpg" alt="Mayfair Hotels & Resorts"></div>
+                        <div class="logo-wave-card">
+                            <div class="logo-wave-reel">
+                                <img src="/images/clients/morbihan.jpg" alt="Morbihan">
+                                <img src="/images/clients/hokkaido.png" alt="Hokkaido">
                             </div>
                         </div>
-                        <div class="logo-flip-card">
-                            <div class="logo-flip-inner" style="transition-delay:360ms">
-                                <div class="logo-flip-face logo-flip-front"><img src="/images/clients/csf-inox.png" alt="CSF Inox"></div>
-                                <div class="logo-flip-face logo-flip-back"><img src="/images/clients/careoutlook.webp" alt="CareOutlook"></div>
-                            </div>
-                        </div>
-                        <div class="logo-flip-card">
-                            <div class="logo-flip-inner" style="transition-delay:450ms">
-                                <div class="logo-flip-face logo-flip-front"><img src="/images/clients/region-occitanie.png" alt="R&eacute;gion Occitanie"></div>
-                                <div class="logo-flip-face logo-flip-back"><img src="/images/clients/montpellier-mediterranee-metropole.png" alt="Montpellier M&eacute;diterran&eacute;e M&eacute;tropole"></div>
-                            </div>
-                        </div>
-                        <div class="logo-flip-card">
-                            <div class="logo-flip-inner" style="transition-delay:540ms">
-                                <div class="logo-flip-face logo-flip-front"><img src="/images/clients/perpignan-mediterranee-metropole.png" alt="Perpignan M&eacute;diterran&eacute;e M&eacute;tropole"></div>
-                                <div class="logo-flip-face logo-flip-back"><img src="/images/clients/doma-hotels.jpg" alt="DOMA Hotels"></div>
-                            </div>
-                        </div>
-                        <div class="logo-flip-card">
-                            <div class="logo-flip-inner" style="transition-delay:630ms">
-                                <div class="logo-flip-face logo-flip-front"><img src="/images/clients/morbihan.jpg" alt="Morbihan"></div>
-                                <div class="logo-flip-face logo-flip-back"><img src="/images/clients/hokkaido.png" alt="Hokkaido"></div>
-                            </div>
-                        </div>
-                        <div class="logo-flip-card">
-                            <div class="logo-flip-inner" style="transition-delay:720ms">
-                                <div class="logo-flip-face logo-flip-front"><img src="/images/clients/chu-rennes.webp" alt="CHU Rennes"></div>
-                                <div class="logo-flip-face logo-flip-back"><img src="/images/clients/nexon.webp" alt="Nexon"></div>
-                            </div>
-                        </div>
-                        <div class="logo-flip-card">
-                            <div class="logo-flip-inner" style="transition-delay:810ms">
-                                <div class="logo-flip-face logo-flip-front"><img src="/images/clients/obrien-winter-partners.jpg" alt="O'Brien Winter Partners"></div>
-                                <div class="logo-flip-face logo-flip-back"><img src="/images/clients/ludwigshafen.png" alt="Ludwigshafen"></div>
-                            </div>
-                        </div>
-                        <div class="logo-flip-card">
-                            <div class="logo-flip-inner" style="transition-delay:900ms">
-                                <div class="logo-flip-face logo-flip-front"><img src="/images/clients/paytren.webp" alt="Paytren"></div>
-                                <div class="logo-flip-face logo-flip-back"><img src="/images/clients/centre-hospitalier-mayotte.png" alt="Centre Hospitalier de Mayotte"></div>
-                            </div>
-                        </div>
-                        <div class="logo-flip-card">
-                            <div class="logo-flip-inner" style="transition-delay:990ms">
-                                <div class="logo-flip-face logo-flip-front"><img src="/images/clients/region-bourgogne-franche-comte.jpg" alt="R&eacute;gion Bourgogne-Franche-Comt&eacute;"></div>
-                                <div class="logo-flip-face logo-flip-back"><img src="/images/clients/ajuntament-cunit.png" alt="Ajuntament Cunit"></div>
+                        <div class="logo-wave-card">
+                            <div class="logo-wave-reel">
+                                <img src="/images/clients/ludwigshafen.png" alt="Ludwigshafen">
+                                <img src="/images/clients/paytren.webp" alt="Paytren">
                             </div>
                         </div>
                     </div>
@@ -560,23 +531,101 @@
         }, {passive:true});
     </script>
     <script>
-        // ── Logo flip-reveal (slot-machine style): appear, hold 2s, then flip in a staggered wave ──
+        // ── Logo carousel: left-to-right wave swap ──
+        // Single global clock drives every card; each card is staggered by STAGGER_MS
+        // so the swap sweeps left-to-right, repeating every CYCLE_MS with no drift.
         (function () {
-            var grid = document.getElementById('logo-flip-grid');
-            if (!grid) return;
-            var triggered = false;
-            var observer = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting && !triggered) {
-                        triggered = true;
-                        setTimeout(function () {
-                            grid.classList.add('flipped');
-                        }, 2000);
-                        observer.disconnect();
-                    }
+            var LOGOS = [
+                { src: '/images/clients/bestford-insurance.png', alt: 'Bestford Insurance' },
+                { src: '/images/clients/herrenberg.png', alt: 'Herrenberg' },
+                { src: '/images/clients/loughborough-university-london.png', alt: 'Loughborough University London' },
+                { src: '/images/clients/eydap.webp', alt: 'EYDAP' },
+                { src: '/images/clients/hellweg.png', alt: 'Hellweg' },
+                { src: '/images/clients/taketa-city.png', alt: 'Taketa City' },
+                { src: '/images/clients/kingsway-hospitals.jpg', alt: 'Kingsway Hospitals' },
+                { src: '/images/clients/mayfair-hotels-resorts.jpg', alt: 'Mayfair Hotels & Resorts' },
+                { src: '/images/clients/csf-inox.png', alt: 'CSF Inox' },
+                { src: '/images/clients/careoutlook.webp', alt: 'CareOutlook' },
+                { src: '/images/clients/region-occitanie.png', alt: 'Région Occitanie' },
+                { src: '/images/clients/montpellier-mediterranee-metropole.png', alt: 'Montpellier Méditerranée Métropole' },
+                { src: '/images/clients/perpignan-mediterranee-metropole.png', alt: 'Perpignan Méditerranée Métropole' },
+                { src: '/images/clients/doma-hotels.jpg', alt: 'DOMA Hotels' },
+                { src: '/images/clients/morbihan.jpg', alt: 'Morbihan' },
+                { src: '/images/clients/hokkaido.png', alt: 'Hokkaido' },
+                { src: '/images/clients/chu-rennes.webp', alt: 'CHU Rennes' },
+                { src: '/images/clients/nexon.webp', alt: 'Nexon' },
+                { src: '/images/clients/obrien-winter-partners.jpg', alt: "O'Brien Winter Partners" },
+                { src: '/images/clients/ludwigshafen.png', alt: 'Ludwigshafen' },
+                { src: '/images/clients/paytren.webp', alt: 'Paytren' },
+                { src: '/images/clients/centre-hospitalier-mayotte.png', alt: 'Centre Hospitalier de Mayotte' },
+                { src: '/images/clients/region-bourgogne-franche-comte.jpg', alt: 'Région Bourgogne-Franche-Comté' },
+                { src: '/images/clients/ajuntament-cunit.png', alt: 'Ajuntament Cunit' }
+            ];
+
+            var row = document.getElementById('logo-wave-row');
+            if (!row) return;
+            var cards = Array.prototype.slice.call(row.querySelectorAll('.logo-wave-card'));
+            if (!cards.length) return;
+
+            var TICK_MS = 50;          // master clock resolution
+            var HOLD_MS = 3000;        // ~3s steady hold before a card moves
+            var TRANSITION_MS = 600;   // slide duration
+            var STAGGER_MS = 200;      // delay between each card's move (left → right wave)
+            var CYCLE_MS = HOLD_MS + TRANSITION_MS; // full period between a card's successive moves
+
+            var state = cards.map(function (card, i) {
+                var reel = card.querySelector('.logo-wave-reel');
+                var imgs = reel.querySelectorAll('img');
+                var start = Math.floor(i * LOGOS.length / cards.length);
+                return {
+                    reel: reel,
+                    imgs: imgs,
+                    index: start,
+                    phase: HOLD_MS + i * STAGGER_MS, // first move happens ~3s in, wave order left → right
+                    busy: false
+                };
+            });
+
+            function advance(s) {
+                if (s.busy) return;
+                s.busy = true;
+
+                var height = s.reel.parentElement.getBoundingClientRect().height || 110;
+                s.reel.style.transition = 'transform ' + (TRANSITION_MS / 1000) + 's ease-out';
+                s.reel.style.transform = 'translateY(-' + height + 'px)';
+
+                var resolved = false;
+                function reset() {
+                    if (resolved) return;
+                    resolved = true;
+                    s.reel.removeEventListener('transitionend', reset);
+
+                    s.reel.style.transition = 'none';
+                    s.reel.style.transform = 'translateY(0)';
+
+                    s.index = (s.index + 1) % LOGOS.length;
+                    var nextIndex = (s.index + 1) % LOGOS.length;
+                    s.imgs[0].src = LOGOS[s.index].src;
+                    s.imgs[0].alt = LOGOS[s.index].alt;
+                    s.imgs[1].src = LOGOS[nextIndex].src;
+                    s.imgs[1].alt = LOGOS[nextIndex].alt;
+
+                    void s.reel.offsetHeight; // force reflow so 'transition: none' takes effect first
+                    s.busy = false;
+                }
+                s.reel.addEventListener('transitionend', reset);
+                setTimeout(reset, TRANSITION_MS + 150); // safety net if transitionend never fires
+            }
+
+            var clock = 0;
+            setInterval(function () {
+                clock += TICK_MS;
+                state.forEach(function (s) {
+                    var elapsed = (clock - s.phase) % CYCLE_MS;
+                    if (elapsed < 0) elapsed += CYCLE_MS;
+                    if (elapsed < TICK_MS) advance(s);
                 });
-            }, { threshold: 0.3 });
-            observer.observe(grid);
+            }, TICK_MS);
         })();
     </script>
 <!-- impeccable-live-start -->

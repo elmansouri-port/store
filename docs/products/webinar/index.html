@@ -192,10 +192,10 @@
                 <div class="mt-9 flex flex-col sm:flex-row gap-4">
                     <a href="/store/tarifs"
                         class="inline-flex items-center justify-center px-8 py-3.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-base font-bold whitespace-nowrap shadow-xl shadow-purple-900/20 transition-all active:scale-95">Essai gratuit</a>
-                    <a href="https://giantlink.ma/form-ale"
+                    <button type="button" onclick="openDemoModal()"
                         class="inline-flex items-center justify-center px-8 py-3.5 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-base font-bold whitespace-nowrap transition-all active:scale-95">
-                        Contacter un expert
-                    </a>
+                        Demander une d&eacute;mo
+                    </button>
                 </div>
             </div>
 
@@ -612,7 +612,7 @@
                         <p class="text-gray-500 max-w-2xl mx-auto text-[17px]">Sans engagement annuel obligatoire. Sans frais cach&eacute;s. Sans mauvaise surprise.</p>
 
                         <!-- Monthly/Yearly Switch -->
-                        <div class="mt-10 flex items-center justify-center gap-4">
+                        <div class="mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
                             <div class="cur-switcher">
                                 <button type="button" class="cur-btn" aria-haspopup="listbox" aria-expanded="false">
                                     <span class="cur-sym" data-cur-sym>€</span>
@@ -1151,6 +1151,138 @@
         </div>
     </footer>
 
+    <!-- ===== DEMO REQUEST MODAL (lead capture) ===== -->
+    <div id="demo-modal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeDemoModal()"></div>
+        <div class="absolute inset-0 flex items-start sm:items-center justify-center p-4 overflow-y-auto">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full my-8 relative" onclick="event.stopPropagation()">
+                <button onclick="closeDemoModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 z-10" aria-label="Fermer">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+
+                <div class="p-7 sm:p-9">
+                    <!-- Form panel -->
+                    <div id="demo-panel-form">
+                        <h3 id="demo-modal-title" class="text-xl sm:text-2xl font-extrabold text-navy-900 tracking-tight mb-2">Besoin d'une d&eacute;mo <span class="text-brand-500">Rainbow Webinar</span>&nbsp;?</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed mb-6">Laissez-nous vos coordonn&eacute;es pour planifier une d&eacute;mo avec notre &eacute;quipe commerciale. Nous passerons en revue les fonctionnalit&eacute;s Enterprise et r&eacute;pondrons &agrave; vos questions.</p>
+
+                        <div class="grid grid-cols-2 gap-3 mb-7" role="tablist">
+                            <button type="button" id="demo-tab-book" role="tab" aria-selected="true" onclick="setDemoTab('book')" class="demo-tab-btn text-left p-4 rounded-xl border-2 border-gray-200 bg-white transition-all">
+                                <span class="flex items-center gap-2 font-bold text-navy-900 text-sm">
+                                    <svg class="w-4 h-4 text-brand-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                                    Demander une d&eacute;mo
+                                </span>
+                                <span class="block text-xs text-gray-500 mt-1">D&eacute;couvrez nos plans Enterprise avec notre &eacute;quipe commerciale</span>
+                            </button>
+                            <button type="button" id="demo-tab-video" role="tab" aria-selected="false" onclick="setDemoTab('video')" class="demo-tab-btn text-left p-4 rounded-xl border-2 border-gray-200 bg-white transition-all">
+                                <span class="flex items-center gap-2 font-bold text-navy-900 text-sm">
+                                    <svg class="w-4 h-4 text-brand-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"/></svg>
+                                    Voir une vid&eacute;o
+                                </span>
+                                <span class="block text-xs text-gray-500 mt-1">Acc&eacute;dez &agrave; une vid&eacute;o de pr&eacute;sentation du produit</span>
+                            </button>
+                        </div>
+
+                        <form id="demo-form" novalidate>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="demo-first-name" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Pr&eacute;nom <span class="text-brand-500">*</span></label>
+                                    <input required type="text" id="demo-first-name" placeholder="Jean" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label for="demo-last-name" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Nom <span class="text-brand-500">*</span></label>
+                                    <input required type="text" id="demo-last-name" placeholder="Dupont" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label for="demo-email" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Email professionnel <span class="text-brand-500">*</span></label>
+                                    <input required type="email" id="demo-email" placeholder="jean@entreprise.com" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label for="demo-phone" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">T&eacute;l&eacute;phone</label>
+                                    <input type="tel" id="demo-phone" placeholder="+33 6 12 34 56 78" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label for="demo-company" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Nom de l'entreprise <span class="text-brand-500">*</span></label>
+                                    <input required type="text" id="demo-company" placeholder="Acme" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label for="demo-company-size" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Taille de l'entreprise <span class="text-brand-500">*</span></label>
+                                    <select required id="demo-company-size" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm bg-white text-gray-700">
+                                        <option value="" disabled selected>S&eacute;lectionner</option>
+                                        <option>1-10 employ&eacute;s</option>
+                                        <option>11-50 employ&eacute;s</option>
+                                        <option>51-200 employ&eacute;s</option>
+                                        <option>201-500 employ&eacute;s</option>
+                                        <option>501-1000 employ&eacute;s</option>
+                                        <option>1000+ employ&eacute;s</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="demo-country" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Pays / R&eacute;gion <span class="text-brand-500">*</span></label>
+                                    <select required id="demo-country" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm bg-white text-gray-700">
+                                        <option value="" disabled selected>S&eacute;lectionner</option>
+                                        <option>France</option>
+                                        <option>Belgique</option>
+                                        <option>Suisse</option>
+                                        <option>Luxembourg</option>
+                                        <option>Allemagne</option>
+                                        <option>Espagne</option>
+                                        <option>Italie</option>
+                                        <option>Royaume-Uni</option>
+                                        <option>Autre</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="demo-source" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Comment nous avez-vous connu&nbsp;?</label>
+                                    <select id="demo-source" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm bg-white text-gray-700">
+                                        <option value="" selected>S&eacute;lectionner</option>
+                                        <option>Recherche Google</option>
+                                        <option>R&eacute;seaux sociaux</option>
+                                        <option>Recommandation</option>
+                                        <option>&Eacute;v&eacute;nement / Salon</option>
+                                        <option>Partenaire Rainbow</option>
+                                        <option>Autre</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <label class="flex items-start gap-2.5 mt-5 cursor-pointer">
+                                <input required type="checkbox" id="demo-consent" class="mt-0.5 w-4 h-4 rounded border-gray-300 text-brand-500 focus:ring-brand-500 shrink-0">
+                                <span class="text-xs text-gray-500 leading-relaxed">J'accepte les <a href="/store/legal" class="text-brand-500 font-semibold hover:underline">conditions d'utilisation</a> de Rainbow et l'utilisation de mes donn&eacute;es personnelles telle que d&eacute;crite dans la <a href="/store/privacy" class="text-brand-500 font-semibold hover:underline">politique de confidentialit&eacute;</a>. <span class="text-brand-500">*</span></span>
+                            </label>
+
+                            <button type="submit" class="w-full mt-6 py-3.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm transition-all active:scale-[.98] shadow-lg shadow-purple-900/15">
+                                Demander une d&eacute;mo
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Video panel -->
+                    <div id="demo-panel-video" class="hidden">
+                        <h3 class="text-xl sm:text-2xl font-extrabold text-navy-900 tracking-tight mb-2">D&eacute;couvrez <span class="text-brand-500">Rainbow Webinar</span> en vid&eacute;o</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed mb-6">Un aper&ccedil;u rapide de l'interface et des fonctionnalit&eacute;s cl&eacute;s, sans rendez-vous n&eacute;cessaire.</p>
+                        <div class="rounded-xl overflow-hidden border border-gray-200 bg-black">
+                            <video src="/store/images/webinar-page/interface_rainbow_webinar_v3.mp4" controls playsinline class="w-full h-auto block"></video>
+                        </div>
+                        <button type="button" onclick="setDemoTab('book')" class="w-full mt-6 py-3.5 rounded-btn border-2 border-brand-500 text-brand-500 hover:bg-brand-50 font-bold text-sm transition-all">
+                            Plut&ocirc;t planifier une d&eacute;mo avec un expert
+                        </button>
+                    </div>
+
+                    <!-- Success panel -->
+                    <div id="demo-panel-success" class="hidden text-center py-6">
+                        <div class="w-14 h-14 rounded-full bg-brand-50 flex items-center justify-center mx-auto mb-5">
+                            <svg class="w-7 h-7 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-navy-900 tracking-tight mb-2">Merci&nbsp;!</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed max-w-sm mx-auto">Votre demande a bien &eacute;t&eacute; enregistr&eacute;e. Un membre de notre &eacute;quipe commerciale vous recontactera sous 24h ouvr&eacute;es.</p>
+                        <button type="button" onclick="closeDemoModal()" class="mt-6 px-8 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm transition-all">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="/store/js/mega-menu.js"></script>
     <script src="/store/js/i18n.js"></script>
     <script>
@@ -1411,6 +1543,73 @@
     })();
     </script>
     <script src="/store/js/currency.js"></script>
+    <script>
+        // ── Demo request modal (lead capture) ──
+        (function () {
+            var modal = document.getElementById('demo-modal');
+            if (!modal) return;
+            var tabBook = document.getElementById('demo-tab-book');
+            var tabVideo = document.getElementById('demo-tab-video');
+            var panelForm = document.getElementById('demo-panel-form');
+            var panelVideo = document.getElementById('demo-panel-video');
+            var panelSuccess = document.getElementById('demo-panel-success');
+            var form = document.getElementById('demo-form');
+            var video = panelVideo.querySelector('video');
+            var lastFocused = null;
+
+            function setTabStyles() {
+                [tabBook, tabVideo].forEach(function (btn) {
+                    var selected = btn.getAttribute('aria-selected') === 'true';
+                    btn.classList.toggle('border-brand-500', selected);
+                    btn.classList.toggle('bg-brand-50', selected);
+                    btn.classList.toggle('border-gray-200', !selected);
+                });
+            }
+
+            window.setDemoTab = function (tab) {
+                var showBook = tab === 'book';
+                tabBook.setAttribute('aria-selected', showBook ? 'true' : 'false');
+                tabVideo.setAttribute('aria-selected', showBook ? 'false' : 'true');
+                setTabStyles();
+                panelForm.classList.toggle('hidden', !showBook);
+                panelVideo.classList.toggle('hidden', showBook);
+                panelSuccess.classList.add('hidden');
+                if (!showBook) { video.currentTime = 0; video.play().catch(function () {}); }
+                else { video.pause(); }
+            };
+
+            window.openDemoModal = function () {
+                lastFocused = document.activeElement;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                panelSuccess.classList.add('hidden');
+                setDemoTab('book');
+                form.reset();
+                var firstInput = document.getElementById('demo-first-name');
+                if (firstInput) firstInput.focus();
+            };
+
+            window.closeDemoModal = function () {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+                video.pause();
+                if (lastFocused && lastFocused.focus) lastFocused.focus();
+            };
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeDemoModal();
+            });
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (!form.checkValidity()) { form.reportValidity(); return; }
+                panelForm.classList.add('hidden');
+                panelSuccess.classList.remove('hidden');
+            });
+
+            setTabStyles();
+        })();
+    </script>
 <!-- impeccable-live-start -->
 <script src="http://localhost:8400/live.js?token=7e1a9f72-559f-41b5-9268-cc7ffe4bf926"></script>
 <!-- impeccable-live-end -->
