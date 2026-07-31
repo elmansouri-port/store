@@ -48,62 +48,6 @@
     <link rel="stylesheet" href="/store/css/style.css">
     <link rel="stylesheet" href="/store/css/mega-menu.css">
     <style>
-        .lang-switcher { position: relative; }
-        .lang-switcher button { display: flex; align-items: center; gap: 4px; font-size: 0.8125rem; color: #64748b; cursor: pointer; background: none; border: none; padding: 4px 8px; border-radius: 6px; transition: color .2s; }
-        .lang-switcher button:hover { color: #0f172a; }
-        .lang-switcher .lang-dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border: 1px solid #e9e5ff; border-radius: 10px; box-shadow: 0 8px 24px rgba(124,58,237,.08); min-width: 140px; z-index: 200; padding: 4px 0; margin-top: 4px; }
-        .lang-switcher.open .lang-dropdown { display: block; }
-        .lang-dropdown button { display: block; width: 100%; text-align: left; padding: 8px 14px; font-size: 0.8125rem; color: #374151; border: none; background: none; cursor: pointer; }
-        .lang-dropdown button:hover { background: #f5f3ff; }
-        .lang-dropdown button.active { color: #7c3aed; font-weight: 600; }
-
-        /* ── Floating anchor nav ── */
-        .float-nav {
-            position: fixed;
-            top: 76px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-6px);
-            z-index: 45;
-            background: #ede9fe;
-            border-radius: 999px;
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            gap: 2px;
-            box-shadow: 0 4px 24px rgba(94,45,145,.13), 0 1px 4px rgba(94,45,145,.08);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .25s ease, transform .25s ease;
-            white-space: nowrap;
-            max-width: calc(100vw - 24px);
-            overflow-x: auto;
-            scrollbar-width: none;
-        }
-        .float-nav::-webkit-scrollbar { display: none; }
-        .float-nav.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateX(-50%) translateY(0);
-        }
-        .float-nav-item {
-            flex: 0 0 auto;
-            padding: 8px 20px;
-            border-radius: 999px;
-            font-size: .8125rem;
-            font-weight: 500;
-            color: #5e2d91;
-            cursor: pointer;
-            transition: background .18s, font-weight .18s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .float-nav-item:hover { background: rgba(255,255,255,.55); }
-        .float-nav-item.active {
-            background: #fff;
-            font-weight: 700;
-            box-shadow: 0 1px 6px rgba(94,45,145,.12);
-        }
-
         .section-anchor { scroll-margin-top: 110px; }
 
         /* ── Certification flip cards (same component as the homepage carousel) ── */
@@ -167,15 +111,6 @@
     </style>
 </head>
 <body class="font-sans text-gray-700 antialiased bg-white">
-
-    <!-- ===== FLOATING ANCHOR NAV ===== -->
-    <nav class="float-nav" id="float-nav" role="navigation" aria-label="Navigation de la page">
-        <a href="#risques" class="float-nav-item active" data-section="risques">Risques</a>
-        <a href="#architecture" class="float-nav-item" data-section="architecture">Architecture</a>
-        <a href="#certifications" class="float-nav-item" data-section="certifications">Certifications</a>
-        <a href="#securite" class="float-nav-item" data-section="securite">Sécurité</a>
-        <a href="#comparatif" class="float-nav-item" data-section="comparatif">Comparatif</a>
-    </nav>
 
     <!-- ===== NAV ===== -->
     <nav id="navbar" class="fixed top-0 w-full z-50 glass-nav">
@@ -306,7 +241,7 @@
                             <svg class="w-5 h-5 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5"/></svg>
                         </div>
                         <h3 class="text-lg font-bold text-navy-900 mb-3">Une gouvernance rest&eacute;e fran&ccedil;aise</h3>
-                        <p class="text-sm md:text-[15px] text-gray-600 leading-relaxed">Alcatel Lucent Enterprise est une soci&eacute;t&eacute; de droit fran&ccedil;ais, avec un si&egrave;ge social &agrave; Colombes. Sa strat&eacute;gie produit et la gouvernance des donn&eacute;es restent pilot&eacute;es depuis la France, ind&eacute;pendamment de la structure actionnariale du groupe.</p>
+                        <p class="text-sm md:text-[15px] text-gray-600 leading-relaxed">Alcatel-Lucent est une soci&eacute;t&eacute; de droit fran&ccedil;ais, avec un si&egrave;ge social &agrave; Colombes. Sa strat&eacute;gie produit et la gouvernance des donn&eacute;es restent pilot&eacute;es depuis la France, ind&eacute;pendamment de la structure actionnariale du groupe.</p>
                     </div>
                 </div>
             </section>
@@ -328,7 +263,7 @@
                             <svg class="w-6 h-6 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"/></svg>
                         </div>
                         <h3 class="text-base font-bold text-navy-900 mb-2">Conception et R&amp;D en France</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">Les &eacute;quipes de conception et d'ing&eacute;nierie de fiabilit&eacute; (SRE) d'Alcatel Lucent Enterprise sont bas&eacute;es dans trois sites fran&ccedil;ais&nbsp;: Brest, Illkirch et Colombes.</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Les &eacute;quipes de conception et d'ing&eacute;nierie de fiabilit&eacute; (SRE) d'Alcatel-Lucent sont bas&eacute;es dans trois sites fran&ccedil;ais&nbsp;: Brest, Illkirch et Colombes.</p>
                     </div>
                     <div class="text-center px-4">
                         <div class="w-14 h-14 rounded-full bg-brand-50 flex items-center justify-center mx-auto mb-5">
@@ -743,7 +678,7 @@
                             Contacter un expert
                         </a>
                         <a href="/store/a-propos-de-rainbow" class="px-8 py-3 rounded-btn border-2 border-brand-500 text-purple-900 hover:bg-gray-50 text-base font-bold transition-all active:scale-95 inline-flex items-center justify-center">
-                            D&eacute;couvrir Alcatel Lucent Enterprise
+                            D&eacute;couvrir Alcatel-Lucent
                         </a>
                     </div>
                 </div>
@@ -813,7 +748,7 @@
             <div class="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-16 py-16">
                 <!-- Brand -->
                 <div class="max-w-xs">
-                    <img src="/store/images/ale_white.png" alt="Alcatel-Lucent Enterprise" class="h-11 w-auto opacity-90 mb-6">
+                    <img src="/store/images/ale_white.png" alt="Alcatel-Lucent" class="h-11 w-auto opacity-90 mb-6">
                     <address class="not-italic text-sm text-gray-400 leading-relaxed">
                         ALE International<br>
                         32 avenue Kl&eacute;ber<br>
@@ -900,57 +835,6 @@
         window.addEventListener('scroll', function(){
             nav.style.boxShadow = window.scrollY > 8 ? '0 1px 12px rgba(30,27,75,.07)' : '';
         }, {passive:true});
-    </script>
-    <script>
-        // ── Floating anchor nav scroll-spy ──
-        (function () {
-            var floatNav = document.getElementById('float-nav');
-            var heroEl = document.querySelector('header');
-            var sectionIds = ['risques', 'architecture', 'certifications', 'securite', 'comparatif'];
-
-            function getActive() {
-                var current = sectionIds[0];
-                for (var i = 0; i < sectionIds.length; i++) {
-                    var el = document.getElementById(sectionIds[i]);
-                    if (!el) continue;
-                    if (el.getBoundingClientRect().top <= 120) current = sectionIds[i];
-                }
-                return current;
-            }
-
-            function update() {
-                var heroBottom = heroEl ? heroEl.getBoundingClientRect().bottom : -1;
-                if (heroBottom < 64) {
-                    floatNav.classList.add('visible');
-                } else {
-                    floatNav.classList.remove('visible');
-                }
-
-                var active = getActive();
-                document.querySelectorAll('.float-nav-item').forEach(function (item) {
-                    if (item.dataset.section === active) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', update, { passive: true });
-            update();
-
-            document.querySelectorAll('.float-nav-item').forEach(function (item) {
-                item.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    var target = document.getElementById(item.dataset.section);
-                    if (target) {
-                        var offset = 96;
-                        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-                        window.scrollTo({ top: top, behavior: 'smooth' });
-                    }
-                });
-            });
-        })();
     </script>
     <script>
         // Certifications carousel arrows

@@ -48,62 +48,6 @@
     <link rel="stylesheet" href="/store/css/style.css">
     <link rel="stylesheet" href="/store/css/mega-menu.css">
     <style>
-        .lang-switcher { position: relative; }
-        .lang-switcher button { display: flex; align-items: center; gap: 4px; font-size: 0.8125rem; color: #64748b; cursor: pointer; background: none; border: none; padding: 4px 8px; border-radius: 6px; transition: color .2s; }
-        .lang-switcher button:hover { color: #0f172a; }
-        .lang-switcher .lang-dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border: 1px solid #e9e5ff; border-radius: 10px; box-shadow: 0 8px 24px rgba(124,58,237,.08); min-width: 140px; z-index: 200; padding: 4px 0; margin-top: 4px; }
-        .lang-switcher.open .lang-dropdown { display: block; }
-        .lang-dropdown button { display: block; width: 100%; text-align: left; padding: 8px 14px; font-size: 0.8125rem; color: #374151; border: none; background: none; cursor: pointer; }
-        .lang-dropdown button:hover { background: #f5f3ff; }
-        .lang-dropdown button.active { color: #7c3aed; font-weight: 600; }
-
-        /* ── Floating anchor nav ── */
-        .float-nav {
-            position: fixed;
-            top: 76px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-6px);
-            z-index: 45;
-            background: #ede9fe;
-            border-radius: 999px;
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            gap: 2px;
-            box-shadow: 0 4px 24px rgba(94,45,145,.13), 0 1px 4px rgba(94,45,145,.08);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .25s ease, transform .25s ease;
-            white-space: nowrap;
-            max-width: calc(100vw - 24px);
-            overflow-x: auto;
-            scrollbar-width: none;
-        }
-        .float-nav::-webkit-scrollbar { display: none; }
-        .float-nav.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateX(-50%) translateY(0);
-        }
-        .float-nav-item {
-            flex: 0 0 auto;
-            padding: 8px 20px;
-            border-radius: 999px;
-            font-size: .8125rem;
-            font-weight: 500;
-            color: #5e2d91;
-            cursor: pointer;
-            transition: background .18s, font-weight .18s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .float-nav-item:hover { background: rgba(255,255,255,.55); }
-        .float-nav-item.active {
-            background: #fff;
-            font-weight: 700;
-            box-shadow: 0 1px 6px rgba(94,45,145,.12);
-        }
-
         .section-anchor { scroll-margin-top: 110px; }
 
         /* ── Search bar (same component as the FAQ hero) ── */
@@ -129,12 +73,6 @@
     </style>
 </head>
 <body class="font-sans text-gray-700 antialiased bg-white">
-
-    <!-- ===== FLOATING ANCHOR NAV ===== -->
-    <nav class="float-nav" id="float-nav" role="navigation" aria-label="Navigation de la page">
-        <a href="#parcours" class="float-nav-item active" data-section="parcours">Parcours guid&eacute;s</a>
-        <a href="#documentation" class="float-nav-item" data-section="documentation">Documentation</a>
-    </nav>
 
     <!-- ===== NAV ===== -->
     <nav id="navbar" class="fixed top-0 w-full z-50 glass-nav">
@@ -394,7 +332,7 @@
             <div class="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-16 py-16">
                 <!-- Brand -->
                 <div class="max-w-xs">
-                    <img src="/store/images/ale_white.png" alt="Alcatel-Lucent Enterprise" class="h-11 w-auto opacity-90 mb-6">
+                    <img src="/store/images/ale_white.png" alt="Alcatel-Lucent" class="h-11 w-auto opacity-90 mb-6">
                     <address class="not-italic text-sm text-gray-400 leading-relaxed">
                         ALE International<br>
                         32 avenue Kl&eacute;ber<br>
@@ -483,66 +421,21 @@
             nav.style.boxShadow = window.scrollY > 8 ? '0 1px 12px rgba(30,27,75,.07)' : '';
         }, {passive:true});
 
-        // Help search: route to the support hub with the query
+        // Help search: route to the Rainbow help center, in the visitor's current site language
+        var HELP_LOCALES = { en: 'en-us', fr: 'fr', de: 'de', it: 'it', es: 'es' };
+        function helpLocale() {
+            var lang = (window.i18n && typeof window.i18n.getLang === 'function') ? window.i18n.getLang() : 'en';
+            return HELP_LOCALES[lang] || 'en-us';
+        }
         var helpForm = document.getElementById('help-search-form');
         if (helpForm) {
             helpForm.addEventListener('submit', function(e){
                 e.preventDefault();
                 var q = document.getElementById('help-search-input').value.trim();
-                window.location.href = '/support' + (q ? ('?q=' + encodeURIComponent(q)) : '');
+                var url = 'https://help.openrainbow.com/hc/' + helpLocale() + '/search';
+                window.location.href = url + (q ? ('?query=' + encodeURIComponent(q)) : '');
             });
         }
-    </script>
-    <script>
-        // ── Floating anchor nav scroll-spy ──
-        (function () {
-            var floatNav = document.getElementById('float-nav');
-            var heroEl = document.querySelector('header');
-            var sectionIds = ['parcours', 'documentation'];
-
-            function getActive() {
-                var current = sectionIds[0];
-                for (var i = 0; i < sectionIds.length; i++) {
-                    var el = document.getElementById(sectionIds[i]);
-                    if (!el) continue;
-                    if (el.getBoundingClientRect().top <= 120) current = sectionIds[i];
-                }
-                return current;
-            }
-
-            function update() {
-                var heroBottom = heroEl ? heroEl.getBoundingClientRect().bottom : -1;
-                if (heroBottom < 64) {
-                    floatNav.classList.add('visible');
-                } else {
-                    floatNav.classList.remove('visible');
-                }
-
-                var active = getActive();
-                document.querySelectorAll('.float-nav-item').forEach(function (item) {
-                    if (item.dataset.section === active) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', update, { passive: true });
-            update();
-
-            document.querySelectorAll('.float-nav-item').forEach(function (item) {
-                item.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    var target = document.getElementById(item.dataset.section);
-                    if (target) {
-                        var offset = 96;
-                        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-                        window.scrollTo({ top: top, behavior: 'smooth' });
-                    }
-                });
-            });
-        })();
     </script>
 <!-- impeccable-live-start -->
 <script src="http://localhost:8400/live.js?token=7e1a9f72-559f-41b5-9268-cc7ffe4bf926"></script>

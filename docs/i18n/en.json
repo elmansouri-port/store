@@ -52,7 +52,7 @@
     "rainbow": "Rainbow",
     "solutions": "Solutions",
     "industries": "Industries",
-    "copyright": "&copy; 2026 Rainbow by Alcatel-Lucent Enterprise. All rights reserved.",
+    "copyright": "&copy; 2026 Rainbow by Alcatel-Lucent. All rights reserved.",
     "copyrightShort": "&copy; 2026 Rainbow by ALE. All rights reserved."
   },
   "products": {
@@ -430,12 +430,12 @@
     "ctaContactUs": "Contact Sales"
   },
   "about": {
-    "title": "About Alcatel-Lucent Enterprise",
+    "title": "About Alcatel-Lucent",
     "heroTag": "About Us",
     "heroTitle": "Connecting People & Business",
-    "heroDescription": "For over 100 years, Alcatel-Lucent Enterprise has been at the forefront of communication innovation, helping businesses worldwide connect, collaborate and grow.",
+    "heroDescription": "For over 100 years, Alcatel-Lucent has been at the forefront of communication innovation, helping businesses worldwide connect, collaborate and grow.",
     "storyTitle": "Our Story",
-    "storyP1": "Alcatel-Lucent Enterprise (ALE) is a leading provider of communications, networking and cloud solutions tailored to customers' industries. With innovative technology and a deep understanding of business needs, ALE delivers solutions that connect people and things, processes and knowledge.",
+    "storyP1": "Alcatel-Lucent (ALE) is a leading provider of communications, networking and cloud solutions tailored to customers' industries. With innovative technology and a deep understanding of business needs, ALE delivers solutions that connect people and things, processes and knowledge.",
     "storyP2": "Rainbow by ALE is the next-generation cloud communication platform that brings together messaging, video conferencing, telephony, and collaboration into a single, unified experience for businesses of all sizes.",
     "figuresTitle": "Key Figures",
     "figEmployees": "Employees worldwide",
@@ -512,7 +512,7 @@
   "solutions": {
     "heroTag": "Our Portfolio",
     "heroTitle": "ALE Solutions",
-    "heroDescription": "From unified communications to enterprise networking, discover the complete Alcatel-Lucent Enterprise portfolio.",
+    "heroDescription": "From unified communications to enterprise networking, discover the complete Alcatel-Lucent portfolio.",
     "loading": "Loading solutions...",
     "noSolutions": "No solutions available yet.",
     "loadError": "Failed to load solutions.",
