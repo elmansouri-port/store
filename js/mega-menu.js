@@ -67,7 +67,7 @@
             '<div class="mega-menu-showcase-img">' + svgIcon('chat') + '</div>',
             '<div class="mega-menu-showcase-body">',
               '<p class="mega-menu-showcase-title">Rainbow Collaboration</p>',
-              '<p class="mega-menu-showcase-desc">Messagerie, visioconférence et téléphonie unifiés pour vos équipes au quotidien.</p>',
+              'Messagerie, visioconférence et appels audio, propulsés par l&#39;IA.</p>',
               '<span class="mega-menu-showcase-tag">Populaire</span>',
             '</div>',
           '</a>',
@@ -357,7 +357,7 @@
       if (!mobileEl) continue;
       sm.parentNode.insertBefore(mobileEl, sm.nextSibling);
 
-      // Accordion toggle — uses CSS classes (mob-section-hdr / is-open / mob-chev)
+      // Accordion toggle  uses CSS classes (mob-section-hdr / is-open / mob-chev)
       if (headerEl && headerEl.tagName === 'A') {
         (function (content, header) {
           var SVGNS = 'http://www.w3.org/2000/svg';
@@ -394,7 +394,7 @@
       }
     }
 
-    // Hamburger ↔ X icon — reacts to #mobile-menu hidden class changes
+    // Hamburger ↔ X icon  reacts to #mobile-menu hidden class changes
     var mobileBtn   = document.getElementById('mobile-menu-btn');
     var mobilePanel = document.getElementById('mobile-menu');
     var hamSVG   = '<svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>';

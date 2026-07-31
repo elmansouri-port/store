@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * build-pages.js — generate a static GitHub Pages build into ./docs
+ * build-pages.js  generate a static GitHub Pages build into ./docs
  *
  * Why: this repo is a Node/Express app that uses clean URLs (/products, /contact, ...)
  * and root-absolute asset paths (/css, /js, /images). GitHub Pages can't run Express,
@@ -124,7 +124,7 @@ if (fs.existsSync(notFoundSrc)) {
   fs.writeFileSync(path.join(OUT, '404.html'),
     '<!doctype html><html lang="fr"><head><meta charset="utf-8">' +
     '<meta name="viewport" content="width=device-width,initial-scale=1">' +
-    '<title>Page introuvable — Rainbow</title>' +
+    '<title>Page introuvable  Rainbow</title>' +
     `<meta http-equiv="refresh" content="3;url=${BASE}/">` +
     '<style>body{font-family:Inter,system-ui,sans-serif;background:#f9f8fe;color:#1f2937;' +
     'display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;text-align:center}' +

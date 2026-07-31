@@ -248,7 +248,7 @@ function initUnifiedPlatformTabs() {
 
     // Every tab expands to the SAME height (the tallest content) and the quote
     // block is locked to its tallest quote, so switching tabs never changes the
-    // left column height — which also stops the image from re-centering.
+    // left column height  which also stops the image from re-centering.
     var maxContentHeight = 0;
 
     function measurePlatformHeights() {
@@ -271,7 +271,7 @@ function initUnifiedPlatformTabs() {
         if (m > 0) maxContentHeight = m;
 
         // Tallest quote: fix the container height and center every quote in it,
-        // so switching only fades opacity — zero reflow.
+        // so switching only fades opacity  zero reflow.
         var qc = document.getElementById('platform-quote');
         if (qc) {
             var qs = qc.querySelectorAll('.quote-item');
@@ -512,7 +512,7 @@ function initUnifiedPlatformTabs() {
 
     // Re-measure once fonts/layout settle (and on resize), otherwise the
     // heights locked at init can be too small and clip content once the real
-    // font renders — then re-apply the locked height to the open tab.
+    // font renders  then re-apply the locked height to the open tab.
     function refreshActiveHeight() {
         measurePlatformHeights();
         var active = document.querySelector('.platform-tab-item.active .platform-tab-content');

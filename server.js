@@ -118,7 +118,7 @@ app.get('/telecharger-application-rainbow', (req, res) => sendPage(req, res, P('
 
 // ── API ────────────────────────────────────────────────────────────────────────
 
-// Contact form stub — wire up to a real backend when needed
+// Contact form stub  wire up to a real backend when needed
 app.post('/api/contact', (req, res) => {
     const { name, email, message } = req.body;
     if (!name || !email || !message) return res.status(400).json({ error: 'Name, email and message required' });

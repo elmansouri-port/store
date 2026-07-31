@@ -182,23 +182,23 @@ tailwind.config = {
   <section id="principles" class="ds-section">
     <div class="ds-chip" style="background:#f5f3ff;color:#5e2d91;border:1px solid #ddd6fe;margin-bottom:16px">Design System · Rainbow by ALE</div>
     <h1 class="ds-section-title">Design Principles</h1>
-    <p class="ds-section-sub">The four values that govern every decision — from micro-interactions to page layout.</p>
+    <p class="ds-section-sub">The four values that govern every decision  from micro-interactions to page layout.</p>
 
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
       <div style="padding:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-left:3px solid #5e2d91">
-        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">01 — Clarity over decoration</div>
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">01  Clarity over decoration</div>
         <div style="font-size:13px;color:#6b7280;line-height:1.6">Every visual element must earn its place. Glassmorphism and gradients create depth, not noise. If removing something makes the page cleaner, remove it.</div>
       </div>
       <div style="padding:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-left:3px solid #CF0072">
-        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">02 — Motion with purpose</div>
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">02  Motion with purpose</div>
         <div style="font-size:13px;color:#6b7280;line-height:1.6">Animation guides attention, confirms state, and signals hierarchy. Never animate for entertainment. Spring easing <code style="font-size:11px;background:#f5f3ff;padding:1px 4px;border-radius:4px">cubic-bezier(.16,1,.3,1)</code> is our signature curve.</div>
       </div>
       <div style="padding:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-left:3px solid #0085CA">
-        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">03 — Trust through consistency</div>
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">03  Trust through consistency</div>
         <div style="font-size:13px;color:#6b7280;line-height:1.6">Enterprise buyers make decisions on perceived reliability. Consistent spacing, type, and color patterns signal craftsmanship. Inconsistency erodes confidence.</div>
       </div>
       <div style="padding:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-left:3px solid #34B233">
-        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">04 — Accessible by default</div>
+        <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">04  Accessible by default</div>
         <div style="font-size:13px;color:#6b7280;line-height:1.6">Contrast ratios, focus states, and keyboard navigation are non-negotiable. AA compliance is the floor, not the ceiling.</div>
       </div>
     </div>
@@ -207,7 +207,7 @@ tailwind.config = {
   <!-- ─── BRAND ─── -->
   <section id="brand" class="ds-section">
     <h2 class="ds-section-title">Brand Identity</h2>
-    <p class="ds-section-sub">Rainbow is a B2B SaaS platform by Alcatel-Lucent Enterprise. The brand voice is premium, clear, and human — never cold or corporate.</p>
+    <p class="ds-section-sub">Rainbow is a B2B SaaS platform by Alcatel-Lucent Enterprise. The brand voice is premium, clear, and human  never cold or corporate.</p>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
       <div>
@@ -232,11 +232,11 @@ tailwind.config = {
   <!-- ─── COLORS ─── -->
   <section id="colors" class="ds-section">
     <h2 class="ds-section-title">Colors</h2>
-    <p class="ds-section-sub">All color values extracted from the live codebase. A critical inconsistency exists between two purple values — see the callout below.</p>
+    <p class="ds-section-sub">All color values extracted from the live codebase. A critical inconsistency exists between two purple values  see the callout below.</p>
 
     <div class="ds-callout ds-callout-error">
       <span>⚠</span>
-      <div><strong>Inconsistency detected:</strong> Two different values are used as "brand primary purple" — <code style="font-family:monospace;font-size:11px">#5e2d91</code> (Tailwind config in index.html, CSS file, btn-cta-primary) and <code style="font-family:monospace;font-size:11px">#7c3aed</code> (Tailwind config in tarifs.html/signup.html, glass borders, glow shadows). <strong>Resolution: adopt #5e2d91 as the single brand.500 token and use #7c3aed only as an interactive/accent variant (brand.vibrant).</strong></div>
+      <div><strong>Inconsistency detected:</strong> Two different values are used as "brand primary purple"  <code style="font-family:monospace;font-size:11px">#5e2d91</code> (Tailwind config in index.html, CSS file, btn-cta-primary) and <code style="font-family:monospace;font-size:11px">#7c3aed</code> (Tailwind config in tarifs.html/signup.html, glass borders, glow shadows). <strong>Resolution: adopt #5e2d91 as the single brand.500 token and use #7c3aed only as an interactive/accent variant (brand.vibrant).</strong></div>
     </div>
 
     <div class="ds-group-label">Brand Purple Scale</div>
@@ -350,7 +350,7 @@ tailwind.config = {
     <div class="ds-group-label">Gradient Text</div>
     <div class="ds-canvas">
       <div class="gradient-text" style="font-size:2rem;font-weight:800;letter-spacing:-.03em;margin-bottom:8px">Unified platform</div>
-      <div class="hero-badge-gradient" style="font-size:1.25rem;font-weight:700;letter-spacing:-.02em">Rainbow — by ALE</div>
+      <div class="hero-badge-gradient" style="font-size:1.25rem;font-weight:700;letter-spacing:-.02em">Rainbow  by ALE</div>
     </div>
     <div class="ds-code">.gradient-text {
   background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #6366f1 100%);
@@ -398,7 +398,7 @@ tailwind.config = {
   <!-- ─── BORDER RADIUS ─── -->
   <section id="radius" class="ds-section">
     <h2 class="ds-section-title">Border Radius</h2>
-    <p class="ds-section-sub">Two radius systems coexist — Tailwind utilities and custom pixel values in CSS. These should be unified into a single token set.</p>
+    <p class="ds-section-sub">Two radius systems coexist  Tailwind utilities and custom pixel values in CSS. These should be unified into a single token set.</p>
 
     <div class="ds-callout ds-callout-warn">
       <span>⚠</span>
@@ -468,7 +468,7 @@ tailwind.config = {
     <div class="ds-canvas" style="display:flex;align-items:center;gap:32px;padding:40px">
       <div class="motion-box"></div>
       <div>
-        <div style="font-size:13px;font-weight:600;color:#170926;margin-bottom:4px">Spring — cubic-bezier(.16, 1, .3, 1)</div>
+        <div style="font-size:13px;font-weight:600;color:#170926;margin-bottom:4px">Spring  cubic-bezier(.16, 1, .3, 1)</div>
         <div style="font-size:12px;color:#6b7280;line-height:1.7">Used on: hover-lift, product-card, testimonial-card, expand-card, pill-tab slider, faq-item, compliance-card-arrow, lang-dropdown. This single curve unifies all hover and transition motion across the system.</div>
       </div>
     </div>
@@ -505,7 +505,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
   <!-- ─── BUTTONS ─── -->
   <section id="buttons" class="ds-section">
     <h2 class="ds-section-title">Buttons</h2>
-    <p class="ds-section-sub">Two systems exist in parallel — CSS classes (<code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.btn-cta-*</code>) and Tailwind inline classes. The CSS class system should be the canonical one.</p>
+    <p class="ds-section-sub">Two systems exist in parallel  CSS classes (<code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.btn-cta-*</code>) and Tailwind inline classes. The CSS class system should be the canonical one.</p>
 
     <div class="ds-callout ds-callout-warn">
       <span>⚠</span>
@@ -620,7 +620,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
     <h2 class="ds-section-title">Cards</h2>
     <p class="ds-section-sub">Five distinct card types, each with specific surface treatments and motion behaviors.</p>
 
-    <div class="ds-group-label">Glass Card — .glass-card</div>
+    <div class="ds-group-label">Glass Card  .glass-card</div>
     <div class="ds-canvas">
       <div class="glass-card" style="padding:24px;border-radius:12px;max-width:320px">
         <div style="font-size:13px;font-weight:700;color:#170926;margin-bottom:6px">Feature Card</div>
@@ -634,7 +634,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
   box-shadow: 0 8px 32px rgba(0,0,0,.03), inset 0 1px 0 rgba(255,255,255,.6);
 }</div>
 
-    <div class="ds-group-label">Stat Card — .stat-card (dark surface)</div>
+    <div class="ds-group-label">Stat Card  .stat-card (dark surface)</div>
     <div class="ds-canvas ds-canvas-dark">
       <div class="stat-card" style="max-width:220px;text-align:center">
         <div style="font-size:2.5rem;font-weight:800;color:#d5bcf8;letter-spacing:-.03em">10K+</div>
@@ -649,7 +649,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
   padding: 32px;
 }</div>
 
-    <div class="ds-group-label">Product Range Card — .product-range-card</div>
+    <div class="ds-group-label">Product Range Card  .product-range-card</div>
     <div class="ds-canvas" style="padding:24px">
       <div class="product-range-card" style="max-width:300px">
         <div class="product-range-card-image" style="background:#f5f3ff;display:flex;align-items:center;justify-content:center;height:120px">
@@ -663,7 +663,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
       </div>
     </div>
 
-    <div class="ds-group-label">FAQ Card — .faq-card</div>
+    <div class="ds-group-label">FAQ Card  .faq-card</div>
     <div class="ds-canvas">
       <div style="max-width:560px">
         <div class="faq-card open" style="border-color:#5e2d91">
@@ -672,7 +672,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
             <svg class="faq-card-chevron" style="transform:rotate(180deg)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
           </button>
           <div class="faq-card-answer-wrapper" style="max-height:200px">
-            <div class="faq-card-answer-inner"><div class="faq-card-answer-border"><p class="faq-card-answer">Yes — the Enterprise plan supports up to 1,000 live participants with cloud recording included.</p></div></div>
+            <div class="faq-card-answer-inner"><div class="faq-card-answer-border"><p class="faq-card-answer">Yes  the Enterprise plan supports up to 1,000 live participants with cloud recording included.</p></div></div>
           </div>
         </div>
       </div>
@@ -718,7 +718,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
 
     <div class="ds-canvas" style="display:flex;flex-direction:column;gap:24px">
       <div>
-        <div style="font-size:11px;color:#9ca3af;margin-bottom:12px">Step 1 of 3 — active</div>
+        <div style="font-size:11px;color:#9ca3af;margin-bottom:12px">Step 1 of 3  active</div>
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:28px;height:10px;background:#5e2d91;border-radius:5px"></div>
           <div style="width:10px;height:10px;background:#d1d5db;border-radius:50%"></div>
@@ -726,7 +726,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
         </div>
       </div>
       <div>
-        <div style="font-size:11px;color:#9ca3af;margin-bottom:12px">Step 2 of 3 — one done</div>
+        <div style="font-size:11px;color:#9ca3af;margin-bottom:12px">Step 2 of 3  one done</div>
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:10px;height:10px;background:#5e2d91;border-radius:50%"></div>
           <div style="width:28px;height:10px;background:#5e2d91;border-radius:5px"></div>
@@ -734,7 +734,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
         </div>
       </div>
       <div>
-        <div style="font-size:11px;color:#9ca3af;margin-bottom:12px">Step 3 of 3 — all done</div>
+        <div style="font-size:11px;color:#9ca3af;margin-bottom:12px">Step 3 of 3  all done</div>
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:10px;height:10px;background:#5e2d91;border-radius:50%"></div>
           <div style="width:10px;height:10px;background:#5e2d91;border-radius:50%"></div>
@@ -768,7 +768,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
   <!-- ─── FAQ ─── -->
   <section id="faq" class="ds-section">
     <h2 class="ds-section-title">FAQ</h2>
-    <p class="ds-section-sub">Two implementations exist across the project — <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.faq-card</code> (new, Laurenn style) and <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.faq-item</code> (older). Consolidate to <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.faq-card</code>.</p>
+    <p class="ds-section-sub">Two implementations exist across the project  <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.faq-card</code> (new, Laurenn style) and <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.faq-item</code> (older). Consolidate to <code style="font-size:12px;background:#f5f3ff;padding:1px 5px;border-radius:4px">.faq-card</code>.</p>
     <div class="ds-callout ds-callout-warn"><span>⚠</span><div>Two different FAQ component implementations exist. Standardize on <code style="font-family:monospace;font-size:11px">.faq-card</code> system going forward.</div></div>
 
     <div class="ds-canvas">
@@ -834,7 +834,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
       <div class="hero-gradient" style="padding:56px 40px;position:relative;text-align:center">
         <div class="blob blob-1" style="opacity:.5"></div>
         <div style="position:relative;z-index:10">
-          <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:99px;background:rgba(94,45,145,.08);border:1px solid rgba(94,45,145,.2);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5e2d91;margin-bottom:20px">New — Rainbow Webinar 3.0</div>
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:99px;background:rgba(94,45,145,.08);border:1px solid rgba(94,45,145,.2);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5e2d91;margin-bottom:20px">New  Rainbow Webinar 3.0</div>
           <h1 style="font-size:2.5rem;font-weight:800;color:#170926;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px">The platform for<br><span class="gradient-text">better webinaires</span></h1>
           <p style="font-size:15px;color:#6b7280;max-width:420px;margin:0 auto 28px;line-height:1.65">Connect your teams with secure messaging, HD video, and enterprise telephony.</p>
           <div style="display:flex;gap:12px;justify-content:center">
@@ -849,7 +849,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
 
 /* Anatomy: badge → h1 → sub → dual CTA → scroll indicator */
 /* Word shuffler: .hero-word-loader > .hero-words (CSS animation hero_slide 9s) */
-/* Blobs: .blob-1 (purple), .blob-2 (indigo), .blob-3 (violet) — position:absolute */</div>
+/* Blobs: .blob-1 (purple), .blob-2 (indigo), .blob-3 (violet)  position:absolute */</div>
   </section>
 
   <!-- ─── STATS PATTERN ─── -->
@@ -1082,7 +1082,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
         <div class="ds-dont-header">✗ Don't</div>
         <div class="ds-dont-body">
           <div style="font-size:13px;color:#170926;font-weight:600;margin-bottom:4px">Use <code style="font-size:11px">#7c3aed</code> as the primary brand color</div>
-          <div style="font-size:12px;color:#6b7280">This vibrant purple is for glass borders, glow effects, and interactive accent states — not brand identity.</div>
+          <div style="font-size:12px;color:#6b7280">This vibrant purple is for glass borders, glow effects, and interactive accent states  not brand identity.</div>
         </div>
       </div>
     </div>

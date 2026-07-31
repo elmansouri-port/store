@@ -179,7 +179,7 @@
             fetch(base + '/i18n/en.json').then(function (r) { return r.json(); }).then(function (d) { cache['en'] = d; try { localStorage.setItem('i18n_en', JSON.stringify(d)); } catch (e) {} });
             if (lang !== 'en') fetch(base + '/i18n/' + lang + '.json').then(function (r) { return r.json(); }).then(function (d) { cache[lang] = d; try { localStorage.setItem('i18n_' + lang, JSON.stringify(d)); } catch (e) {} });
         } else {
-            // First visit — fetch from server
+            // First visit  fetch from server
             var promises = [loadTranslations('en')];
             if (lang !== 'en') promises.push(loadTranslations(lang));
             Promise.all(promises).then(function () {

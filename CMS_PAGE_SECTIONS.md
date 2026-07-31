@@ -1,4 +1,4 @@
-# Rainbow by ALE — CMS Page Sections Reference
+# Rainbow by ALE  CMS Page Sections Reference
 
 > **Purpose:** This document maps every page in the Rainbow marketing site to its constituent sections, with precise references to the source HTML files. It is intended for the CMS developer to model the correct content fields in the Zendesk → CMS Manager → Astro pipeline.
 >
@@ -6,16 +6,16 @@
 >
 > **Convention:** Each section entry shows `File : line` so the developer can jump directly to the template HTML.
 
-> ⚠️ **IMPORTANT — Navbar & Footer canonical source:**
-> The HTML files for individual pages (`pages/collaboration.html`, `pages/webinar.html`, etc.) each contain their own copy of the navbar and footer, but these copies are not all identical. **The navbar and footer that must be used as the single source of truth for the Astro implementation are the ones in `index.html`** (the homepage). When building the Astro shared layout, take the `nav#navbar.glass-nav` from `index.html : 229–295` and the `footer.footer-premium` from `index.html : 1383–1468`. Ignore the navbar/footer markup in all other page files — they are duplicates that may be slightly out of date.
+> ⚠️ **IMPORTANT  Navbar & Footer canonical source:**
+> The HTML files for individual pages (`pages/collaboration.html`, `pages/webinar.html`, etc.) each contain their own copy of the navbar and footer, but these copies are not all identical. **The navbar and footer that must be used as the single source of truth for the Astro implementation are the ones in `index.html`** (the homepage). When building the Astro shared layout, take the `nav#navbar.glass-nav` from `index.html : 229–295` and the `footer.footer-premium` from `index.html : 1383–1468`. Ignore the navbar/footer markup in all other page files  they are duplicates that may be slightly out of date.
 
 ---
 
-## 0. CMS Architecture — Block-Based Pages & Universal Spacing
+## 0. CMS Architecture  Block-Based Pages & Universal Spacing
 
 ### How pages are built
 
-Every page in the Astro frontend is composed by stacking an ordered list of **section blocks**. A block is a reusable template (Hero, Pricing, FAQ, CTA Banner, etc.) paired with a content record. The same block template can be placed on any page — there is no "this block belongs to this page" restriction.
+Every page in the Astro frontend is composed by stacking an ordered list of **section blocks**. A block is a reusable template (Hero, Pricing, FAQ, CTA Banner, etc.) paired with a content record. The same block template can be placed on any page  there is no "this block belongs to this page" restriction.
 
 ```
 Page
@@ -25,7 +25,7 @@ Page
       └── block_layout ← universal display settings (spacing, visibility)
 ```
 
-A page is saved as an ordered array of block instances. Adding a new page means choosing a title/slug and composing it from blocks. The same "FAQ" block or "CTA Banner" block can appear on the homepage, the collaboration page, and a future landing page — each with its own content and spacing settings.
+A page is saved as an ordered array of block instances. Adding a new page means choosing a title/slug and composing it from blocks. The same "FAQ" block or "CTA Banner" block can appear on the homepage, the collaboration page, and a future landing page  each with its own content and spacing settings.
 
 ---
 
@@ -35,9 +35,9 @@ These fields are present on **every block instance**, regardless of block type. 
 
 | Field | Type | Options / Notes |
 |---|---|---|
-| `spacing_top` | Select | Vertical space **above** the block. Values: `none` (0), `xs` (16 px), `sm` (40 px), `md` (64 px), `lg` (80 px — default for most sections), `xl` (112 px — hero/pricing), `2xl` (128 px) |
+| `spacing_top` | Select | Vertical space **above** the block. Values: `none` (0), `xs` (16 px), `sm` (40 px), `md` (64 px), `lg` (80 px  default for most sections), `xl` (112 px  hero/pricing), `2xl` (128 px) |
 | `spacing_bottom` | Select | Vertical space **below** the block. Same values as `spacing_top` |
-| `block_id` | Text (auto) | Auto-generated slug used as the HTML `id` attribute — enables the floating section nav pills to link to this block by anchor |
+| `block_id` | Text (auto) | Auto-generated slug used as the HTML `id` attribute  enables the floating section nav pills to link to this block by anchor |
 | `block_visible` | Boolean | Show/hide the block without deleting it. Default: `true` |
 
 **Spacing presets map to Tailwind padding classes:**
@@ -54,13 +54,13 @@ These fields are present on **every block instance**, regardless of block type. 
 
 The Astro block wrapper component reads `spacing_top` and `spacing_bottom` and applies the corresponding classes to the outer `<section>` element. The block template itself does not need to handle padding.
 
-> **Default spacing:** When no value is set, the CMS should default to `lg` (80 px) for both top and bottom — this matches the most common `py-20` value used in the current HTML templates.
+> **Default spacing:** When no value is set, the CMS should default to `lg` (80 px) for both top and bottom  this matches the most common `py-20` value used in the current HTML templates.
 
 ---
 
 ## Table of Contents
 
-0. [CMS Architecture — Block-Based Pages & Universal Spacing](#0-cms-architecture--block-based-pages--universal-spacing)
+0. [CMS Architecture  Block-Based Pages & Universal Spacing](#0-cms-architecture--block-based-pages--universal-spacing)
 1. [Homepage](#1-homepage)
 2. [Rainbow Collaboration Product Page](#2-rainbow-collaboration-product-page)
 3. [Rainbow Webinar Product Page](#3-rainbow-webinar-product-page)
@@ -121,7 +121,7 @@ Full-width hero with background glows, animated word rotator in the headline, su
 
 | Field | Type | Notes |
 |---|---|---|
-| `hero_badge_text` | Text | e.g. "Simple. Moderne. Européenne" — displays as gradient uppercase label |
+| `hero_badge_text` | Text | e.g. "Simple. Moderne. Européenne"  displays as gradient uppercase label |
 | `hero_title_static` | Rich text / HTML | Static portion of the `<h1>` before the rotating words |
 | `hero_rotating_words` | Repeatable text | Each word in the CSS word rotator (réunions, webinaires, présentations, formations) |
 | `hero_description` | Text | Short paragraph below the title |
@@ -327,7 +327,7 @@ Dark gradient footer. See [Shared Components → Footer](#132-footer).
 ### 2.1 Navigation Bar
 
 **File:** `pages/collaboration.html : 108`  
-Shared component — see [Section 13.1](#131-navigation-bar).
+Shared component  see [Section 13.1](#131-navigation-bar).
 
 ---
 
@@ -354,7 +354,7 @@ Two-column layout: left side has a badge, `<h1>`, description paragraph, and two
 | Field | Type | Notes |
 |---|---|---|
 | `hero_badge_text` | Text | Small uppercase pill label (e.g. "Communication d'équipe souveraine") |
-| `hero_title` | Rich text | `<h1>` — may include a `<span>` for brand-colored product name |
+| `hero_title` | Rich text | `<h1>`  may include a `<span>` for brand-colored product name |
 | `hero_description` | Text | Paragraph below the title |
 | `hero_cta_primary_label` | Text | Primary button (e.g. "Essai gratuit") |
 | `hero_cta_primary_url` | URL | |
@@ -392,7 +392,7 @@ A bento-grid feature layout with 2 rows. Row 1 has a large card (3/5 width) and 
 | Field | Type | Notes |
 |---|---|---|
 | `features_section_title` | Text | `<h2>` |
-| `bento_cards` | Repeatable item (5 cards) | Each card: `card_title` (text, bold), `card_description` (text), `card_media_type` (`video` or `image`), `card_media_src` (URL), `card_media_alt` (text), `card_accent_color` (hex, used for gradient background), `card_size` (`large`, `medium`, `small` — controls grid span) |
+| `bento_cards` | Repeatable item (5 cards) | Each card: `card_title` (text, bold), `card_description` (text), `card_media_type` (`video` or `image`), `card_media_src` (URL), `card_media_alt` (text), `card_accent_color` (hex, used for gradient background), `card_size` (`large`, `medium`, `small`  controls grid span) |
 
 ---
 
@@ -414,7 +414,7 @@ Full pricing section with: heading + subheading, monthly/yearly billing toggle (
 | `pricing_footnotes` | Repeatable item (3 items) | Each: `footnote_icon_name`, `footnote_title` (bold), `footnote_description` |
 | `comparison_table_toggle_label` | Text | e.g. "Comparer toutes les fonctionnalités" |
 | `comparison_table_hide_label` | Text | e.g. "Masquer le tableau comparatif" |
-| `comparison_table` | Structured data | Groups of rows — see sub-fields below |
+| `comparison_table` | Structured data | Groups of rows  see sub-fields below |
 
 **Pricing Plan sub-fields (per plan):**
 
@@ -437,7 +437,7 @@ Full pricing section with: heading + subheading, monthly/yearly billing toggle (
 | Field | Type | Notes |
 |---|---|---|
 | `comparison_groups` | Repeatable item | Each group: `group_label` (text, e.g. "Collaboration & Messagerie"), `group_rows` (repeatable) |
-| `group_row` | Repeatable item | Each row: `feature_name`, `value_free`, `value_enterprise`, `value_premium` — values can be text or a checkmark/dash symbol |
+| `group_row` | Repeatable item | Each row: `feature_name`, `value_free`, `value_enterprise`, `value_premium`  values can be text or a checkmark/dash symbol |
 
 ---
 
@@ -448,7 +448,7 @@ Full pricing section with: heading + subheading, monthly/yearly billing toggle (
 
 Zendesk-powered accordion FAQ. Same structure as [Section 1.12](#112-faq-section).
 
-**CMS Fields:** Same as [Section 1.12](#112-faq-section) — only the `faq_zendesk_section_id` and copy differ per page.
+**CMS Fields:** Same as [Section 1.12](#112-faq-section)  only the `faq_zendesk_section_id` and copy differ per page.
 
 ---
 
@@ -483,7 +483,7 @@ Structurally identical to the Collaboration page but for the Webinar product. Ke
 ### 3.1 Navigation Bar
 
 **File:** `pages/webinar.html : 108`  
-Shared — see [Section 13.1](#131-navigation-bar).
+Shared  see [Section 13.1](#131-navigation-bar).
 
 ---
 
@@ -564,7 +564,7 @@ Same structure as [Section 2.6](#26-pricing-section) with Webinar-specific plan 
 ### 3.7 FAQ Section
 
 **File:** `pages/webinar.html : ~736`  
-Same as [Section 2.7](#27-faq-section) — different `faq_zendesk_section_id`.
+Same as [Section 2.7](#27-faq-section)  different `faq_zendesk_section_id`.
 
 ---
 
@@ -587,7 +587,7 @@ Same as [Section 2.8](#28-cta-banner-section) and [Section 2.9](#29-footer).
 ### 4.1 Navigation Bar
 
 **File:** `pages/tarifs.html : ~108`  
-Shared — see [Section 13.1](#131-navigation-bar).
+Shared  see [Section 13.1](#131-navigation-bar).
 
 ---
 
@@ -627,9 +627,9 @@ Sticky sidebar on desktop that links to product pricing sections on the page. On
 **Selector:** `section#collaboration`  
 **File:** `pages/tarifs.html : ~300`
 
-Pricing tables for Rainbow Collaboration — same plan structure as [Section 2.6](#26-pricing-section).
+Pricing tables for Rainbow Collaboration  same plan structure as [Section 2.6](#26-pricing-section).
 
-**CMS Fields:** Same as [Section 2.6](#26-pricing-section) — pricing plans, billing toggle, footnotes, comparison table.
+**CMS Fields:** Same as [Section 2.6](#26-pricing-section)  pricing plans, billing toggle, footnotes, comparison table.
 
 ---
 
@@ -638,7 +638,7 @@ Pricing tables for Rainbow Collaboration — same plan structure as [Section 2.6
 **Selector:** `section#webinar`  
 **File:** `pages/tarifs.html : ~400`
 
-Pricing tables for Rainbow Webinar — same structure as [Section 3.6](#36-pricing-section).
+Pricing tables for Rainbow Webinar  same structure as [Section 3.6](#36-pricing-section).
 
 ---
 
@@ -671,7 +671,7 @@ A standalone page focused solely on Collaboration pricing. Structure mirrors the
 
 | Section | Fields |
 |---|---|
-| Navigation Bar | Shared — [Section 13.1](#131-navigation-bar) |
+| Navigation Bar | Shared  [Section 13.1](#131-navigation-bar) |
 | Page Hero | `hero_title`, `hero_description` |
 | Pricing Plans | Same as [Section 2.6](#26-pricing-section) |
 | Billing Toggle | `monthly_label`, `yearly_label`, `yearly_discount_label` |
@@ -777,7 +777,7 @@ Same as [Section 1.12](#112-faq-section), [Section 13.3](#133-cta-banner), [Sect
 ### 8.1 Navigation Bar
 
 **File:** `pages/contact.html : ~1`  
-Shared — see [Section 13.1](#131-navigation-bar).
+Shared  see [Section 13.1](#131-navigation-bar).
 
 ---
 
@@ -802,7 +802,7 @@ Simple centered page header.
 **Selector:** `section.pb-24.px-6 > #contact-form`  
 **File:** `pages/contact.html : ~140`
 
-The main contact form. Most fields are structural (HTML inputs) — only labels and option values are CMS-editable.
+The main contact form. Most fields are structural (HTML inputs)  only labels and option values are CMS-editable.
 
 **CMS Fields:**
 
@@ -837,7 +837,7 @@ The main contact form. Most fields are structural (HTML inputs) — only labels 
 
 ### 9.1 Navigation Bar
 
-Shared — see [Section 13.1](#131-navigation-bar).
+Shared  see [Section 13.1](#131-navigation-bar).
 
 ---
 
@@ -881,7 +881,7 @@ A card with a form title, two-column input grid, and submit button.
 
 ### 9.4 Footer
 
-Shared — see [Section 13.2](#132-footer).
+Shared  see [Section 13.2](#132-footer).
 
 ---
 
@@ -897,7 +897,7 @@ Shared — see [Section 13.2](#132-footer).
 
 ### 10.1 Navigation Bar
 
-Shared — see [Section 13.1](#131-navigation-bar).
+Shared  see [Section 13.1](#131-navigation-bar).
 
 ---
 
@@ -959,7 +959,7 @@ Responsive grid of article cards. Each card has a thumbnail image, category badg
 
 ### 10.5 Footer
 
-Shared — see [Section 13.2](#132-footer).
+Shared  see [Section 13.2](#132-footer).
 
 ---
 
@@ -975,7 +975,7 @@ Shared — see [Section 13.2](#132-footer).
 
 ### 11.1 Navigation Bar
 
-Shared — see [Section 13.1](#131-navigation-bar).
+Shared  see [Section 13.1](#131-navigation-bar).
 
 ---
 
@@ -1024,8 +1024,8 @@ The main article content. Written in Zendesk Markdown, converted to HTML. Suppor
 
 | Field | Type | Notes |
 |---|---|---|
-| `article_body` | Rich text / HTML (from Zendesk) | Full article content — this is the primary Zendesk-managed field |
-| `key_points_box` | Rich text | Optional highlighted box (`.key-points-box`) — can be embedded within the body or managed separately |
+| `article_body` | Rich text / HTML (from Zendesk) | Full article content  this is the primary Zendesk-managed field |
+| `key_points_box` | Rich text | Optional highlighted box (`.key-points-box`)  can be embedded within the body or managed separately |
 
 ---
 
@@ -1078,7 +1078,7 @@ Grid of related article cards.
 
 ### 11.8 Footer
 
-Shared — see [Section 13.2](#132-footer).
+Shared  see [Section 13.2](#132-footer).
 
 ---
 
@@ -1095,7 +1095,7 @@ Shared — see [Section 13.2](#132-footer).
 ### 12.1 Navigation Bar
 
 **File:** `404.html : 1`  
-Shared — see [Section 13.1](#131-navigation-bar).
+Shared  see [Section 13.1](#131-navigation-bar).
 
 ---
 
@@ -1197,7 +1197,7 @@ A prominent call-to-action block used at the bottom of most pages, before the fo
 **Selector:** `#faq-items-container` (rendered by JS from Zendesk API)  
 **Reference:** `index.html : 1335–1360`
 
-The accordion is rendered client-side. Items are not directly managed in the CMS — they are fetched from Zendesk Help Center at runtime. The only CMS-editable fields are the section chrome.
+The accordion is rendered client-side. Items are not directly managed in the CMS  they are fetched from Zendesk Help Center at runtime. The only CMS-editable fields are the section chrome.
 
 **CMS Fields:**
 
@@ -1224,7 +1224,7 @@ Complete flat list of every distinct section across all pages, ordered by page.
 | 2 | Mobile Menu | All pages | `index.html` | 271 | `div#mobile-menu` |
 | 3 | Language Switcher | All pages | `index.html` | 256 | `.lang-switcher#lang-switcher` |
 | 4 | Floating Section Nav | Homepage, Products, Blog | `index.html` | 298 | `nav#section-nav` |
-| 5 | Hero — Word Rotator | Homepage | `index.html` | 310 | `section.relative.flex.flex-col` |
+| 5 | Hero  Word Rotator | Homepage | `index.html` | 310 | `section.relative.flex.flex-col` |
 | 6 | Trust Logos Band / Marquee | Homepage | `index.html` | 366 | `section.marquee-container` |
 | 7 | Features Tabs (Platform) | Homepage | `index.html` | 422 | `section#fonctionnalites` |
 | 8 | Customer Quote (per feature tab) | Homepage | `index.html` | 523 | `#platform-quote` |
@@ -1238,10 +1238,10 @@ Complete flat list of every distinct section across all pages, ordered by page.
 | 16 | FAQ Accordion (Zendesk) | Homepage, Product pages, Tarifs | `index.html` | 1322 | `section#questions-frequentes` |
 | 17 | CTA Banner | All pages | `index.html` | 1364 | `.sp-cta-banner` |
 | 18 | Footer | All pages | `index.html` | 1383 | `footer.footer-premium` |
-| 19 | Hero — Two Column (product) | Collaboration, Webinar | `pages/collaboration.html` | 211 | `header.pt-32.pb-20` |
+| 19 | Hero  Two Column (product) | Collaboration, Webinar | `pages/collaboration.html` | 211 | `header.pt-32.pb-20` |
 | 20 | Stats Banner (4 metrics, dark) | Collaboration, Webinar | `pages/collaboration.html` | 248 | `section.py-20` (dark gradient) |
 | 21 | Features Bento Grid | Collaboration | `pages/collaboration.html` | 276 | `section#fonctionnalites` |
-| 22 | Pricing Section — Bento Plans | Collaboration, Webinar, Tarifs | `pages/collaboration.html` | 350 | `section#tarifs` |
+| 22 | Pricing Section  Bento Plans | Collaboration, Webinar, Tarifs | `pages/collaboration.html` | 350 | `section#tarifs` |
 | 23 | Billing Toggle (Monthly/Yearly) | Pricing pages | `pages/collaboration.html` | 358 | `#billing-toggle` |
 | 24 | Pricing Plan Cards | Pricing pages | `pages/collaboration.html` | 373 | `.pricing-card` grid |
 | 25 | Pricing Footnotes (3 boxes) | Pricing pages | `pages/collaboration.html` | 463 | Grid below plan cards |
@@ -1251,7 +1251,7 @@ Complete flat list of every distinct section across all pages, ordered by page.
 | 29 | Timeline Step Panels | Webinar | `pages/webinar.html` | 298 | `.timeline-panel` |
 | 30 | Tarifs Sticky Sidebar | Tarifs | `pages/tarifs.html` | 163 | `.page-sidebar` |
 | 31 | Tarifs Mobile Pill Bar | Tarifs | `pages/tarifs.html` | 188 | `.mobile-pill-bar` |
-| 32 | Page Hero — Simple Centered | Tarifs, Contact | `pages/tarifs.html` | ~210 | `header.pt-32` |
+| 32 | Page Hero  Simple Centered | Tarifs, Contact | `pages/tarifs.html` | ~210 | `header.pt-32` |
 | 33 | Contact Form | Contact | `pages/contact.html` | ~140 | `#contact-form` |
 | 34 | Form Success / Error States | Contact, Partenaires | `pages/contact.html` | ~80 | `#message-box` |
 | 35 | Partners Hero (Two-Column) | Partenaires | `pages/partenaires.html` | ~100 | `.two-col` |
@@ -1275,23 +1275,23 @@ Complete flat list of every distinct section across all pages, ordered by page.
 
 ## Notes for the CMS Developer
 
-1. **All section templates are reusable across any page.** No section is locked to a specific page. The CMS page model is a slug + an ordered list of block instances. Any block type (Hero, Pricing, CTA Banner, FAQ, etc.) can be dropped onto any page. This means the developer must implement each section as a self-contained Astro component that reads only from its own `block_data` — never from a page-level context.
+1. **All section templates are reusable across any page.** No section is locked to a specific page. The CMS page model is a slug + an ordered list of block instances. Any block type (Hero, Pricing, CTA Banner, FAQ, etc.) can be dropped onto any page. This means the developer must implement each section as a self-contained Astro component that reads only from its own `block_data`  never from a page-level context.
 
-2. **Spacing is controlled by universal `spacing_top` / `spacing_bottom` fields.** These two fields exist on every block instance (defined in Section 0). The Astro block wrapper applies the correct Tailwind padding class. Individual block templates must NOT include hardcoded `py-*`, `pt-*`, or `pb-*` classes on their outermost element — those classes are injected by the wrapper. Inner content padding (e.g. between the heading and the cards) is still the block's own responsibility.
+2. **Spacing is controlled by universal `spacing_top` / `spacing_bottom` fields.** These two fields exist on every block instance (defined in Section 0). The Astro block wrapper applies the correct Tailwind padding class. Individual block templates must NOT include hardcoded `py-*`, `pt-*`, or `pb-*` classes on their outermost element  those classes are injected by the wrapper. Inner content padding (e.g. between the heading and the cards) is still the block's own responsibility.
 
 3. **Navbar and footer canonical source is `index.html`.** Each page file (`pages/*.html`) carries its own embedded copy of the navbar and footer, but they are not kept in sync with each other. The homepage (`index.html`) has the most complete and up-to-date version. Always use `index.html : 229–295` for the navbar and `index.html : 1383–1468` for the footer when implementing the Astro shared layout component. Discard the copies in the other page files.
 
-2. **Zendesk as source of truth for FAQ and Article content.** FAQ accordions are fetched directly from the Zendesk Help Center API at runtime. The CMS only needs to store the `faq_zendesk_section_id` per page. Blog article body (`article_body`) is also authored in Zendesk Markdown and pushed as HTML via API — the CMS receives it and injects it into `.prose-article`.
+2. **Zendesk as source of truth for FAQ and Article content.** FAQ accordions are fetched directly from the Zendesk Help Center API at runtime. The CMS only needs to store the `faq_zendesk_section_id` per page. Blog article body (`article_body`) is also authored in Zendesk Markdown and pushed as HTML via API  the CMS receives it and injects it into `.prose-article`.
 
 2. **Billing toggle is purely client-side.** The monthly/yearly switch (`#billing-toggle`) is a JS-driven toggle that shows/hides `.price-monthly` / `.price-yearly` elements. The CMS must store **both** price values per plan; the toggle itself needs no CMS field.
 
 3. **Animated counters use `data-counter`.** The `counter-number` elements use `data-counter="90"` and `data-duration="2000"` attributes for the scroll-triggered animation. The CMS must emit these as HTML attributes (not just text content) for the JS to pick up.
 
-4. **Compliance flip cards are hover-interactive.** The `.compliance-card` 3D flip is CSS-only (`transform: rotateY(180deg)` on hover). No JS required — the CMS just needs to supply front/back content per card.
+4. **Compliance flip cards are hover-interactive.** The `.compliance-card` 3D flip is CSS-only (`transform: rotateY(180deg)` on hover). No JS required  the CMS just needs to supply front/back content per card.
 
 5. **Expand cards (Actualités) have one card defaulting to expanded.** The `.expand-card.expanded` class marks the default open card. The CMS field `card_default_expanded: true` should apply this class.
 
-6. **The padding box wrapping product pages.** On collaboration.html and webinar.html, all sections after the hero are wrapped in a `div.rounded-[32px]` box that creates a card-like effect. This is structural HTML — no CMS field needed.
+6. **The padding box wrapping product pages.** On collaboration.html and webinar.html, all sections after the hero are wrapped in a `div.rounded-[32px]` box that creates a card-like effect. This is structural HTML  no CMS field needed.
 
 7. **Language switcher is JavaScript-driven.** Languages are populated via `js/i18n.js`. The CMS should manage the language list in a global setting, not per-page.
 

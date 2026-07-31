@@ -56,7 +56,7 @@
   "products": {
     "heroTag": "Le nostre soluzioni",
     "heroTitle": "Famiglia di prodotti Rainbow",
-    "heroDescription": "Soluzioni di comunicazione unificata progettate per ogni esigenza aziendale — dalla collaborazione di squadra ai webinar su larga scala e all'ospitalità intelligente.",
+    "heroDescription": "Soluzioni di comunicazione unificata progettate per ogni esigenza aziendale  dalla collaborazione di squadra ai webinar su larga scala e all'ospitalità intelligente.",
     "loading": "Caricamento prodotti...",
     "noProducts": "Nessun prodotto disponibile al momento.",
     "loadError": "Impossibile caricare i prodotti.",
@@ -336,7 +336,7 @@
     "subscriptionCanceled": "Abbonamento annullato.",
     "infoUpdated": "Informazioni aggiornate con successo",
     "rainbowAccess": "Accedi a Rainbow",
-    "rainbowAccessDesc": "Apri la piattaforma di comunicazione Rainbow — messaggistica, videochiamate e collaborazione.",
+    "rainbowAccessDesc": "Apri la piattaforma di comunicazione Rainbow  messaggistica, videochiamate e collaborazione.",
     "openRainbow": "Apri Rainbow"
   },
   "checkout": {

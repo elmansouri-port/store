@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centre d'aide — Apprenez et maîtrisez Rainbow | Rainbow by ALE</title>
+    <title>Centre d'aide  Apprenez et maîtrisez Rainbow | Rainbow by ALE</title>
     <meta name="description" content="Formations e-learning et tutoriels Rainbow : premiers pas, astuces avancées, dépannage. Toute l'aide dont vous avez besoin, au même endroit.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://rainbow-portal.example.com/centre-aide-rainbow">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Centre d'aide — Apprenez et maîtrisez Rainbow">
+    <meta property="og:title" content="Centre d'aide  Apprenez et maîtrisez Rainbow">
     <meta property="og:description" content="Formations e-learning et tutoriels Rainbow : premiers pas, astuces avancées, dépannage. Toute l'aide dont vous avez besoin, au même endroit.">
     <meta property="og:url" content="https://rainbow-portal.example.com/centre-aide-rainbow">
 
@@ -19,7 +19,7 @@
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "Centre d'aide — Apprenez et maîtrisez Rainbow",
+        "name": "Centre d'aide  Apprenez et maîtrisez Rainbow",
         "url": "https://rainbow-portal.example.com/centre-aide-rainbow",
         "description": "Formations e-learning et tutoriels Rainbow : premiers pas, astuces avancées, dépannage. Toute l'aide dont vous avez besoin, au même endroit.",
         "publisher": { "@type": "Organization", "name": "ALE International", "url": "https://rainbow-portal.example.com/" }
@@ -433,7 +433,7 @@
                 e.preventDefault();
                 var q = document.getElementById('help-search-input').value.trim();
                 var url = 'https://help.openrainbow.com/hc/' + helpLocale() + '/search';
-                window.location.href = url + (q ? ('?query=' + encodeURIComponent(q)) : '');
+                window.open(url + (q ? ('?query=' + encodeURIComponent(q)) : ''), '_blank', 'noopener');
             });
         }
     </script>

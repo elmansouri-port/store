@@ -58,7 +58,7 @@
   "products": {
     "heroTag": "Our Solutions",
     "heroTitle": "Rainbow Product Family",
-    "heroDescription": "Unified communication solutions designed for every business need — from team collaboration to large-scale webinars and smart hospitality.",
+    "heroDescription": "Unified communication solutions designed for every business need  from team collaboration to large-scale webinars and smart hospitality.",
     "loading": "Loading products...",
     "noProducts": "No products available yet.",
     "loadError": "Failed to load products.",
@@ -351,7 +351,7 @@
     "stripeSecure": "Secured by Stripe. Your card data never touches our servers.",
     "paymentSuccess": "Payment successful! Subscription is now active.",
     "rainbowAccess": "Access Rainbow",
-    "rainbowAccessDesc": "Open the Rainbow communication platform — messaging, video calls, and collaboration.",
+    "rainbowAccessDesc": "Open the Rainbow communication platform  messaging, video calls, and collaboration.",
     "openRainbow": "Open Rainbow"
   },
   "checkout": {
@@ -377,7 +377,7 @@
     "paymentFailed": "Payment failed. Please try again."
   },
   "offers": {
-    "collaborationDesc": "Unified communication platform — messaging, video, telephony.",
+    "collaborationDesc": "Unified communication platform  messaging, video, telephony.",
     "webinarDesc": "Host large-scale online events with up to 10,000 participants.",
     "smartHotelDesc": "AI-powered guest experience and hotel operations platform.",
     "plansComing": "Plans coming soon.",
@@ -486,7 +486,7 @@
     "controllerContent": "The data controller is ALE International, 32 avenue Kl\u00e9ber, 92700 Colombes, France. For any questions regarding your personal data, contact us at: privacy@al-enterprise.com.",
     "collectionTitle": "Data We Collect",
     "collectionContent": "We collect the following categories of personal data:",
-    "collectionItems": "Account information (name, email, company, phone); Usage data (login times, features used, preferences); Payment data (processed securely by Stripe — we do not store card numbers); Technical data (IP address, browser type, device information); Communication data (support tickets, contact form submissions)",
+    "collectionItems": "Account information (name, email, company, phone); Usage data (login times, features used, preferences); Payment data (processed securely by Stripe  we do not store card numbers); Technical data (IP address, browser type, device information); Communication data (support tickets, contact form submissions)",
     "purposeTitle": "How We Use Your Data",
     "purposeContent": "We process your personal data for the following purposes:",
     "purposeItems": "Providing and improving our services; Managing your account and subscriptions; Processing payments; Sending service-related communications; Providing customer support; Complying with legal obligations; Analyzing usage to improve our platform",
