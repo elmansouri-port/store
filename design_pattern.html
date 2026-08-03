@@ -1339,8 +1339,6 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
       </div>
       <div class="ds-flow">
         <div class="ds-flow-step"><div class="ds-flow-step-label">Runtime (dev/preview)</div><div class="ds-flow-step-title">server.js  Express</div><div class="ds-flow-step-sub">helmet, cors, i18n locale detection</div></div>
-        <div class="ds-flow-arrow">→</div>
-        <div class="ds-flow-step dashed"><div class="ds-flow-step-label">API</div><div class="ds-flow-step-title">POST /api/contact</div><div class="ds-flow-step-sub">Stub  validates, saves nothing</div></div>
       </div>
       <div class="ds-flow" style="margin-top:14px">
         <div class="ds-flow-step"><div class="ds-flow-step-label">Browser</div><div class="ds-flow-step-title">Stripe Elements</div><div class="ds-flow-step-sub">UI-only  no charge endpoint exists</div></div>
@@ -1369,7 +1367,7 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
           <tr><td><code>/blog/the-power-of-rainbow</code></td><td>Blog article</td><td>pages/blog/the-power-of-rainbow.html</td><td>/blog</td></tr>
           <tr><td><code>/faq</code></td><td>FAQ</td><td>pages/faq.html</td><td>/</td></tr>
           <tr><td><code>/form-al</code></td><td>Lead-gen form</td><td>pages/form-ale.html</td><td>/</td></tr>
-          <tr><td><code>/contact</code></td><td>Contact</td><td>pages/contact.html</td><td>/</td></tr>
+          <tr><td><code>/modifier-rendez-vous</code></td><td>Reschedule form</td><td>pages/modifier-rendez-vous.html</td><td>/</td></tr>
           <tr><td><code>/partenaires</code></td><td>Partner program</td><td>pages/partenaires.html</td><td>/</td></tr>
           <tr><td><code>/trouver-un-partenaire</code></td><td>Partner locator</td><td>pages/trouver-un-partenaire.html</td><td>/</td></tr>
           <tr><td><code>/healthz</code></td><td>Health check</td><td>JSON status</td><td></td></tr>
@@ -1499,19 +1497,13 @@ fadeInUpStagger 0.6s ease-out staggered /* Section grid reveal */</div>
 
     <div class="ds-paper">
       <div class="ds-group-header"><span class="ds-group-num">2.4</span><span class="ds-group-title">API / Webhook Reference</span></div>
-      <p class="ds-group-sub">The one real headless read-endpoint in production, plus the one internal API route.</p>
-      <div class="ds-code" style="margin-bottom:12px">GET https://rainbow-market.zendesk.com/api/v2/help_center/sections/33369381353746/articles.json
+      <p class="ds-group-sub">The one real headless read-endpoint in production. No internal API routes remain since the contact-form stub was removed.</p>
+      <div class="ds-code">GET https://rainbow-market.zendesk.com/api/v2/help_center/sections/33369381353746/articles.json
     ?locale=fr&per_page=20&page=1&sort_by=position&sort_order=asc
 
 Auth: none (public read endpoint)
 Called from: pages/tarifs.html, "Questions fréquentes" section
 Response: { articles: [{ title, body, position, ... }] }</div>
-      <div class="ds-code">POST /api/contact   (server.js, internal)
-Body: { name, email, message }
-Auth: none
-Status: stub  validates required fields, returns { success: true }, persists nothing
-Note: pages/contact.html doesn't even call this route  its submit handler is a client-only
-console.log(). Two disconnected stubs pretending to be one working feature.</div>
     </div>
 
     <div class="ds-paper">
@@ -1562,7 +1554,6 @@ console.log(). Two disconnected stubs pretending to be one working feature.</div
           <tr><td><code>billing_toggle_change</code></td><td>Flip Mensuel/Annuel</td><td>pages/tarifs.html <code>.billing-toggle-input</code></td><td>GA4 (planned)</td><td class="ds-status-no">Not implemented</td></tr>
           <tr><td><code>checkout_modal_open</code></td><td>Click plan CTA</td><td>index.html #checkout-modal</td><td>GA4 + CRM (planned)</td><td class="ds-status-no">Not implemented</td></tr>
           <tr><td><code>partner_form_submit</code></td><td>Partner application sent</td><td>pages/partenaires.html #partner-form</td><td>Eloqua</td><td class="ds-status-yes">✓ Live</td></tr>
-          <tr><td><code>contact_form_submit</code></td><td>Contact form "sent"</td><td>pages/contact.html #contact-form</td><td class="ds-status-no">Nowhere  console.log only</td><td class="ds-status-no">Stubbed, not wired</td></tr>
           <tr><td><code>mega_menu_open</code></td><td>Products/Ressources hover</td><td>js/mega-menu.js</td><td>GA4 (planned)</td><td class="ds-status-no">Not implemented</td></tr>
           <tr><td><code>currency_change</code></td><td>Switch EUR/USD/GBP</td><td>js/currency.js <code>.cur-switcher</code></td><td>GA4 (planned)</td><td class="ds-status-no">Not implemented</td></tr>
         </tbody>
@@ -1589,16 +1580,10 @@ console.log(). Two disconnected stubs pretending to be one working feature.</div
       <div class="ds-table-wrap"><table class="ds-table">
         <thead><tr><th>Form field</th><th>Destination field</th><th>Required?</th><th>Notes</th></tr></thead>
         <tbody>
-          <tr><td colspan="4" style="background:#f9fafb;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9ca3af">pages/contact.html  destination: none (client-only stub)</td></tr>
-          <tr><td>first_name, last_name</td><td class="ds-status-no"></td><td>Yes</td><td rowspan="4">Payload is built and <code>console.log</code>'d; nothing is sent over the network</td></tr>
-          <tr><td>email</td><td class="ds-status-no"></td><td>Yes</td></tr>
-          <tr><td>inquiry_type, message</td><td class="ds-status-no"></td><td>message: yes</td></tr>
-          <tr><td>referrer_page, lead_source, utm_params, hotjar_id (hidden)</td><td class="ds-status-no"></td><td>n/a</td></tr>
           <tr><td colspan="4" style="background:#f9fafb;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9ca3af">pages/partenaires.html  destination: Eloqua (live)</td></tr>
           <tr><td>Form fields</td><td>Eloqua native fields, form <code>elqFormName=MKT</code></td><td>Per Eloqua form config</td><td>Direct <code>fetch()</code> POST, <code>mode:'no-cors'</code>  response is intentionally opaque</td></tr>
         </tbody>
       </table></div>
-      <div class="ds-callout ds-callout-error" style="margin-top:14px"><span>⚠</span><div><strong>Hidden lead-tracking fields exist but are dead.</strong> contact.html declares <code style="font-family:'JetBrains Mono',monospace;font-size:11px">referrer_page</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:11px">lead_source</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:11px">utm_params</code>, and <code style="font-family:'JetBrains Mono',monospace;font-size:11px">hotjar_id</code> as hidden inputs, but no script on the page ever populates them, and the form never sends anywhere. Either wire this form the way partenaires.html is wired, or remove the dead fields  don't leave them looking functional.</div></div>
     </div>
 
     <div class="ds-paper">
@@ -1608,7 +1593,7 @@ console.log(). Two disconnected stubs pretending to be one working feature.</div
         <tbody>
           <tr><td>Visited /tarifs</td><td>+10</td><td rowspan="4">MQL at 40+, SQL hand-off at 70+</td></tr>
           <tr><td>Opened checkout modal</td><td>+20</td></tr>
-          <tr><td>Submitted partner or contact form</td><td>+40</td></tr>
+          <tr><td>Submitted partner form</td><td>+40</td></tr>
           <tr><td>Enterprise plan selected</td><td>+15</td></tr>
         </tbody>
       </table></div>

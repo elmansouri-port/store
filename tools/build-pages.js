@@ -32,14 +32,14 @@ const ROUTES = {
   'blog': 'pages/blog.html',
   'blog/the-power-of-rainbow': 'pages/blog/the-power-of-rainbow.html',
   'faq': 'pages/faq.html',
-  'contact': 'pages/contact.html',
   'partenaires': 'pages/partenaires.html',
   'a-propos-de-rainbow': 'pages/a-propos-de-rainbow.html',
   'rainbow-donnees-hebergees-en-france': 'pages/rainbow-donnees-hebergees-en-france.html',
   'centre-aide-rainbow': 'pages/centre-aide-rainbow.html',
   'telecharger-application-rainbow': 'pages/telecharger-application-rainbow.html',
   'trouver-un-partenaire': 'pages/trouver-un-partenaire.html',
-  'form-al': 'pages/form-ale.html'
+  'form-al': 'pages/form-ale.html',
+  'modifier-rendez-vous': 'pages/modifier-rendez-vous.html'
 };
 
 const ASSET_DIRS = ['css', 'js', 'images', 'img', 'i18n', 'assets'];

@@ -82,8 +82,8 @@
       '<div class="mega-menu-footer">',
         '<p class="mega-menu-footer-text">Besoin d\'aide pour choisir ? Nous sommes là pour vous guider.</p>',
         '<div class="mega-menu-footer-actions">',
-          '<a href="/contact" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('question-mark-circle') + 'Contacter un expert</a>',
-          '<a href="/contact" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Nous contacter</a>',
+          '<a href="https://giantlink.ma/form-ale" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('question-mark-circle') + 'Contacter un expert</a>',
+          '<a href="https://giantlink.ma/form-ale" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Nous contacter</a>',
         '</div>',
       '</div>',
     '</div>'
@@ -190,7 +190,7 @@
       '<div class="mega-menu-footer">',
         '<p class="mega-menu-footer-text">Des tarifs simples et transparents pour votre équipe.</p>',
         '<div class="mega-menu-footer-actions">',
-          '<a href="/contact" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Nous contacter</a>',
+          '<a href="https://giantlink.ma/form-ale" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Nous contacter</a>',
         '</div>',
       '</div>',
     '</div>'

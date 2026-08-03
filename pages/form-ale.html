@@ -400,7 +400,8 @@
         .cal-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 34px;
+            column-gap: 34px;
+            row-gap: 8px;
         }
 
         .cal-wd {
@@ -442,6 +443,19 @@
             #cal-days {
                 grid-auto-rows: 36px;
                 align-content: start;
+                flex: 1;
+                min-height: 0;
+                overflow-y: auto;
+                padding-right: 3px;
+            }
+
+            #cal-days::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            #cal-days::-webkit-scrollbar-thumb {
+                background: #dcd7f0;
+                border-radius: 3px;
             }
 
             .cal-day {
@@ -450,6 +464,30 @@
 
             .cal-empty {
                 aspect-ratio: auto;
+            }
+        }
+
+        /* ---- Short-height viewports (e.g. laptop screens with limited vertical space) ---- */
+        @media (max-height: 700px) and (min-width: 861px) {
+            .shell {
+                height: calc(100vh - 24px);
+                min-height: 420px;
+            }
+
+            .book-cols {
+                margin-top: 16px;
+            }
+
+            .step-title {
+                margin-bottom: 6px;
+            }
+
+            .progress-dots {
+                margin-bottom: 6px;
+            }
+
+            #cal-days {
+                grid-auto-rows: 30px;
             }
         }
 

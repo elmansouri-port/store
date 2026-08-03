@@ -68,7 +68,6 @@ The Astro block wrapper component reads `spacing_top` and `spacing_bottom` and a
 5. [Collaboration Pricing Page](#5-collaboration-pricing-page)
 6. [Webinar Pricing Page](#6-webinar-pricing-page)
 7. [Products Overview Page](#7-products-overview-page)
-8. [Contact Page](#8-contact-page)
 9. [Partners Page (Partenaires)](#9-partners-page-partenaires)
 10. [Blog Listing Page](#10-blog-listing-page)
 11. [Blog Article Page](#11-blog-article-page)
@@ -764,69 +763,6 @@ Same as [Section 1.12](#112-faq-section), [Section 13.3](#133-cta-banner), [Sect
 
 ---
 
----
-
-## 8. Contact Page
-
-**Source file:** `pages/contact.html`  
-**Build output:** `docs/contact/index.html`  
-**Route:** `/contact`
-
----
-
-### 8.1 Navigation Bar
-
-**File:** `pages/contact.html : ~1`  
-Shared  see [Section 13.1](#131-navigation-bar).
-
----
-
-### 8.2 Hero Header
-
-**Selector:** `header.pt-32.pb-16.px-6`  
-**File:** `pages/contact.html : ~100`
-
-Simple centered page header.
-
-**CMS Fields:**
-
-| Field | Type | Notes |
-|---|---|---|
-| `hero_title` | Text | `<h1>` e.g. "Contactez-nous" |
-| `hero_description` | Text | Optional subparagraph |
-
----
-
-### 8.3 Contact Form Section
-
-**Selector:** `section.pb-24.px-6 > #contact-form`  
-**File:** `pages/contact.html : ~140`
-
-The main contact form. Most fields are structural (HTML inputs)  only labels and option values are CMS-editable.
-
-**CMS Fields:**
-
-| Field | Type | Notes |
-|---|---|---|
-| `form_section_title` | Text | Heading above the form card |
-| `form_first_name_label` | Text | Label for first name input |
-| `form_last_name_label` | Text | Label for last name input |
-| `form_email_label` | Text | |
-| `form_phone_label` | Text | |
-| `form_inquiry_type_label` | Text | Label for dropdown |
-| `form_inquiry_options` | Repeatable text | Dropdown option labels |
-| `form_message_label` | Text | |
-| `form_promo_checkbox_label` | Text | Newsletter opt-in label |
-| `form_terms_checkbox_label` | Rich text | Terms agreement text with link |
-| `form_submit_label` | Text | Button text |
-| `form_success_title` | Text | Success state heading |
-| `form_success_description` | Text | Success state message |
-| `form_error_message` | Text | Error state message |
-
----
-
----
-
 ## 9. Partners Page (Partenaires)
 
 **Source file:** `pages/partenaires.html`  
@@ -1208,7 +1144,7 @@ The accordion is rendered client-side. Items are not directly managed in the CMS
 | `faq_zendesk_section_id` | Text | Zendesk section ID for API call |
 | `faq_contact_prompt` | Text | e.g. "Vous avez d'autres questions ?" |
 | `faq_contact_link_label` | Text | e.g. "Contactez notre équipe" |
-| `faq_contact_link_url` | URL | mailto or `/contact` |
+| `faq_contact_link_url` | URL | mailto or external URL (e.g. `https://giantlink.ma/form-ale`) |
 
 ---
 
@@ -1251,9 +1187,8 @@ Complete flat list of every distinct section across all pages, ordered by page.
 | 29 | Timeline Step Panels | Webinar | `pages/webinar.html` | 298 | `.timeline-panel` |
 | 30 | Tarifs Sticky Sidebar | Tarifs | `pages/tarifs.html` | 163 | `.page-sidebar` |
 | 31 | Tarifs Mobile Pill Bar | Tarifs | `pages/tarifs.html` | 188 | `.mobile-pill-bar` |
-| 32 | Page Hero  Simple Centered | Tarifs, Contact | `pages/tarifs.html` | ~210 | `header.pt-32` |
-| 33 | Contact Form | Contact | `pages/contact.html` | ~140 | `#contact-form` |
-| 34 | Form Success / Error States | Contact, Partenaires | `pages/contact.html` | ~80 | `#message-box` |
+| 32 | Page Hero  Simple Centered | Tarifs | `pages/tarifs.html` | ~210 | `header.pt-32` |
+| 34 | Form Success State | Partenaires | `pages/partenaires.html` | 378 | `#success-msg` |
 | 35 | Partners Hero (Two-Column) | Partenaires | `pages/partenaires.html` | ~100 | `.two-col` |
 | 36 | Partner Registration Form | Partenaires | `pages/partenaires.html` | ~200 | `.form-card` |
 | 37 | Partners Decorative Circle | Partenaires | `pages/partenaires.html` | ~130 | `.visual-wrap > .circle-outer` |
