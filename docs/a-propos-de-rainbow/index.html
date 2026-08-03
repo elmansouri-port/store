@@ -576,11 +576,24 @@
             var cards = Array.prototype.slice.call(row.querySelectorAll('.logo-wave-card'));
             if (!cards.length) return;
 
+            // The initial <img src="/store/images/clients/..."> tags get base-path-prefixed
+            // at build time (e.g. "/store/images/clients/..." on GitHub Pages), but LOGOS
+            // above holds the raw un-prefixed paths as authored. Derive the real prefix
+            // from an image already on the page so swapped-in logos resolve the same way
+            // instead of 404ing once the wave starts overwriting src.
+            var ASSET_BASE = (function () {
+                var probe = row.querySelector('.logo-wave-reel img');
+                var raw = probe ? probe.getAttribute('src') || '' : '';
+                var marker = '/images/clients/';
+                var idx = raw.indexOf(marker);
+                return idx > -1 ? raw.slice(0, idx) : '';
+            })();
+
             // Preload every logo up front so swapped-in images are already cached by
             // the time the wave reaches them, instead of showing alt-text while they load.
             LOGOS.forEach(function (item) {
                 var preload = new Image();
-                preload.src = item.src;
+                preload.src = ASSET_BASE + item.src;
             });
 
             var TICK_MS = 50;          // master clock resolution
@@ -621,9 +634,9 @@
 
                     s.index = (s.index + 1) % LOGOS.length;
                     var nextIndex = (s.index + 1) % LOGOS.length;
-                    s.imgs[0].src = LOGOS[s.index].src;
+                    s.imgs[0].src = ASSET_BASE + LOGOS[s.index].src;
                     s.imgs[0].alt = LOGOS[s.index].alt;
-                    s.imgs[1].src = LOGOS[nextIndex].src;
+                    s.imgs[1].src = ASSET_BASE + LOGOS[nextIndex].src;
                     s.imgs[1].alt = LOGOS[nextIndex].alt;
 
                     void s.reel.offsetHeight; // force reflow so 'transition: none' takes effect first
