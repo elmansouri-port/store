@@ -15,7 +15,8 @@
     'lifebuoy': '<path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Zm0 0v4.5m-6.375-9.75 3.185 3.185m0 0 3.185-3.185M12 12l3.185 3.185M12 12l-3.185-3.185"/>',
     'sparkles': '<path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/>',
     'question-mark-circle': '<path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"/>',
-    'light-bulb': '<path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/>'
+    'light-bulb': '<path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/>',
+    'information-circle': '<path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>'
   };
 
   function svgIcon(name) {
@@ -88,13 +89,14 @@
     '</div>'
   ].join('');
 
-  var ressourcesItems = [
+  var ressourcesLeftItems = [
+    makeItem('/store/a-propos-de-rainbow', 'information-circle', 'À propos', 'Découvrez Rainbow, ALE International et notre mission.'),
+    makeItem('/store/rainbow-donnees-hebergees-en-france', 'lock-closed', 'Souveraineté', 'Vos données hébergées et protégées en France.'),
+    makeItem('/store/faq', 'question-mark-circle', 'FAQ', 'Les réponses aux questions les plus fréquentes sur Rainbow.')
+  ].join('');
+
+  var ressourcesRightItems = [
     makeItem('/store/blog', 'newspaper', 'Blog', 'Actualités, conseils et mises à jour produit de l\'équipe Rainbow.'),
-    makeItem('/store/tutorials', 'academic-cap', 'Tutoriels', 'Guides pas-à-pas et vidéos pour tirer le meilleur de Rainbow.'),
-    makeItem('/store/docs', 'book-open', 'Documentation', 'Docs API complètes, guides d\'intégration et références techniques.'),
-    makeItem('/store/community', 'users', 'Communauté', 'Rejoignez la communauté Rainbow pour partager vos idées et obtenir de l\'aide.'),
-    makeItem('/store/support', 'lifebuoy', 'Support', 'Obtenez de l\'aide technique, signalez des problèmes et trouvez des solutions.'),
-    makeItem('/store/changelog', 'sparkles', 'Nouveautés', 'Restez informé des dernières fonctionnalités, versions et améliorations.'),
     makeItem('/store/partenaires', 'users', 'Partenaires', 'Rejoignez le réseau Rainbow et développez votre activité.')
   ].join('');
 
@@ -102,9 +104,11 @@
     '<div class="mega-menu" role="menu">',
       '<div class="mega-menu-inner">',
         '<div class="mega-menu-main">',
-          '<p class="mega-menu-section-title">Apprendre &amp; Découvrir</p>',
-          '<div class="mega-menu-grid">' + ressourcesItems + '</div>',
-          '<a href="/store/ressources" class="mega-menu-see-all">Parcourir toutes les ressources <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
+          '<p class="mega-menu-section-title">Ressources</p>',
+          '<div class="mega-menu-cols">',
+            '<div class="mega-menu-col">' + ressourcesLeftItems + '</div>',
+            '<div class="mega-menu-col">' + ressourcesRightItems + '</div>',
+          '</div>',
         '</div>',
         '<div class="mega-menu-side">',
           '<p class="mega-menu-section-title">Guide populaire</p>',
@@ -117,7 +121,7 @@
             '</div>',
           '</a>',
           '<p class="mega-menu-section-title">Besoin d\'aide ?</p>',
-          '<a href="/store/support" class="mega-menu-side-cta">',
+          '<a href="/store/centre-aide-rainbow" class="mega-menu-side-cta">',
             '<span class="mega-menu-side-cta-icon">' + svgIcon('lifebuoy') + '</span>',
             '<span><p class="mega-menu-side-cta-text">Accéder au centre d\'aide</p><p class="mega-menu-side-cta-desc">Disponible 24h/7j pour vous aider</p></span>',
           '</a>',
@@ -127,7 +131,7 @@
         '<p class="mega-menu-footer-text">Restez informé des dernières nouveautés Rainbow.</p>',
         '<div class="mega-menu-footer-actions">',
           '<a href="/store/blog" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('newspaper') + 'Visiter notre blog</a>',
-          '<a href="/store/support" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Obtenir de l\'aide</a>',
+          '<a href="/store/centre-aide-rainbow" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Obtenir de l\'aide</a>',
         '</div>',
       '</div>',
     '</div>'
@@ -153,21 +157,18 @@
   ].join('');
 
   var ressourcesMobileItems = [
+    makeMobileItem('/store/a-propos-de-rainbow', 'information-circle', 'À propos', 'Découvrez Rainbow et ALE International.'),
+    makeMobileItem('/store/rainbow-donnees-hebergees-en-france', 'lock-closed', 'Souveraineté', 'Données hébergées et protégées en France.'),
+    makeMobileItem('/store/faq', 'question-mark-circle', 'FAQ', 'Questions fréquentes sur Rainbow.'),
     makeMobileItem('/store/blog', 'newspaper', 'Blog', 'Actualités et mises à jour.'),
-    makeMobileItem('/store/tutorials', 'academic-cap', 'Tutoriels', 'Guides pas-à-pas.'),
-    makeMobileItem('/store/docs', 'book-open', 'Documentation', 'Docs API et références.'),
-    makeMobileItem('/store/community', 'users', 'Communauté', 'Partagez vos idées.'),
-    makeMobileItem('/store/support', 'lifebuoy', 'Support', 'Obtenez de l\'aide.'),
-    makeMobileItem('/store/changelog', 'sparkles', 'Nouveautés', 'Dernières fonctionnalités et versions.'),
     makeMobileItem('/store/partenaires', 'users', 'Partenaires', 'Rejoignez le réseau Rainbow.')
   ].join('');
 
   var ressourcesMobileHTML = [
     '<div class="mega-menu-mobile-content">',
       '<div class="mega-menu-mobile-section">',
-        '<p class="mega-menu-mobile-section-title">Apprendre &amp; Découvrir</p>',
+        '<p class="mega-menu-mobile-section-title">Ressources</p>',
         ressourcesMobileItems,
-        '<a href="/store/ressources" class="mega-menu-mobile-see-all">Parcourir toutes les ressources <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
       '</div>',
     '</div>'
   ].join('');
