@@ -90,10 +90,15 @@
             padding: 4px 6px;
             display: block;
         }
-        @media (max-width: 640px) {
-            .logo-wave-row { gap: 8px; }
-            .logo-wave-card { height: 92px; }
-            .logo-wave-reel img { height: 92px; flex-basis: 92px; padding: 2px 4px; }
+        @media (max-width: 768px) {
+            .logo-wave-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+            .logo-wave-card { height: 100px; }
+            .logo-wave-reel img { height: 100px; flex-basis: 100px; padding: 3px 5px; }
+        }
+        @media (max-width: 480px) {
+            .logo-wave-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+            .logo-wave-card { height: 84px; }
+            .logo-wave-reel img { height: 84px; flex-basis: 84px; padding: 2px 6px; }
         }
 
         /* ── Timeline ── */
@@ -566,6 +571,13 @@
             if (!row) return;
             var cards = Array.prototype.slice.call(row.querySelectorAll('.logo-wave-card'));
             if (!cards.length) return;
+
+            // Preload every logo up front so swapped-in images are already cached by
+            // the time the wave reaches them, instead of showing alt-text while they load.
+            LOGOS.forEach(function (item) {
+                var preload = new Image();
+                preload.src = item.src;
+            });
 
             var TICK_MS = 50;          // master clock resolution
             var HOLD_MS = 3000;        // ~3s steady hold before a card moves
