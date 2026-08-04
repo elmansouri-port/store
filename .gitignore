@@ -11,3 +11,6 @@ form-model.txt
 # Unreferenced full-size image backups (accidental duplicates; real images are optimized)
 images/*-2.jpg
 docs/images/*-2.jpg
+
+# Impeccable design-review tool  local cache/session state, not shared
+.impeccable/
