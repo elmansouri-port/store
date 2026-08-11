@@ -400,7 +400,7 @@
 
                                     <div class="inline-cta" role="complementary" aria-label="Télécharger le rapport Rainbow 2026">
                                         <p>Rainbow 2026 Benchmark Report&nbsp;: découvrez les chiffres clés de l'adoption de la communication unifiée en entreprise.</p>
-                                        <a href="#" target="_blank" rel="noopener noreferrer">
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('whitepaper-modal-cover').open();">
                                             Télécharger le rapport
                                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                                         </a>
@@ -449,7 +449,7 @@
                                                 Rapports
                                             </p>
                                             <p class="resource-card-title">Rainbow 2026 Business Impact Report</p>
-                                            <a href="#" class="resource-card-link" aria-label="Télécharger le Rainbow 2026 Business Impact Report">
+                                            <a href="#" class="resource-card-link" aria-label="Télécharger le Rainbow 2026 Business Impact Report" onclick="event.preventDefault(); document.getElementById('whitepaper-modal').open();">
                                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                                                 En savoir plus
                                             </a>
@@ -799,6 +799,44 @@
     </script>
     <script src="/js/mega-menu.js"></script>
     <script src="/js/i18n.js"></script>
+
+    <!-- Whitepaper download modal — LAVENDER cover (default).
+         Opened by the sidebar resource card "En savoir plus". -->
+    <whitepaper-download-form
+        id="whitepaper-modal"
+        modal
+        doc-label="Guide 2026"
+        doc-title="Comment choisir sa solution de communication unifiée pour votre PME"
+        doc-meta="PDF · 24 pages · 12 min de lecture"
+        highlights="Comparer les solutions UCaaS du marché|Les critères qui comptent : coûts, sécurité, intégration|Une grille de décision prête à l’emploi"
+        heading="Recevez le <span class=&quot;wf-accent&quot;>livre blanc</span>"
+        subtitle="Renseignez vos coordonnées, le PDF se télécharge immédiatement."
+        submit-label="Télécharger le PDF">
+    </whitepaper-download-form>
+
+    <!-- Same modal, but with a real COVER IMAGE instead of the type-only cover.
+         Opened by the mid-article CTA "Télécharger le rapport".
+
+         TO USE THE REAL LIVRE BLANC COVER: drop the file in /images/ and point
+         `image` at it, e.g. image="/images/livre-blanc-ucaas-2026.webp".
+         Any dimensions work — the slot is an A4-portrait frame and the image is
+         object-fit:cover'd, so it will never stretch or distort. Portrait
+         artwork around 400x566px or larger looks best.
+         `image` is currently set to an existing photo as a placeholder. -->
+    <whitepaper-download-form
+        id="whitepaper-modal-cover"
+        modal
+        image="/images/GUIDES.jpg"
+        image-alt="Couverture du livre blanc : choisir sa solution de communication unifiée"
+        doc-label="Guide 2026"
+        doc-title="Comment choisir sa solution de communication unifiée pour votre PME"
+        doc-meta="PDF · 24 pages · 12 min de lecture"
+        highlights="Comparer les solutions UCaaS du marché|Les critères qui comptent : coûts, sécurité, intégration|Une grille de décision prête à l’emploi"
+        heading="Recevez le <span class=&quot;wf-accent&quot;>livre blanc</span>"
+        subtitle="Renseignez vos coordonnées, le PDF se télécharge immédiatement."
+        submit-label="Télécharger le PDF">
+    </whitepaper-download-form>
+    <script src="/js/components/whitepaper-download-form.js"></script>
 <!-- impeccable-live-start -->
 <script src="http://localhost:8400/live.js?token=7e1a9f72-559f-41b5-9268-cc7ffe4bf926"></script>
 <!-- impeccable-live-end -->
