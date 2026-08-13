@@ -22,6 +22,8 @@
  * Events: "wf-submit" → detail { firstName, lastName, email, company, role, newsletter }
  */
 (function () {
+    const LIVRE_BLANC_WEBHOOK_URL = 'https://n8n.openrainbow.org/webhook/livre-blanc-lead';
+
     const TEMPLATE = document.createElement('template');
     TEMPLATE.innerHTML = `
         <style>
@@ -48,6 +50,7 @@
             .wf-card {
                 position: relative;
                 width: 100%; max-width: 880px; margin: 24px auto;
+                max-height: calc(100vh - 32px);
                 background: #fff;
                 border-radius: 18px;
                 overflow: hidden;
@@ -60,7 +63,14 @@
                     0 8px 16px -8px rgba(17,15,38,0.16);
                 animation: wf-enter .42s cubic-bezier(0.16,1,0.3,1) both;
             }
-            @media (min-width: 700px) { .wf-card { margin: 0 auto; } }
+            /* Cap to the viewport (minus scrim padding) and let the cover/body
+               panels scroll internally instead of relying on the scrim's own
+               overflow — a centered flex item taller than its container can
+               get clipped and unreachable in some browsers, so the card must
+               never actually need to overflow the scrim. */
+            @media (min-width: 700px) {
+                .wf-card { margin: 0 auto; max-height: calc(100vh - 56px); }
+            }
             :host(:not([modal])) .wf-card { animation: none; }
             @keyframes wf-enter {
                 from { opacity: 0; transform: translateY(12px) scale(.985); }
@@ -75,7 +85,7 @@
                 position: relative;
                 display: flex; flex-direction: column;
                 padding: 34px 28px 28px;
-                overflow: hidden;
+                min-height: 0; overflow-y: auto; overflow-x: hidden;
 
                 --cover-bg: linear-gradient(155deg, #fbfaff 0%, #ece6fa 60%, #e4dcf4 100%);
                 /* muted tones are darker than the site's --muted (#6b6a85) on purpose:
@@ -195,10 +205,16 @@
 
             /* ── Form panel (the action) ───────────────────────────── */
             .wf-body {
-                padding: 34px 32px 32px; min-width: 0;
+                padding: 34px 32px 32px; min-width: 0; min-height: 0;
+                overflow-y: auto;
                 display: flex; flex-direction: column;
             }
             @media (min-width: 700px) { .wf-body { padding: 38px 40px 34px; } }
+
+            .wf-body::-webkit-scrollbar, .wf-cover::-webkit-scrollbar { width: 4px; }
+            .wf-body::-webkit-scrollbar-thumb, .wf-cover::-webkit-scrollbar-thumb {
+                background: #dcd7f0; border-radius: 3px;
+            }
 
             .wf-close {
                 position: absolute; z-index: 3; top: 14px; right: 14px;
@@ -282,6 +298,15 @@
                 font-size: 0.75rem; color: #c62a2f; margin: -3px 0 0 26px;
             }
             .wf-consent-err svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+            .wf-submit-error {
+                display: none; align-items: center; gap: 6px;
+                font-size: 0.8125rem; color: #c62a2f; margin-top: 12px;
+                padding: 10px 12px; border-radius: 8px;
+                background: #fdf1f1; border: 1px solid #f4cccc;
+            }
+            .wf-submit-error.visible { display: flex; }
+            .wf-submit-error svg { width: 14px; height: 14px; flex-shrink: 0; }
 
             /* ── Submit ────────────────────────────────────────────── */
             .wf-submit {
@@ -555,6 +580,8 @@
                                 <span class="wf-submit-label"></span>
                             </button>
 
+                            <p class="wf-submit-error" role="alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v4m0 3.5v.5"/></svg>Une erreur est survenue lors de l'envoi. Veuillez réessayer.</p>
+
                             <p class="wf-reassure">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V8a5 5 0 0110 0v3M6 11h12a1 1 0 011 1v7a1 1 0 01-1 1H6a1 1 0 01-1-1v-7a1 1 0 011-1z"/></svg>
                                 Aucun spam. Désinscription en un clic.
@@ -578,16 +605,92 @@
         </div>
     `;
 
-    const DEFAULT_HIGHLIGHTS = [
-        'Comparer les principales solutions UCaaS du marché',
-        'Les critères qui comptent : coûts, sécurité, intégration',
-        'Une grille de décision prête à l’emploi',
-    ];
+    // All UI chrome that isn't already exposed as a per-instance attribute
+    // (field labels, placeholders, error/success copy) is driven by the
+    // `lang` attribute ("fr" default, "en", "de") so the same shared
+    // component renders correctly on every language's copy of a page.
+    const LABELS = {
+        fr: {
+            close: 'Fermer',
+            docLabel: 'Livre blanc', docTitle: 'Choisir sa solution de communication unifiée', docMeta: 'PDF · Gratuit',
+            defaultHighlights: [
+                'Comparer les principales solutions UCaaS du marché',
+                'Les critères qui comptent : coûts, sécurité, intégration',
+                'Une grille de décision prête à l’emploi',
+            ],
+            firstNameLabel: 'Prénom', lastNameLabel: 'Nom', emailLabel: 'E-mail professionnel',
+            companyLabel: 'Entreprise', roleLabel: 'Votre fonction', optional: '(optionnel)',
+            placeholders: { firstName: 'Jean', lastName: 'Dupont', email: 'jean@entreprise.com', company: 'Acme', role: 'Directeur des systèmes d\'information' },
+            requiredErr: 'Ce champ est requis.', emailErr: 'Veuillez renseigner un e-mail valide.',
+            consentErr: 'Vous devez accepter la politique de confidentialité.',
+            submitError: 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.',
+            sending: 'Envoi en cours…', reassure: 'Aucun spam. Désinscription en un clic.',
+            consentLabelHtml: (privacyUrl) => 'J\'accepte que mes données soient utilisées par Rainbow&trade; by Alcatel-Lucent conformément à la ' +
+                `<a href="${privacyUrl}" target="_blank" rel="noopener noreferrer">politique de confidentialité</a>. *`,
+            newsletterLabel: 'Je souhaite recevoir les actualités Rainbow™ by Alcatel-Lucent.',
+            heading: 'Recevez le <span class="wf-accent">livre blanc</span>',
+            subtitle: 'Renseignez vos coordonnées, le PDF se télécharge immédiatement.',
+            submitLabel: 'Télécharger le PDF',
+            successTitle: 'Votre livre blanc arrive',
+            successBodyTpl: 'Le téléchargement démarre dans un instant. Nous avons aussi envoyé le lien à {email} pour que vous puissiez le retrouver plus tard.',
+            successClose: 'Fermer', successHint: 'Rien reçu&nbsp;? Vérifiez vos indésirables.'
+        },
+        en: {
+            close: 'Close',
+            docLabel: 'Whitepaper', docTitle: 'Choosing your unified communications solution', docMeta: 'PDF · Free',
+            defaultHighlights: [
+                'Compare the leading UCaaS solutions on the market',
+                'The criteria that matter: cost, security, integration',
+                'A ready-to-use decision matrix',
+            ],
+            firstNameLabel: 'First name', lastNameLabel: 'Last name', emailLabel: 'Work email',
+            companyLabel: 'Company', roleLabel: 'Your role', optional: '(optional)',
+            placeholders: { firstName: 'John', lastName: 'Smith', email: 'john@company.com', company: 'Acme', role: 'Head of IT' },
+            requiredErr: 'This field is required.', emailErr: 'Please enter a valid email address.',
+            consentErr: 'You must accept the privacy policy.',
+            submitError: 'Something went wrong while sending. Please try again.',
+            sending: 'Sending…', reassure: 'No spam. Unsubscribe with one click.',
+            consentLabelHtml: (privacyUrl) => 'I agree to my data being used by Rainbow&trade; by Alcatel-Lucent in accordance with the ' +
+                `<a href="${privacyUrl}" target="_blank" rel="noopener noreferrer">privacy policy</a>. *`,
+            newsletterLabel: 'I would like to receive Rainbow™ by Alcatel-Lucent news.',
+            heading: 'Get the <span class="wf-accent">whitepaper</span>',
+            subtitle: 'Fill in your details and the PDF downloads immediately.',
+            submitLabel: 'Download the PDF',
+            successTitle: 'Your whitepaper is on its way',
+            successBodyTpl: 'The download starts in a moment. We\'ve also sent the link to {email} so you can find it again later.',
+            successClose: 'Close', successHint: 'Didn\'t get anything? Check your spam folder.'
+        },
+        de: {
+            close: 'Schließen',
+            docLabel: 'Whitepaper', docTitle: 'Die richtige Lösung für Unified Communications wählen', docMeta: 'PDF · Kostenlos',
+            defaultHighlights: [
+                'Vergleichen Sie die führenden UCaaS-Lösungen auf dem Markt',
+                'Die entscheidenden Kriterien: Kosten, Sicherheit, Integration',
+                'Eine gebrauchsfertige Entscheidungsmatrix',
+            ],
+            firstNameLabel: 'Vorname', lastNameLabel: 'Nachname', emailLabel: 'Geschäftliche E-Mail',
+            companyLabel: 'Unternehmen', roleLabel: 'Ihre Funktion', optional: '(optional)',
+            placeholders: { firstName: 'Max', lastName: 'Mustermann', email: 'max@unternehmen.de', company: 'Acme', role: 'IT-Leiter' },
+            requiredErr: 'Dieses Feld ist erforderlich.', emailErr: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
+            consentErr: 'Sie müssen die Datenschutzrichtlinie akzeptieren.',
+            submitError: 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+            sending: 'Wird gesendet…', reassure: 'Kein Spam. Abmeldung mit einem Klick.',
+            consentLabelHtml: (privacyUrl) => 'Ich stimme zu, dass meine Daten von Rainbow&trade; by Alcatel-Lucent gemäß der ' +
+                `<a href="${privacyUrl}" target="_blank" rel="noopener noreferrer">Datenschutzrichtlinie</a> verwendet werden. *`,
+            newsletterLabel: 'Ich möchte Neuigkeiten von Rainbow™ by Alcatel-Lucent erhalten.',
+            heading: 'Erhalten Sie das <span class="wf-accent">Whitepaper</span>',
+            subtitle: 'Geben Sie Ihre Daten ein, und das PDF wird sofort heruntergeladen.',
+            submitLabel: 'PDF herunterladen',
+            successTitle: 'Ihr Whitepaper ist auf dem Weg',
+            successBodyTpl: 'Der Download startet in Kürze. Wir haben den Link auch an {email} gesendet, damit Sie ihn später wiederfinden.',
+            successClose: 'Schließen', successHint: 'Nichts erhalten? Prüfen Sie Ihren Spam-Ordner.'
+        }
+    };
 
     class WhitepaperDownloadForm extends HTMLElement {
         static get observedAttributes() {
             return ['doc-label', 'doc-title', 'doc-meta', 'highlights', 'image', 'image-alt',
-                'heading', 'subtitle', 'privacy-url', 'submit-label'];
+                'heading', 'subtitle', 'privacy-url', 'submit-label', 'lang'];
         }
 
         constructor() {
@@ -640,16 +743,19 @@
             const root = this.shadowRoot;
             const val = (name, fallback) => this.getAttribute(name) || fallback;
 
+            const lang = (this.getAttribute('lang') || 'fr').toLowerCase();
+            const L = LABELS[lang] || LABELS.fr;
+            this._L = L;
+
             // — cover —
-            root.querySelector('.wf-doc-label-text').textContent = val('doc-label', 'Livre blanc');
-            root.querySelector('.wf-doc-title').textContent =
-                val('doc-title', 'Choisir sa solution de communication unifiée');
-            root.querySelector('.wf-doc-meta').textContent = val('doc-meta', 'PDF · Gratuit');
+            root.querySelector('.wf-doc-label-text').textContent = val('doc-label', L.docLabel);
+            root.querySelector('.wf-doc-title').textContent = val('doc-title', L.docTitle);
+            root.querySelector('.wf-doc-meta').textContent = val('doc-meta', L.docMeta);
 
             const rawHighlights = this.getAttribute('highlights');
             const items = rawHighlights
                 ? rawHighlights.split('|').map((s) => s.trim()).filter(Boolean)
-                : DEFAULT_HIGHLIGHTS;
+                : L.defaultHighlights;
             const list = root.querySelector('.wf-highlights');
             list.textContent = '';
             items.forEach((text) => {
@@ -672,19 +778,46 @@
                 art.hidden = true;
             }
 
+            // — form chrome (labels, placeholders, errors) —
+            root.querySelector('.wf-close').setAttribute('aria-label', L.close);
+            root.querySelector('.wf-success-close').textContent = L.successClose;
+
+            const FIELD_LABELS = {
+                'wf-first-name': L.firstNameLabel, 'wf-last-name': L.lastNameLabel,
+                'wf-email': L.emailLabel, 'wf-company': L.companyLabel,
+            };
+            Object.keys(FIELD_LABELS).forEach((id) => {
+                const input = root.getElementById(id);
+                const label = input.closest('.wf-field').querySelector('label');
+                label.childNodes[0].textContent = FIELD_LABELS[id] + ' ';
+                const err = input.closest('.wf-field').querySelector('.wf-err');
+                if (err) err.lastChild.textContent = id === 'wf-email' ? L.emailErr : L.requiredErr;
+                input.placeholder = L.placeholders[
+                    id === 'wf-first-name' ? 'firstName' : id === 'wf-last-name' ? 'lastName'
+                        : id === 'wf-email' ? 'email' : 'company'
+                ];
+            });
+            const roleInput = root.getElementById('wf-role');
+            const roleLabel = roleInput.closest('.wf-field').querySelector('label');
+            roleLabel.childNodes[0].textContent = L.roleLabel + ' ';
+            roleLabel.querySelector('.opt').textContent = L.optional;
+            roleInput.placeholder = L.placeholders.role;
+
+            root.querySelector('.wf-consent-err').lastChild.textContent = L.consentErr;
+            root.querySelector('.wf-submit-error').lastChild.textContent = L.submitError;
+            root.querySelector('.wf-reassure').lastChild.textContent = L.reassure;
+
             // — form —
-            root.querySelector('.wf-heading').innerHTML =
-                val('heading', 'Recevez le <span class="wf-accent">livre blanc</span>');
-            root.querySelector('.wf-subtitle').textContent =
-                val('subtitle', 'Renseignez vos coordonnées, le PDF se télécharge immédiatement.');
-            root.querySelector('.wf-submit-label').textContent = val('submit-label', 'Télécharger le PDF');
+            root.querySelector('.wf-heading').innerHTML = val('heading', L.heading);
+            root.querySelector('.wf-subtitle').textContent = val('subtitle', L.subtitle);
+            root.querySelector('.wf-submit-label').textContent = val('submit-label', L.submitLabel);
 
             const privacyUrl = val('privacy-url', '/politique-de-confidentialite');
-            root.querySelector('.wf-consent-label').innerHTML =
-                'J\'accepte que mes données soient utilisées par Rainbow&trade; by Alcatel-Lucent conformément à la ' +
-                `<a href="${privacyUrl}" target="_blank" rel="noopener noreferrer">politique de confidentialité</a>. *`;
-            root.querySelector('.wf-newsletter-label').textContent =
-                'Je souhaite recevoir les actualités Rainbow™ by Alcatel-Lucent.';
+            root.querySelector('.wf-consent-label').innerHTML = L.consentLabelHtml(privacyUrl);
+            root.querySelector('.wf-newsletter-label').textContent = L.newsletterLabel;
+
+            root.querySelector('.wf-success h3').textContent = L.successTitle;
+            root.querySelector('.wf-success-hint').innerHTML = L.successHint;
         }
 
         _handleSubmit(e) {
@@ -719,42 +852,58 @@
             const originalLabel = labelEl.textContent;
             btn.classList.add('is-loading');
             btn.disabled = true;
-            labelEl.textContent = 'Envoi en cours…';
+            labelEl.textContent = (this._L || LABELS.fr).sending;
+            this.shadowRoot.querySelector('.wf-submit-error').classList.remove('visible');
 
             const email = (data.get('email') || '').trim();
+            const detail = {
+                firstName: data.get('firstName'),
+                lastName: data.get('lastName'),
+                email: data.get('email'),
+                company: data.get('company'),
+                role: data.get('role'),
+                newsletter: data.get('newsletter') === 'on',
+            };
 
-            window.setTimeout(() => {
-                this.dispatchEvent(new CustomEvent('wf-submit', {
-                    bubbles: true,
-                    composed: true,
-                    detail: {
-                        firstName: data.get('firstName'),
-                        lastName: data.get('lastName'),
-                        email: data.get('email'),
-                        company: data.get('company'),
-                        role: data.get('role'),
-                        newsletter: data.get('newsletter') === 'on',
-                    }
-                }));
+            fetch(LIVRE_BLANC_WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(detail),
+            })
+                .then((res) => {
+                    if (!res.ok) throw new Error('request failed: ' + res.status);
+                    this.dispatchEvent(new CustomEvent('wf-submit', {
+                        bubbles: true,
+                        composed: true,
+                        detail,
+                    }));
 
-                const mailEl = this.shadowRoot.querySelector('.wf-success-mail');
-                if (mailEl && email) mailEl.textContent = email;
+                    const mailEl = this.shadowRoot.querySelector('.wf-success-mail');
+                    if (mailEl && email) mailEl.textContent = email;
 
-                this._form.classList.add('wf-form-exit');
-                window.setTimeout(() => {
-                    this._form.style.display = 'none';
-                    this._form.classList.remove('wf-form-exit');
+                    this._form.classList.add('wf-form-exit');
+                    window.setTimeout(() => {
+                        this._form.style.display = 'none';
+                        this._form.classList.remove('wf-form-exit');
+                        btn.classList.remove('is-loading');
+                        btn.disabled = false;
+                        labelEl.textContent = originalLabel;
+                        this._submitting = false;
+                        // hides the now-stale form heading/subtitle via CSS
+                        this.setAttribute('submitted', '');
+                        this._success.classList.add('visible');
+                        const closeBtn = this.shadowRoot.querySelector('.wf-success-close');
+                        if (closeBtn) closeBtn.focus();
+                    }, 200);
+                })
+                .catch((err) => {
+                    console.error('[whitepaper-download-form] submit failed:', err);
                     btn.classList.remove('is-loading');
                     btn.disabled = false;
                     labelEl.textContent = originalLabel;
                     this._submitting = false;
-                    // hides the now-stale form heading/subtitle via CSS
-                    this.setAttribute('submitted', '');
-                    this._success.classList.add('visible');
-                    const closeBtn = this.shadowRoot.querySelector('.wf-success-close');
-                    if (closeBtn) closeBtn.focus();
-                }, 200);
-            }, 620);
+                    this.shadowRoot.querySelector('.wf-submit-error').classList.add('visible');
+                });
         }
 
         _setFieldError(input, hasError) {
@@ -794,11 +943,12 @@
             this._submitBtn.classList.remove('is-loading');
             this._submitBtn.disabled = false;
             this._submitBtn.querySelector('.wf-submit-label').textContent =
-                this.getAttribute('submit-label') || 'Télécharger le PDF';
+                this.getAttribute('submit-label') || (this._L || LABELS.fr).submitLabel;
             this.shadowRoot.querySelectorAll('.has-error').forEach((el) => el.classList.remove('has-error'));
             this.shadowRoot.querySelectorAll('[aria-invalid="true"]')
                 .forEach((el) => el.setAttribute('aria-invalid', 'false'));
             this._setConsentError(false);
+            this.shadowRoot.querySelector('.wf-submit-error').classList.remove('visible');
         }
     }
 

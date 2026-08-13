@@ -1,5 +1,13 @@
-﻿(function () {
+(function () {
   'use strict';
+
+  // No `^` anchor, and BASE_PREFIX captures whatever precedes the lang
+  // segment: this must also work under a GitHub Pages subpath
+  // (e.g. /store/fr/tarifs), not just a root-served /fr/tarifs.
+  var LANG_MATCH = location.pathname.match(/^(.*?)\/(fr|en|de)(\/|$)/);
+  var BASE_PREFIX = LANG_MATCH ? LANG_MATCH[1] : '';
+  var LANG = LANG_MATCH ? LANG_MATCH[2] : 'fr';
+  function url(p) { return BASE_PREFIX + '/' + LANG + p; }
 
   var icons = {
     'video-camera': '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/>',
@@ -24,6 +32,179 @@
     return '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">' + p + '</svg>';
   }
 
+  var COPY = {
+    fr: {
+      products: {
+        sectionTitle: 'Nos produits', seeAll: 'Voir tous les produits',
+        items: [
+          ['Rainbow Collaboration', "Messagerie d'équipe, canaux et partage de fichiers en un seul endroit."],
+          ['Rainbow Webinar', "Webinaires live et en replay avec outils d'engagement intégrés."],
+          ['Rainbow Smart Hotel', 'Réservation de salles et gestion de calendrier pour les hôtels.'],
+          ['Rainbow Analytics', 'Rapports en temps réel et analyses de vos données de communication.'],
+          ['Rainbow Voice', "Téléphonie cloud avec voix HD, SVI et routage d'appels."],
+          ['Rainbow Security', 'Chiffrement de niveau entreprise et contrôles de conformité.']
+        ],
+        itemsMobile: ["Messagerie et canaux d'équipe.", 'Webinaires live et en replay.', 'Réservation de salles intelligente.', 'Rapports en temps réel.', 'Téléphonie cloud.', 'Conformité entreprise.'],
+        showcaseTitle: 'Rainbow Collaboration', showcaseDesc: "Messagerie, visioconférence et appels audio, propulsés par l'IA.",
+        showcaseTag: 'Populaire', sideTitle: 'À la une',
+        integrationsTitle: 'Intégrations', integrationsCtaTitle: 'Connectez vos outils', integrationsCtaDesc: 'Google, Outlook, Teams &amp; plus',
+        footerText: "Besoin d'aide pour choisir ? Nous sommes là pour vous guider.",
+        footerBtnSecondary: 'Contacter un expert', footerBtnPrimary: 'Nous contacter'
+      },
+      ressources: {
+        sectionTitle: 'Ressources',
+        leftItems: [
+          ['À propos', 'Découvrez Rainbow, ALE International et notre mission.'],
+          ['Souveraineté', 'Vos données hébergées et protégées en France.'],
+          ['FAQ', 'Les réponses aux questions les plus fréquentes sur Rainbow.']
+        ],
+        rightItems: [
+          ['Blog', "Actualités, conseils et mises à jour produit de l'équipe Rainbow."],
+          ['Partenaires', 'Rejoignez le réseau Rainbow et développez votre activité.']
+        ],
+        mobileItems: [
+          ['À propos', 'Découvrez Rainbow et ALE International.'],
+          ['Souveraineté', 'Données hébergées et protégées en France.'],
+          ['FAQ', 'Questions fréquentes sur Rainbow.'],
+          ['Blog', 'Actualités et mises à jour.'],
+          ['Partenaires', 'Rejoignez le réseau Rainbow.']
+        ],
+        sideTitle: 'Guide populaire', showcaseTitle: 'Débuter avec Rainbow',
+        showcaseDesc: "Tout ce qu'il faut savoir pour configurer et commencer à utiliser Rainbow en 10 minutes.",
+        showcaseTag: 'Populaire', helpTitle: "Besoin d'aide ?",
+        helpCtaTitle: "Accéder au centre d'aide", helpCtaDesc: 'Disponible 24h/7j pour vous aider',
+        footerText: 'Restez informé des dernières nouveautés Rainbow.',
+        footerBtnSecondary: 'Visiter notre blog', footerBtnPrimary: "Obtenir de l'aide"
+      },
+      tarifs: {
+        sectionTitle: 'Nos tarifs',
+        items: [
+          ['Rainbow Collaboration', "Tarifs adaptés à vos besoins de collaboration d'équipe."],
+          ['Rainbow Webinar', 'Plans et tarifs pour nos solutions de webinaires interactifs.']
+        ],
+        itemsMobile: ['Plans collaboration.', 'Plans webinaires.'],
+        seeAll: 'Voir tous les plans',
+        footerText: 'Des tarifs simples et transparents pour votre équipe.',
+        footerBtnPrimary: 'Nous contacter'
+      },
+      navWords: { produits: 'produits', ressources: 'ressources', tarifs: 'tarifs' }
+    },
+    en: {
+      products: {
+        sectionTitle: 'Our products', seeAll: 'See all products',
+        items: [
+          ['Rainbow Collaboration', 'Team messaging, channels, and file sharing in one place.'],
+          ['Rainbow Webinar', 'Live and on-demand webinars with built-in engagement tools.'],
+          ['Rainbow Smart Hotel', 'Room booking and calendar management for hotels.'],
+          ['Rainbow Analytics', 'Real-time reporting and analytics for your communication data.'],
+          ['Rainbow Voice', 'Cloud telephony with HD voice, IVR, and call routing.'],
+          ['Rainbow Security', 'Enterprise-grade encryption and compliance controls.']
+        ],
+        itemsMobile: ['Team messaging and channels.', 'Live and on-demand webinars.', 'Smart room booking.', 'Real-time reporting.', 'Cloud telephony.', 'Enterprise compliance.'],
+        showcaseTitle: 'Rainbow Collaboration', showcaseDesc: 'Messaging, video conferencing, and voice calls, powered by AI.',
+        showcaseTag: 'Popular', sideTitle: 'Featured',
+        integrationsTitle: 'Integrations', integrationsCtaTitle: 'Connect your tools', integrationsCtaDesc: 'Google, Outlook, Teams &amp; more',
+        footerText: "Need help choosing? We're here to guide you.",
+        footerBtnSecondary: 'Talk to an expert', footerBtnPrimary: 'Contact us'
+      },
+      ressources: {
+        sectionTitle: 'Resources',
+        leftItems: [
+          ['About', 'Discover Rainbow, ALE International, and our mission.'],
+          ['Data sovereignty', 'Your data hosted and protected in France.'],
+          ['FAQ', 'Answers to the most common questions about Rainbow.']
+        ],
+        rightItems: [
+          ['Blog', 'News, tips, and product updates from the Rainbow team.'],
+          ['Partners', 'Join the Rainbow network and grow your business.']
+        ],
+        mobileItems: [
+          ['About', 'Discover Rainbow and ALE International.'],
+          ['Data sovereignty', 'Data hosted and protected in France.'],
+          ['FAQ', 'Frequently asked questions about Rainbow.'],
+          ['Blog', 'News and updates.'],
+          ['Partners', 'Join the Rainbow network.']
+        ],
+        sideTitle: 'Popular guide', showcaseTitle: 'Getting started with Rainbow',
+        showcaseDesc: 'Everything you need to set up and start using Rainbow in 10 minutes.',
+        showcaseTag: 'Popular', helpTitle: 'Need help?',
+        helpCtaTitle: 'Visit the help center', helpCtaDesc: 'Available 24/7 to help you',
+        footerText: 'Stay up to date with the latest Rainbow news.',
+        footerBtnSecondary: 'Visit our blog', footerBtnPrimary: 'Get help'
+      },
+      tarifs: {
+        sectionTitle: 'Our pricing',
+        items: [
+          ['Rainbow Collaboration', 'Pricing tailored to your team collaboration needs.'],
+          ['Rainbow Webinar', 'Plans and pricing for our interactive webinar solutions.']
+        ],
+        itemsMobile: ['Collaboration plans.', 'Webinar plans.'],
+        seeAll: 'See all plans',
+        footerText: 'Simple, transparent pricing for your team.',
+        footerBtnPrimary: 'Contact us'
+      },
+      navWords: { produits: 'products', ressources: 'resources', tarifs: 'pricing' }
+    },
+    de: {
+      products: {
+        sectionTitle: 'Unsere Produkte', seeAll: 'Alle Produkte ansehen',
+        items: [
+          ['Rainbow Collaboration', 'Team-Messaging, Kanäle und Dateiaustausch an einem Ort.'],
+          ['Rainbow Webinar', 'Live- und Aufzeichnungs-Webinare mit integrierten Engagement-Tools.'],
+          ['Rainbow Smart Hotel', 'Raumbuchung und Kalenderverwaltung für Hotels.'],
+          ['Rainbow Analytics', 'Echtzeit-Berichte und Analysen Ihrer Kommunikationsdaten.'],
+          ['Rainbow Voice', 'Cloud-Telefonie mit HD-Sprache, IVR und Anrufweiterleitung.'],
+          ['Rainbow Security', 'Verschlüsselung auf Unternehmensniveau und Compliance-Kontrollen.']
+        ],
+        itemsMobile: ['Team-Messaging und Kanäle.', 'Live- und Aufzeichnungs-Webinare.', 'Intelligente Raumbuchung.', 'Echtzeit-Berichte.', 'Cloud-Telefonie.', 'Unternehmens-Compliance.'],
+        showcaseTitle: 'Rainbow Collaboration', showcaseDesc: 'Messaging, Videokonferenzen und Sprachanrufe, unterstützt durch KI.',
+        showcaseTag: 'Beliebt', sideTitle: 'Im Fokus',
+        integrationsTitle: 'Integrationen', integrationsCtaTitle: 'Verbinden Sie Ihre Tools', integrationsCtaDesc: 'Google, Outlook, Teams &amp; mehr',
+        footerText: 'Unsicher bei der Wahl? Wir helfen Ihnen gerne weiter.',
+        footerBtnSecondary: 'Experten kontaktieren', footerBtnPrimary: 'Kontaktieren Sie uns'
+      },
+      ressources: {
+        sectionTitle: 'Ressourcen',
+        leftItems: [
+          ['Über uns', 'Entdecken Sie Rainbow, ALE International und unsere Mission.'],
+          ['Datenhoheit', 'Ihre Daten werden in Frankreich gehostet und geschützt.'],
+          ['FAQ', 'Antworten auf die häufigsten Fragen zu Rainbow.']
+        ],
+        rightItems: [
+          ['Blog', 'Neuigkeiten, Tipps und Produktupdates vom Rainbow-Team.'],
+          ['Partner', 'Werden Sie Teil des Rainbow-Netzwerks und wachsen Sie mit uns.']
+        ],
+        mobileItems: [
+          ['Über uns', 'Entdecken Sie Rainbow und ALE International.'],
+          ['Datenhoheit', 'Daten gehostet und geschützt in Frankreich.'],
+          ['FAQ', 'Häufig gestellte Fragen zu Rainbow.'],
+          ['Blog', 'Neuigkeiten und Updates.'],
+          ['Partner', 'Werden Sie Teil des Rainbow-Netzwerks.']
+        ],
+        sideTitle: 'Beliebter Leitfaden', showcaseTitle: 'Erste Schritte mit Rainbow',
+        showcaseDesc: 'Alles, was Sie wissen müssen, um Rainbow in 10 Minuten einzurichten und zu nutzen.',
+        showcaseTag: 'Beliebt', helpTitle: 'Brauchen Sie Hilfe?',
+        helpCtaTitle: 'Zum Hilfe-Center', helpCtaDesc: 'Rund um die Uhr für Sie da',
+        footerText: 'Bleiben Sie über die neuesten Rainbow-Neuigkeiten informiert.',
+        footerBtnSecondary: 'Unseren Blog besuchen', footerBtnPrimary: 'Hilfe erhalten'
+      },
+      tarifs: {
+        sectionTitle: 'Unsere Preise',
+        items: [
+          ['Rainbow Collaboration', 'Preise, die auf Ihre Team-Collaboration-Bedürfnisse zugeschnitten sind.'],
+          ['Rainbow Webinar', 'Pläne und Preise für unsere interaktiven Webinar-Lösungen.']
+        ],
+        itemsMobile: ['Collaboration-Pläne.', 'Webinar-Pläne.'],
+        seeAll: 'Alle Pläne ansehen',
+        footerText: 'Einfache, transparente Preise für Ihr Team.',
+        footerBtnPrimary: 'Kontaktieren Sie uns'
+      },
+      navWords: { produits: 'produkte', ressources: 'ressourcen', tarifs: 'preise' }
+    }
+  };
+
+  var C = COPY[LANG] || COPY.fr;
+
   function makeItem(href, icon, title, desc) {
     return [
       '<a href="' + href + '" class="mega-menu-item" role="menuitem">',
@@ -45,168 +226,163 @@
     ].join('');
   }
 
-  var productsItems = [
-    makeItem('/products/collaboration', 'chat', 'Rainbow Collaboration', 'Messagerie d\'équipe, canaux et partage de fichiers en un seul endroit.'),
-    makeItem('/products/webinar', 'video-camera', 'Rainbow Webinar', 'Webinaires live et en replay avec outils d\'engagement intégrés.'),
-    makeItem('/products/smart-hotel', 'calendar', 'Rainbow Smart Hotel', 'Réservation de salles et gestion de calendrier pour les hôtels.'),
-    makeItem('/products/analytics', 'chart-bar', 'Rainbow Analytics', 'Rapports en temps réel et analyses de vos données de communication.'),
-    makeItem('/products/voice', 'phone', 'Rainbow Voice', 'Téléphonie cloud avec voix HD, SVI et routage d\'appels.'),
-    makeItem('/products/security', 'lock-closed', 'Rainbow Security', 'Chiffrement de niveau entreprise et contrôles de conformité.')
-  ].join('');
+  var PRODUCT_HREFS = ['/products/collaboration', '/products/webinar', '/products/smart-hotel', '/products/analytics', '/products/voice', '/products/security'];
+  var PRODUCT_ICONS = ['chat', 'video-camera', 'calendar', 'chart-bar', 'phone', 'lock-closed'];
+
+  var productsItems = C.products.items.map(function (item, i) {
+    return makeItem(url(PRODUCT_HREFS[i]), PRODUCT_ICONS[i], item[0], item[1]);
+  }).join('');
 
   var productsHTML = [
     '<div class="mega-menu" role="menu">',
       '<div class="mega-menu-inner">',
         '<div class="mega-menu-main">',
-          '<p class="mega-menu-section-title">Nos produits</p>',
+          '<p class="mega-menu-section-title">' + C.products.sectionTitle + '</p>',
           '<div class="mega-menu-grid">' + productsItems + '</div>',
-          '<a href="/products" class="mega-menu-see-all">Voir tous les produits <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
+          '<a href="' + url('/products') + '" class="mega-menu-see-all">' + C.products.seeAll + ' <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
         '</div>',
         '<div class="mega-menu-side">',
-          '<p class="mega-menu-section-title">À la une</p>',
-          '<a href="/products/collaboration" class="mega-menu-showcase">',
+          '<p class="mega-menu-section-title">' + C.products.sideTitle + '</p>',
+          '<a href="' + url('/products/collaboration') + '" class="mega-menu-showcase">',
             '<div class="mega-menu-showcase-img">' + svgIcon('chat') + '</div>',
             '<div class="mega-menu-showcase-body">',
-              '<p class="mega-menu-showcase-title">Rainbow Collaboration</p>',
-              'Messagerie, visioconférence et appels audio, propulsés par l&#39;IA.</p>',
-              '<span class="mega-menu-showcase-tag">Populaire</span>',
+              '<p class="mega-menu-showcase-title">' + C.products.showcaseTitle + '</p>',
+              '<p class="mega-menu-showcase-desc">' + C.products.showcaseDesc + '</p>',
+              '<span class="mega-menu-showcase-tag">' + C.products.showcaseTag + '</span>',
             '</div>',
           '</a>',
-          '<p class="mega-menu-section-title">Intégrations</p>',
-          '<a href="/integrations" class="mega-menu-side-cta">',
+          '<p class="mega-menu-section-title">' + C.products.integrationsTitle + '</p>',
+          '<a href="' + url('/integrations') + '" class="mega-menu-side-cta">',
             '<span class="mega-menu-side-cta-icon">' + svgIcon('calendar') + '</span>',
-            '<span><p class="mega-menu-side-cta-text">Connectez vos outils</p><p class="mega-menu-side-cta-desc">Google, Outlook, Teams &amp; plus</p></span>',
+            '<span><p class="mega-menu-side-cta-text">' + C.products.integrationsCtaTitle + '</p><p class="mega-menu-side-cta-desc">' + C.products.integrationsCtaDesc + '</p></span>',
           '</a>',
         '</div>',
       '</div>',
       '<div class="mega-menu-footer">',
-        '<p class="mega-menu-footer-text">Besoin d\'aide pour choisir ? Nous sommes là pour vous guider.</p>',
+        '<p class="mega-menu-footer-text">' + C.products.footerText + '</p>',
         '<div class="mega-menu-footer-actions">',
-          '<a href="https://giantlink.ma/form-ale" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('question-mark-circle') + 'Contacter un expert</a>',
-          '<a href="https://giantlink.ma/form-ale" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Nous contacter</a>',
+          '<a href="' + url('/form-al') + '" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('question-mark-circle') + C.products.footerBtnSecondary + '</a>',
+          '<a href="https://giantlink.ma/form-ale" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + C.products.footerBtnPrimary + '</a>',
         '</div>',
       '</div>',
     '</div>'
   ].join('');
 
-  var ressourcesLeftItems = [
-    makeItem('/a-propos-de-rainbow', 'information-circle', 'À propos', 'Découvrez Rainbow, ALE International et notre mission.'),
-    makeItem('/rainbow-donnees-hebergees-en-france', 'lock-closed', 'Souveraineté', 'Vos données hébergées et protégées en France.'),
-    makeItem('/faq', 'question-mark-circle', 'FAQ', 'Les réponses aux questions les plus fréquentes sur Rainbow.')
-  ].join('');
+  var RESSOURCES_LEFT_HREFS = ['/a-propos-de-rainbow', '/rainbow-donnees-hebergees-en-france', '/faq'];
+  var RESSOURCES_LEFT_ICONS = ['information-circle', 'lock-closed', 'question-mark-circle'];
+  var RESSOURCES_RIGHT_HREFS = ['/blog', '/partenaires'];
+  var RESSOURCES_RIGHT_ICONS = ['newspaper', 'users'];
 
-  var ressourcesRightItems = [
-    makeItem('/blog', 'newspaper', 'Blog', 'Actualités, conseils et mises à jour produit de l\'équipe Rainbow.'),
-    makeItem('/partenaires', 'users', 'Partenaires', 'Rejoignez le réseau Rainbow et développez votre activité.')
-  ].join('');
+  var ressourcesLeftItems = C.ressources.leftItems.map(function (item, i) {
+    return makeItem(url(RESSOURCES_LEFT_HREFS[i]), RESSOURCES_LEFT_ICONS[i], item[0], item[1]);
+  }).join('');
+
+  var ressourcesRightItems = C.ressources.rightItems.map(function (item, i) {
+    return makeItem(url(RESSOURCES_RIGHT_HREFS[i]), RESSOURCES_RIGHT_ICONS[i], item[0], item[1]);
+  }).join('');
 
   var ressourcesHTML = [
     '<div class="mega-menu" role="menu">',
       '<div class="mega-menu-inner">',
         '<div class="mega-menu-main">',
-          '<p class="mega-menu-section-title">Ressources</p>',
+          '<p class="mega-menu-section-title">' + C.ressources.sectionTitle + '</p>',
           '<div class="mega-menu-cols">',
             '<div class="mega-menu-col">' + ressourcesLeftItems + '</div>',
             '<div class="mega-menu-col">' + ressourcesRightItems + '</div>',
           '</div>',
         '</div>',
         '<div class="mega-menu-side">',
-          '<p class="mega-menu-section-title">Guide populaire</p>',
-          '<a href="/tutorials" class="mega-menu-showcase">',
+          '<p class="mega-menu-section-title">' + C.ressources.sideTitle + '</p>',
+          '<a href="' + url('/tutorials') + '" class="mega-menu-showcase">',
             '<div class="mega-menu-showcase-img">' + svgIcon('light-bulb') + '</div>',
             '<div class="mega-menu-showcase-body">',
-              '<p class="mega-menu-showcase-title">Débuter avec Rainbow</p>',
-              '<p class="mega-menu-showcase-desc">Tout ce qu\'il faut savoir pour configurer et commencer à utiliser Rainbow en 10 minutes.</p>',
-              '<span class="mega-menu-showcase-tag">Populaire</span>',
+              '<p class="mega-menu-showcase-title">' + C.ressources.showcaseTitle + '</p>',
+              '<p class="mega-menu-showcase-desc">' + C.ressources.showcaseDesc + '</p>',
+              '<span class="mega-menu-showcase-tag">' + C.ressources.showcaseTag + '</span>',
             '</div>',
           '</a>',
-          '<p class="mega-menu-section-title">Besoin d\'aide ?</p>',
-          '<a href="/centre-aide-rainbow" class="mega-menu-side-cta">',
+          '<p class="mega-menu-section-title">' + C.ressources.helpTitle + '</p>',
+          '<a href="' + url('/centre-aide-rainbow') + '" class="mega-menu-side-cta">',
             '<span class="mega-menu-side-cta-icon">' + svgIcon('lifebuoy') + '</span>',
-            '<span><p class="mega-menu-side-cta-text">Accéder au centre d\'aide</p><p class="mega-menu-side-cta-desc">Disponible 24h/7j pour vous aider</p></span>',
+            '<span><p class="mega-menu-side-cta-text">' + C.ressources.helpCtaTitle + '</p><p class="mega-menu-side-cta-desc">' + C.ressources.helpCtaDesc + '</p></span>',
           '</a>',
         '</div>',
       '</div>',
       '<div class="mega-menu-footer">',
-        '<p class="mega-menu-footer-text">Restez informé des dernières nouveautés Rainbow.</p>',
+        '<p class="mega-menu-footer-text">' + C.ressources.footerText + '</p>',
         '<div class="mega-menu-footer-actions">',
-          '<a href="/blog" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('newspaper') + 'Visiter notre blog</a>',
-          '<a href="/centre-aide-rainbow" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Obtenir de l\'aide</a>',
+          '<a href="' + url('/blog') + '" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('newspaper') + C.ressources.footerBtnSecondary + '</a>',
+          '<a href="' + url('/centre-aide-rainbow') + '" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + C.ressources.footerBtnPrimary + '</a>',
         '</div>',
       '</div>',
     '</div>'
   ].join('');
 
-  var productsMobileItems = [
-    makeMobileItem('/products/collaboration', 'chat', 'Rainbow Collaboration', 'Messagerie et canaux d\'équipe.'),
-    makeMobileItem('/products/webinar', 'video-camera', 'Rainbow Webinar', 'Webinaires live et en replay.'),
-    makeMobileItem('/products/smart-hotel', 'calendar', 'Rainbow Smart Hotel', 'Réservation de salles intelligente.'),
-    makeMobileItem('/products/analytics', 'chart-bar', 'Rainbow Analytics', 'Rapports en temps réel.'),
-    makeMobileItem('/products/voice', 'phone', 'Rainbow Voice', 'Téléphonie cloud.'),
-    makeMobileItem('/products/security', 'lock-closed', 'Rainbow Security', 'Conformité entreprise.')
-  ].join('');
+  var productsMobileItems = C.products.itemsMobile.map(function (desc, i) {
+    return makeMobileItem(url(PRODUCT_HREFS[i]), PRODUCT_ICONS[i], C.products.items[i][0], desc);
+  }).join('');
 
   var productsMobileHTML = [
     '<div class="mega-menu-mobile-content">',
       '<div class="mega-menu-mobile-section">',
-        '<p class="mega-menu-mobile-section-title">Nos produits</p>',
+        '<p class="mega-menu-mobile-section-title">' + C.products.sectionTitle + '</p>',
         productsMobileItems,
-        '<a href="/products" class="mega-menu-mobile-see-all">Voir tous les produits <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
+        '<a href="' + url('/products') + '" class="mega-menu-mobile-see-all">' + C.products.seeAll + ' <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
       '</div>',
     '</div>'
   ].join('');
 
-  var ressourcesMobileItems = [
-    makeMobileItem('/a-propos-de-rainbow', 'information-circle', 'À propos', 'Découvrez Rainbow et ALE International.'),
-    makeMobileItem('/rainbow-donnees-hebergees-en-france', 'lock-closed', 'Souveraineté', 'Données hébergées et protégées en France.'),
-    makeMobileItem('/faq', 'question-mark-circle', 'FAQ', 'Questions fréquentes sur Rainbow.'),
-    makeMobileItem('/blog', 'newspaper', 'Blog', 'Actualités et mises à jour.'),
-    makeMobileItem('/partenaires', 'users', 'Partenaires', 'Rejoignez le réseau Rainbow.')
-  ].join('');
+  var RESSOURCES_MOBILE_HREFS = ['/a-propos-de-rainbow', '/rainbow-donnees-hebergees-en-france', '/faq', '/blog', '/partenaires'];
+  var RESSOURCES_MOBILE_ICONS = ['information-circle', 'lock-closed', 'question-mark-circle', 'newspaper', 'users'];
+
+  var ressourcesMobileItems = C.ressources.mobileItems.map(function (item, i) {
+    return makeMobileItem(url(RESSOURCES_MOBILE_HREFS[i]), RESSOURCES_MOBILE_ICONS[i], item[0], item[1]);
+  }).join('');
 
   var ressourcesMobileHTML = [
     '<div class="mega-menu-mobile-content">',
       '<div class="mega-menu-mobile-section">',
-        '<p class="mega-menu-mobile-section-title">Ressources</p>',
+        '<p class="mega-menu-mobile-section-title">' + C.ressources.sectionTitle + '</p>',
         ressourcesMobileItems,
       '</div>',
     '</div>'
   ].join('');
 
-  var tarifsItems = [
-    makeItem('/products/collaboration/pricing', 'chat', 'Rainbow Collaboration', 'Tarifs adaptés à vos besoins de collaboration d\'équipe.'),
-    makeItem('/products/webinar/pricing', 'video-camera', 'Rainbow Webinar', 'Plans et tarifs pour nos solutions de webinaires interactifs.')
-  ].join('');
+  var TARIFS_HREFS = ['/products/collaboration/pricing', '/products/webinar/pricing'];
+  var TARIFS_ICONS = ['chat', 'video-camera'];
+
+  var tarifsItems = C.tarifs.items.map(function (item, i) {
+    return makeItem(url(TARIFS_HREFS[i]), TARIFS_ICONS[i], item[0], item[1]);
+  }).join('');
 
   var tarifsHTML = [
     '<div class="mega-menu mega-menu-tarifs" role="menu">',
       '<div class="mega-menu-inner">',
         '<div class="mega-menu-main">',
-          '<p class="mega-menu-section-title">Nos tarifs</p>',
+          '<p class="mega-menu-section-title">' + C.tarifs.sectionTitle + '</p>',
           '<div class="mega-menu-grid">' + tarifsItems + '</div>',
-          '<a href="/tarifs" class="mega-menu-see-all">Voir tous les plans <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
+          '<a href="' + url('/tarifs') + '" class="mega-menu-see-all">' + C.tarifs.seeAll + ' <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
         '</div>',
       '</div>',
       '<div class="mega-menu-footer">',
-        '<p class="mega-menu-footer-text">Des tarifs simples et transparents pour votre équipe.</p>',
+        '<p class="mega-menu-footer-text">' + C.tarifs.footerText + '</p>',
         '<div class="mega-menu-footer-actions">',
-          '<a href="https://giantlink.ma/form-ale" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + 'Nous contacter</a>',
+          '<a href="https://giantlink.ma/form-ale" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + C.tarifs.footerBtnPrimary + '</a>',
         '</div>',
       '</div>',
     '</div>'
   ].join('');
 
-  var tarifsMobileItems = [
-    makeMobileItem('/products/collaboration/pricing', 'chat', 'Rainbow Collaboration', 'Plans collaboration.'),
-    makeMobileItem('/products/webinar/pricing', 'video-camera', 'Rainbow Webinar', 'Plans webinaires.')
-  ].join('');
+  var tarifsMobileItems = C.tarifs.itemsMobile.map(function (desc, i) {
+    return makeMobileItem(url(TARIFS_HREFS[i]), TARIFS_ICONS[i], C.tarifs.items[i][0], desc);
+  }).join('');
 
   var tarifsMobileHTML = [
     '<div class="mega-menu-mobile-content">',
       '<div class="mega-menu-mobile-section">',
-        '<p class="mega-menu-mobile-section-title">Nos tarifs</p>',
+        '<p class="mega-menu-mobile-section-title">' + C.tarifs.sectionTitle + '</p>',
         tarifsMobileItems,
-        '<a href="/tarifs" class="mega-menu-mobile-see-all">Voir tous les plans <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
+        '<a href="' + url('/tarifs') + '" class="mega-menu-mobile-see-all">' + C.tarifs.seeAll + ' <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>',
       '</div>',
     '</div>'
   ].join('');
@@ -305,9 +481,15 @@
       var trigger = dd.querySelector('a');
       if (!trigger) continue;
 
-      var isProducts = dd.querySelector('[data-i18n="nav.product"]') !== null;
-      var isRessources = trigger.textContent.trim().toLowerCase() === 'ressources';
-      var isTarifs = trigger.textContent.trim().toLowerCase() === 'tarifs';
+      // Detect by the trigger's own label in the active language, with the
+      // dropdown's hrefs as a fallback. This used to key off a data-i18n
+      // attribute, but translation markers are consumed at build time and are
+      // not present in served HTML.
+      var triggerText = trigger.textContent.trim().toLowerCase();
+      var isProducts = triggerText === C.navWords.produits ||
+        dd.querySelector('a[href*="/products/"]') !== null;
+      var isRessources = triggerText === C.navWords.ressources;
+      var isTarifs = triggerText === C.navWords.tarifs;
       if (!isProducts && !isRessources && !isTarifs) continue;
 
       var megaHTML, mobileHTML;
@@ -330,22 +512,22 @@
       var sm = submenus[j];
       if (!sm.querySelector('a')) continue;
 
-      // Detect section type. Prefer stable signals (data-i18n key on the header,
-      // or the submenu's own link hrefs) over the header text, which changes with
-      // the active language and would otherwise miss translated labels.
+      // Detect section type from the header label in the active language, with
+      // the submenu's own link hrefs as the fallback. (Translation markers are
+      // consumed at build time, so they are not available to match on here.)
       var headerEl = sm.previousElementSibling;
       var headerText = headerEl ? headerEl.textContent.trim().toLowerCase() : '';
-      var i18nKey = headerEl ? (headerEl.getAttribute('data-i18n') || '') : '';
 
       var mobileContent;
-      if (i18nKey === 'nav.product' || headerText.indexOf('produit') !== -1 ||
-          headerText.indexOf('product') !== -1 || sm.querySelector('a[href*="/products/"]')) {
+      if (headerText.indexOf('produit') !== -1 || headerText.indexOf('product') !== -1 ||
+          headerText.indexOf('produkte') !== -1 || sm.querySelector('a[href*="/products/"]')) {
         mobileContent = productsMobileHTML;
-      } else if (i18nKey === 'nav.pricing' || headerText.indexOf('tarif') !== -1 ||
-          headerText.indexOf('pricing') !== -1 || sm.querySelector('a[href*="/tarif"]')) {
+      } else if (headerText.indexOf('tarif') !== -1 || headerText.indexOf('pricing') !== -1 ||
+          headerText.indexOf('preise') !== -1 || sm.querySelector('a[href*="/tarif"]')) {
         mobileContent = tarifsMobileHTML;
-      } else if (i18nKey === 'nav.resources' || headerText.indexOf('ressource') !== -1 ||
-          headerText.indexOf('resource') !== -1 || sm.querySelector('a[href="/blog"], a[href="/support"]')) {
+      } else if (headerText.indexOf('ressource') !== -1 || headerText.indexOf('resource') !== -1 ||
+          headerText.indexOf('ressourcen') !== -1 ||
+          sm.querySelector('a[href*="/blog"], a[href*="/support"]')) {
         mobileContent = ressourcesMobileHTML;
       } else {
         continue;

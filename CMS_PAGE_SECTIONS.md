@@ -128,7 +128,7 @@ Full-width hero with background glows, animated word rotator in the headline, su
 | `hero_cta_primary_url` | URL | e.g. `/tarifs` |
 | `hero_cta_secondary_label` | Text | e.g. "Contacter un agent" |
 | `hero_cta_secondary_url` | URL | External link |
-| `hero_video_src` | Media / URL | Path to `.mp4` demo video (e.g. `/images/rainbow_intro.mp4`) |
+| `hero_video_src` | Media / URL | Path to `.mp4` demo video (e.g. `/images/rainbow_homepage_05_FR.mp4`) |
 | `hero_video_poster` | Image | Optional fallback poster frame |
 
 ---
@@ -513,7 +513,7 @@ Same fields as [Section 2.3](#23-hero-section), except the right column is a `<v
 | `hero_cta_primary_url` | URL | |
 | `hero_cta_secondary_label` | Text | |
 | `hero_cta_secondary_url` | URL | |
-| `hero_video_src` | Media / URL | Autoplay loop video (e.g. `/images/webinar-page/interface_rainbow_webinar_v3.mp4`) |
+| `hero_video_src` | Media / URL | Autoplay loop video (e.g. `/images/webinar-page/interface_rainbow_webinar_EN.mp4`) |
 
 ---
 

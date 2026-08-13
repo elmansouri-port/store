@@ -14,3 +14,4 @@ docs/images/*-2.jpg
 
 # Impeccable design-review tool  local cache/session state, not shared
 .impeccable/
+n8n/

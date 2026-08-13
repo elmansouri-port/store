@@ -1,70 +1,51 @@
-// Lightweight i18n engine for Rainbow Portal
+// Language switcher for Rainbow Portal.
+// The URL is the source of truth for language (/fr/..., /en/..., /de/...) —
+// every page is a fully-translated static file per language, so this file's
+// only job is: read the lang from the URL, render the switcher UI, and on a
+// switch, navigate to the equivalent path under the new lang prefix.
 (function () {
     'use strict';
 
-    var cache = {};
-    var currentLang = 'en';
-    var currentTranslations = {};
-    var SUPPORTED = ['en', 'fr', 'de'];
-    var DEFAULT_LANG = 'en';
+    var SUPPORTED = ['fr', 'en', 'de'];
+    var DEFAULT_LANG = 'fr';
 
-    // Detect language: localStorage > browser > default
-    function detectLang() {
-        var stored = localStorage.getItem('lang');
-        if (stored && SUPPORTED.indexOf(stored) !== -1) return stored;
-        var nav = (navigator.language || navigator.userLanguage || '').slice(0, 2).toLowerCase();
-        return SUPPORTED.indexOf(nav) !== -1 ? nav : DEFAULT_LANG;
+    function currentLangFromUrl() {
+        // No `^` anchor: this must also match under a GitHub Pages subpath
+        // (e.g. /store/fr/tarifs), not just a root-served /fr/tarifs.
+        var m = location.pathname.match(/\/(fr|en|de)(\/|$)/);
+        return m ? m[1] : DEFAULT_LANG;
     }
 
-    // Load translations: instant from localStorage, background-refresh from server
-    function loadTranslations(lang) {
-        if (cache[lang]) return Promise.resolve(cache[lang]);
-        try {
-            var stored = localStorage.getItem('i18n_' + lang);
-            if (stored) cache[lang] = JSON.parse(stored);
-        } catch (e) {}
+    var currentLang = currentLangFromUrl();
 
-        var base = window.location.origin;
-        var fetching = fetch(base + '/i18n/' + lang + '.json')
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-                cache[lang] = data;
-                try { localStorage.setItem('i18n_' + lang, JSON.stringify(data)); } catch (e) {}
-                return data;
-            });
+    // Remember the explicit choice so a later visit to an unprefixed URL
+    // (e.g. a bookmark from before this migration) redirects consistently.
+    function setCookie(lang) {
+        document.cookie = 'lang=' + lang + ';path=/;max-age=31536000;SameSite=Lax';
+    }
+    setCookie(currentLang);
 
-        if (cache[lang]) return Promise.resolve(cache[lang]);
-        return fetching;
+    function targetPath(lang) {
+        // Preserve everything before the lang segment too (e.g. a GitHub
+        // Pages "/store" subpath base), not just what follows it.
+        var path = location.pathname;
+        var m = path.match(/^(.*?)\/(fr|en|de)(\/.*|$)/);
+        if (m) return m[1] + '/' + lang + m[3] + location.search + location.hash;
+        return '/' + lang + path + location.search + location.hash;
     }
 
-    // Get nested value by dot-separated key
-    function getKey(obj, key) {
-        var parts = key.split('.');
-        var val = obj;
-        for (var i = 0; i < parts.length; i++) {
-            if (val == null) return undefined;
-            val = val[parts[i]];
-        }
-        return val;
+    function setLang(lang) {
+        if (SUPPORTED.indexOf(lang) === -1) lang = DEFAULT_LANG;
+        if (lang === currentLang) return;
+        setCookie(lang);
+        window.location.href = targetPath(lang);
     }
 
-    // Translate a single key, with optional fallback to English
-    function t(key, fallback) {
-        var val = getKey(currentTranslations, key);
-        if (val !== undefined) return val;
-        if (currentLang !== 'en' && cache['en']) {
-            val = getKey(cache['en'], key);
-            if (val !== undefined) return val;
-        }
-        return fallback !== undefined ? fallback : key;
-    }
-
-    // Build language switcher dropdowns (desktop + mobile)
     function initLangSwitcher() {
         var langs = {
-            en: { name: 'English',  flag: '\ud83c\uddec\ud83c\udde7' },
-            fr: { name: 'Fran\u00e7ais', flag: '\ud83c\uddeb\ud83c\uddf7' },
-            de: { name: 'Deutsch',  flag: '\ud83c\udde9\ud83c\uddea' }
+            fr: { name: 'Français', flag: '🇫🇷' },
+            en: { name: 'English',  flag: '🇬🇧' },
+            de: { name: 'Deutsch',  flag: '🇩🇪' }
         };
 
         var dropdown = document.getElementById('lang-dropdown');
@@ -82,8 +63,6 @@
                 btn.onclick = function (e) {
                     e.stopPropagation();
                     setLang(code);
-                    var sw = document.getElementById('lang-switcher');
-                    if (sw) sw.classList.remove('open');
                 };
                 dropdown.appendChild(btn);
             });
@@ -111,84 +90,10 @@
         if (sw && !sw.contains(e.target)) sw.classList.remove('open');
     });
 
-    // Apply translations to all data-i18n elements on the page
-    function applyTranslations() {
-        document.querySelectorAll('[data-i18n]').forEach(function (el) {
-            var key = el.getAttribute('data-i18n');
-            var val = t(key);
-            if (val !== key || currentLang === 'en') el.textContent = val;
-        });
-        document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
-            var key = el.getAttribute('data-i18n-html');
-            var val = t(key);
-            if (val !== key || currentLang === 'en') el.innerHTML = val;
-        });
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
-            var key = el.getAttribute('data-i18n-placeholder');
-            var val = t(key);
-            if (val !== key || currentLang === 'en') el.placeholder = val;
-        });
-        document.documentElement.lang = currentLang;
-        var switcher = document.getElementById('lang-current');
-        if (switcher) switcher.textContent = currentLang.toUpperCase();
-    }
-
-    // Set cookie so server can pre-translate HTML on next navigation
-    function setCookie(lang) {
-        document.cookie = 'lang=' + lang + ';path=/;max-age=31536000;SameSite=Lax';
-    }
-
-    // Set language and re-apply
-    function setLang(lang) {
-        if (SUPPORTED.indexOf(lang) === -1) lang = DEFAULT_LANG;
-        currentLang = lang;
-        localStorage.setItem('lang', lang);
-        setCookie(lang);
-        loadTranslations(lang).then(function (data) {
-            currentTranslations = data;
-            applyTranslations();
-            initLangSwitcher();
-            window.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang } }));
-        });
-    }
-
-    // Initialize
     function init() {
-        var lang = detectLang();
-        currentLang = lang;
-        setCookie(lang);
-
-        // Load from localStorage synchronously (instant, no network)
-        try {
-            var enRaw = localStorage.getItem('i18n_en');
-            if (enRaw) cache['en'] = JSON.parse(enRaw);
-            if (lang !== 'en') {
-                var langRaw = localStorage.getItem('i18n_' + lang);
-                if (langRaw) cache[lang] = JSON.parse(langRaw);
-            }
-        } catch (e) {}
-
-        if (cache[lang] || cache['en']) {
-            // Instant path from cache
-            currentTranslations = cache[lang] || cache['en'];
-            applyTranslations();
-            initLangSwitcher();
-            window.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang } }));
-            // Background refresh
-            var base = window.location.origin;
-            fetch(base + '/i18n/en.json').then(function (r) { return r.json(); }).then(function (d) { cache['en'] = d; try { localStorage.setItem('i18n_en', JSON.stringify(d)); } catch (e) {} });
-            if (lang !== 'en') fetch(base + '/i18n/' + lang + '.json').then(function (r) { return r.json(); }).then(function (d) { cache[lang] = d; try { localStorage.setItem('i18n_' + lang, JSON.stringify(d)); } catch (e) {} });
-        } else {
-            // First visit  fetch from server
-            var promises = [loadTranslations('en')];
-            if (lang !== 'en') promises.push(loadTranslations(lang));
-            Promise.all(promises).then(function () {
-                currentTranslations = cache[lang] || cache['en'];
-                applyTranslations();
-                initLangSwitcher();
-                window.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang } }));
-            });
-        }
+        document.documentElement.lang = currentLang;
+        initLangSwitcher();
+        window.dispatchEvent(new CustomEvent('langchange', { detail: { lang: currentLang } }));
     }
 
     if (document.readyState === 'loading') {
@@ -197,9 +102,9 @@
         init();
     }
 
-    // Public API
+    // Public API — kept for pages that read the current language (e.g. the
+    // help-center search locale routing on centre-aide-rainbow.html).
     window.i18n = {
-        t: t,
         setLang: setLang,
         getLang: function () { return currentLang; },
         supported: SUPPORTED
