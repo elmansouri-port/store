@@ -68,14 +68,36 @@ const ASSET_DIRS = ['css', 'js', 'images', 'img', 'i18n', 'assets'];
 // Prefix root-absolute paths ("/x" but not "//x" or "/store/...") with BASE.
 function prefixHtml(html) {
   return html
-    // src/href/action/poster="/..."
-    .replace(/(\s(?:src|href|action|poster|data-src)=")\/(?!\/)/g, `$1${BASE}/`)
+    // src/href/action/poster="/..." — `image` is <whitepaper-download-form>'s
+    // cover-art attribute, which JS copies straight into img.src, so it needs
+    // the base prefix just like a real src would.
+    .replace(/(\s(?:src|href|action|poster|data-src|image)=")\/(?!\/)/g, `$1${BASE}/`)
     // srcset entries beginning with /
     .replace(/(\ssrcset=")([^"]*)"/g, (m, p, val) =>
       p + val.replace(/(^|,\s*)\/(?!\/)/g, `$1${BASE}/`) + '"')
     // inline style url(/...) and CSS url(/...)
     .replace(/url\(\s*(['"]?)\/(?!\/)/g, `url($1${BASE}/`);
 }
+/*
+ * Relative asset paths are invisible locally and fatal in production.
+ * Pages are served from /<lang>/<route>/, so "js/x.js" resolves against the
+ * language segment (/store/fr/js/x.js) and 404s — but only once the host adds
+ * the trailing slash, which the dev server does not. prefixHtml only rewrites
+ * root-absolute paths, so anything relative slips through untouched and the
+ * page silently loses its scripts. Catch it at build time instead.
+ */
+const RELATIVE_ASSET = /\s(?:src|href|action|poster|data-src)="(?!https?:|\/\/|\/|#|mailto:|tel:|data:|javascript:|\{\{)([^"]+)"/g;
+function findRelativeAssets(html) {
+  const out = [];
+  let m;
+  while ((m = RELATIVE_ASSET.exec(html)) !== null) {
+    // Ignore values built by JS at runtime (string concatenation in a script).
+    if (/[' +]/.test(m[1])) continue;
+    out.push(m[1]);
+  }
+  return out;
+}
+
 function prefixCss(css) {
   return css.replace(/url\(\s*(['"]?)\/(?!\/)/g, `url($1${BASE}/`);
 }
@@ -133,6 +155,7 @@ for (const dir of ASSET_DIRS) {
 // 3. lang-prefixed page routes
 let pageCount = 0;
 const missingKeys = new Map();   // lang -> Set(key)
+const relativeAssets = [];       // routePath -> offending relative path
 
 /**
  * Write one route. `lang` set => the source is a template and gets rendered
@@ -150,6 +173,10 @@ function writeRoute(routePath, srcRel, lang) {
         missingKeys.get(lang).add(key);
       },
     });
+  }
+  const rel = findRelativeAssets(html);
+  if (rel.length) {
+    for (const r of rel) relativeAssets.push(`${routePath}/  ->  ${r}`);
   }
   const destDir = path.join(OUT, routePath);
   fs.mkdirSync(destDir, { recursive: true });
@@ -205,6 +232,15 @@ console.log(`Built ${pageCount} pages into docs/ with base "${BASE}/". Assets: $
 
 // A marker whose key is absent from the catalogue leaves the FR copy in place,
 // which is easy to miss on a page you don't read. Say so loudly.
+// These 404 in production but not on the dev server, so they never show up in
+// local testing — fail loudly at build time instead.
+if (relativeAssets.length) {
+  console.error(`  ERROR ${relativeAssets.length} relative asset path(s) — these 404 under /<lang>/:`);
+  relativeAssets.forEach(r => console.error('    ' + r));
+  console.error('  Make them root-absolute ("/js/x.js"); the build adds the base prefix.');
+  process.exitCode = 1;
+}
+
 if (missingKeys.size) {
   for (const [lang, keys] of missingKeys) {
     console.warn(`  WARNING ${lang}: ${keys.size} key(s) missing from i18n/${lang}.json — source copy kept:`);

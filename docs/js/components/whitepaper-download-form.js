@@ -36,6 +36,10 @@
                 backdrop-filter: blur(4px);
                 display: none; align-items: flex-start; justify-content: center;
                 padding: 16px; overflow-y: auto;
+                /* stop a scroll that runs off the end of the modal from carrying
+                   on down the article behind it */
+                overscroll-behavior: contain;
+                -webkit-overflow-scrolling: touch;
             }
             :host([modal][open]) .wf-scrim { display: flex; }
             :host(:not([modal])) .wf-scrim {
@@ -51,6 +55,10 @@
                 position: relative;
                 width: 100%; max-width: 880px; margin: 24px auto;
                 max-height: calc(100vh - 32px);
+                /* dvh tracks the visible viewport as mobile browser chrome
+                   collapses; vh does not, so a vh-capped card runs under the
+                   toolbar and puts the submit button out of reach. */
+                max-height: calc(100dvh - 32px);
                 background: #fff;
                 border-radius: 18px;
                 overflow: hidden;
@@ -58,6 +66,16 @@
                 font-family: 'Google Sans', system-ui, -apple-system, sans-serif;
                 display: grid;
                 grid-template-columns: 304px 1fr;
+                /* Implicit grid rows are auto-sized, so they grow to fit their
+                   content and overflow a max-height container — overflow:hidden
+                   then slices the bottom off whichever panel is taller (the
+                   cover, once it carries A4 art) and the form becomes unusable.
+                   The panels' own overflow-y never engages, because a panel
+                   that is exactly as tall as its content never overflows
+                   itself; the card does. minmax(0, 1fr) caps the row at the
+                   card height so the panels really can scroll. Plain 1fr is
+                   not enough: its implied auto minimum overflows just the same. */
+                grid-template-rows: minmax(0, 1fr);
                 box-shadow:
                     0 24px 48px -12px rgba(17,15,38,0.28),
                     0 8px 16px -8px rgba(17,15,38,0.16);
@@ -69,7 +87,11 @@
                get clipped and unreachable in some browsers, so the card must
                never actually need to overflow the scrim. */
             @media (min-width: 700px) {
-                .wf-card { margin: 0 auto; max-height: calc(100vh - 56px); }
+                .wf-card {
+                    margin: 0 auto;
+                    max-height: calc(100vh - 56px);
+                    max-height: calc(100dvh - 56px);
+                }
             }
             :host(:not([modal])) .wf-card { animation: none; }
             @keyframes wf-enter {
@@ -420,6 +442,36 @@
                 .wf-highlights { margin-top: 22px; }
             }
 
+            /* ── Short viewports (laptops) ───────────────────────────
+               A 1366x768 or 1440x900 laptop is WIDE but SHORT: no width
+               breakpoint fires, yet once browser chrome is subtracted there is
+               only ~600-800px of height for a card whose cover panel runs past
+               600px with A4 art. Trim the cover's vertical cost by height
+               instead, so the panel fits rather than becoming a scroller —
+               scrolling a decorative panel to reach nothing is a poor trade. */
+            @media (min-width: 661px) and (max-height: 860px) {
+                .wf-cover { padding: 26px 24px 22px; }
+                .wf-doc-art { max-width: 128px; margin-bottom: 16px; }
+                .wf-doc-title { font-size: 1.25rem; }
+                .wf-highlights { margin-top: 18px; gap: 9px; }
+                .wf-cover-foot { padding-top: 18px; }
+                .wf-body { padding: 28px 34px 26px; }
+                .wf-heading { font-size: 1.375rem; }
+                .wf-subtitle { margin-bottom: 20px; }
+                .wf-field, .wf-row { margin-bottom: 13px; }
+            }
+            /* Shorter still: the visitor arrived from a download CTA, so intent
+               is established — drop the persuasion layer rather than the form. */
+            @media (min-width: 661px) and (max-height: 700px) {
+                .wf-highlights, .wf-cover-foot, .wf-doc-rule { display: none; }
+                .wf-doc-art { max-width: 104px; margin-bottom: 14px; }
+                .wf-cover { padding: 22px 22px 20px; }
+                .wf-body { padding: 24px 32px 22px; }
+                .wf-subtitle { margin-bottom: 16px; }
+                .wf-consents { margin-top: 4px; padding-top: 12px; }
+                .wf-submit { margin-top: 14px; }
+            }
+
             /* ── Mobile ──────────────────────────────────────────────
                The visitor reached this modal from a download CTA, so intent is
                already established. The cover collapses to a compact identity
@@ -427,7 +479,21 @@
                persuasion layer (value bullets, accent rule, hosting line) is
                dropped so the first field sits near the top of the viewport. */
             @media (max-width: 660px) {
-                .wf-card { grid-template-columns: 1fr; border-radius: 16px; margin: 8px auto; }
+                .wf-card {
+                    grid-template-columns: 1fr;
+                    /* Stacked: identity band takes what it needs, the form takes
+                       the rest. Without the minmax(0,...) the form row would size
+                       to content and overflow the card. */
+                    grid-template-rows: auto minmax(0, 1fr);
+                    border-radius: 16px; margin: 8px auto;
+                }
+                /* On a phone, capping the card forces a scroll container inside
+                   a scroll container — the page moves when the visitor means to
+                   move the form, and the submit button is easy to strand. Let
+                   the card run its natural height and give the scrim the single
+                   scroll context instead. The panels keep their overflow rules
+                   but never engage them, since nothing constrains them now. */
+                :host([modal]) .wf-card { max-height: none; }
                 .wf-cover {
                     padding: 18px 20px;
                     border-right: 0; border-bottom: var(--cover-edge);

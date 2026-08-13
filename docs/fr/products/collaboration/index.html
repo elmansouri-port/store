@@ -100,6 +100,8 @@
     </style>
     <link rel="stylesheet" href="/store/css/style.css">
     <link rel="stylesheet" href="/store/css/mega-menu.css">
+    <!-- translated strings for this page's inline scripts; must precede them -->
+    <script data-i18n-js="collaboration.js">window.I18N={"hideTable":"Masquer le tableau comparatif","showTable":"Comparer toutes les fonctionnalités"};window.t=function(k,f){var v=window.I18N[k];return v===undefined?(f===undefined?k:f):v};</script>
 </head>
 
 <body class="font-sans text-gray-700 antialiased">
@@ -936,7 +938,6 @@
 
     <script src="/store/js/mega-menu.js"></script>
     <script src="/store/js/i18n.js"></script>
-<script data-i18n-js="collaboration.js">window.I18N={"hideTable":"Masquer le tableau comparatif","showTable":"Comparer toutes les fonctionnalités"};window.t=function(k,f){var v=window.I18N[k];return v===undefined?(f===undefined?k:f):v};</script>
     <script>
 
 
@@ -945,7 +946,6 @@
             if (sw && !sw.contains(e.target)) sw.classList.remove('open');
         });
 
-        function t(k, f) { return typeof i18n !== 'undefined' ? i18n.t(k, f) : f; }
 
         // Timeline Switcher Logic
         function switchTimelineTab(index) {

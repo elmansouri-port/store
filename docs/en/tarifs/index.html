@@ -231,6 +231,8 @@
     </style>
     <link rel="stylesheet" href="/store/css/style.css">
     <link rel="stylesheet" href="/store/css/mega-menu.css">
+    <!-- translated strings for this page's inline scripts; must precede them -->
+    <script data-i18n-js="tarifs.js">window.I18N={"hideTable":"Hide comparison table","showTable":"Compare all features"};window.t=function(k,f){var v=window.I18N[k];return v===undefined?(f===undefined?k:f):v};</script>
 </head>
 
 <body class="font-sans text-gray-700 antialiased">
@@ -931,7 +933,6 @@
 
     <script src="/store/js/mega-menu.js"></script>
     <script src="/store/js/i18n.js"></script>
-<script data-i18n-js="tarifs.js">window.I18N={"hideTable":"Hide comparison table","showTable":"Compare all features"};window.t=function(k,f){var v=window.I18N[k];return v===undefined?(f===undefined?k:f):v};</script>
     <script>
         // Mobile menu is handled by /js/mega-menu.js (shared navbar behavior)
         document.addEventListener('click', function (e) {
@@ -939,7 +940,6 @@
             if (sw && !sw.contains(e.target)) sw.classList.remove('open');
         });
 
-        function t(k, f) { return typeof i18n !== 'undefined' ? i18n.t(k, f) : f; }
 
         // Toggle Pricing Comparison Table (one instance per product: 'collaboration' / 'webinar')
         function toggleComparisonTable(key) {

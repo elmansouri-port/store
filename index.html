@@ -1746,9 +1746,12 @@
             }
         })();
     </script>
-    <script src="js/mega-menu.js"></script>
-    <script src="js/i18n.js"></script>
-    <script src="js/homepage-animations.js"></script>
+    <!-- Root-absolute, like every other page: this file is served at /fr/, /en/
+         and /de/, so a relative "js/..." resolves against the language segment
+         (/store/fr/js/...) and 404s. -->
+    <script src="/js/mega-menu.js"></script>
+    <script src="/js/i18n.js"></script>
+    <script src="/js/homepage-animations.js"></script>
     <script>
         (function () {
             function stripHtml(str) {

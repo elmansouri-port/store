@@ -100,6 +100,8 @@
     </style>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/mega-menu.css">
+    <!-- translated strings for this page's inline scripts; must precede them -->
+    <script data-i18n-js="collaboration.js"></script>
 </head>
 
 <body class="font-sans text-gray-700 antialiased">
@@ -1007,7 +1009,6 @@
 
     <script src="/js/mega-menu.js"></script>
     <script src="/js/i18n.js"></script>
-<script data-i18n-js="collaboration.js"></script>
     <script>
 
 
@@ -1016,7 +1017,6 @@
             if (sw && !sw.contains(e.target)) sw.classList.remove('open');
         });
 
-        function t(k, f) { return typeof i18n !== 'undefined' ? i18n.t(k, f) : f; }
 
         // Timeline Switcher Logic
         function switchTimelineTab(index) {
