@@ -1,11 +1,10 @@
 {
   "a-propos-de-rainbow": {
     "body": {
-      "d-couvrir-rainbow": "Discover Rainbow",
       "l-diteur-fran-ais-des": "France's Business Communications Publisher",
       "notre-engagement-souverainet": "Our data sovereignty commitment",
       "rainbow-by-alcatel-lucent-l-diteur": "Rainbow by <0>Alcatel-Lucent</0>: France's business communications publisher",
-      "rainbow-est-d-velopp-par-alcatel": "Rainbow is developed by Alcatel-Lucent, the direct successor to Alcatel and its century of telecommunications innovation, now dedicated to your cloud collaboration."
+      "rainbow-est-d-velopp-par-alcatel": "Rainbow is developed by Alcatel-Lucent, the direct successor to Alcatel and its century of telecommunications innovation, now dedicated to your sovereign, secure cloud collaboration."
     },
     "chronologie": {
       "ale-lance-rainbow-sa-plateforme": "ALE launches Rainbow, its cloud communication and collaboration platform, designed to connect internal teams and external partners.",
@@ -276,17 +275,59 @@
   },
   "collaboration": {
     "body": {
+      "1-10-employ-s": "1-10 employees",
+      "11-50-employ-s": "11-50 employees",
+      "1000-employ-s": "1000+ employees",
       "120k": "120K+",
+      "201-500-employ-s": "201-500 employees",
+      "501-1000-employ-s": "501-1000 employees",
       "50m": "50M+",
+      "51-200-employ-s": "51-200 employees",
+      "acme_placeholder": "Acme",
+      "allemagne": "Germany",
+      "autre": "Other",
+      "belgique": "Belgium",
+      "besoin-d-une-d-mo-rainbow-collaboration": "Need a <0>Rainbow Collaboration</0> demo&nbsp;?",
+      "comment-nous-avez-vous-connu": "How did you hear about us?",
       "communication-d-quipe-souveraine": "Sovereign team communication",
       "contacter-un-expert": "Talk to an expert",
+      "demander-une-d-mo": "Request a demo",
       "disponibilit-garantie": "guaranteed\r\n                                uptime",
+      "dupont_placeholder": "Smith",
+      "email-professionnel": "Business email <0>*</0>",
+      "espagne": "Spain",
       "essai-gratuit": "Free trial",
+      "fermer": "Close",
+      "fermer_aria-label": "Close",
+      "france": "France",
+      "italie": "Italy",
+      "j-accepte-les-conditions-d": "I accept Rainbow's <0>terms of use</0> and the use of my personal data as described in the <1>privacy policy</1>. <2>*</2>",
+      "jean-entreprise-com_placeholder": "john@company.com",
+      "jean_placeholder": "John",
+      "laissez-nous-vos-coordonn-es-pour": "Leave us your details to schedule a demo with our sales team. We'll walk you through the Enterprise features and answer your questions.",
+      "luxembourg": "Luxembourg",
+      "merci": "Thank you&nbsp;!",
       "messages-appels-audio-r-unions-vid": "Messages, voice calls, video meetings, and file sharing &mdash; no more juggling between Teams, WhatsApp, and your inbox.",
       "messages-chang-s": "messages\r\n                                exchanged",
+      "nom": "Last name <0>*</0>",
+      "nom-de-l-entreprise": "Company name <0>*</0>",
+      "partenaire-rainbow": "Rainbow partner",
+      "pays-r-gion": "Country / Region <0>*</0>",
+      "pr-nom": "First name <0>*</0>",
+      "r-seaux-sociaux": "Social media",
       "rainbow-collaboration-tous-vos": "<0>Rainbow Collaboration</0>&nbsp;: all your team conversations in one tool, hosted in France",
+      "recherche-google": "Google search",
+      "recommandation": "Recommendation",
+      "royaume-uni": "United Kingdom",
+      "s-lectionner": "Select",
       "satisfaction-client": "customer\r\n                                satisfaction",
       "sections-de-la-page_aria-label": "Page sections",
+      "suisse": "Switzerland",
+      "t-l-phone": "Phone",
+      "taille-de-l-entreprise": "Company size <0>*</0>",
+      "une-erreur-est-survenue-lors-de-l": "An error occurred while sending your request. Please try again.",
+      "v-nement-salon": "Event / Trade show",
+      "votre-demande-a-bien-t-enregistr-e": "Your request has been received. A member of our sales team will get back to you within 24 business hours.",
       "webinars-tenus": "webinars hosted"
     },
     "fonctionnalites": {
@@ -301,7 +342,10 @@
       "transcriptions-de-visioconf-rences": "Video call transcripts"
     },
     "js": {
+      "demoSubmit": "Request a demo",
+      "demoSuccess": "Your request has been received. A member of our sales team will get back to you within 24 business hours.",
       "hideTable": "Hide the comparison table",
+      "sending": "Sending…",
       "showTable": "Compare all features"
     },
     "meta": {

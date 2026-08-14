@@ -101,7 +101,7 @@
     <link rel="stylesheet" href="/store/css/style.css">
     <link rel="stylesheet" href="/store/css/mega-menu.css">
     <!-- translated strings for this page's inline scripts; must precede them -->
-    <script data-i18n-js="collaboration.js">window.I18N={"hideTable":"Hide the comparison table","showTable":"Compare all features"};window.t=function(k,f){var v=window.I18N[k];return v===undefined?(f===undefined?k:f):v};</script>
+    <script data-i18n-js="collaboration.js">window.I18N={"demoSubmit":"Request a demo","demoSuccess":"Your request has been received. A member of our sales team will get back to you within 24 business hours.","hideTable":"Hide the comparison table","sending":"Sending…","showTable":"Compare all features"};window.t=function(k,f){var v=window.I18N[k];return v===undefined?(f===undefined?k:f):v};</script>
 </head>
 
 <body class="font-sans text-gray-700 antialiased">
@@ -363,7 +363,7 @@
                                         <span>One-click screen and file sharing</span>
                                     </li>
                                 </ul>
-                                <a href="/store/en/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">Discover the features</a>
+                                <button type="button" onclick="openDemoModal()" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">Discover the features</button>
                             </div>
 
                             <!-- Panel 1: Réunions productives -->
@@ -386,7 +386,7 @@
                                         <span>Recording and automatic meeting minutes</span>
                                     </li>
                                 </ul>
-                                <a href="/store/en/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">Discover the features</a>
+                                <button type="button" onclick="openDemoModal()" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">Discover the features</button>
                             </div>
 
                             <!-- Panel 2: Animation d'équipes -->
@@ -409,7 +409,7 @@
                                         <span>Presence status to stay informally connected</span>
                                     </li>
                                 </ul>
-                                <a href="/store/en/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">Discover the features</a>
+                                <button type="button" onclick="openDemoModal()" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">Discover the features</button>
                             </div>
 
                             <!-- Panel 3: Relation client -->
@@ -432,7 +432,7 @@
                                         <span>Tracking and history of exchanges</span>
                                     </li>
                                 </ul>
-                                <a href="/store/en/tarifs" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">Discover the features</a>
+                                <button type="button" onclick="openDemoModal()" class="inline-flex items-center justify-center px-6 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white text-lg font-bold transition-all shadow-md hover:shadow-lg">Discover the features</button>
                             </div>
                         </div>
 
@@ -642,7 +642,7 @@
                                             </ul>
                                         </div>
 
-                                        <a href="https://giantlink.ma/form-ale" class="block w-full py-3.5 px-4 text-center rounded-[10px] bg-white text-navy-900 hover:bg-gray-100 font-bold transition-all shadow-md text-sm hover:shadow-lg">Contact us</a>
+                                        <a href="/store/en/form-al" class="block w-full py-3.5 px-4 text-center rounded-[10px] bg-white text-navy-900 hover:bg-gray-100 font-bold transition-all shadow-md text-sm hover:shadow-lg">Contact us</a>
                                         <p class="text-center text-xs text-gray-400 mt-3">You will be put in touch with a Rainbow partner</p>
                                     </div>
                                 </div>
@@ -907,7 +907,7 @@
                             <li><a href="/store/en/trouver-un-partenaire" class="text-gray-400 hover:text-white transition-colors">Find a partner</a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Press</a></li>
-                            <li><a href="https://giantlink.ma/form-ale" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                            <li><a href="/store/en/form-al" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -935,6 +935,111 @@
             </div>
         </div>
     </footer>
+
+    <!-- ===== DEMO REQUEST MODAL (lead capture) ===== -->
+    <div id="demo-modal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeDemoModal()"></div>
+        <div class="absolute inset-0 flex items-start sm:items-center justify-center p-4 overflow-y-auto">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full my-8 relative" onclick="event.stopPropagation()">
+                <button onclick="closeDemoModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 z-10" aria-label="Close">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+
+                <div class="p-7 sm:p-9">
+                    <!-- Form panel -->
+                    <div id="demo-panel-form">
+                        <h3 id="demo-modal-title" class="text-xl sm:text-2xl font-extrabold text-navy-900 tracking-tight mb-2">Need a <span class="text-brand-500">Rainbow Collaboration</span> demo&nbsp;?</h3>
+                        <p id="demo-modal-subtitle" class="text-sm text-gray-500 leading-relaxed mb-6">Leave us your details to schedule a demo with our sales team. We'll walk you through the Enterprise features and answer your questions.</p>
+
+                        <form id="demo-form" novalidate>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="demo-first-name" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">First name <span class="text-brand-500">*</span></label>
+                                    <input required type="text" id="demo-first-name" placeholder="John" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label for="demo-last-name" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Last name <span class="text-brand-500">*</span></label>
+                                    <input required type="text" id="demo-last-name" placeholder="Smith" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label for="demo-email" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Business email <span class="text-brand-500">*</span></label>
+                                    <input required type="email" id="demo-email" placeholder="john@company.com" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label for="demo-phone" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Phone</label>
+                                    <input type="tel" id="demo-phone" placeholder="+33 6 12 34 56 78" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label for="demo-company" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Company name <span class="text-brand-500">*</span></label>
+                                    <input required type="text" id="demo-company" placeholder="Acme" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label for="demo-company-size" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Company size <span class="text-brand-500">*</span></label>
+                                    <select required id="demo-company-size" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm bg-white text-gray-700">
+                                        <option value="" disabled selected>Select</option>
+                                        <option>1-10 employees</option>
+                                        <option>11-50 employees</option>
+                                        <option>51-200 employees</option>
+                                        <option>201-500 employees</option>
+                                        <option>501-1000 employees</option>
+                                        <option>1000+ employees</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="demo-country" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Country / Region <span class="text-brand-500">*</span></label>
+                                    <select required id="demo-country" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm bg-white text-gray-700">
+                                        <option value="" disabled selected>Select</option>
+                                        <option>France</option>
+                                        <option>Belgium</option>
+                                        <option>Switzerland</option>
+                                        <option>Luxembourg</option>
+                                        <option>Germany</option>
+                                        <option>Spain</option>
+                                        <option>Italy</option>
+                                        <option>United Kingdom</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="demo-source" class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">How did you hear about us?</label>
+                                    <select id="demo-source" class="w-full px-3.5 py-2.5 rounded-btn border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none text-sm bg-white text-gray-700">
+                                        <option value="" selected>Select</option>
+                                        <option>Google search</option>
+                                        <option>Social media</option>
+                                        <option>Recommendation</option>
+                                        <option>Event / Trade show</option>
+                                        <option>Rainbow partner</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <label class="flex items-start gap-2.5 mt-5 cursor-pointer">
+                                <input required type="checkbox" id="demo-consent" class="mt-0.5 w-4 h-4 rounded border-gray-300 text-brand-500 focus:ring-brand-500 shrink-0">
+                                <span class="text-xs text-gray-500 leading-relaxed">I accept Rainbow's <a href="/store/en/legal" class="text-brand-500 font-semibold hover:underline">terms of use</a> and the use of my personal data as described in the <a href="/store/en/privacy" class="text-brand-500 font-semibold hover:underline">privacy policy</a>. <span class="text-brand-500">*</span></span>
+                            </label>
+
+                            <p id="demo-error" class="hidden mt-4 text-xs text-red-700 bg-red-50 border border-red-200 rounded-btn px-3.5 py-2.5">An error occurred while sending your request. Please try again.</p>
+
+                            <button type="submit" id="demo-submit-btn" class="w-full mt-6 py-3.5 rounded-btn bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm transition-all active:scale-[.98] shadow-lg shadow-purple-900/15 disabled:opacity-60 disabled:cursor-not-allowed">
+                                <span id="demo-submit-label">Request a demo</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Success panel -->
+                    <div id="demo-panel-success" class="hidden text-center py-6">
+                        <div class="w-14 h-14 rounded-full bg-brand-50 flex items-center justify-center mx-auto mb-5">
+                            <svg class="w-7 h-7 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-navy-900 tracking-tight mb-2">Thank you&nbsp;!</h3>
+                        <p id="demo-success-text" class="text-sm text-gray-500 leading-relaxed max-w-sm mx-auto">Your request has been received. A member of our sales team will get back to you within 24 business hours.</p>
+                        <button type="button" onclick="closeDemoModal()" class="mt-6 px-8 py-3 rounded-btn bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm transition-all">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="/store/js/mega-menu.js"></script>
     <script src="/store/js/i18n.js"></script>
@@ -1150,6 +1255,98 @@
     })();
     </script>
     <script src="/store/js/currency.js"></script>
+    <script>
+        // ── Demo request modal (lead capture) ──
+        (function () {
+            var modal = document.getElementById('demo-modal');
+            if (!modal) return;
+            var panelSuccess = document.getElementById('demo-panel-success');
+            var form = document.getElementById('demo-form');
+            var submitLabel = document.getElementById('demo-submit-label');
+            var successText = document.getElementById('demo-success-text');
+            var lastFocused = null;
+            var DEMO_WEBHOOK_URL = 'https://n8n.openrainbow.org/webhook/demo-request-lead';
+            var demoSubmitBtn = document.getElementById('demo-submit-btn');
+            var demoError = document.getElementById('demo-error');
+            var demoSubmitting = false;
+
+            var COPY = {
+                submitLabel: t('demoSubmit'),
+                sendingLabel: t('sending'),
+                successText: t('demoSuccess')
+            };
+
+            window.openDemoModal = function () {
+                lastFocused = document.activeElement;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                panelSuccess.classList.add('hidden');
+                document.getElementById('demo-panel-form').classList.remove('hidden');
+                form.reset();
+                demoError.classList.add('hidden');
+                demoSubmitBtn.disabled = false;
+                submitLabel.textContent = COPY.submitLabel;
+                var firstInput = document.getElementById('demo-first-name');
+                if (firstInput) firstInput.focus();
+            };
+
+            window.closeDemoModal = function () {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+                if (lastFocused && lastFocused.focus) lastFocused.focus();
+            };
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeDemoModal();
+            });
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (!form.checkValidity()) { form.reportValidity(); return; }
+                if (demoSubmitting) return;
+
+                var byId = function (id) { return document.getElementById(id).value.trim(); };
+                var payload = {
+                    firstName: byId('demo-first-name'),
+                    lastName: byId('demo-last-name'),
+                    email: byId('demo-email'),
+                    phone: byId('demo-phone'),
+                    company: byId('demo-company'),
+                    companySize: byId('demo-company-size'),
+                    country: byId('demo-country'),
+                    source: byId('demo-source'),
+                    consent: document.getElementById('demo-consent').checked,
+                    requestType: 'book',
+                };
+
+                demoSubmitting = true;
+                demoError.classList.add('hidden');
+                demoSubmitBtn.disabled = true;
+                submitLabel.textContent = COPY.sendingLabel;
+
+                fetch(DEMO_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                    .then(function (res) {
+                        if (!res.ok) throw new Error('request failed: ' + res.status);
+                        successText.textContent = COPY.successText;
+                        document.getElementById('demo-panel-form').classList.add('hidden');
+                        panelSuccess.classList.remove('hidden');
+                    })
+                    .catch(function (err) {
+                        console.error('[demo-form] submit failed:', err);
+                        demoError.classList.remove('hidden');
+                    })
+                    .finally(function () {
+                        demoSubmitting = false;
+                        demoSubmitBtn.disabled = false;
+                        submitLabel.textContent = COPY.submitLabel;
+                    });
+            });
+        })();
+    </script>
 </body>
 
 </html>

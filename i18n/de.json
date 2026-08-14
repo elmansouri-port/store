@@ -1,11 +1,10 @@
 {
   "a-propos-de-rainbow": {
     "body": {
-      "d-couvrir-rainbow": "Rainbow entdecken",
       "l-diteur-fran-ais-des": "Der französische Anbieter für Unternehmenskommunikation",
       "notre-engagement-souverainet": "Unser Engagement für digitale Souveränität",
       "rainbow-by-alcatel-lucent-l-diteur": "Rainbow by <0>Alcatel-Lucent</0>: der französische Anbieter für Unternehmenskommunikation",
-      "rainbow-est-d-velopp-par-alcatel": "Rainbow wird von Alcatel-Lucent entwickelt, dem direkten Nachfolger von Alcatel und seinem über hundertjährigen Erbe an Innovationen in der Telekommunikation – heute im Dienst Ihrer Cloud-Zusammenarbeit."
+      "rainbow-est-d-velopp-par-alcatel": "Rainbow wird von Alcatel-Lucent entwickelt, dem direkten Nachfolger von Alcatel und seinem über hundertjährigen Erbe an Innovationen in der Telekommunikation – heute im Dienst Ihrer souveränen und sicheren Cloud-Zusammenarbeit."
     },
     "chronologie": {
       "ale-lance-rainbow-sa-plateforme": "ALE bringt Rainbow auf den Markt, seine Cloud-Plattform für Kommunikation und Zusammenarbeit, die interne Teams und externe Partner miteinander verbindet.",
@@ -276,17 +275,59 @@
   },
   "collaboration": {
     "body": {
+      "1-10-employ-s": "1-10 Mitarbeiter",
+      "11-50-employ-s": "11-50 Mitarbeiter",
+      "1000-employ-s": "1000+ Mitarbeiter",
       "120k": "120K+",
+      "201-500-employ-s": "201-500 Mitarbeiter",
+      "501-1000-employ-s": "501-1000 Mitarbeiter",
       "50m": "50M+",
+      "51-200-employ-s": "51-200 Mitarbeiter",
+      "acme_placeholder": "Acme",
+      "allemagne": "Deutschland",
+      "autre": "Andere",
+      "belgique": "Belgien",
+      "besoin-d-une-d-mo-rainbow-collaboration": "Ben&ouml;tigen Sie eine <0>Rainbow Collaboration</0>-Demo&nbsp;?",
+      "comment-nous-avez-vous-connu": "Wie sind Sie auf uns aufmerksam geworden?",
       "communication-d-quipe-souveraine": "Souveräne Team-Kommunikation",
       "contacter-un-expert": "Experten kontaktieren",
+      "demander-une-d-mo": "Demo anfordern",
       "disponibilit-garantie": "garantierte\r\n                                Verfügbarkeit",
+      "dupont_placeholder": "Mustermann",
+      "email-professionnel": "Geschäftliche E-Mail-Adresse <0>*</0>",
+      "espagne": "Spanien",
       "essai-gratuit": "Kostenlos testen",
+      "fermer": "Schlie&szlig;en",
+      "fermer_aria-label": "Schlie&szlig;en",
+      "france": "Frankreich",
+      "italie": "Italien",
+      "j-accepte-les-conditions-d": "Ich akzeptiere die <0>Nutzungsbedingungen</0> von Rainbow sowie die Verwendung meiner personenbezogenen Daten wie in der <1>Datenschutzrichtlinie</1> beschrieben. <2>*</2>",
+      "jean-entreprise-com_placeholder": "max@unternehmen.de",
+      "jean_placeholder": "Max",
+      "laissez-nous-vos-coordonn-es-pour": "Hinterlassen Sie uns Ihre Kontaktdaten, um eine Demo mit unserem Vertriebsteam zu vereinbaren. Wir zeigen Ihnen die Enterprise-Funktionen und beantworten Ihre Fragen.",
+      "luxembourg": "Luxemburg",
+      "merci": "Vielen Dank&nbsp;!",
       "messages-appels-audio-r-unions-vid": "Nachrichten, Sprachanrufe, Videomeetings und Dateiaustausch – kein Hin- und Herwechseln mehr zwischen Teams, WhatsApp und Ihrem Postfach.",
       "messages-chang-s": "ausgetauschte\r\n                                Nachrichten",
+      "nom": "Nachname <0>*</0>",
+      "nom-de-l-entreprise": "Firmenname <0>*</0>",
+      "partenaire-rainbow": "Rainbow-Partner",
+      "pays-r-gion": "Land / Region <0>*</0>",
+      "pr-nom": "Vorname <0>*</0>",
+      "r-seaux-sociaux": "Soziale Netzwerke",
       "rainbow-collaboration-tous-vos": "<0>Rainbow Collaboration</0>&nbsp;: der gesamte Team-Austausch in einem einzigen Tool, gehostet in Frankreich",
+      "recherche-google": "Google-Suche",
+      "recommandation": "Empfehlung",
+      "royaume-uni": "Vereinigtes K&ouml;nigreich",
+      "s-lectionner": "Ausw&auml;hlen",
       "satisfaction-client": "Kunden-\r\n                                zufriedenheit",
       "sections-de-la-page_aria-label": "Seitenabschnitte",
+      "suisse": "Schweiz",
+      "t-l-phone": "Telefon",
+      "taille-de-l-entreprise": "Unternehmensgr&ouml;&szlig;e <0>*</0>",
+      "une-erreur-est-survenue-lors-de-l": "Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+      "v-nement-salon": "Veranstaltung / Messe",
+      "votre-demande-a-bien-t-enregistr-e": "Ihre Anfrage wurde erfolgreich erfasst. Ein Mitglied unseres Vertriebsteams wird sich innerhalb von 24 Werkstunden bei Ihnen melden.",
       "webinars-tenus": "durchgeführte Webinare"
     },
     "fonctionnalites": {
@@ -301,7 +342,10 @@
       "transcriptions-de-visioconf-rences": "Videokonferenz-Transkripte"
     },
     "js": {
+      "demoSubmit": "Demo anfordern",
+      "demoSuccess": "Ihre Anfrage wurde erfolgreich erfasst. Ein Mitglied unseres Vertriebsteams wird sich innerhalb von 24 Werkstunden bei Ihnen melden.",
       "hideTable": "Vergleichstabelle ausblenden",
+      "sending": "Wird gesendet…",
       "showTable": "Alle Funktionen vergleichen"
     },
     "meta": {

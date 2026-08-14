@@ -1,11 +1,10 @@
 {
   "a-propos-de-rainbow": {
     "body": {
-      "d-couvrir-rainbow": "D&eacute;couvrir Rainbow",
       "l-diteur-fran-ais-des": "L'&eacute;diteur fran&ccedil;ais des communications d'entreprise",
       "notre-engagement-souverainet": "Notre engagement souverainet&eacute;",
       "rainbow-by-alcatel-lucent-l-diteur": "Rainbow by <0>Alcatel-Lucent</0> : l'&eacute;diteur fran&ccedil;ais des communications d'entreprise",
-      "rainbow-est-d-velopp-par-alcatel": "Rainbow est d&eacute;velopp&eacute; par Alcatel-Lucent, h&eacute;ritier direct d'Alcatel, plus d'un si&egrave;cle d'innovation dans les t&eacute;l&eacute;communications, aujourd'hui au service de votre collaboration cloud."
+      "rainbow-est-d-velopp-par-alcatel": "Rainbow est d&eacute;velopp&eacute; par Alcatel-Lucent, h&eacute;ritier direct d'Alcatel, plus d'un si&egrave;cle d'innovation dans les t&eacute;l&eacute;communications, aujourd'hui au service de votre collaboration cloud souveraine et s&eacute;curis&eacute;e."
     },
     "chronologie": {
       "ale-lance-rainbow-sa-plateforme": "ALE lance Rainbow, sa plateforme cloud de communication et de collaboration, con&ccedil;ue pour connecter &eacute;quipes internes et partenaires externes.",
@@ -276,17 +275,59 @@
   },
   "collaboration": {
     "body": {
+      "1-10-employ-s": "1-10 employ&eacute;s",
+      "11-50-employ-s": "11-50 employ&eacute;s",
+      "1000-employ-s": "1000+ employ&eacute;s",
       "120k": "120K+",
+      "201-500-employ-s": "201-500 employ&eacute;s",
+      "501-1000-employ-s": "501-1000 employ&eacute;s",
       "50m": "50M+",
+      "51-200-employ-s": "51-200 employ&eacute;s",
+      "acme_placeholder": "Acme",
+      "allemagne": "Allemagne",
+      "autre": "Autre",
+      "belgique": "Belgique",
+      "besoin-d-une-d-mo-rainbow-collaboration": "Besoin d'une d&eacute;mo <0>Rainbow Collaboration</0>&nbsp;?",
+      "comment-nous-avez-vous-connu": "Comment nous avez-vous connu&nbsp;?",
       "communication-d-quipe-souveraine": "Communication d'&eacute;quipe souveraine",
       "contacter-un-expert": "Contacter un expert",
+      "demander-une-d-mo": "Demander une d&eacute;mo",
       "disponibilit-garantie": "disponibilit&eacute;\n                                garantie",
+      "dupont_placeholder": "Dupont",
+      "email-professionnel": "Email professionnel <0>*</0>",
+      "espagne": "Espagne",
       "essai-gratuit": "Essai gratuit",
+      "fermer": "Fermer",
+      "fermer_aria-label": "Fermer",
+      "france": "France",
+      "italie": "Italie",
+      "j-accepte-les-conditions-d": "J'accepte les <0>conditions d'utilisation</0> de Rainbow et l'utilisation de mes donn&eacute;es personnelles telle que d&eacute;crite dans la <1>politique de confidentialit&eacute;</1>. <2>*</2>",
+      "jean-entreprise-com_placeholder": "jean@entreprise.com",
+      "jean_placeholder": "Jean",
+      "laissez-nous-vos-coordonn-es-pour": "Laissez-nous vos coordonn&eacute;es pour planifier une d&eacute;mo avec notre &eacute;quipe commerciale. Nous passerons en revue les fonctionnalit&eacute;s Enterprise et r&eacute;pondrons &agrave; vos questions.",
+      "luxembourg": "Luxembourg",
+      "merci": "Merci&nbsp;!",
       "messages-appels-audio-r-unions-vid": "Messages, appels audio, r&eacute;unions vid&eacute;os et partage de fichiers, fini de jongler entre Teams, WhatsApp et votre bo&icirc;te mail.",
       "messages-chang-s": "messages\n                                &eacute;chang&eacute;s",
+      "nom": "Nom <0>*</0>",
+      "nom-de-l-entreprise": "Nom de l'entreprise <0>*</0>",
+      "partenaire-rainbow": "Partenaire Rainbow",
+      "pays-r-gion": "Pays / R&eacute;gion <0>*</0>",
+      "pr-nom": "Pr&eacute;nom <0>*</0>",
+      "r-seaux-sociaux": "R&eacute;seaux sociaux",
       "rainbow-collaboration-tous-vos": "<0>Rainbow Collaboration</0>&nbsp;: tous vos &eacute;changes d'&eacute;quipe dans un seul outil, h&eacute;berg&eacute; en France",
+      "recherche-google": "Recherche Google",
+      "recommandation": "Recommandation",
+      "royaume-uni": "Royaume-Uni",
+      "s-lectionner": "S&eacute;lectionner",
       "satisfaction-client": "satisfaction\n                                client",
       "sections-de-la-page_aria-label": "Sections de la page",
+      "suisse": "Suisse",
+      "t-l-phone": "T&eacute;l&eacute;phone",
+      "taille-de-l-entreprise": "Taille de l'entreprise <0>*</0>",
+      "une-erreur-est-survenue-lors-de-l": "Une erreur est survenue lors de l'envoi. Veuillez r&eacute;essayer.",
+      "v-nement-salon": "&Eacute;v&eacute;nement / Salon",
+      "votre-demande-a-bien-t-enregistr-e": "Votre demande a bien &eacute;t&eacute; enregistr&eacute;e. Un membre de notre &eacute;quipe commerciale vous recontactera sous 24h ouvr&eacute;es.",
       "webinars-tenus": "webinars tenus"
     },
     "fonctionnalites": {
@@ -301,7 +342,10 @@
       "transcriptions-de-visioconf-rences": "Transcriptions de visioconf&eacute;rences"
     },
     "js": {
+      "demoSubmit": "Demander une démo",
+      "demoSuccess": "Votre demande a bien été enregistrée. Un membre de notre équipe commerciale vous recontactera sous 24h ouvrées.",
       "hideTable": "Masquer le tableau comparatif",
+      "sending": "Envoi en cours…",
       "showTable": "Comparer toutes les fonctionnalités"
     },
     "meta": {
@@ -871,7 +915,7 @@
       "path-stroke-linecap-round-stroke_3": "<0><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 59.905 0 006.75 15.75v-1.5\" /></0>\n                                Enseignants &amp; formateurs",
       "path-stroke-linecap-round-stroke_4": "<0><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z\" /></0>\n                                Managers &amp; consultants",
       "pilotez-vos-projets-alignez-vos": "Pilotez vos projets, alignez vos équipes et fluidifiez la prise de décision au sein d'un espace de travail unifié, accessible en un clic, depuis n'importe quel appareil connecté.",
-      "pme-qui-veulent-une-alternative": "PME qui veulent une alternative &agrave; WhatsApp. Grands comptes qui ont besoin de souverainet&eacute; et de évolutivité. Secteur public qui ne peut pas se permettre le Cloud Act. Les trois ont en commun d'avoir choisi Rainbow.",
+      "pme-qui-veulent-une-alternative": "PME qui veulent une alternative &agrave; WhatsApp. Grands comptes qui ont besoin de souverainet&eacute; et d'évolutivité. Secteur public qui ne peut pas se permettre le Cloud Act. Les trois ont en commun d'avoir choisi Rainbow.",
       "public": "Public",
       "public_alt": "Public",
       "rainbow-s-adapte-vous-pas-l": "Rainbow s'adapte &agrave; vous, pas l'inverse.",

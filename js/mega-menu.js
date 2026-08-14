@@ -262,7 +262,7 @@
         '<p class="mega-menu-footer-text">' + C.products.footerText + '</p>',
         '<div class="mega-menu-footer-actions">',
           '<a href="' + url('/form-al') + '" class="mega-menu-btn mega-menu-btn-secondary">' + svgIcon('question-mark-circle') + C.products.footerBtnSecondary + '</a>',
-          '<a href="https://giantlink.ma/form-ale" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + C.products.footerBtnPrimary + '</a>',
+          '<a href="' + url('/form-al') + '" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + C.products.footerBtnPrimary + '</a>',
         '</div>',
       '</div>',
     '</div>'
@@ -367,7 +367,7 @@
       '<div class="mega-menu-footer">',
         '<p class="mega-menu-footer-text">' + C.tarifs.footerText + '</p>',
         '<div class="mega-menu-footer-actions">',
-          '<a href="https://giantlink.ma/form-ale" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + C.tarifs.footerBtnPrimary + '</a>',
+          '<a href="' + url('/form-al') + '" class="mega-menu-btn mega-menu-btn-primary">' + svgIcon('lifebuoy') + C.tarifs.footerBtnPrimary + '</a>',
         '</div>',
       '</div>',
     '</div>'
