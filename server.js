@@ -57,6 +57,7 @@ const SHARED_PAGES = {
     'form-al': 'pages/form-ale.html',
     'confirmer-rendez-vous': 'pages/confirmer-rendez-vous.html',
     'modifier-rendez-vous': 'pages/modifier-rendez-vous.html',
+    'desinscription': 'pages/desinscription.html',
 };
 
 // One template per route; the copy comes from i18n/<lang>.json at render time.

@@ -51,6 +51,7 @@ const SHARED_PAGES = {
   'form-al': 'pages/form-ale.html',
   'confirmer-rendez-vous': 'pages/confirmer-rendez-vous.html',
   'modifier-rendez-vous': 'pages/modifier-rendez-vous.html',
+  'desinscription': 'pages/desinscription.html',
 };
 
 // Every language is rendered from the same template; the copy comes from

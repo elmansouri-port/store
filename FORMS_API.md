@@ -21,9 +21,10 @@
 | Livre blanc (type-only cover) | Web component instance | `pages/blog/the-power-of-rainbow.html : 806` |
 | Livre blanc (with cover image) | Web component instance | `pages/blog/the-power-of-rainbow.html : 827` |
 | Demo request (Rainbow Webinar) | Inline markup + inline script | `pages/webinar.html : 958` |
+| Unsubscribe | Standalone page, GET-then-POST | `pages/desinscription.html` |
 
-The two livre blanc forms are **the same component** with different attributes. The demo form is
-standalone, not a component, and shares no code with them.
+The two livre blanc forms are **the same component** with different attributes. The demo form and
+the unsubscribe page are each standalone and share no code with the others.
 
 ---
 
@@ -275,6 +276,60 @@ browser's own and follow the browser's language, not the page's.
 
 ---
 
+## 4. Unsubscribe
+
+**Source:** `pages/desinscription.html`, routed at `/<lang>/desinscription` (a shared page like
+`confirmer-rendez-vous` — see [I18N.md](I18N.md), "Known gaps"). Reached only from an email link,
+never linked from the site's own nav or footer.
+
+### Why the link has two methods
+
+| Method | What it does |
+|---|---|
+| `GET /webhook/unsubscribe-check?u=<token>` | Checks the link is genuine and returns the address masked (`j***t@gmail.com`) so the page can ask "unsubscribe this address?". Records nothing. |
+| `POST /webhook/unsubscribe` `{ token }` | Actually records the opt-out. |
+
+The split is the whole point. Mail scanners and corporate security appliances pre-fetch every link
+in an email to check it's safe. If the `GET` recorded the opt-out, those robots would silently
+unsubscribe people who never clicked — and you'd only find out when the list quietly stopped
+growing. Same reasoning as `confirmer-rendez-vous`.
+
+### What happens on confirm
+
+- **The token is checked, not trusted.** The signature is recomputed and compared server-side.
+  Editing the address inside the link invalidates it, so nobody can unsubscribe somebody else by
+  hand-editing a URL.
+- **The existing list is read** matching on the canonical address, so the same person under
+  `jean.dupont+news@gmail.com` and `jeandupont@gmail.com` is recognised as one person, not two.
+- **A row is written — unless one already exists.** Clicking confirm twice is not an error; the
+  second click reports success without writing a duplicate, the same way cancelling an
+  already-cancelled booking does (`#done_already` / `res.body.already`).
+- **Salesforce would be flagged here.** Today `POST /webhook/unsubscribe` is a NoOp placeholder
+  that simply passes through — the opt-out is recorded, but nothing syncs to Salesforce yet.
+
+### Controls
+
+| Function | Behaviour |
+|---|---|
+| `checkToken()` | Fires the `GET` on page load (and from "Réessayer" on a retryable error). Renders the masked address once it comes back. |
+| `confirmUnsubscribe()` | Fires the `POST`, wired to `#btn-confirm`. |
+
+### States
+
+| Element | Shown when |
+|---|---|
+| `#state-checking` | The `GET` is in flight |
+| `#state-ready` | Token is genuine; masked address shown, waiting on a click |
+| `#state-working` | The confirm `POST` is in flight |
+| `#state-done` | Recorded — text differs for a fresh opt-out vs. `already` |
+| `#state-error` | Missing/invalid token or a network failure; `#btn-retry` only shows when retrying could help |
+
+### Query param
+
+`?u=<token>` per the two-method table above. `?token=<token>` is also accepted as a fallback.
+
+---
+
 ## Wiring the backend
 
 ### The whitepaper component
@@ -297,9 +352,21 @@ The loading state (spinner + "Envoi en cours…") and the double-submit guard ar
 is in flight; on failure, an inline `#demo-error` banner appears above it and the form stays put
 for a retry. Validation is still native (`checkValidity()`/`reportValidity()`).
 
+### Unsubscribe
+
+`pages/desinscription.html` calls `GET /webhook/unsubscribe-check?u=<token>` on load and `POST
+/webhook/unsubscribe` from the confirm button, both under `n8n.openrainbow.org`. Like the
+`booking-lookup`/`booking-confirm` pair the confirm/reschedule pages call, neither workflow is
+committed to `n8n/` in this repo yet — the page will show a generic error until both are built and
+activated at those webhook paths. Expected response shapes:
+
+- `GET` — `200 { "email_masked": "j***t@gmail.com" }`, or `404` for an unknown/tampered token.
+- `POST` — `200 { "already": false }` (or `true` on a duplicate confirm), or a non-2xx with
+  `{ "error_code": "..." }` for the retryable-error path.
+
 ### CSP
 
-Both the whitepaper and demo `fetch()` calls (and the confirm/reschedule pages' calls to
+The whitepaper, demo, and unsubscribe `fetch()` calls (and the confirm/reschedule pages' calls to
 `ipapi.co` and their own `n8n.openrainbow.org` webhooks) only work because `server.js`'s
 `connectSrc` directive allowlists `https://n8n.openrainbow.org` and `https://ipapi.co`. If a new
 webhook host is ever introduced, it needs to be added there too, or the browser will silently
@@ -328,6 +395,7 @@ now follow the same fetch/loading/error pattern.
 | `js/components/whitepaper-download-form.js` | The whitepaper component — markup, styles, logic |
 | `pages/blog/the-power-of-rainbow.html` | Both livre blanc instances + their triggers |
 | `pages/webinar.html` | Demo modal markup, styles, and script |
+| `pages/desinscription.html` | Unsubscribe page — markup, styles, and script |
 
 > After editing any page, run `node tools/build-pages.js` to regenerate `docs/` (the GitHub Pages
 > build). Note also that `server.js` caches translated HTML per language in memory — restart the
